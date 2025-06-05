@@ -30,6 +30,7 @@ html.lenis body {
   background: #ced1bf;
   color: #2b3530;
 }
+div::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
@@ -90,6 +91,7 @@ body {
   --spacing-8-25: calc(33 * var(--multiplier));
   --spacing-8-75: calc(35 * var(--multiplier));
   --spacing-10: calc(40 * var(--multiplier));
+  --spacing-11: calc(44 * var(--multiplier));
   --spacing-12: calc(48 * var(--multiplier));
   --spacing-14: calc(56 * var(--multiplier));
   --spacing-15: calc(60 * var(--multiplier));
@@ -109,7 +111,6 @@ body {
   --spacing-38: calc(152 * var(--multiplier));
   --spacing-42-5: calc(170 * var(--multiplier));
   --spacing-48: calc(182 * var(--multiplier));
-  /* wrong amth */
   --spacing-50: calc(200 * var(--multiplier));
   --spacing-53-75: calc(215 * var(--multiplier));
   --spacing-56-25: calc(225 * var(--multiplier));
@@ -118,11 +119,17 @@ body {
   --spacing-102: calc(408 * var(--multiplier));
   --spacing-118: calc(472 * var(--multiplier));
   --spacing-172: calc(688 * var(--multiplier));
+  --spacing-750svh: calc(750svh / var(--basesvh));
+  --spacing-1500svh: calc(1500svh / var(--basesvh));
   --spacing-2000svh: calc(2000svh / var(--basesvh));
   --spacing-2400svh: calc(2400svh / var(--basesvh));
+  --spacing-3200svh: calc(3200svh / var(--basesvh));
   --spacing-3500svh: calc(3500svh / var(--basesvh));
+  --spacing-4800svh: calc(4800svh / var(--basesvh));
   --spacing-5600svh: calc(5600svh / var(--basesvh));
   --spacing-6400svh: calc(6400svh / var(--basesvh));
   --spacing-7000svh: calc(7000svh / var(--basesvh));
+  --spacing-7200svh: calc(7200svh / var(--basesvh));
   --spacing-8000svh: calc(8000svh / var(--basesvh));
+  --spacing-12000svh: calc(12000svh / var(--basesvh));
 }

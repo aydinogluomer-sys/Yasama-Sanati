@@ -1,9 +1,11 @@
-export default function PlaySVG() {
+import cn from "@/utils/cn";
+
+export default function PlaySVG({ className }: { className?: string }) {
   return (
     <svg
       width="15"
       height="16"
-      className="h-auto w-4"
+      className={cn("h-auto w-4", className)}
       viewBox="0 0 15 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

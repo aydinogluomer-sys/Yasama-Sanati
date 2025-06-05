@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <ReactLenis root>
         <body
-          className={`${BasisGrotesquePro.variable} antialiased selection:bg-[#ced1bf] selection:text-[#2b3530]`}
+          className={`${BasisGrotesquePro.variable} overflow-clip antialiased selection:bg-[#ced1bf] selection:text-[#2b3530]`}
         >
           <WindowSizeProvider>{children}</WindowSizeProvider>
         </body>

@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import Image, { StaticImageData } from "next/image";
 import CustomLink from "@/components/Server/CustomLink";
 import DashedLink from "@/components/Server/DashedLink";
-import CrossIcon from "@/components/SVGComponents/CloseIcon";
+import CloseIcon from "@/components/SVGComponents/CloseIcon";
 import Home from "@/public/SideBar/home.png";
 import Destinations from "@/public/SideBar/destination.png";
 import Wellness from "@/public/SideBar/wellness.png";
@@ -133,7 +133,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
               duration: 0.8,
             },
           }}
-          className="relative flex-[0.9] bg-black"
+          className="relative flex-[0.9]"
           ref={imgContainerRef}
         >
           {data.map(({ src, link }, i) => (
@@ -249,7 +249,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
           // p-2000svh
           onClick={() => setOpenSideBar((prev) => !prev)}
         >
-          <CrossIcon className="size-7 [&_path]:[stroke-width:1px]" />
+          <CloseIcon className="size-4 [&_path]:[stroke-width:1px]" />
         </motion.button>
       </motion.div>
     </motion.div>

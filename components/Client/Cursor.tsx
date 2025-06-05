@@ -40,7 +40,7 @@ export default function Cursor({
           custom={isMobile}
           variants={variants}
           className={cn(
-            "pointer-events-none fixed z-[200] bg-[#fff]/30 text-lg [backdrop-filter:blur(10px)]",
+            "pointer-events-none fixed z-[20] bg-[#fff]/30 text-lg [backdrop-filter:blur(10px)]",
             className,
           )}
         >

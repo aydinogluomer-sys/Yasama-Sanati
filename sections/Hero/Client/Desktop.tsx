@@ -36,7 +36,6 @@ export default function HeroDesktopClient({
         </motion.div>
         <motion.div
           className="absolute inset-x-0 top-0 flex h-screen cursor-pointer flex-col justify-end gap-8"
-          // style={{ backgroundImage }}
           {...handlers}
           onClick={() => {
             handlers.onMouseLeave(); //will exit the cursor

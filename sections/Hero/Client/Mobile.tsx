@@ -26,9 +26,9 @@ export default function HeroMobileClient({
       <Cursor
         renderCursor={!playIntro}
         isMobile={true}
-        className="absolute grid aspect-square h-11 place-items-center rounded-full"
+        className="absolute grid aspect-square w-11 place-items-center rounded-full"
       >
-        <PlaySVG />
+        <PlaySVG className="w-1/3" />
       </Cursor>
     </div>
   );
