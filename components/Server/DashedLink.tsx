@@ -1,10 +1,10 @@
 import cn from "@/utils/cn";
 import * as motion from "motion/react-client";
-import { AnimationProps, MotionStyle } from "motion/react";
+import { MotionProps, MotionStyle } from "motion/react";
 import React, { PropsWithChildren } from "react";
 
 type DashedLinkProps = PropsWithChildren &
-  AnimationProps & {
+  MotionProps & {
     style?: MotionStyle;
     className?: string;
   };
@@ -12,11 +12,11 @@ export default function DashedLink({
   children,
   className,
   style,
-  ...AnimationProps
+  ...motionProps
 }: DashedLinkProps) {
   return (
     // <Link href={href}>
-    <motion.div className="" {...AnimationProps}>
+    <motion.div className="" {...motionProps}>
       <motion.div
         initial="initial"
         whileHover="hover"

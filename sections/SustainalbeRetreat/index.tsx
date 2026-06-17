@@ -18,7 +18,7 @@ export default function SustainableRetreat() {
           },
         }}
       >
-        {"Sustainable Retreat • Sustainable Retreat • Sustainable Retreat • "}
+        {"Sürdürülebilir İnziva • Sürdürülebilir İnziva • Sürdürülebilir İnziva • "}
       </ResponsiveMarquee>
 
       <div className="mt-18 flex flex-col gap-y-14 px-8-25 md:mt-26 md:grid md:grid-cols-3 md:grid-rows-[auto_auto] md:gap-y-24 md:px-16">
@@ -26,42 +26,42 @@ export default function SustainableRetreat() {
           <ResponsiveMaskTextVariant
             desktop={[
               <Fragment key="d-0">
-                At our Resorts and Residences, we believe in
+                Resort ve Rezidanslarımızda ortaklık bilincini
               </Fragment>,
               <Fragment key="d-1">
-                fostering a sense of partnership, building a
+                geliştirmeye, gelişen bir ekosistem inşa etmeye,
               </Fragment>,
               <Fragment key="d-2">
-                thriving ecosystem, nurturing a strong
+                güçlü bir Topluluk beslemeye ve gezegenimizin
               </Fragment>,
               <Fragment key="d-3">
-                Community, and prioritizing the health of the
+                sağlığına öncelik vermeye inanıyoruz.
               </Fragment>,
               <Fragment key="d-4">
-                planet. These values shape every aspect of
+                Bu değerler, kişiselleştirilmiş Esenlik
               </Fragment>,
               <Fragment key="d-5">
-                your personalized Wellness experience.
+                deneyiminizin her yönünü şekillendirir.
               </Fragment>,
             ]}
             mobile={[
               <Fragment key="m-0">
-                At our Resorts and Residences, we believe
+                Resort ve Rezidanslarımızda ortaklık
               </Fragment>,
               <Fragment key="m-1">
-                in fostering a sense of partnership,
+                bilincini geliştirmeye, gelişen bir
               </Fragment>,
               <Fragment key="m-2">
-                building a thriving ecosystem, nurturing a
+                ekosistem inşa etmeye, güçlü bir
               </Fragment>,
               <Fragment key="m-3">
-                strong Community, and prioritizing the
+                Topluluk beslemeye ve gezegenimizin
               </Fragment>,
               <Fragment key="m-4">
-                health of the planet. These values shape
+                sağlığına öncelik vermeye inanıyoruz.
               </Fragment>,
-              <Fragment key="m-5">every aspect of your personalized</Fragment>,
-              <Fragment key="m-6">Wellness experience.</Fragment>,
+              <Fragment key="m-5">Bu değerler, kişiselleştirilmiş Esenlik</Fragment>,
+              <Fragment key="m-6">deneyiminizin her yönünü şekillendirir.</Fragment>,
             ]}
             className="text-base [line-height:1.33] md:text-lg"
           />
@@ -69,33 +69,33 @@ export default function SustainableRetreat() {
           <ResponsiveMaskTextVariant
             desktop={[
               <Fragment key="d2-0">
-                We envision a world where mind, body, and
+                Zihin, beden ve ruhun uyum içinde geliştiği,
               </Fragment>,
               <Fragment key="d2-1">
-                spirit thrive in harmony, fostering
+                birbirimizle ve doğal dünyayla bağları
               </Fragment>,
               <Fragment key="d2-2">
-                connections to each other and the natural
+                güçlendiren, tatmin kavramını maddi
               </Fragment>,
               <Fragment key="d2-3">
-                world, redefining the concept of fulfillment
+                başarının ötesinde yeniden tanımlayan
               </Fragment>,
-              <Fragment key="d2-4">beyond material success.</Fragment>,
+              <Fragment key="d2-4">bir dünya hayal ediyoruz.</Fragment>,
             ]}
             mobile={[
               <Fragment key="m2-0">
-                We envision a world where mind, body,
+                Zihin, beden ve ruhun uyum içinde
               </Fragment>,
               <Fragment key="m2-1">
-                and spirit thrive in harmony, fostering
+                geliştiği, birbirimizle ve doğal
               </Fragment>,
               <Fragment key="m2-2">
-                connections to each other and the natural
+                dünyayla bağları güçlendiren, tatmin
               </Fragment>,
               <Fragment key="m2-3">
-                world, redefining the concept of fulfillment
+                kavramını maddi başarının ötesinde
               </Fragment>,
-              <Fragment key="m2-4">beyond material success.</Fragment>,
+              <Fragment key="m2-4">yeniden tanımlayan bir dünya hayal ediyoruz.</Fragment>,
             ]}
             className="text-base [line-height:1.33] md:text-lg"
           />

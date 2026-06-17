@@ -10,22 +10,22 @@ export default function WellnessSanctuary() {
   const textLines = {
     desktop: [
       <Fragment key="desktop-1">
-        <span>Personalized</span> wellness,
+        <span className="text-[#ca7d57]">Kadim bilgelik</span>, çağdaş
       </Fragment>,
-      <Fragment key="desktop-2">innovation, and nature</Fragment>,
-      <Fragment key="desktop-3">meet in synergy</Fragment>,
+      <Fragment key="desktop-2">yöntem ve sen; hepsi</Fragment>,
+      <Fragment key="desktop-3">aynı seansta buluşur</Fragment>,
     ],
     mobile: [
       <Fragment key="mobile-1">
-        <span>Personalized</span> wellness,
+        <span className="text-[#ca7d57]">Kadim bilgelik</span>, çağdaş
       </Fragment>,
-      <Fragment key="mobile-2">innovation, and nature meet</Fragment>,
-      <Fragment key="mobile-3">in synergy</Fragment>,
+      <Fragment key="mobile-2">yöntem ve sen; hepsi</Fragment>,
+      <Fragment key="mobile-3">aynı seansta buluşur</Fragment>,
     ],
   };
 
   return (
-    <div className="flex flex-col bg-[#30493D] text-[#D1CCBF] md:grid md:grid-cols-2">
+    <div className="flex flex-col bg-[#30493D] text-[#D1CCBF] md:grid md:grid-cols-2" id="yaklasimimiz">
       <ResponsiveImage parallaxAmount={20}>
         <Image
           src={WellnessSanctuaryImage}
@@ -35,23 +35,23 @@ export default function WellnessSanctuary() {
       </ResponsiveImage>
       <div className="flex flex-col justify-center px-3-75 py-40 md:py-0">
         <div className="flex flex-col gap-12 md:ml-36 md:w-fit md:gap-16">
-          <SectionTitle>Wellness Sanctuary</SectionTitle>
+          <SectionTitle>Yaklaşımımız</SectionTitle>
           <ResponsiveMaskText
             {...textLines}
             className="text-24 [line-height:1] md:text-40"
           />
           <MaskText
             lines={[
-              <>At ELEMENTIS, we use the Integrative</>,
-              <>Wellness approach that considers</>,
-              <>psychological, physical, and nutritional</>,
-              <>aspects of your life to improve overall</>,
-              <>well-being and balance.</>,
+              <>Her yolculuk kısa bir ön görüşmeyle</>,
+              <>başlar. İhtiyacını birlikte haritalar,</>,
+              <>sana uygun disiplini ve tempoyu</>,
+              <>birlikte seçeriz. Hazır şablon yok;</>,
+              <>senin ritmin var.</>,
             ]}
             className="text-lg [line-height:1.3] font-normal"
           />
-          <StyledLink href="https://elementis.co/wellness">
-            Discover ELEMENTIS
+          <StyledLink href="/programlar">
+            Programları Keşfet
           </StyledLink>
         </div>
       </div>

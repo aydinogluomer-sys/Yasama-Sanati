@@ -21,38 +21,41 @@ export default function NavBar() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const scrollValue = latest / window.innerHeight;
     setState(scrollValue > 0.5);
-    if (scrollValue > 0.65) {
-      if ((scrollY.getPrevious() as number) < latest) {
+    if (latest > 50) {
+      const prev = scrollY.getPrevious() ?? 0;
+      if (prev < latest) {
         setY("-100%");
       } else {
         setY("0%");
       }
+    } else {
+      setY("0%");
     }
   });
   const navItems = [
     {
-      href: "https://elementis.co/destinations",
-      children: "Destinations",
+      href: "/programlar",
+      children: "Programlar",
     },
     {
-      href: "https://elementis.co/wellness",
-      children: "Wellness",
+      href: "/#yaklasimimiz",
+      children: "Yaklaşımımız",
     },
     {
-      href: "https://elementis.co/innovation",
-      children: "Innovation",
+      href: "/egitmenler",
+      children: "Eğitmenler",
     },
     {
-      href: "https://elementis.co/sustainability",
-      children: "Nature",
+      href: "/the-story",
+      children: "Hikayemiz",
     },
     {
-      href: "https://elementis.co/community",
-      children: "Community",
+      href: "/community",
+      children: "Topluluk",
     },
     {
-      href: "https://elementis.co/the-story",
-      children: "The Story",
+      href: "/blog",
+      children: "Blog",
     },
   ];
   return (
@@ -91,8 +94,8 @@ export default function NavBar() {
         <LogoFull
           className="h-auto w-full max-w-38 origin-left md:max-w-53-75"
           variants={{
-            initial: { fill: "#FFFFFF" },
-            animate: { fill: "#2B3530" },
+            initial: { color: "#FFFFFF" },
+            animate: { color: "#2B3530" },
           }}
         />
         <nav aria-label="navigation" className="hidden gap-6 md:flex">
@@ -116,20 +119,22 @@ export default function NavBar() {
           ))}
         </nav>
         <div className="flex items-center gap-8">
-          <BorderedButton
-            className={cn(
-              "relative hidden w-fit cursor-pointer items-center gap-4 px-5 py-4.5 text-base [line-height:0.8] font-normal md:flex",
-              state
-                ? "text-[#2b3530] [&_svg]:[stroke:#2b3530]"
-                : "text-white [&_svg]:[stroke:white]",
-            )}
-          >
-            Join Us
-            <NavigateSVG
-              style={{ fill: state ? "#ffffff" : "#2b3530" }}
-              className="mr-2.5 size-2.5"
-            />
-          </BorderedButton>
+          <Link href="/#on-kayit">
+            <BorderedButton
+              className={cn(
+                "relative hidden w-fit cursor-pointer items-center gap-4 px-5 py-4.5 text-base [line-height:0.8] font-normal md:flex",
+                state
+                  ? "text-[#2b3530] [&_svg]:[stroke:#2b3530]"
+                  : "text-white [&_svg]:[stroke:white]",
+              )}
+            >
+              Ön Görüşme
+              <NavigateSVG
+                style={{ fill: state ? "#ffffff" : "#2b3530" }}
+                className="mr-2.5 size-2.5"
+              />
+            </BorderedButton>
+          </Link>
           <motion.button
             initial="initial"
             whileHover="whileHover"

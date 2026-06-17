@@ -14,11 +14,11 @@ export default function ContactUs({
       style={style}
       className={cn("flex flex-col [line-height:1]", className)}
     >
-      <div>Contact Us</div>
+      <div>Bize Ulaşın</div>
       <div className="flex cursor-default md:flex-col">
-        <DashedLink>info@ELEMENTIS.co</DashedLink>
+        <DashedLink>merhaba@yasamasanati.com</DashedLink>
         <div className="md:hidden">|</div>
-        <DashedLink>+62 823 4078 1817</DashedLink>
+        <DashedLink>+90 232 000 0000</DashedLink>
       </div>
     </div>
   );

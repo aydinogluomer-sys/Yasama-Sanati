@@ -6,40 +6,38 @@ import { Fragment } from "react";
 export default function ElementisStoryServer() {
   const textLines = {
     mobile: [
-      <Fragment key="m-1"> Our story is deeply</Fragment>,
-      <Fragment key="m-2">
-        rooted in fostering <span>meaningful</span>
-      </Fragment>,
+      <Fragment key="m-1">Bu akademi, yıllar içinde ayrı</Fragment>,
+      <Fragment key="m-2">ayrı öğrenilen disiplinlerin</Fragment>,
       <Fragment key="m-3">
-        <span>connections</span>, providing genuine
+        <span className="text-[#ca7d57]">tek bir soruda</span> birleşmesiyle
       </Fragment>,
-      <Fragment key="m-4">care, and upholding a strong</Fragment>,
-      <Fragment key="m-5">commitment to our Community.</Fragment>,
+      <Fragment key="m-4">doğdu: insan kendine</Fragment>,
+      <Fragment key="m-5">nasıl geri döner?</Fragment>,
     ],
     desktop: [
-      <Fragment key="d-1">Our story is deeply rooted in</Fragment>,
-      <Fragment key="d-2">
-        fostering <span>meaningful connections</span>,
+      <Fragment key="d-1">Bu akademi, yıllar içinde ayrı</Fragment>,
+      <Fragment key="d-2">ayrı öğrenilen disiplinlerin</Fragment>,
+      <Fragment key="d-3">
+        <span className="text-[#ca7d57]">tek bir soruda</span> birleşmesiyle
       </Fragment>,
-      <Fragment key="d-3">providing genuine care, and upholding</Fragment>,
-      <Fragment key="d-4">a strong commitment to our</Fragment>,
-      <Fragment key="d-5">Community.</Fragment>,
+      <Fragment key="d-4">doğdu: insan kendine</Fragment>,
+      <Fragment key="d-5">nasıl geri döner?</Fragment>,
     ],
   };
   return (
     <>
-      <SectionTitle className="md:col-span-3">ELEMENTIS Story</SectionTitle>
+      <SectionTitle className="md:col-span-3">Yaşama Sanatı Hikayesi</SectionTitle>
       <div className="max-md:mt-12 md:col-span-6 md:col-start-6">
         <ResponsiveMaskText
           {...textLines}
           className="text-24 [line-height:1] md:text-40 [&>:first-child]:indent-23"
         />
         <div className="mt-12 flex flex-col gap-1 max-md:mb-16 md:gap-4">
-          <StyledLink href="https://elementis.co/the-story">
-            Discover ELEMENTIS
+          <StyledLink href="/the-story">
+            Hikayenin Tamamı
           </StyledLink>
-          <StyledLink href="https://elementis.co/the-story#team">
-            Meet The Global Team
+          <StyledLink href="/egitmenler">
+            Eğitmenlerle Tanış
           </StyledLink>
         </div>
       </div>

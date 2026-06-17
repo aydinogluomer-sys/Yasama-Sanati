@@ -3,78 +3,79 @@ import FormImage from "@/public/FormImage.png";
 import ParallaxContainer from "@/components/Client/ParallaxContainer";
 import Input from "@/components/Server/Input";
 import Checkbox from "@/components/Client/Checkbox";
-import Form from "next/form";
 import Select from "@/components/Server/Select";
 import Label from "@/components/Server/Label";
 import Link from "next/link";
-import * as motion from "motion/react-client";
-import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
+import FormContainer from "@/components/Client/FormContainer";
+import SubmitButton from "@/components/Client/SubmitButton";
 
 export default function FormServer() {
   const categories = [
-    "Resorts and Residences",
-    "Retreats",
-    "Wellness",
-    "New Developments",
-    "Building Innovation",
+    "Nefes Koçluğu",
+    "Reiki Enerji Şifası",
+    "Meridyen Terapi",
+    "Mucizeler Kursu",
+    "Hipnoterapi",
+    "Yaşam Koçluğu",
   ];
 
   return (
-    <div className="flex flex-col bg-[#CED1BF] md:grid md:grid-cols-2">
+    <div className="flex flex-col bg-[#CED1BF] md:grid md:grid-cols-2" id="on-kayit">
       <ParallaxContainer parallaxAmount={20}>
         <Image src={FormImage} alt="form-image" className="h-auto w-full" />
       </ParallaxContainer>
       <div className="col-start-2 flex flex-col items-center justify-center">
-        <Form action={""} className="w-full max-w-102 px-5 py-24 md:p-0">
+        <FormContainer>
           <div className="w-full text-xl font-light md:text-30">
-            Take the First step
+            İlk Adımı At
           </div>
           <div className="mt-8 mb-10 text-base md:text-lg">
-            Become a member of ELEMENTIS Club and take the first step towards a
-            life filled with purpose, Wellness, and connection
+            Kısa bir ön kayıt bırak; 48 saat içinde seni arayalım. Sana uygun programı ve tempoyu birlikte netleştirelim.
           </div>
           <div className="flex flex-col gap-4">
-            <Label label="Full Name">
-              <Input type="text" placeholder="Enter your name" />
+            <div className="grid grid-cols-2 gap-4">
+              <Label label="Ad">
+                <Input type="text" name="ad" placeholder="Adını yaz" required />
+              </Label>
+              <Label label="Soyad">
+                <Input type="text" name="soyad" placeholder="Soyadını yaz" required />
+              </Label>
+            </div>
+            <Label label="E-posta Adresi">
+              <Input type="email" name="eposta" placeholder="E-posta adresini yaz" required />
             </Label>
-            <Label label="Email Address">
-              <Input type="email" placeholder="Enter your email address" />
-            </Label>
-            <Label label="Phone number">
+            <Label label="Telefon Numarası">
               <div className="flex -space-x-4 md:-space-x-6">
-                <Select options="dial code" />
-                <Input type="tel" placeholder="Enter your phone number"></Input>
+                <Select options="dial code" name="telefon_kod" />
+                <Input type="tel" name="telefon" placeholder="Telefon numaranızı yazın" required />
               </div>
             </Label>
-            <Label label="Country">
-              <Select options="countries" />
+            <Label label="Şehir">
+              <Select options="cities" name="sehir" />
             </Label>
           </div>
           <div className="mt-10 space-y-5 text-sm text-[#2b3530] md:text-base">
-            <p>I would like to receive information on ELEMENTIS.</p>
+            <p>Hangi alanlar ilgini çekiyor?</p>
             <div className="flex flex-wrap gap-4">
               {categories.map((category) => (
-                <Checkbox key={category}>{category}</Checkbox>
+                <Checkbox key={category} name="ilgi_alanlari" value={category}>
+                  {category}
+                </Checkbox>
               ))}
             </div>
           </div>
-          <Checkbox className="mt-8-75" required={true}>
-            I agree to the{" "}
-            <Link href="" className="underline-[#2b3530] underline">
-              Policies and Terms
-            </Link>
+          <Checkbox className="mt-8-75" required={true} name="kvkk_onay" value="true">
+            Kişisel verilerimin{" "}
+            <Link href="/kvkk" className="underline-[#2b3530] underline">
+              KVKK Aydınlatma Metni
+            </Link>{" "}
+            kapsamında işlenmesini kabul ediyorum.
           </Checkbox>
-          <motion.button
-            type="submit"
-            className="mt-14 flex w-full cursor-pointer items-center justify-between px-6 py-5 text-base text-[#d1ccbf] md:text-lg"
-            initial={{ backgroundColor: "#2b3530" }}
-            whileHover={{ backgroundColor: "#304d3d" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <span>Sign up</span>
-            <NavigateSVG fill="#D1CCBF" />
-          </motion.button>
-        </Form>
+          <div className="mt-6 text-xs text-[#2b3530]/70">
+            Bilgilerin yalnızca seninle iletişim kurmak için kullanılır; üçüncü kişilerle paylaşılmaz.
+          </div>
+          <SubmitButton />
+        </FormContainer>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ export default function StayConnected({
       aria-label="Social Navigation"
       className={cn("flex flex-col", className)}
     >
-      <div>Stay Connected</div>
+      <div>Takipte Kalın</div>
       <div className="flex items-center">
         {SocialLogos.map((eachSocial) => (
           <Link href={eachSocial.href} key={eachSocial.key}>

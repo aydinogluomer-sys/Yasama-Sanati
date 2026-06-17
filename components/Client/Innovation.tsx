@@ -52,7 +52,11 @@ function Innovation() {
     >
       <motion.div
         {...handlers}
-        onClick={() => router.replace("https://elementis.co/innovation")}
+        onClick={() => {
+          if (!isMobile) {
+            router.push("/programlar");
+          }
+        }}
         className="sticky -top-[5vh] h-[110vh] md:-top-[15vh] md:h-[130vh]"
       >
         <ClipImageCard
@@ -80,7 +84,7 @@ function Innovation() {
           {...cursorProps}
           className="flex -translate-x-1/2 translate-y-1/4 items-center justify-center gap-2 rounded-full px-5 py-2 text-white"
         >
-          Discover More
+          Daha Fazlasını Keşfet
           <NavigateSVG style={{ fill: "white" }} className="size-2.5" />
         </CustomCursor>
       )}

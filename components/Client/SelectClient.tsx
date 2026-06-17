@@ -4,11 +4,13 @@ import { useState } from "react";
 interface SelectClientProps {
   options: string[];
   defaultSelection: string;
+  name?: string;
 }
 
 export default function SelectClient({
   defaultSelection,
   options,
+  name,
 }: SelectClientProps) {
   const [selectedOption, setSelectedOption] =
     useState<string>(defaultSelection);
@@ -17,6 +19,7 @@ export default function SelectClient({
       <select
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
+        name={name}
         className="cursor-pointer bg-[#c4c7b3] text-xs outline-none md:text-base"
       >
         {options.map((option, i) => (

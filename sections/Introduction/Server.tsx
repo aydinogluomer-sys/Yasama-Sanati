@@ -21,55 +21,57 @@ export default function IntroductionServer() {
       </motion.div>
 
       <SectionTitle className="md:col-start-1 md:row-start-2">
-        Introduction
+        Tanışma
       </SectionTitle>
 
       <div className="flex flex-col gap-12 md:col-span-2 md:col-start-2 md:gap-20">
         <ResponsiveMaskText
           mobile={[
-            <Fragment key="m-1">Welcome to a world of</Fragment>,
-            <Fragment key="m-2">
-              <span>luxury and well-being</span> with
+            <Fragment key="m-1">Yaşama Sanatı'na</Fragment>,
+            <Fragment key="m-2">hoş geldin. Burası;</Fragment>,
+            <Fragment key="m-3">nefesin, enerjinin ve</Fragment>,
+            <Fragment key="m-4">
+              zihnin <span className="text-[#ca7d57]">tek bir bütün</span>
             </Fragment>,
-            <Fragment key="m-3">ELEMENTIS, where you will</Fragment>,
-            <Fragment key="m-4">discover exquisite luxury</Fragment>,
-            <Fragment key="m-5">health and wellness resorts</Fragment>,
-            <Fragment key="m-6">and residences nestled in the</Fragment>,
-            <Fragment key="m-7">most breathtaking destinations</Fragment>,
-            <Fragment key="m-8">on the globe.</Fragment>,
+            <Fragment key="m-5">olarak ele alındığı, altı</Fragment>,
+            <Fragment key="m-6">köklü disiplini aynı çatı</Fragment>,
+            <Fragment key="m-7">altında buluşturan bir</Fragment>,
+            <Fragment key="m-8">şifa ve eğitim akademisi.</Fragment>,
           ]}
           desktop={[
-            <Fragment key="d-1">
-              Welcome to a world of <span>luxury and</span>
-            </Fragment>,
+            <Fragment key="d-1">Yaşama Sanatı'na hoş geldin.</Fragment>,
             <Fragment key="d-2">
-              <span>well-being</span> with ELEMENTIS, where you
+              Burası; nefesin, enerjinin ve zihnin
             </Fragment>,
             <Fragment key="d-3">
-              will discover exquisite luxury health and
+              <span className="text-[#ca7d57]">tek bir bütün</span> olarak ele alındığı,
             </Fragment>,
             <Fragment key="d-4">
-              wellness resorts and residences nestled
+              altı köklü disiplini aynı çatı altında
             </Fragment>,
             <Fragment key="d-5">
-              in the most breathtaking destinations
+              buluşturan bir şifa ve eğitim
             </Fragment>,
-            <Fragment key="d-6">on the globe.</Fragment>,
+            <Fragment key="d-6">
+              akademisi.
+            </Fragment>,
           ]}
           className="text-24 [line-height:1] md:text-40 [&>:first-child]:indent-23"
         />
 
         <MaskText
           lines={[
-            <Fragment key="l-1">At ELEMENTIS, we use the Integrative</Fragment>,
-            <Fragment key="l-2">Wellness approach that considers</Fragment>,
+            <Fragment key="l-1">Bütünsel yaklaşımımız; zihinsel,</Fragment>,
+            <Fragment key="l-2">bedensel ve enerjetik düzeyleri</Fragment>,
             <Fragment key="l-3">
-              psychological, physical, and nutritional
+              birlikte ele alır. Amaç semptomu
             </Fragment>,
             <Fragment key="l-4">
-              aspects of your life to improve overall
+              bastırmak değil, dengenin yeniden
             </Fragment>,
-            <Fragment key="l-5">well-being and balance.</Fragment>,
+            <Fragment key="l-5">
+              kurulmasına alan açmaktır.
+            </Fragment>,
           ]}
           className="text-base [line-height:1.3] font-normal md:text-lg"
         />

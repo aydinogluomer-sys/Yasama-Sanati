@@ -9,16 +9,16 @@ export default function SustainableRetreat() {
       <ResponsiveMarquee
         animationConfig={{
           mobile: {
-            max: "-887px",
+            max: "-763px",
             speed: 50,
           },
           desktop: {
-            max: "-88.7%",
+            max: "-76.3%",
             speed: 5,
           },
         }}
       >
-        {"Sustainable Retreat • Sustainable Retreat • Sustainable Retreat • "}
+        {"Çalışma Alanları • Çalışma Alanları • Çalışma Alanları • "}
       </ResponsiveMarquee>
 
       <div className="mt-18 flex flex-col gap-y-14 px-8-25 md:mt-26 md:grid md:grid-cols-3 md:grid-rows-[auto_auto] md:gap-y-24 md:px-16">
@@ -26,42 +26,41 @@ export default function SustainableRetreat() {
           <ResponsiveMaskTextVariant
             desktop={[
               <Fragment key="d-0">
-                At our Resorts and Residences, we believe in
+                Akademide üç formatta çalışıyoruz:
               </Fragment>,
               <Fragment key="d-1">
-                fostering a sense of partnership, building a
+                birebir seanslar, küçük grup
               </Fragment>,
               <Fragment key="d-2">
-                thriving ecosystem, nurturing a strong
+                programları ve sertifikalı eğitimler.
               </Fragment>,
               <Fragment key="d-3">
-                Community, and prioritizing the health of the
+                Her programın süresi, ön koşulu ve
               </Fragment>,
               <Fragment key="d-4">
-                planet. These values shape every aspect of
+                kazanımı kendi sayfasında açıkça
               </Fragment>,
               <Fragment key="d-5">
-                your personalized Wellness experience.
+                yazar; sürpriz yok.
               </Fragment>,
             ]}
             mobile={[
               <Fragment key="m-0">
-                At our Resorts and Residences, we believe
+                Akademide üç formatta çalışıyoruz:
               </Fragment>,
               <Fragment key="m-1">
-                in fostering a sense of partnership,
+                birebir seanslar, küçük grup
               </Fragment>,
               <Fragment key="m-2">
-                building a thriving ecosystem, nurturing a
+                programları ve sertifikalı eğitimler.
               </Fragment>,
               <Fragment key="m-3">
-                strong Community, and prioritizing the
+                Her programın süresi, ön koşulu ve
               </Fragment>,
               <Fragment key="m-4">
-                health of the planet. These values shape
+                kazanımı kendi sayfasında açıkça
               </Fragment>,
-              <Fragment key="m-5">every aspect of your personalized</Fragment>,
-              <Fragment key="m-6">Wellness experience.</Fragment>,
+              <Fragment key="m-5">yazar; sürpriz yok.</Fragment>,
             ]}
             className="text-base [line-height:1.33] md:text-lg"
           />
@@ -69,35 +68,39 @@ export default function SustainableRetreat() {
           <ResponsiveMaskTextVariant
             desktop={[
               <Fragment key="d2-0">
-                We envision a world where mind, body, and
+                "Buraya uyku sorunum için
               </Fragment>,
               <Fragment key="d2-1">
-                spirit thrive in harmony, fostering
+                geldim; nefesimle, sınırlarımla
               </Fragment>,
               <Fragment key="d2-2">
-                connections to each other and the natural
+                ve kendimle tanışıp çıktım.
               </Fragment>,
               <Fragment key="d2-3">
-                world, redefining the concept of fulfillment
+                İyi ki."
               </Fragment>,
-              <Fragment key="d2-4">beyond material success.</Fragment>,
+              <Fragment key="d2-4">
+                — Z. A., Nefes Koçluğu katılımcısı
+              </Fragment>,
             ]}
             mobile={[
               <Fragment key="m2-0">
-                We envision a world where mind, body,
+                "Buraya uyku sorunum için
               </Fragment>,
               <Fragment key="m2-1">
-                and spirit thrive in harmony, fostering
+                geldim; nefesimle, sınırlarımla
               </Fragment>,
               <Fragment key="m2-2">
-                connections to each other and the natural
+                ve kendimle tanışıp çıktım.
               </Fragment>,
               <Fragment key="m2-3">
-                world, redefining the concept of fulfillment
+                İyi ki."
               </Fragment>,
-              <Fragment key="m2-4">beyond material success.</Fragment>,
+              <Fragment key="m2-4">
+                — Z. A., Nefes Koçluğu katılımcısı
+              </Fragment>,
             ]}
-            className="text-base [line-height:1.33] md:text-lg"
+            className="text-base [line-height:1.33] md:text-lg italic"
           />
         </div>
         <SustainableRetreatClient />

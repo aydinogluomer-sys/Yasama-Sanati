@@ -7,12 +7,16 @@ interface CheckboxProps {
   children: ReactNode;
   className?: string;
   required?: boolean;
+  name?: string;
+  value?: string;
 }
 
 export default function Checkbox({
   children,
   className,
   required = false,
+  name,
+  value,
 }: CheckboxProps) {
   const [checked, setChecked] = useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +32,9 @@ export default function Checkbox({
       <input
         type="checkbox"
         className="hidden"
+        name={name}
+        value={value}
+        checked={checked}
         onChange={handleChange}
         required={required}
       />

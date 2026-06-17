@@ -17,12 +17,12 @@ const SocialLogos = [
   },
   {
     logo: <TiktokLogo />,
-    href: "https://wa.me/6282340781817",
+    href: "https://www.tiktok.com/@elementis.co",
     key: "tiktok",
   },
   {
     logo: <WhatsappLogo />,
-    href: "https://www.tiktok.com/@elementis.co",
+    href: "https://wa.me/6282340781817",
     key: "whatsapp",
   },
   {

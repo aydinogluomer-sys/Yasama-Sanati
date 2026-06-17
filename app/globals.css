@@ -49,6 +49,7 @@ body {
   }
 }
 @theme {
+  --font-serif: var(--font-serif);
   /* text utilities */
   --text-*: initial;
   --text-2xs: calc(12 * var(--multiplier));
@@ -133,3 +134,50 @@ body {
   --spacing-8000svh: calc(8000svh / var(--basesvh));
   --spacing-12000svh: calc(12000svh / var(--basesvh));
 }
+
+/* Hero Header Entrance Animations */
+@keyframes heroTitleFadeIn {
+  from {
+    opacity: 0.15;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroDescFadeIn {
+  from {
+    opacity: 0.15;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-title {
+  opacity: 0.15;
+  animation: heroTitleFadeIn 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-hero-desc {
+  opacity: 0.15;
+  animation: heroDescFadeIn 1.6s cubic-bezier(0.25, 1, 0.5, 1) 0.15s forwards;
+}
+
+/* Custom overrides for high-fidelity footer matching */
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif !important;
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    display: grid !important;
+    grid-template-columns: 2.6fr 1fr 1fr 1fr 1.2fr !important;
+    column-gap: 0px !important;
+  }
+}
+

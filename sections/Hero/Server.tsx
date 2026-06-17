@@ -14,18 +14,18 @@ export default function HeroServer() {
             key="marquee"
             animationConfig={{
               mobile: {
-                max: "-1852px",
+                max: "-1482px",
                 speed: 50,
               },
               desktop: {
-                max: "-185.25%",
+                max: "-148.2%",
                 speed: 5,
               },
             }}
             className="text-white"
           >
             {
-              "Wellness • Innovation • Nature • Community • Wellness • Innovation • Nature • Community • "
+              "Şifa • Nefes • Denge • Dönüşüm • Şifa • Nefes • Denge • Dönüşüm • "
             }
           </ResponsiveMarquee>,
         ]}
@@ -55,15 +55,15 @@ export default function HeroServer() {
           }}
           className="md:[line-height:1.2]"
           lines={[
-            <>A lifestyle revolution for a</>,
-            <>sustaiable fulfilling future</>,
+            <>Şifa bir teknik değil,</>,
+            <>bir yaşama sanatıdır.</>,
           ]}
         />
         <MaskText
           transition={{
             delayChildren: 0.6,
           }}
-          lines={[<>Scroll to Explore</>]}
+          lines={[<>Keşfetmek için Kaydır</>]}
           className="flex-1 text-end text-nowrap [filter:blur(0.25px)] max-md:hidden"
         />
         <Br />

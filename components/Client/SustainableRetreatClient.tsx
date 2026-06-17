@@ -7,39 +7,47 @@ import Image2 from "@/public/group/our-vision-and-mission.png";
 import Image3 from "@/public/group/our-commitment.png";
 import Image4 from "@/public/group/our-pillars.png";
 import Image5 from "@/public/group/sustainability.png";
+import Image6 from "@/public/Introduction.png";
 import { useImageReveal } from "@/hooks/useImageReveal";
+
 interface LinkType {
   title: string;
   href: string;
   img: StaticImageData;
 }
+
 export default function SustainableRetreatClient() {
   const { imgContainerRef, handleFocus } = useImageReveal();
   const links: LinkType[] = [
     {
-      title: "ELEMENTIS Story",
-      href: "https://elementis.co/the-story",
+      title: "Meridyen Terapi",
+      href: "/programlar/meridyen-terapi",
       img: Image1,
     },
     {
-      title: "Our Vision & Mission",
-      href: "https://elementis.co/sustainability#mission-vision",
+      title: "Nefes Koçluğu",
+      href: "/programlar/nefes-koclugu",
       img: Image2,
     },
     {
-      title: "Our Commitment",
-      href: "https://elementis.co/sustainability#our-comitment",
+      title: "Mucizeler Kursu",
+      href: "/programlar/mucizeler-kursu",
       img: Image3,
     },
     {
-      title: "Our Pillars",
-      href: "https://elementis.co/sustainability#our-pillars",
+      title: "Yaşam Koçluğu",
+      href: "/programlar/yasam-kocu",
       img: Image4,
     },
     {
-      title: "Sustainability",
-      href: "https://elementis.co/sustainability",
+      title: "Hipnoterapi",
+      href: "/programlar/hipnoterapi",
       img: Image5,
+    },
+    {
+      title: "Reiki",
+      href: "/programlar/reiki",
+      img: Image6,
     },
   ];
 
@@ -67,7 +75,7 @@ export default function SustainableRetreatClient() {
           </motion.div>
         ))}
       </div>
-      <div className="-mx-8-25 grid grid-rows-5 divide-y divide-[#D1CCBF] border-y border-[#D1CCBF] md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
+      <div className="-mx-8-25 grid grid-rows-6 divide-y divide-[#D1CCBF] border-y border-[#D1CCBF] md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
         {links.map((eachLink, index) => (
           <StyledLinkClient
             handleFocus={handleFocus}

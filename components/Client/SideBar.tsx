@@ -32,40 +32,52 @@ interface SideBarProps {
 export default function SideBar({ setOpenSideBar }: SideBarProps) {
   const { imgContainerRef, handleFocus } = useImageReveal();
   const data: LinkItem[] = [
-    { href: "https://elementis.co/", link: "Home", src: Home },
+    { href: "/", link: "Ana Sayfa", src: Home },
     {
-      href: "https://elementis.co/destinations",
-      link: "Destinations",
+      href: "/programlar/meridyen-terapi",
+      link: "Meridyen Terapi",
       src: Destinations,
     },
-    { href: "https://elementis.co/wellness", link: "Wellness", src: Wellness },
     {
-      href: "https://elementis.co/innovation",
-      link: "Innovation",
+      href: "/programlar/nefes-koclugu",
+      link: "Nefes Koçluğu",
+      src: Wellness,
+    },
+    {
+      href: "/programlar/mucizeler-kursu",
+      link: "Mucizeler Kursu",
       src: Innovation,
     },
     {
-      href: "https://elementis.co/sustainability",
-      link: "Nature",
+      href: "/programlar/yasam-kocu",
+      link: "Yaşam Koçluğu",
       src: Nature,
     },
     {
-      href: "https://elementis.co/community",
-      link: "Community",
+      href: "/programlar/hipnoterapi",
+      link: "Hipnoterapi",
       src: Community,
     },
     {
-      href: "https://elementis.co/the-story",
-      link: "The Story",
+      href: "/programlar/reiki",
+      link: "Reiki",
       src: TheStory,
     },
     {
-      href: "https://elementis.co/new-developments",
-      link: "New Developments",
+      href: "/the-story",
+      link: "Hikayemiz",
       src: NewDevelopments,
     },
-    { href: "https://elementis.co/press", link: "Press Room", src: PressRoom },
-    { href: "https://elementis.co/careers", link: "Careers", src: Careers },
+    {
+      href: "/egitmenler",
+      link: "Eğitmenler",
+      src: PressRoom,
+    },
+    {
+      href: "/#on-kayit",
+      link: "İletişim",
+      src: Careers,
+    },
   ];
 
   const temp = {
@@ -148,7 +160,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
           ))}
         </motion.div>
         <div className="flex-1 pt-7000svh pr-16 pb-3500svh pl-48">
-          <span className="text-1800svh text-[#2b3530]/80">Discover pages</span>
+          <span className="text-1800svh text-[#2b3530]/80">Sayfaları keşfedin</span>
           <nav
             aria-label="pages"
             className="mt-6400svh mb-8000svh grid grid-flow-col-dense grid-cols-2 grid-rows-5"
@@ -205,11 +217,11 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
               id="contact-us"
               className="space-y-2400svh text-1800svh text-[#2b3530]"
             >
-              <div className="text-[#2b3530]/80">Contact Us</div>
+              <div className="text-[#2b3530]/80">Bize Ulaşın</div>
               <div className="flex items-center [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
-                <DashedLink>info@ELEMENTIS.co</DashedLink>
+                <DashedLink>merhaba@yasamasanati.com</DashedLink>
                 <div className="mx-5">|</div>
-                <DashedLink>+62 823 4078 1817</DashedLink>
+                <DashedLink>+90 232 000 0000</DashedLink>
               </div>
             </motion.div>
             <motion.div
@@ -234,9 +246,9 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
               }}
               className="text-1600svh"
             >
-              <Link href="https://elementis.co/privacy-terms">
+              <Link href="/privacy-terms">
                 <DashedLink className="w-fit text-[#2b3530] [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
-                  Policy and Terms
+                  Politikalar ve Şartlar
                 </DashedLink>
               </Link>
             </motion.div>

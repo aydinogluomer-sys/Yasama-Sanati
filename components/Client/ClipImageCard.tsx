@@ -30,98 +30,77 @@ export default function ClipImageCard({
   const [currentState, setCurrentState] = useState(1);
   const data: DataItem[] = [
     {
-      title: [<>ELEMENTIS</>, <>Innovation Culture</>],
+      title: [<>Nefes Koçluğu</>, <>Eğitimi</>],
       description: {
         mobile: [
-          <>We foster a culture of Innovation that </>,
-          <>enriches lives through transformative</>,
-          <>solutions and innovative ideas that</>,
-          <>resonate with our global Community.</>,
+          <>Doğru nefes alarak zihinsel berraklık, duygusal</>,
+          <>denge ve hücresel düzeyde detoks sağlayın.</>,
+          <>Uluslararası sertifikalı eğitmenlik programı.</>,
         ],
         desktop: [
-          <>We foster a culture of Innovation that enriches</>,
-          <>lives through transformative solutions and</>,
-          <>innovative ideas that resonate with our global</>,
-          <>Community.</>,
+          <>Doğru nefes alarak zihinsel berraklık, duygusal</>,
+          <>denge ve hücresel düzeyde detoks sağlayın.</>,
+          <>Uluslararası sertifikalı eğitmenlik programı.</>,
         ],
       },
     },
     {
-      title: [<>Exceptional Wood</>, <>Construction</>],
+      title: [<>Meridyen Terapisi</>, <>ve Kinesiyoloji</>],
       description: {
         mobile: [
-          <>Our high-quality glue laminated timber</>,
-          <>revolutionizes tropical climate</>,
-          <>construction byseamlessly combining</>,
-          <>natural elegance, unparalleled durability,</>,
-          <>and environmental responsibility.</>,
+          <>Vücudun enerji kanallarını bloke eden</>,
+          <>engelleri kaldırın. Bütünsel kinesiyoloji</>,
+          <>teknikleriyle derin hücresel şifa.</>,
         ],
         desktop: [
-          <>Our high-quality glue laminated timber</>,
-          <>revolutionizes tropical climate construction by</>,
-          <>seamlessly combining natural elegance,</>,
-          <>unparalleled durability, and environmental</>,
-          <>responsibility.</>,
+          <>Vücudun enerji kanallarını bloke eden</>,
+          <>engelleri kaldırın. Bütünsel kinesiyoloji</>,
+          <>teknikleriyle derin hücresel şifa.</>,
         ],
       },
     },
     {
-      title: [<>Innovative Glass</>, <>Solutions</>],
+      title: [<>Mucizeler Kursu</>, <>(ACIM)</>],
       description: {
         mobile: [
-          <>The innovative Low-E solar control glass</>,
-          <>stands out for its unparalleled ability to</>,
-          <>blend energy efficiency, enhanced</>,
-          <>comfort, and breathtaking aesthetic</>,
-          <>appeal.</>,
+          <>Korkudan sevgiye geçişi hedefleyen,</>,
+          <>zihinsel arınma ve spiritüel uyanış. Yıllık</>,
+          <>çevrimiçi rehberlik ve çalışma programı.</>,
         ],
         desktop: [
-          <>The innovative Low-E solar control glass stands</>,
-          <>out for its unparalleled ability to blend energy</>,
-          <>efficiency, enhanced comfort, and breathtaking</>,
-          <>aesthetic appeal.</>,
+          <>Korkudan sevgiye geçişi hedefleyen,</>,
+          <>zihinsel arınma ve spiritüel uyanış. Yıllık</>,
+          <>çevrimiçi rehberlik ve çalışma programı.</>,
         ],
       },
     },
     {
-      title: [<>World First Climate</>, <>Control</>],
+      title: [<>Reiki Enerji</>, <>Eğitimleri</>],
       description: {
         mobile: [
-          <>We pioneer an innovative climate</>,
-          <>control system that outperforms any</>,
-          <>other option, ending the battle with</>,
-          <>moid for an infinitely healthier</>,
-          <>experience. When combined with our</>,
-          <>solar energy system it provides a</>,
-          <>world-first sustainable solution.</>,
+          <>Evrensel yaşam enerjisini yönlendirerek</>,
+          <>çakraları dengeleyin ve şifa kanallarınızı açın.</>,
+          <>Birinci aşamadan master seviyesine uzanan yol.</>,
         ],
         desktop: [
-          <>We pioneer an innovative climate control</>,
-          <>system that outperforms any other option,</>,
-          <>ending the battle with moid for an infinitely </>,
-          <>healthier experience. When combined with our</>,
-          <>solar energy system it provides a world-first</>,
-          <>sustainable solution.</>,
+          <>Evrensel yaşam enerjisini yönlendirerek</>,
+          <>çakraları dengeleyin ve şifa kanallarınızı açın.</>,
+          <>Birinci aşamadan master seviyesine uzanan yol.</>,
         ],
       },
     },
     {
-      title: [<>State-of-the-Art</>, <>Design</>],
+      title: [<>Hipnoterapi &</>, <>Yaşam Koçluğu</>],
       description: {
         mobile: [
-          <>By blending natural elements,panoramic</>,
-          <>views, tactile textures, luxury touches,</>,
-          <>and sustainable design principles, we</>,
-          <>create a memorable and inviting hotel</>,
-          <>interior that reflects ELEMENTIS</>,
-          <>modern, wooden eco concept.</>,
+          <>Bilinçaltının gücünü keşfederek köklü</>,
+          <>davranış değişiklikleri sağlayın ve bireysel</>,
+          <>potansiyelinizi gerçeğe dönüştürün.</>,
         ],
         desktop: [
-          <>By blending natural elements,panoramic views,</>,
-          <>tactile textures, luxury touches, and sustainable</>,
-          <>design principles, we create a memorable and</>,
-          <>inviting hotel interior that reflects ELEMENTIS</>,
-          <>modern, wooden eco concept.</>,
+          <>Bilinçaltının gücünü keşfederek köklü</>,
+          <>davranış değişiklikleri sağlayın ve bireysel</>,
+          <>potansiyelinizi gerçeğe dönüştürün.</>,
         ],
       },
     },
@@ -153,7 +132,7 @@ export default function ClipImageCard({
         className,
       )}
     >
-      <SectionTitle className="">Innovation</SectionTitle>
+      <SectionTitle className="">Şifa Yolculuğu</SectionTitle>
       <motion.div
         variants={{
           initial: { y: "50%" },
@@ -202,7 +181,7 @@ export default function ClipImageCard({
         />
       </motion.div>
       <span className="text-base [line-height:1] md:text-xl">
-        ( Keep Scrolling ){" "}
+        ( Kaydırmaya Devam Edin ){" "}
       </span>
     </motion.div>
   );
