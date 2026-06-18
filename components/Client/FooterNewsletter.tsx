@@ -1,123 +1,90 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import Magnetic from "@/components/Client/Magnetic";
+import { FormEvent, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+
+type Status = "idle" | "loading" | "success" | "error";
 
 export default function FooterNewsletter() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [isFocused, setIsFocused] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const reduceMotion = useReducedMotion();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!event.currentTarget.reportValidity()) return;
 
     setStatus("loading");
-
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setStatus("success");
+      await new Promise((resolve) => window.setTimeout(resolve, 650));
       setEmail("");
-    } catch (err) {
-      console.error(err);
+      setStatus("success");
+    } catch {
       setStatus("error");
     }
   };
 
   return (
-    <div className="w-full font-sans">
-      <p className="text-xs font-light text-[#F3EFE6]/72 leading-relaxed mb-6">
+    <div className="w-full">
+      <p className="max-w-[24rem] text-sm leading-6 text-[#F3EFE6]/68">
         Yeni içeriklerden ve etkinliklerden ilk siz haberdar olun.
       </p>
-      <AnimatePresence mode="wait">
-        {status !== "success" ? (
-          <div className="relative w-full">
-            <motion.form
-              key="footer-newsletter-form"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-3 w-full relative z-10"
-            >
-              <div className="relative w-full">
-                <input
-                  type="email"
-                  required
-                  disabled={status === "loading"}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
-                  placeholder="E-posta adresiniz"
-                  className="w-full bg-[rgba(20,28,24,0.42)] rounded-[10px] border border-[rgba(243,239,230,0.08)] px-4 py-3 text-sm text-[#F3EFE6]/88 placeholder-[#F3EFE6]/58 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/25 focus-visible:border-[#C9875B]/55 transition-all duration-300 shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] h-11"
-                />
-                {/* Animated glowing focus border */}
-                <motion.div
-                  className="absolute inset-0 border border-[#C9875B]/60 rounded-[10px] pointer-events-none z-0"
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: isFocused ? 1 : 0, scale: isFocused ? 1 : 0.98 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                />
-              </div>
 
-              <Magnetic range={15} strength={0.2}>
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="w-full bg-[#C9875B] hover:bg-[#D79A70] hover:-translate-y-[1px] disabled:bg-[#C9875B]/50 disabled:transform-none text-[#1D261F] h-11 flex items-center justify-center gap-1.5 text-xs font-semibold tracking-[0.10em] uppercase transition-all duration-300 ease-out cursor-pointer rounded-[10px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] motion-reduce:transform-none"
-                >
-                  {status === "loading" ? (
-                    <svg className="animate-spin h-3.5 w-3.5 text-[#1D261F]" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                  ) : (
-                    <div className="flex items-center gap-1.5 group/btn">
-                      <span>Abone Ol</span>
-                      <svg className="size-3 text-[#1D261F] transform group-hover/btn:translate-x-1.5 transition-transform duration-300 ease-out motion-reduce:transform-none" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                      </svg>
-                    </div>
-                  )}
-                </button>
-              </Magnetic>
-            </motion.form>
-          </div>
-        ) : (
+      <AnimatePresence mode="wait" initial={false}>
+        {status === "success" ? (
           <motion.div
-            key="footer-newsletter-success"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-xs text-[#C9875B] font-medium py-2.5 flex items-center gap-2"
+            key="success"
+            role="status"
+            aria-live="polite"
+            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-5 flex min-h-12 items-center gap-2 rounded-[0.65rem] border border-[#D58D5D]/35 bg-[#D58D5D]/10 px-4 text-sm text-[#E6A47A]"
           >
-            <svg className="size-4 shrink-0 text-[#C9875B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-              <motion.path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                d="M5 13l4 4L19 7"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              />
-            </svg>
-            <span>Kayıt başarılı, teşekkürler!</span>
+            <span aria-hidden="true">✓</span>
+            <span>Kayıt başarılı, teşekkürler.</span>
           </motion.div>
+        ) : (
+          <motion.form
+            key="form"
+            onSubmit={handleSubmit}
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-5 grid gap-3"
+          >
+            <label htmlFor="footer-email" className="sr-only">E-posta adresiniz</label>
+            <input
+              id="footer-email"
+              name="email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              required
+              disabled={status === "loading"}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="E-posta adresiniz"
+              className="h-12 min-w-0 rounded-[0.65rem] border border-[#F3EFE6]/10 bg-[#15231D]/65 px-4 text-sm text-[#F3EFE6] outline-none transition-colors placeholder:text-[#F3EFE6]/42 hover:border-[#F3EFE6]/20 focus:border-[#D58D5D]/70 focus:ring-2 focus:ring-[#D58D5D]/25 disabled:cursor-wait disabled:opacity-60 motion-reduce:transition-none"
+            />
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              aria-busy={status === "loading"}
+              className="group flex h-12 items-center justify-center gap-2 rounded-[0.65rem] bg-[#D58D5D] px-5 text-xs font-semibold uppercase tracking-[0.1em] text-[#17251F] transition-colors hover:bg-[#E09A6C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3EFE6] focus-visible:ring-offset-3 focus-visible:ring-offset-[#31483C] disabled:cursor-wait disabled:opacity-65 motion-reduce:transition-none"
+            >
+              <span>{status === "loading" ? "Kaydediliyor" : "Abone Ol"}</span>
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none">→</span>
+            </button>
+          </motion.form>
         )}
       </AnimatePresence>
- 
-      {/* Security note with lock icon */}
-      <div className="flex items-start gap-2 text-[10px] text-[#F3EFE6]/54 mt-4 leading-[1.5]">
-        <svg className="size-3 text-[#C9875B]/78 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-          <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-        </svg>
-        <span className="font-light text-[#F3EFE6]/54">Bilgileriniz güvende. İstediğiniz zaman abonelikten çıkabilirsiniz.</span>
-      </div>
+
+      <p className="mt-4 flex items-start gap-2 text-[11px] leading-[1.55] text-[#F3EFE6]/56">
+        <span aria-hidden="true" className="mt-px shrink-0 text-[#D58D5D]">▣</span>
+        <span>Bilgileriniz güvende. İstediğiniz zaman abonelikten çıkabilirsiniz.</span>
+      </p>
 
       {status === "error" && (
-        <p className="text-[10px] text-red-400 mt-1.5 font-medium">Bir hata oluştu. Lütfen tekrar deneyin.</p>
+        <p role="alert" className="mt-3 text-xs text-[#FFB2A8]">Bir hata oluştu. Lütfen tekrar deneyin.</p>
       )}
     </div>
   );
