@@ -1,32 +1,45 @@
-# Yaşama Sanatı — Developer / Agent Handoff (claude.md)
+# Yasama Sanati - Agent Handoff
 
-Bu dosya, projede çalışan yapay zeka ajanları (Claude, Gemini, Antigravity vb.) ve geliştiriciler için mimari notları ve son yapılan güncellemeleri barındırır.
+This file is for AI agents and developers working on the Yasama Sanati site.
 
-## En Son Tamamlanan İşlemler (Footer Redesign & Alignment Pass)
+## Current State
 
-Footer alanı, kullanıcı deneyimini ve marka prestijini en üst düzeye çıkarmak için **Awwwards standardında** bir cila geçişine (polish pass) tabi tutulmuştur.
+- The project lives in `Elementis-SOTD`.
+- The GitHub remote is `https://github.com/aydinogluomer-sys/Yasama-Sanati.git`.
+- Main focus is the footer polish pass and the Awwwards quality loop artifacts under `awwwards-loop/`.
+- Local fonts are used so the build does not depend on remote Google Fonts.
 
-### Yapılan Düzenlemeler:
-1. **Dikey Hizalama (Ruler Alignment):**
-   - Sayfanın en üstünde yer alan header'ın `"YAŞAMA SANATI"` metninin başlangıç `"Y"` harfi ile dikey bir cetvel düşünülerek, footer'daki tüm içeriklerin sol sınırları `pl-0` olacak şekilde sıfırlanmış ve bu hizaya tam olarak oturtulmuştur.
-   - Sol kenardaki dekoratif dikey çizgi, desktop görünümde `left-[-32px]` konumuna (sayfa padding alanına) ötelenmiş ve logo yazısının üstüne binmesi engellenmiştir.
-   - Sol üstteki sparkle yıldızı (`lg:-left-[37px]`) ve yaşam çizgisi (`left-[-37px]`) bu dikey cila çizgisine göre konumlandırılmıştır.
-   - Sağdaki bülten kartı ve legal linkler, en sağdaki hamburger menü butonunun dikey hizasına göre sonlandırılmıştır.
+## What Was Changed Recently
 
-2. **Dikey/Yatay Gradyanlı Bölücüler:**
-   - Kolonlar arası dikey ayrım çizgileri kısaltılmış (`top-20 bottom-20`), düz ve sert çizgiler yerine uçları tamamen şeffaflıkla eriyen linear-gradient çizgiler kullanılmıştır.
+- Footer layout was tuned to match the provided reference image more closely.
+- Newsletter layout was switched to a compact horizontal desktop form row.
+- Contact items now use small inline glyphs.
+- The footer background is flatter and less saturated than earlier revisions.
+- The main content container was widened to reduce left and right crowding.
 
-3. **Mikro Konum İmza Alanı:**
-   - Koordinat satırı (`38.4237° N · 27.1428° E`) üzerinde yer alan geçersiz Tailwind opaklık sınıfı (`border-[#F3EFE6]/06`) standart `border-[#F3EFE6]/[0.06]` olarak düzeltilmiştir.
-   - Lokasyon bilgisinin başına, aktifliği simgeleyen animasyonlu bir mikro nokta (`animate-pulse` ve `animate-ping`) yerleştirilmiştir.
+## Editable Areas
 
-4. **Bülten Kartı Kontrolleri:**
-   - E-posta input'u, kilit simgeli güvenlik notu (`items-start`), hover animasyonlu abone ol butonu (`hover:bg-[#D79A70]`) ve premium renklendirmeler tamamlanmıştır.
+- `sections/Footer/**`
+- `components/Client/FooterBackgroundText.tsx`
+- `components/Client/FooterNewsletter.tsx`
+- `app/layout.tsx`
+- `app/globals.css`
+- `awwwards-loop/**`
 
-## Kritik Dosyalar ve Değişiklik İzinleri
-- **Düzenlenebilir Alanlar:** Yalnızca footer ile ilişkili olan `sections/Footer/**`, `components/Client/FooterBackgroundText.tsx` ve `components/Client/FooterNewsletter.tsx` dosyalarıdır.
-- **Değiştirilmemesi Gerekenler:** Global tema, header, hero ve site geneli diğer paylaşımlı bileşenlerdir.
+## Do Not Change Without Scope Expansion
 
-## Geliştirici İpuçları
-- Tailwind CSS sınıflarında köşeli parantez içindeki opaklık veya özel değer tanımlamalarına dikkat edilmelidir (Örn: `border-[#F3EFE6]/[0.06]`).
-- Animasyonlar `motion/react` kütüphanesi üzerinden yürütülmekte olup, kullanıcıların `reduced-motion` ayarları her zaman göz önünde bulundurulmalıdır (`motion-reduce:transform-none` vb.).
+- Header, hero, and unrelated page sections
+- Shared app-wide design decisions
+- User-owned untracked folders outside the main app flow
+
+## Verification Expectations
+
+- Run `npm run build` after code changes.
+- Check the footer at desktop, tablet, and mobile widths.
+- Confirm newsletter focus and success states.
+- Keep `awwwards-loop/implementation.md`, iteration files, and reports in sync with the latest pass.
+
+## Working Notes
+
+- The repo already has a committed history of the footer loop.
+- Keep changes scoped and avoid broad rewrites unless the reference or tests require them.
