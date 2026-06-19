@@ -170,7 +170,7 @@ body {
 
 /* Custom overrides for high-fidelity footer matching */
 .font-serif {
-  font-family: var(--font-serif), Georgia, serif !important;
+  font-family: var(--font-serif) !important;
 }
 
 @media (min-width: 1024px) {

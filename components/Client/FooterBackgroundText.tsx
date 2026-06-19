@@ -8,6 +8,7 @@ interface FooterBackgroundTextProps {
 
 export default function FooterBackgroundText({ containerRef }: FooterBackgroundTextProps) {
   void containerRef;
+
   return (
     <div
       aria-hidden="true"

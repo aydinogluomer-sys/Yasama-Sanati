@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Cormorant_Garamond } from "next/font/google";
+import localFont from "next/font/local";
+import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "@/utils/lenis";
 import { WindowSizeProvider } from "./providers";
 import { MotionConfig } from "motion/react";
 
-const hankenGrotesk = Hanken_Grotesk({
-  subsets: ["latin", "latin-ext"],
-  weight: ["300", "400", "500"],
+const basisGrotesque = localFont({
+  src: [
+    { path: "./fonts/BasisGrotesquePro-Light.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/BasisGrotesquePro-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/BasisGrotesquePro-Medium.woff2", weight: "500", style: "normal" },
+  ],
   variable: "--font-grotesque",
 });
 
@@ -30,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body
-        className={`${hankenGrotesk.variable} ${cormorantGaramond.variable} overflow-x-clip antialiased selection:bg-[#ced1bf] selection:text-[#2b3530]`}
+        className={`${basisGrotesque.variable} ${cormorantGaramond.variable} overflow-x-clip antialiased selection:bg-[#ced1bf] selection:text-[#2b3530]`}
       >
         <ReactLenis root>
           <WindowSizeProvider>

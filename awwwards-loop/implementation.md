@@ -58,9 +58,8 @@ Every `ITERATE` report must create the next iteration plan from its failed crite
 
 ## Current status
 
-- [x] Iteration 02 replaced the fixed-height footer with a content-driven responsive grid.
-- [x] Newsletter, contact wrapping, focus states, reduced motion, semantics, and legal bar were rebuilt.
-- [x] Production build passed after the footer rewrite.
-- [x] Current source is served independently on port 3210 from a detached production server.
+- [x] Iteration 04 brought the footer back toward the reference with a flatter background, inline contact glyphs, and a horizontal newsletter row.
+- [x] Production build passes after the local-font and footer adjustments.
+- [x] Current source is served independently on port 3240 from a detached production server.
 - [x] Inspectable browser evidence captured at desktop, tablet, and mobile sizes.
-- [x] Final scored report passed.
+- [x] Newsletter focus and success states were re-verified on the updated footer.

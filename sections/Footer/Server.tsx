@@ -36,7 +36,7 @@ const reveal = {
 };
 
 const footerLink =
-  "w-fit text-sm leading-6 text-[#F3EFE6]/68 transition-colors duration-200 hover:text-[#F3EFE6] focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] focus-visible:ring-offset-4 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none";
+  "w-fit text-sm leading-6 text-[#F3EFE6]/72 transition-colors duration-200 hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none";
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -54,7 +54,7 @@ export default function Footer() {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_76%_38%,rgba(67,103,84,0.36),transparent_38%),linear-gradient(145deg,#27372f_0%,#2d4439_100%)]"
+        className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_76%_38%,rgba(67,103,84,0.24),transparent_40%),linear-gradient(180deg,#27352f_0%,#2a3831_100%)]"
       />
       <FooterBackgroundText containerRef={footerRef} />
 
@@ -73,8 +73,13 @@ export default function Footer() {
             aria-labelledby="footer-brand-title"
           >
             <div aria-hidden="true" className="absolute -left-3 -top-8 hidden h-[360px] w-px bg-gradient-to-b from-[#D58D5D]/70 via-[#D58D5D]/20 to-transparent sm:block" />
-            <span aria-hidden="true" className="absolute -left-[0.925rem] -top-10 hidden text-sm text-[#D58D5D] sm:block">×</span>
-            <h2 id="footer-brand-title" className="font-serif text-[2.35rem] font-medium uppercase leading-[0.92] tracking-[-0.02em] md:text-[2.7rem]">
+            <span aria-hidden="true" className="absolute -left-[0.925rem] -top-10 hidden text-sm text-[#D58D5D] sm:block">
+              ×
+            </span>
+            <h2
+              id="footer-brand-title"
+              className="font-serif text-[2.35rem] font-medium uppercase leading-[0.92] tracking-[-0.02em] md:text-[2.7rem]"
+            >
               Yaşama
               <br />
               Sanatı
@@ -87,7 +92,9 @@ export default function Footer() {
               className="group mt-8 flex h-12 w-full max-w-[13.75rem] items-center justify-between rounded-[0.65rem] border border-[#D58D5D]/85 px-5 text-xs font-medium tracking-[0.04em] text-[#E09A6C] transition-colors hover:bg-[#D58D5D] hover:text-[#203028] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3EFE6] focus-visible:ring-offset-4 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
             >
               <span>Programları Keşfet</span>
-              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none">→</span>
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none">
+                →
+              </span>
             </Link>
 
             <div className="mt-8 flex flex-wrap gap-2.5" aria-label="Sosyal medya hesapları">
@@ -120,17 +127,29 @@ export default function Footer() {
           >
             <FooterNav index="01" title="Akademi" links={akademiLinks} />
             <FooterNav index="02" title="Kaynaklar" links={kaynaklarLinks} />
+
             <section className="col-span-2 sm:col-span-1" aria-labelledby="footer-contact-title">
               <Eyebrow>03</Eyebrow>
-              <h3 id="footer-contact-title" className="mt-2 font-serif text-xl font-medium">İletişim</h3>
-              <ul className="mt-5 space-y-3.5 text-sm text-[#F3EFE6]/68">
-                <li>
-                  <a className={`${footerLink} break-all`} href="mailto:info@yasamasanati.com">info@yasamasanati.com</a>
+              <h3 id="footer-contact-title" className="mt-2 font-serif text-xl font-medium">
+                İletişim
+              </h3>
+              <ul className="mt-5 space-y-3.5">
+                <li className="flex items-start gap-2">
+                  <ContactGlyph kind="mail" />
+                  <a className={footerLink} href="mailto:info@yasamasanati.com">
+                    info@yasamasanati.com
+                  </a>
                 </li>
-                <li>
-                  <a className={footerLink} href="tel:+905327893753">+90 532 789 37 53</a>
+                <li className="flex items-start gap-2">
+                  <ContactGlyph kind="phone" />
+                  <a className={footerLink} href="tel:+905327893753">
+                    +90 532 789 37 53
+                  </a>
                 </li>
-                <li className="leading-6">Online &amp; İzmir</li>
+                <li className="flex items-start gap-2 text-sm leading-6 text-[#F3EFE6]/68">
+                  <ContactGlyph kind="location" />
+                  <span>Online &amp; İzmir</span>
+                </li>
               </ul>
             </section>
           </motion.div>
@@ -141,10 +160,12 @@ export default function Footer() {
             className="md:col-span-2 lg:col-span-3 lg:border-l lg:border-[#F3EFE6]/12 lg:pl-10 xl:pl-12"
             aria-labelledby="footer-newsletter-title"
           >
-            <div className="mx-auto w-full max-w-[27rem] rounded-[1.25rem] border border-[#F3EFE6]/12 bg-[#F3EFE6]/[0.045] p-6 shadow-[0_24px_70px_rgba(12,23,18,0.14)] backdrop-blur-sm md:mx-0 lg:max-w-none xl:p-7">
-              <Eyebrow>04</Eyebrow>
-              <h3 id="footer-newsletter-title" className="mt-2 font-serif text-xl font-medium">Bülten</h3>
-              <div className="mt-5"><FooterNewsletter /></div>
+            <Eyebrow>04</Eyebrow>
+            <h3 id="footer-newsletter-title" className="mt-2 font-serif text-xl font-medium">
+              Bülten
+            </h3>
+            <div className="mt-5 max-w-[27rem] lg:max-w-none">
+              <FooterNewsletter />
             </div>
           </motion.section>
         </motion.div>
@@ -152,16 +173,20 @@ export default function Footer() {
         <div className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-[#F3EFE6]/16 to-transparent lg:mt-20" />
         <div className="flex flex-col items-center gap-5 py-6 text-center text-xs text-[#F3EFE6]/52 lg:flex-row lg:justify-between lg:text-left">
           <p className="shrink-0">© 2026 Yaşama Sanatı</p>
+
           <nav aria-label="Yasal bağlantılar">
             <ul className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2">
               {legalLinks.map(([label, href], index) => (
                 <li key={label} className="flex items-center gap-2.5">
                   {index > 0 && <span aria-hidden="true" className="size-1 rounded-full bg-[#D58D5D]/75" />}
-                  <Link className="transition-colors hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none" href={href}>{label}</Link>
+                  <Link className="transition-colors hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none" href={href}>
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
+
           <div className="flex shrink-0 items-center gap-5">
             <button
               type="button"
@@ -170,7 +195,9 @@ export default function Footer() {
             >
               Yukarı Git ↑
             </button>
-            <span>Yaşama Sanatı Akademisi <span aria-hidden="true" className="ml-1 text-[#D58D5D]">✦</span></span>
+            <span>
+              Yaşama Sanatı Akademisi <span aria-hidden="true" className="ml-1 text-[#D58D5D]">✦</span>
+            </span>
           </div>
         </div>
       </div>
@@ -196,12 +223,48 @@ function FooterNav({
   return (
     <nav aria-labelledby={titleId}>
       <Eyebrow>{index}</Eyebrow>
-      <h3 id={titleId} className="mt-2 font-serif text-xl font-medium">{title}</h3>
+      <h3 id={titleId} className="mt-2 font-serif text-xl font-medium">
+        {title}
+      </h3>
       <ul className="mt-5 space-y-2.5">
         {links.map(([label, href]) => (
-          <li key={label}><Link className={footerLink} href={href}>{label}</Link></li>
+          <li key={label}>
+            <Link className={footerLink} href={href}>
+              {label}
+            </Link>
+          </li>
         ))}
       </ul>
     </nav>
+  );
+}
+
+type ContactGlyphKind = "mail" | "phone" | "location";
+
+function ContactGlyph({ kind }: { kind: ContactGlyphKind }) {
+  const common = "mt-0.5 size-4 shrink-0 text-[#D58D5D]";
+
+  if (kind === "mail") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className={common} fill="none">
+        <path d="M4.5 6.5h15v11h-15z" stroke="currentColor" strokeWidth="1.4" />
+        <path d="m5.75 7.75 6.25 5 6.25-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (kind === "phone") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className={common} fill="none">
+        <path d="M7.75 4.75 10 7.5 8.25 9.25c.65 1.43 1.7 2.79 3.15 4.24 1.45 1.45 2.81 2.5 4.24 3.15L17.5 15l2.75 2.25c-.35 1.5-1.43 2.75-2.75 3.25-1.92.73-4.18.25-6.68-1.42-2.07-1.38-3.96-3.27-5.34-5.34-1.67-2.5-2.15-4.76-1.42-6.68.5-1.32 1.75-2.4 3.25-2.75Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className={common} fill="none">
+      <path d="M12 20c2.8-2.9 6-6.4 6-10.2a6 6 0 1 0-12 0c0 3.8 3.2 7.3 6 10.2Z" stroke="currentColor" strokeWidth="1.3" />
+      <circle cx="12" cy="9.8" r="1.8" stroke="currentColor" strokeWidth="1.3" />
+    </svg>
   );
 }
