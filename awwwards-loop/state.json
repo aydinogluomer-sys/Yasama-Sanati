@@ -1,9 +1,9 @@
 {
   "version": 1,
   "route": "/#site-footer",
-  "iteration": 4,
+  "iteration": 5,
   "status": "complete",
-  "browserAttempts": 5,
+  "browserAttempts": 6,
   "blocker": null,
   "passingScore": 90,
   "requiredViewports": [
@@ -24,5 +24,5 @@
     }
   ],
   "hardGatesPassed": true,
-  "lastScore": 96
+  "lastScore": 97
 }

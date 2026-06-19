@@ -58,7 +58,7 @@ export default function Footer() {
       />
       <FooterBackgroundText containerRef={footerRef} />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1360px]">
+      <div className="relative z-10 mx-auto w-full max-w-[1440px]">
         <motion.div
           initial={reduceMotion ? false : "hidden"}
           whileInView="visible"
@@ -123,7 +123,7 @@ export default function Footer() {
           <motion.div
             variants={reveal}
             transition={{ duration: 0.55, delay: 0.04 }}
-            className="grid grid-cols-2 gap-x-8 gap-y-12 md:col-span-2 md:grid-cols-3 lg:col-span-6 lg:border-l lg:border-[#F3EFE6]/12 lg:px-10 xl:px-12"
+            className="grid grid-cols-2 gap-x-8 gap-y-12 md:col-span-2 md:grid-cols-3 lg:col-span-6 lg:border-l lg:border-[#F3EFE6]/12 lg:px-10 xl:px-10"
           >
             <FooterNav index="01" title="Akademi" links={akademiLinks} />
             <FooterNav index="02" title="Kaynaklar" links={kaynaklarLinks} />
@@ -157,7 +157,7 @@ export default function Footer() {
           <motion.section
             variants={reveal}
             transition={{ duration: 0.55, delay: 0.08 }}
-            className="md:col-span-2 lg:col-span-3 lg:border-l lg:border-[#F3EFE6]/12 lg:pl-10 xl:pl-12"
+            className="md:col-span-2 lg:col-span-3 lg:border-l lg:border-[#F3EFE6]/12 lg:pl-10 xl:pl-10"
             aria-labelledby="footer-newsletter-title"
           >
             <Eyebrow>04</Eyebrow>
