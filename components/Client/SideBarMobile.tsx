@@ -1,3 +1,5 @@
+"use client";
+
 import StyledLink from "@/components/Server/StyledLink";
 import * as motion from "motion/react-client";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
@@ -5,25 +7,63 @@ import ContactUs from "../Server/ContactUs";
 import StayConnected from "../Server/StayConnected";
 import { AnimatePresence } from "motion/react";
 import Link from "next/link";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 interface LinkItem {
   href: string;
   link: string;
 }
-export default function SideBarMobile() {
+export default function SideBarMobile({
+  setOpenSideBar,
+}: {
+  setOpenSideBar: Dispatch<SetStateAction<boolean>>;
+}) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) return;
+    const focusable = Array.from(panel.querySelectorAll<HTMLElement>("a, button"));
+    focusable[0]?.focus();
+
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== "Tab" || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    panel.addEventListener("keydown", trapFocus);
+    return () => panel.removeEventListener("keydown", trapFocus);
+  }, []);
   const links: LinkItem[] = [
     { href: "/", link: "Ana Sayfa" },
-    { href: "/programlar/meridyen-terapi", link: "Meridyen Terapi" },
+    { href: "/programlar", link: "Programlarımız" },
+    { href: "/community", link: "Topluluk" },
+    { href: "/blog", link: "Blog" },
+    { href: "/sss", link: "Sık Kullanılan Sorular" },
+    { href: "/#on-kayit", link: "İletişim" },
+    { href: "/programlar/yasam-kocu", link: "Yaşam Koçluğu" },
     { href: "/programlar/nefes-koclugu", link: "Nefes Koçluğu" },
     { href: "/programlar/mucizeler-kursu", link: "Mucizeler Kursu" },
-    { href: "/programlar/yasam-kocu", link: "Yaşam Koçluğu" },
     { href: "/programlar/hipnoterapi", link: "Hipnoterapi" },
+    { href: "/programlar/meridyen-terapi", link: "Meridyen Terapi" },
     { href: "/programlar/reiki", link: "Reiki" },
-    { href: "/the-story", link: "Hikayemiz" },
-    { href: "/egitmenler", link: "Eğitmenler" },
-    { href: "/#on-kayit", link: "İletişim" },
   ];
   return (
-    <div className="fixed top-0 z-[30] h-screen w-full overflow-x-hidden">
+    <div
+      ref={panelRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site menüsü"
+      className="fixed top-0 z-[30] h-screen w-full overflow-x-hidden"
+      onClick={(event) => {
+        if ((event.target as HTMLElement).closest("a")) setOpenSideBar(false);
+      }}
+    >
       <AnimatePresence>
         <motion.div
           variants={{
@@ -40,7 +80,7 @@ export default function SideBarMobile() {
           className="h-screen overflow-y-scroll bg-[#CED1BF] px-3-75 pt-12000svh"
         >
           <span className="text-sm text-[#2b353080]">Sayfaları Keşfedin</span>
-          <div className="my-3200svh text-[#2b3530]">
+          <nav aria-label="Mobil navigasyon" className="my-3200svh text-[#2b3530]">
             {links.map(({ link, href }, i) => (
               <StyledLink
                 className="mb-750svh text-lg font-light"
@@ -64,7 +104,7 @@ export default function SideBarMobile() {
                 <NavigateSVG fill="#D1CCBF" />
               </motion.button>
             </Link>
-          </div>
+          </nav>
           <ContactUs className="gap-y-8 text-base text-[#2b3530] max-md:mt-16 md:hidden [&>:first-child]:text-sm [&>:first-child]:text-[#2b3530]/80 [&>div]:gap-x-5" />
           <StayConnected className="mt-4800svh gap-y-6 text-sm [line-height:1] text-[#2b3530]/80 [&_div]:gap-x-8 [&_svg]:h-2400svh [&_svg]:w-auto" />
         </motion.div>

@@ -8,6 +8,8 @@ interface SubPageLayoutProps {
   children: ReactNode;
   noPadding?: boolean;
   heroFullScreen?: boolean;
+  /** Skip the big section hero so the page content itself leads (e.g. a blog article). */
+  hideHero?: boolean;
 }
 
 export default function SubPageLayout({
@@ -16,14 +18,16 @@ export default function SubPageLayout({
   children,
   noPadding = false,
   heroFullScreen = false,
+  hideHero = false,
 }: SubPageLayoutProps) {
   return (
     <div className="min-h-screen bg-[#2B3530] text-[#d1ccbf] font-sans selection:bg-[#ced1bf] selection:text-[#2B3530]">
       <NavBar />
       {/* Hero section for sub-page */}
-      {heroFullScreen ? (
+      {!hideHero &&
+        (heroFullScreen ? (
         <div className="relative flex flex-col justify-center px-6 md:px-16 h-screen w-full bg-[#2B3530]">
-          <h1 className="text-40 md:text-144 font-light tracking-tight [line-height:1] text-white animate-hero-title">
+          <h1 className="font-serif text-display-l font-normal tracking-[-0.02em] text-white animate-hero-title">
             {title}
           </h1>
           {description && (
@@ -49,7 +53,7 @@ export default function SubPageLayout({
         </div>
       ) : (
         <div className="relative flex flex-col justify-center px-6 pt-40 pb-20 md:px-16 md:pt-48 md:pb-28 border-b border-[#ced1bf]/15">
-          <h1 className="text-40 md:text-144 font-light tracking-tight [line-height:1] text-white animate-hero-title">
+          <h1 className="font-serif text-display-l font-normal tracking-[-0.02em] text-white animate-hero-title">
             {title}
           </h1>
           {description && (
@@ -58,15 +62,21 @@ export default function SubPageLayout({
             </p>
           )}
         </div>
-      )}
-      
+        ))}
+
       {/* Main content */}
       {noPadding ? (
         <main className="w-full overflow-hidden">
           {children}
         </main>
       ) : (
-        <main className="px-6 py-16 md:px-16 md:py-28">
+        <main
+          className={
+            hideHero
+              ? "px-6 pt-32 pb-16 md:px-16 md:pt-44 md:pb-28"
+              : "px-6 py-16 md:px-16 md:py-28"
+          }
+        >
           {children}
         </main>
       )}

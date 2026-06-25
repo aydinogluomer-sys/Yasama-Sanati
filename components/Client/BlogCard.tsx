@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { BlogPost } from "@/utils/blogData";
+import Image from "next/image";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -22,11 +23,12 @@ export default function BlogCard({ post }: BlogCardProps) {
         <div className="space-y-4">
           {/* Card Image Container */}
           <div className="relative h-48 md:h-56 w-full overflow-hidden rounded bg-[#2b3530]/40">
-            <img
+            <Image
               src={post.coverImage}
               alt={post.title}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              loading="lazy"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             {/* Category Tag Overlay */}
             <span className="absolute top-4 left-4 bg-[#2b3530]/90 backdrop-blur-md text-[#ca7d57] px-3 py-1 rounded-sm text-2xs font-medium border border-[#ca7d57]/20 uppercase tracking-widest">
@@ -55,9 +57,11 @@ export default function BlogCard({ post }: BlogCardProps) {
         {/* Footer Area */}
         <div className="pt-4 mt-6 border-t border-[#ced1bf]/10 flex items-center justify-between text-2xs">
           <div className="flex items-center space-x-2">
-            <img
+            <Image
               src={post.author.avatar}
               alt={post.author.name}
+              width={24}
+              height={24}
               className="size-6 rounded-full object-cover border border-[#ced1bf]/20"
             />
             <span className="text-[#ced1bf]/60 font-light">{post.author.name}</span>

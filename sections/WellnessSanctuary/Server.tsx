@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Fragment } from "react";
 import WellnessSanctuaryImage from "@/public/WellnessSanctuaryImage.png";
 import ResponsiveMaskText from "@/components/Client/ResponsiveMaskTextVariant";
-import SectionTitle from "@/components/Server/SectionTitle";
+import EditorialSectionTitle from "@/components/Server/EditorialSectionTitle";
 import MaskText from "@/components/Server/MaskText";
 import StyledLink from "@/components/Server/StyledLink";
 import ResponsiveImage from "@/components/Client/ResponsiveImage";
@@ -25,20 +25,20 @@ export default function WellnessSanctuary() {
   };
 
   return (
-    <div className="flex flex-col bg-[#30493D] text-[#D1CCBF] md:grid md:grid-cols-2" id="yaklasimimiz">
+    <section aria-label="Yaklaşımımız" className="flex flex-col bg-[#30493D] text-[#D1CCBF] md:grid md:grid-cols-2" id="yaklasimimiz">
       <ResponsiveImage parallaxAmount={20}>
         <Image
           src={WellnessSanctuaryImage}
-          alt="wellness-sanctuary-image"
+          alt="Kişiye özel yaklaşımı temsil eden dingin bir iç mekân"
           className="h-auto w-full"
         />
       </ResponsiveImage>
       <div className="flex flex-col justify-center px-3-75 py-40 md:py-0">
-        <div className="flex flex-col gap-12 md:ml-36 md:w-fit md:gap-16">
-          <SectionTitle>Yaklaşımımız</SectionTitle>
+        <div className="flex max-w-[38rem] flex-col gap-12 md:ml-24 md:mr-16 md:w-fit md:gap-16 xl:ml-36">
+          <EditorialSectionTitle index="02">Yaklaşımımız</EditorialSectionTitle>
           <ResponsiveMaskText
             {...textLines}
-            className="text-24 [line-height:1] md:text-40"
+            className="font-serif font-normal text-display-s tracking-[-0.01em] text-wrap"
           />
           <MaskText
             lines={[
@@ -55,6 +55,6 @@ export default function WellnessSanctuary() {
           </StyledLink>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

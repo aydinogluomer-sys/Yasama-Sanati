@@ -1,7 +1,6 @@
 "use client";
-import React, { Dispatch, SetStateAction, useRef } from "react";
-import { AnimatePresence, motion, useSpring, useTransform } from "motion/react";
-import FullScreenIcon from "@/components/SVGComponents/FullScreenIcon";
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 interface VideoPlayerProps {
   setPlayIntro: Dispatch<SetStateAction<boolean>>;
@@ -18,34 +17,58 @@ export default function VideoPlayer({
   handlers,
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const videoProgress = useSpring(0, { mass: 1, damping: 30, stiffness: 100 });
-  const width = useTransform(videoProgress, (latest) => {
-    if (videoRef.current) {
-      return `${(latest / videoRef.current.duration) * 100}%`;
-    }
-  });
-  const handleTimeLineClick = (e: React.MouseEvent<HTMLElement>) => {
-    if (videoRef.current) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const progress =
-        ((e.clientX - rect.x) / rect.width) *
-        (videoRef.current.duration as number);
-
-      videoProgress.set(progress);
-      videoRef.current.currentTime = progress;
-    }
-  };
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const reduceMotion = useReducedMotion();
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setPlayIntro(false);
     handlers?.onMouseLeave();
   };
+  useEffect(() => {
+    if (!playIntro) return;
+    returnFocusRef.current = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setPlayIntro(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const controls = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), video[controls]',
+      );
+      if (!controls?.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      const returnTarget = returnFocusRef.current;
+      returnTarget?.focus();
+    };
+  }, [playIntro, reduceMotion, setPlayIntro]);
   return (
     <>
-      <AnimatePresence>
-        {playIntro && (
+      {playIntro && (
           <motion.div
+            ref={dialogRef}
             key="video-container"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Yaşama Sanatı tanıtım filmi"
             onClick={handleClick}
             {...handlers}
             initial="initial"
@@ -60,96 +83,40 @@ export default function VideoPlayer({
                   duration: 0.8,
                 },
               },
-              exit: {
-                clipPath: "inset(0% 0% 100% 0%)",
-                transition: {
-                  ease: [0.24, 0.43, 0.15, 0.97],
-                  duration: 0.8,
-                  delay: 0.25,
-                },
-              },
             }}
-            className="fixed top-0 z-[100] grid h-screen w-full cursor-pointer place-items-center bg-[#1a1a1a] px-3-75"
+            className="fixed top-0 z-[100] grid h-[100svh] w-full cursor-pointer place-items-center bg-[#1a1a1a] px-3-75"
           >
-            <div className="flex h-auto w-full flex-col md:w-[140vh]">
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={handleClick}
+              className="absolute right-5 top-5 z-10 min-h-11 rounded-full border border-white/30 bg-black/30 px-4 text-xs uppercase tracking-[0.14em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              Kapat
+            </button>
+            <div
+              className="flex h-auto w-full flex-col md:w-[140vh]"
+              onClick={(event) => event.stopPropagation()}
+            >
               <div className="flex-1">
                 <video
                   ref={videoRef}
+                  tabIndex={0}
                   width="100%"
                   height="100%"
-                  autoPlay={true}
-                  loop={true}
-                  onTimeUpdate={() => {
-                    videoProgress.set(videoRef.current?.currentTime as number);
-                  }}
+                  autoPlay={!reduceMotion}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/Hero/elementis-posterjpg.png"
+                  aria-label="Yaşama Sanatı tanıtım filmi oynatıcısı"
                 >
-                  <source src="/Hero/elementis-fullmp4.mp4" type="Video/mp4" />
+                  <source src="/Hero/elementis-fullmp4.mp4" type="video/mp4" />
                 </video>
-              </div>
-              <div
-                className="flex items-center gap-5 px-1 py-2"
-                onMouseEnter={(e) => {
-                  e.stopPropagation();
-                  handlers?.onMouseLeave();
-                }}
-                onMouseLeave={(e) => {
-                  e.stopPropagation();
-                  handlers?.onMouseEnter(e);
-                }}
-                onMouseMove={(e) => e.stopPropagation()}
-              >
-                <div
-                  className="flex-1 cursor-pointer overflow-hidden py-2.5"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleTimeLineClick(e);
-                  }}
-                >
-                  <motion.div
-                    className="pointer-events-none h-px bg-white/30"
-                    variants={{
-                      initial: {
-                        x: "-100%",
-                      },
-                      animate: {
-                        x: "0%",
-                        transition: {
-                          ease: [0.24, 0.43, 0.15, 0.97],
-                          duration: 0.5,
-                          delay: 0.25,
-                        },
-                      },
-                      exit: {
-                        x: "100%",
-                        transition: {
-                          ease: [0.24, 0.43, 0.15, 0.97],
-                          duration: 0.3,
-                        },
-                      },
-                    }}
-                  >
-                    <motion.div
-                      className="h-full w-0 rounded-tr-full rounded-br-full bg-white"
-                      style={{
-                        width,
-                      }}
-                    />
-                  </motion.div>
-                </div>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    videoRef.current?.requestFullscreen();
-                  }}
-                >
-                  <FullScreenIcon className="cursor-pointer" />
-                </button>
               </div>
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+      )}
     </>
   );
 }

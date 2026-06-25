@@ -6,6 +6,7 @@ import { motion, useScroll, useSpring } from "motion/react";
 import { BlogPost } from "@/utils/blogData";
 import BlogCard from "./BlogCard";
 import NewsletterForm from "./NewsletterForm";
+import Image from "next/image";
 
 interface BlogDetailContentProps {
   post: BlogPost;
@@ -62,15 +63,17 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
 
         {/* Article Title and Metadata */}
         <div className="space-y-6">
-          <h1 className="text-30 md:text-40 font-light text-white leading-tight [line-height:1.15]">
+          <h1 className="font-serif text-display-s font-normal tracking-[-0.01em] text-white [line-height:1.15]">
             {post.title}
           </h1>
 
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-b border-[#ced1bf]/10 pb-6">
             <div className="flex items-center space-x-3">
-              <img
+              <Image
                 src={post.author.avatar}
                 alt={post.author.name}
+                width={40}
+                height={40}
                 className="size-10 rounded-full border border-[#ced1bf]/20 object-cover"
               />
               <div>
@@ -89,10 +92,13 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
 
         {/* Cover Image */}
         <div className="relative h-64 md:h-[450px] w-full overflow-hidden rounded bg-[#ced1bf]/5">
-          <img
+          <Image
             src={post.coverImage}
             alt={post.title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(min-width: 768px) 896px, 100vw"
+            priority
+            className="object-cover"
           />
         </div>
 

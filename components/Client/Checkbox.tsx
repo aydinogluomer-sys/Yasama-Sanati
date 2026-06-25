@@ -25,13 +25,13 @@ export default function Checkbox({
   return (
     <label
       className={cn(
-        "flex cursor-pointer items-center gap-2 text-[#2b3530]",
+        "group flex min-h-11 cursor-pointer items-center gap-3 text-[#2b3530]",
         className,
       )}
     >
       <input
         type="checkbox"
-        className="hidden"
+        className="peer sr-only"
         name={name}
         value={value}
         checked={checked}
@@ -40,13 +40,13 @@ export default function Checkbox({
       />
       <span
         className={cn(
-          "grid size-3-5 place-items-center border border-[#2b3530]",
+          "grid size-5 shrink-0 place-items-center border border-[#2b3530] transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-[var(--focus-ring)]",
           checked && "bg-[#2b3530]",
         )}
       >
         {checked && <CheckBoxIcon className="h-auto w-1-75" />}
       </span>
-      <div className="text-sm [line-height:1] md:text-base">{children}</div>
+      <div className="text-sm leading-[1.25] md:text-base">{children}</div>
     </label>
   );
 }

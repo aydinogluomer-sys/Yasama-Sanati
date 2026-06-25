@@ -1,20 +1,25 @@
+"use client";
 import React, { PropsWithChildren } from "react";
-import * as motion from "motion/react-client";
+import { motion, useReducedMotion, type MotionProps } from "motion/react";
 import cn from "@/utils/cn";
-import { MotionProps } from "motion/react";
+import { easing, duration } from "@/utils/motion/tokens";
+
 type BorderedButtonProps = PropsWithChildren &
   MotionProps & {
     className?: string;
   };
+
 export default function BorderedButton({
   children,
   className,
   ...props
 }: BorderedButtonProps) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
       initial="initial"
       whileHover="whileHover"
+      whileFocus="whileHover"
       className={cn("relative", className)}
       {...props}
     >
@@ -28,22 +33,22 @@ export default function BorderedButton({
           <path
             d="M1 99 H249 V1 H1 Z"
             opacity="0.5"
-            strokeWidth="2px"
+            strokeWidth="2"
             fill="none"
+            vectorEffect="non-scaling-stroke"
           />
           <motion.path
             d="M1 99 H249 V1 H1 Z"
-            strokeWidth="3px"
+            strokeWidth="3"
             fill="none"
+            vectorEffect="non-scaling-stroke"
             variants={{
               initial: { pathLength: 0 },
               whileHover: {
                 pathLength: 1,
-                transition: {
-                  duration: 0.8,
-                  delay: 0.3,
-                  ease: [0.24, 0.43, 0.15, 0.97],
-                },
+                transition: reduce
+                  ? { duration: 0 }
+                  : { duration: duration.buttonStroke, ease: easing.editorial },
               },
             }}
           />

@@ -1,50 +1,12 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import { useLenis } from "@/utils/lenis";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import MeridianSceneWrapper from "./MeridianSceneWrapper";
 
 export default function MeridianParallaxContainer() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const lastScrollRef = useRef(0);
-  const isTransitioningRef = useRef(false);
-
-  // Programmatic snap-transition using Lenis to avoid CSS Scroll Snapping locking conflicts
-  useLenis((lenis) => {
-    const currentScroll = lenis.scroll;
-    const direction = currentScroll > lastScrollRef.current ? "down" : "up";
-    lastScrollRef.current = currentScroll;
-
-    if (isTransitioningRef.current) return;
-
-    const vh = window.innerHeight;
-
-    // 1. Scroll down from top green hero area -> Slide directly to black 3D scene (vh)
-    if (currentScroll > 15 && currentScroll < vh - 80 && direction === "down") {
-      isTransitioningRef.current = true;
-      lenis.scrollTo(vh, {
-        duration: 0.95,
-        easing: (t) => 1 - Math.pow(1 - t, 3), // Smooth cubic ease out
-        onComplete: () => {
-          isTransitioningRef.current = false;
-        }
-      });
-    }
-
-    // 2. Scroll up from black 3D scene area -> Slide directly back to green hero (0)
-    if (currentScroll < vh - 15 && currentScroll > 80 && direction === "up") {
-      isTransitioningRef.current = true;
-      lenis.scrollTo(0, {
-        duration: 0.95,
-        easing: (t) => 1 - Math.pow(1 - t, 3),
-        onComplete: () => {
-          isTransitioningRef.current = false;
-        }
-      });
-    }
-  });
+  const prefersReducedMotion = useReducedMotion();
 
   // Track scroll position of the wrapper container
   const { scrollYProgress } = useScroll({
@@ -54,7 +16,7 @@ export default function MeridianParallaxContainer() {
 
 
   // Animate scale slightly for a dynamic zoom-out parallax depth effect
-  const sceneScale = useTransform(scrollYProgress, [0.0, 0.4], [1.05, 1.0]);
+  const sceneScale = useTransform(scrollYProgress, [0.0, 0.4], [1.025, 1.0]);
 
   // Fade the "scroll for more" indicator based on scroll progress
   // Fades in as it expands, stays visible, then fades out as subsequent content approaches
@@ -67,15 +29,15 @@ export default function MeridianParallaxContainer() {
   return (
     <div 
       ref={containerRef} 
-      className="relative w-full h-[220vh] bg-transparent" // Scroll track height
+      className="relative h-[150svh] w-full bg-transparent motion-reduce:h-[100svh]"
     >
       {/* Sticky container that keeps the 3D scene pinned to viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#030806]">
+      <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-[#030806]">
         
         {/* Animated container (without clip-path to prevent cutting off left/right UI overlays) */}
         <motion.div
           style={{ 
-            scale: sceneScale,
+            scale: prefersReducedMotion ? 1 : sceneScale,
             width: "100%",
             height: "100%",
           }}
@@ -103,16 +65,14 @@ export default function MeridianParallaxContainer() {
               viewBox="0 0 24 24" 
               strokeWidth={2} 
               stroke="currentColor" 
-              className="size-5 text-[#e0a96d] animate-bounce"
+              className={`size-5 text-[#e0a96d] ${prefersReducedMotion ? "" : "animate-bounce"}`}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
             {/* Mouse wheel animation */}
             <div className="w-[16px] h-[26px] border border-[#e0a96d]/40 rounded-full flex justify-center p-1 opacity-70">
               <motion.div 
-                animate={{ 
-                  y: [0, 8, 0],
-                }}
+                animate={prefersReducedMotion ? undefined : { y: [0, 8, 0] }}
                 transition={{ 
                   duration: 1.5, 
                   repeat: Infinity, 

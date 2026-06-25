@@ -1,9 +1,25 @@
 import React from "react";
 import Link from "next/link";
-import Accordion from "@/components/Client/Accordion";
 import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import FAQList from "@/components/Client/FAQList";
+import TypographyLabel from "@/components/Server/TypographyLabel";
+
+const prependZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+/** Strip a leading "Modül N:" / "Bölüm N:" so the Space Mono index carries the number. */
+const stripModulePrefix = (t: string) => t.replace(/^\s*(Modül|Bölüm)\s*\d+\s*[:.\-–]\s*/i, "");
+
+/** Intercom academy chapter heading: Space Mono index + serif heading + fine rule. */
+function ChapterHeading({ index, children }: { index: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-baseline gap-4 border-b border-[#ced1bf]/15 pb-4">
+      <TypographyLabel className="shrink-0 text-[#ca7d57]">{index}</TypographyLabel>
+      <h3 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white">
+        {children}
+      </h3>
+    </div>
+  );
+}
 
 export interface AccordionItem {
   title: string;
@@ -57,31 +73,47 @@ export default function CourseDetailTemplate({
     <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.8fr_1fr] lg:gap-16 items-start">
       {/* Sol Sütun: İçerik */}
       <div className="space-y-16 md:space-y-24">
-        {/* Giriş Bloğu */}
+        {/* Giriş Bloğu — serif lead */}
         <section className="space-y-6">
-          <h2 className="text-28 md:text-40 font-light text-white leading-tight">
+          <TypographyLabel className="text-[#ca7d57]">Program · Genel Bakış</TypographyLabel>
+          <h2 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white">
             {introTitle}
           </h2>
-          <p className="text-base md:text-lg font-light leading-relaxed text-[#ced1bf]/80 whitespace-pre-line">
+          <p className="max-w-[42rem] text-base md:text-lg font-light leading-relaxed text-[#ced1bf]/80 whitespace-pre-line">
             {introText}
           </p>
         </section>
 
-        {/* Müfredat Akordeonu */}
+        {/* Müfredat — numaralı modül bölümleri (Intercom academy chapter index) */}
         {curriculum && curriculum.length > 0 && (
           <section className="space-y-8">
-            <h3 className="text-xl md:text-28 font-light text-white border-b border-[#ced1bf]/15 pb-3">
-              Eğitim Müfredatı
-            </h3>
-            <Accordion items={curriculum} />
+            <ChapterHeading index="01">Eğitim Müfredatı</ChapterHeading>
+            <ol className="border-t border-[#ced1bf]/12">
+              {curriculum.map((m, i) => (
+                <li
+                  key={i}
+                  className="grid grid-cols-[2.5rem_1fr] gap-x-5 gap-y-2 border-b border-[#ced1bf]/12 py-7 md:grid-cols-[3rem_1fr] md:py-8"
+                >
+                  <TypographyLabel className="text-[#ca7d57] md:pt-1">
+                    {prependZero(i + 1)}
+                  </TypographyLabel>
+                  <div className="space-y-2">
+                    <h4 className="text-lg font-normal text-white md:text-xl">
+                      {stripModulePrefix(m.title)}
+                    </h4>
+                    <p className="text-sm font-light leading-relaxed text-[#ced1bf]/70 md:text-base">
+                      {m.content}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </section>
         )}
 
         {/* Eğitmen Bloğu */}
-        <section className="space-y-6 p-6 md:p-8 bg-[#ced1bf]/5 rounded border border-[#ced1bf]/10">
-          <h3 className="text-xl md:text-28 font-light text-white">
-            Eğitmen Kadromuz
-          </h3>
+        <section className="space-y-6">
+          <ChapterHeading index="02">Eğitmen Kadromuz</ChapterHeading>
           <div className="space-y-3">
             <h4 className="text-lg md:text-xl font-medium text-white">
               {instructor.name}
@@ -89,7 +121,7 @@ export default function CourseDetailTemplate({
             <p className="text-xs md:text-sm text-[#ca7d57] uppercase tracking-wider font-medium">
               {instructor.role}
             </p>
-            <p className="text-sm md:text-base font-light leading-relaxed text-[#ced1bf]/70">
+            <p className="max-w-[42rem] text-sm md:text-base font-light leading-relaxed text-[#ced1bf]/70">
               {instructor.bio}
             </p>
           </div>
@@ -98,9 +130,7 @@ export default function CourseDetailTemplate({
         {/* Testimonials */}
         {testimonials && testimonials.length > 0 && (
           <section className="space-y-8">
-            <h3 className="text-xl md:text-28 font-light text-white border-b border-[#ced1bf]/15 pb-3">
-              Katılımcı Yorumları
-            </h3>
+            <ChapterHeading index="03">Katılımcı Yorumları</ChapterHeading>
             <div className="space-y-6">
               {testimonials.map((t, i) => (
                 <blockquote
@@ -108,7 +138,7 @@ export default function CourseDetailTemplate({
                   className="border-l-2 border-[#ca7d57] pl-6 py-2 space-y-2"
                 >
                   <p className="text-base md:text-lg font-light italic text-[#ced1bf]/80">
-                    "{t.quote}"
+                    &ldquo;{t.quote}&rdquo;
                   </p>
                   <cite className="block text-xs md:text-sm text-[#ced1bf]/60 not-italic font-normal">
                     — {t.author}
@@ -122,9 +152,7 @@ export default function CourseDetailTemplate({
         {/* SSS */}
         {faqs && faqs.length > 0 && (
           <section className="space-y-8">
-            <h3 className="text-xl md:text-28 font-light text-white border-b border-[#ced1bf]/15 pb-3">
-              Sıkça Sorulan Sorular
-            </h3>
+            <ChapterHeading index="04">Sıkça Sorulan Sorular</ChapterHeading>
             <FAQList items={faqs} />
           </section>
         )}

@@ -40,11 +40,11 @@ export default function CustomLink({
               opacity: 1,
               transition: {
                 duration,
-                delay: initialDelay + ((sNo - 1) % 5) * delay,
+                delay: initialDelay + ((sNo - 1) % 6) * delay,
               },
             },
           }}
-          onMouseEnter={() => handleFocus(sNo, false)}
+          onMouseEnter={() => handleFocus(sNo - 1, false)}
         >
           <NavigateSVG
             className="mr-0 size-4 origin-bottom-left [&_path]:[fill:#2b3530]"

@@ -99,9 +99,10 @@ export default function StyledLinkClient({
         whileHover="whileHover"
         onMouseEnter={(e) => handleMouseEnter(e, sNo - 1)}
         onMouseLeave={handleMouseLeave}
+        onFocus={() => handleFocus(sNo - 1, false)}
         style={{ ...style }}
         className={cn(
-          "relative flex h-full items-center justify-between overflow-hidden p-5 [line-height:1] font-normal [&_*]:pointer-events-none",
+          "relative flex min-h-16 items-center justify-between overflow-hidden p-5 [line-height:1] font-normal [&_*]:pointer-events-none",
           className,
         )}
       >

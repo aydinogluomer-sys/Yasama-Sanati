@@ -33,51 +33,17 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
   const { imgContainerRef, handleFocus } = useImageReveal();
   const data: LinkItem[] = [
     { href: "/", link: "Ana Sayfa", src: Home },
-    {
-      href: "/programlar/meridyen-terapi",
-      link: "Meridyen Terapi",
-      src: Destinations,
-    },
-    {
-      href: "/programlar/nefes-koclugu",
-      link: "Nefes Koçluğu",
-      src: Wellness,
-    },
-    {
-      href: "/programlar/mucizeler-kursu",
-      link: "Mucizeler Kursu",
-      src: Innovation,
-    },
-    {
-      href: "/programlar/yasam-kocu",
-      link: "Yaşam Koçluğu",
-      src: Nature,
-    },
-    {
-      href: "/programlar/hipnoterapi",
-      link: "Hipnoterapi",
-      src: Community,
-    },
-    {
-      href: "/programlar/reiki",
-      link: "Reiki",
-      src: TheStory,
-    },
-    {
-      href: "/the-story",
-      link: "Hikayemiz",
-      src: NewDevelopments,
-    },
-    {
-      href: "/egitmenler",
-      link: "Eğitmenler",
-      src: PressRoom,
-    },
-    {
-      href: "/#on-kayit",
-      link: "İletişim",
-      src: Careers,
-    },
+    { href: "/programlar", link: "Programlarımız", src: Destinations },
+    { href: "/community", link: "Topluluk", src: Community },
+    { href: "/blog", link: "Blog", src: PressRoom },
+    { href: "/sss", link: "Sık Kullanılan Sorular", src: NewDevelopments },
+    { href: "/#on-kayit", link: "İletişim", src: Careers },
+    { href: "/programlar/yasam-kocu", link: "Yaşam Koçluğu", src: Nature },
+    { href: "/programlar/nefes-koclugu", link: "Nefes Koçluğu", src: Wellness },
+    { href: "/programlar/mucizeler-kursu", link: "Mucizeler Kursu", src: Innovation },
+    { href: "/programlar/hipnoterapi", link: "Hipnoterapi", src: Community },
+    { href: "/programlar/meridyen-terapi", link: "Meridyen Terapi", src: Destinations },
+    { href: "/programlar/reiki", link: "Reiki", src: TheStory },
   ];
 
   const temp = {
@@ -163,36 +129,19 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
           <span className="text-1800svh text-[#2b3530]/80">Sayfaları keşfedin</span>
           <nav
             aria-label="pages"
-            className="mt-6400svh mb-8000svh grid grid-flow-col-dense grid-cols-2 grid-rows-5"
+            className="mt-6400svh mb-8000svh grid grid-flow-col-dense grid-cols-2 grid-rows-6"
           >
-            {data.map((eachColData, i) =>
-              i === 0 ? (
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  variants={variants}
-                  transition={{
-                    duration: temp.duration,
-                    delay: temp.initialDelay + (i % 5) * temp.delay,
-                    ease: [0.24, 0.43, 0.15, 0.97],
-                  }}
-                  key={"link-" + (i + 1)}
-                  className="cursor-default py-2 text-3000svh [line-height:120%] font-light text-[#2b3530] underline"
-                >
-                  {eachColData.link}
-                </motion.div>
-              ) : (
-                <CustomLink
-                  {...temp}
-                  key={"link-" + (i + 1)}
-                  href={eachColData.href}
-                  sNo={i + 1}
-                  handleFocus={handleFocus}
-                >
-                  {eachColData.link}
-                </CustomLink>
-              ),
-            )}
+            {data.map((eachColData, i) => (
+              <CustomLink
+                {...temp}
+                key={"link-" + (i + 1)}
+                href={eachColData.href}
+                sNo={i + 1}
+                handleFocus={handleFocus}
+              >
+                {eachColData.link}
+              </CustomLink>
+            ))}
           </nav>
           <motion.div
             className="space-y-5600svh"

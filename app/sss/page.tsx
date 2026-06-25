@@ -1,8 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import Link from "next/link";
 import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
+import { motion, AnimatePresence } from "motion/react";
 
 interface FAQ {
   q: string;
@@ -37,26 +40,73 @@ const FAQS: FAQ[] = [
 ];
 
 export default function SSSPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
+  const padZero = (num: number) => (num < 9 ? `0${num + 1}` : `${num + 1}`);
+
   return (
     <SubPageLayout
       title="Sıkça Sorulan Sorular"
       description="Yaşama Sanatı Akademisi eğitimleri, seanslar ve kayıt süreçleri hakkında merak edilenler"
     >
       <div className="max-w-4xl mx-auto space-y-16">
-        <div className="space-y-8">
-          {FAQS.map((faq, idx) => (
-            <div
-              key={idx}
-              className="p-6 md:p-8 bg-[#30493D] rounded border border-[#ced1bf]/10 space-y-3"
-            >
-              <h3 className="text-lg md:text-xl font-medium text-white">
-                {faq.q}
-              </h3>
-              <p className="text-sm md:text-base font-light text-[#ced1bf]/75 leading-relaxed">
-                {faq.a}
-              </p>
-            </div>
-          ))}
+        {/* Accordion Container */}
+        <div className="border-t border-[#ced1bf]/15 divide-y divide-[#ced1bf]/15">
+          {FAQS.map((faq, idx) => {
+            const isOpen = openIndex === idx;
+            return (
+              <div key={idx} className="py-6 md:py-8">
+                <button
+                  onClick={() => toggleFAQ(idx)}
+                  className="w-full flex items-center justify-between text-left group cursor-pointer"
+                  aria-expanded={isOpen}
+                >
+                  <div className="flex items-start gap-4 md:gap-8 flex-1 pr-4">
+                    {/* Space Mono Index */}
+                    <span className="font-mono text-xs md:text-sm text-[#ca7d57]/60 group-hover:text-[#ca7d57] transition-colors duration-300 mt-1 md:mt-1.5 select-none">
+                      {padZero(idx)}
+                    </span>
+                    {/* Question Title in Serif */}
+                    <span className="font-serif font-light text-lg md:text-24 text-[#d1ccbf] group-hover:text-white transition-colors duration-300 tracking-wide">
+                      {faq.q}
+                    </span>
+                  </div>
+
+                  {/* Rotating Action Circle */}
+                  <span className="flex-shrink-0 flex items-center justify-center size-8 border border-[#ced1bf]/20 rounded-full group-hover:border-[#ca7d57] group-hover:bg-[#ca7d57]/10 transition-all duration-300">
+                    <span
+                      className={`text-base font-light text-[#ced1bf] group-hover:text-[#ca7d57] transform transition-transform duration-300 leading-none ${
+                        isOpen ? "rotate-45" : ""
+                      }`}
+                    >
+                      +
+                    </span>
+                  </span>
+                </button>
+
+                {/* Answer Box */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-8 md:pl-12 pt-4 pb-2 text-sm md:text-base leading-relaxed text-[#ced1bf]/70 font-light whitespace-pre-line max-w-3xl">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
 
         {/* Call to action card */}

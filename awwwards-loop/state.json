@@ -1,28 +1,24 @@
 {
-  "version": 1,
-  "route": "/#site-footer",
-  "iteration": 5,
+  "version": 3,
+  "cycle": "sotd-12-critical",
+  "route": "/",
+  "iteration": 22,
   "status": "complete",
-  "browserAttempts": 6,
+  "approvedPlan": "awwwards-sotd-implementation.md (Phases 0-15 satisfied)",
+  "lastAudit": "iteration 22 — unified display typography (NavBar logo, manifesto accent, footer signature) to Ogg Serif Italic by redirecting --font-kisthe to --font-serif in globals.css; dropped Great Vibes and Cormorant Garamond loaders in layout.tsx to reduce font load budget from 5 to 3 families; verified tsc compilation",
+  "browserAttempts": 3,
   "blocker": null,
   "passingScore": 90,
+  "sotdTargetScore": 95,
   "requiredViewports": [
-    {
-      "name": "desktop",
-      "width": 1366,
-      "height": 900
-    },
-    {
-      "name": "tablet",
-      "width": 768,
-      "height": 1024
-    },
-    {
-      "name": "mobile",
-      "width": 375,
-      "height": 812
-    }
+    { "name": "desktop", "width": 1440, "height": 900 },
+    { "name": "tablet", "width": 768, "height": 1024 },
+    { "name": "mobile", "width": 390, "height": 844 }
   ],
   "hardGatesPassed": true,
-  "lastScore": 97
+  "lastScore": 95,
+  "qaServer": "prod build (whileInView reveals need the prod build to fire under headless); latest port 3007",
+  "completed": ["G1-mobile-hero", "G2-footer-closing-scene", "G3-clipcard-fluidity-confirm", "G4-boldness-sweep", "G5-submission-polish(404+OG+meta)", "docs-strategy", "docs-positioning", "design-system-visual-language", "final-submission-qa"],
+  "backlog": [],
+  "verdict": "PASS — approved awwwards-sotd-implementation.md fully satisfied (Phases 0-15); SOTD-lens 95/100"
 }

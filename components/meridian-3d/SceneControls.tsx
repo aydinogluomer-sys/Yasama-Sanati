@@ -29,7 +29,8 @@ export default function SceneControls({
         {/* Reset View / Focus Button */}
         <button
           onClick={onResetView}
-          className="size-9 rounded-full hover:bg-white/5 text-white flex items-center justify-center transition-all duration-300 cursor-pointer group"
+          aria-label="Görünümü sıfırla"
+          className="group flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-all duration-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0a96d]"
           title="Görünümü Sıfırla / Odaklan"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-[18px] text-[#a7c0b0]/70 group-hover:text-white transition-colors">
@@ -40,7 +41,8 @@ export default function SceneControls({
         {/* Zoom In Button */}
         <button
           onClick={onZoomIn}
-          className="size-9 rounded-full hover:bg-white/5 text-white flex items-center justify-center transition-all duration-300 cursor-pointer group"
+          aria-label="Yakınlaştır"
+          className="group flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-all duration-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0a96d]"
           title="Yakınlaştır"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-[18px] text-[#a7c0b0]/70 group-hover:text-white transition-colors">
@@ -51,7 +53,8 @@ export default function SceneControls({
         {/* Zoom Out Button */}
         <button
           onClick={onZoomOut}
-          className="size-9 rounded-full hover:bg-white/5 text-white flex items-center justify-center transition-all duration-300 cursor-pointer group"
+          aria-label="Uzaklaştır"
+          className="group flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-all duration-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0a96d]"
           title="Uzaklaştır"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-[18px] text-[#a7c0b0]/70 group-hover:text-white transition-colors">
@@ -60,19 +63,22 @@ export default function SceneControls({
         </button>
 
         {/* Pan / Drag Indicator Button (Static / Toggle helper) */}
-        <button
+        <span
           className="size-9 rounded-full hover:bg-white/5 text-white flex items-center justify-center transition-all duration-300 cursor-default group"
           title="Kaydır ve Döndür"
+          aria-hidden="true"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-[18px] text-[#a7c0b0]/70 transition-colors">
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.05 4.575a1.5 1.5 0 0 0-1.93 1.93l1.583 3.693a.75.75 0 0 1-.603 1.05l-4.148.367a1.5 1.5 0 0 0-1.312 1.258l-.66 3.626a5.125 5.125 0 0 0 4.12 5.922l2.67.534a.75.75 0 0 0 .787-.417l2.846-5.69a.75.75 0 0 1 1.217-.184l3.18 3.18a1.5 1.5 0 0 0 2.122 0l2.25-2.25a1.5 1.5 0 0 0 0-2.122l-3.18-3.18a.75.75 0 0 1-.184-1.217l5.69-2.846a.75.75 0 0 0 .417-.787l-.534-2.67a5.125 5.125 0 0 0-5.922-4.12l-3.626.66a1.5 1.5 0 0 0-1.258 1.312l-.367 4.148a.75.75 0 0 1-1.05.603L10.05 4.575Z" />
           </svg>
-        </button>
+        </span>
 
         {/* Auto Rotate Button */}
         <button
           onClick={onToggleAutoRotate}
-          className={`size-9 rounded-full hover:bg-white/5 flex items-center justify-center transition-all duration-300 cursor-pointer group ${
+          aria-label={autoRotate ? "Otomatik dönüşü kapat" : "Otomatik dönüşü aç"}
+          aria-pressed={autoRotate}
+          className={`group flex size-11 cursor-pointer items-center justify-center rounded-full transition-all duration-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0a96d] ${
             autoRotate ? "text-[#e0a96d]" : "text-[#a7c0b0]/70"
           }`}
           title={autoRotate ? "Otomatik Dönüşü Kapat" : "Otomatik Dönüşü Aç"}
@@ -86,7 +92,9 @@ export default function SceneControls({
         {hasSelection && (
           <button
             onClick={onToggleIsolate}
-            className={`size-9 rounded-full hover:bg-white/5 flex items-center justify-center transition-all duration-300 cursor-pointer group ${
+            aria-label={isolateSelected ? "Tüm kanalları göster" : "Yalnız seçili kanalı göster"}
+            aria-pressed={isolateSelected}
+            className={`group flex size-11 cursor-pointer items-center justify-center rounded-full transition-all duration-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0a96d] ${
               isolateSelected ? "text-[#e0a96d]" : "text-[#a7c0b0]/70"
             }`}
             title={isolateSelected ? "Tüm Kanalları Göster" : "Sadece Seçili Kanalı Göster"}

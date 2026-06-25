@@ -2,6 +2,7 @@ import React, { useState, useRef, useMemo, useEffect, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+import { useReducedMotion } from "motion/react";
 
 import HumanModel from "./HumanModel";
 import MeridianLines from "./MeridianLines";
@@ -16,34 +17,22 @@ import { Acupoint } from "../../types/meridian";
 import { getCameraFocusTarget, DEFAULT_CAMERA } from "../../utils/cameraFocus";
 
 export default function MeridianScene() {
+  const prefersReducedMotion = useReducedMotion();
   const [acupointsList, setAcupointsList] = useState<Acupoint[]>(ACUPOINTS);
   const [calibrationMode, setCalibrationMode] = useState<boolean>(false);
   const [copiedStatus, setCopiedStatus] = useState<string | null>(null);
 
   const [selectedMeridianId, setSelectedMeridianId] = useState<string | null>(null);
   const [selectedAcupoint, setSelectedAcupoint] = useState<Acupoint | null>(null);
-  const [autoRotate, setAutoRotate] = useState<boolean>(true);
+  const [autoRotate, setAutoRotate] = useState<boolean>(false);
   const [isolateSelected, setIsolateSelected] = useState<boolean>(false);
 
   const [cameraTargetPos, setCameraTargetPos] = useState<[number, number, number]>(DEFAULT_CAMERA.position);
   const [cameraLookAt, setCameraLookAt] = useState<[number, number, number]>(DEFAULT_CAMERA.target);
 
-  const [glbExists, setGlbExists] = useState<boolean | null>(null);
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const controlsRef = useRef<any>(null);
   const bodyRotationRef = useRef<number>(0);
-
-  // Check if human.glb exists in /public/models/
-  useEffect(() => {
-    fetch("/models/human.glb", { method: "HEAD" })
-      .then((res) => {
-        setGlbExists(res.ok);
-      })
-      .catch(() => {
-        setGlbExists(false);
-      });
-  }, []);
 
   // Map meridian ID to its specific color for quick lookup
   const meridianColors = useMemo(() => {
@@ -244,41 +233,16 @@ export default function MeridianScene() {
   return (
     <div className="relative w-full h-full bg-[#030806] md:rounded-2xl border border-white/[0.08] overflow-hidden select-none animate-fade-in">
       
-      {/* GLB File Validation State */}
-      {glbExists === null && (
-        <div className="absolute inset-0 z-30 flex items-center justify-center bg-[#030806] text-[#a7c0b0]/40 text-xs">
-          3D Sahne ve Model Doğrulanıyor...
-        </div>
-      )}
-
-      {glbExists === false && (
-        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center p-6 bg-[#030806]/95 text-center">
-          <div className="max-w-md bg-[#0b1411]/90 backdrop-blur-xl border border-red-900/30 rounded-2xl p-8 shadow-2xl space-y-6">
-            <div className="size-16 rounded-full bg-red-950/20 border border-red-500/20 flex items-center justify-center mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 text-[#e0a96d]">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-              </svg>
-            </div>
-            <div className="space-y-2">
-              <h3 className="text-white font-medium text-lg">Görsel Model Yüklenemedi</h3>
-              <p className="text-xs text-[#a7c0b0]/60 font-mono leading-relaxed bg-[#030806] p-3 rounded border border-white/[0.04]">
-                Missing /models/human.glb — please add a human GLB model.
-              </p>
-            </div>
-            <p className="text-xs text-[#a7c0b0]/70 leading-relaxed font-light">
-              Bu kalite için gerçek bir <code className="text-[#e0a96d] bg-white/5 px-1 py-0.5 rounded font-mono">human.glb</code> asset eklenmelidir. Placeholder (ilkel şekil) modelleriyle premium sonuç alınamaz.
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* 3D WebGL Canvas Layer */}
-      {glbExists === true && (
-        <Canvas
+      <Canvas
           camera={{ fov: 26, position: DEFAULT_CAMERA.position }}
           shadows
-          gl={{ antialias: true }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true, powerPreference: "high-performance" }}
           className="w-full h-full"
+          role="application"
+          aria-label="Etkileşimli meridyen anatomi modeli"
+          aria-describedby="meridian-scene-description"
         >
           <color attach="background" args={["#030806"]} />
           <fogExp2 attach="fog" args={["#030806", 0.22]} />
@@ -308,6 +272,7 @@ export default function MeridianScene() {
               meridianColors={meridianColors}
               onSelectAcupoint={setSelectedAcupoint}
               bodyRotationRef={bodyRotationRef}
+              reduceMotion={Boolean(prefersReducedMotion)}
             />
           </Suspense>
 
@@ -315,11 +280,10 @@ export default function MeridianScene() {
           <CameraController
             targetPos={cameraTargetPos}
             targetLookAt={cameraLookAt}
-            autoRotate={autoRotate && !activeAcupoint}
+            autoRotate={autoRotate && !activeAcupoint && !prefersReducedMotion}
             controlsRef={controlsRef}
           />
-        </Canvas>
-      )}
+      </Canvas>
 
       {/* HTML Sidebar Overlay */}
       <MeridianSidebar
@@ -477,6 +441,7 @@ function SceneContent({
   meridianColors,
   onSelectAcupoint,
   bodyRotationRef,
+  reduceMotion,
 }: {
   acupoints: Acupoint[];
   selectedMeridianId: string | null;
@@ -485,6 +450,7 @@ function SceneContent({
   meridianColors: Record<string, string>;
   onSelectAcupoint: (ap: Acupoint) => void;
   bodyRotationRef: React.MutableRefObject<number>;
+  reduceMotion: boolean;
 }) {
   const modelGroupRef = useRef<THREE.Group>(null);
 
@@ -521,7 +487,7 @@ function SceneContent({
       <HolographicPlatform />
 
       {/* 5. Ambient energy sparks */}
-      <EnergyParticles />
+      {!reduceMotion && <EnergyParticles />}
 
       {/* 6. Mockup-style surrounding aura rings */}
       <DecorativeAuraRings />

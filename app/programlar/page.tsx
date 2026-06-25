@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import SubPageLayout from "@/components/Server/SubPageLayout";
-import BorderedButton from "@/components/Server/BorderedButton";
-import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
+import TypographyLabel from "@/components/Server/TypographyLabel";
+
+const prependZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 
 export default function ProgramlarPage() {
   const programs = [
@@ -61,43 +62,55 @@ export default function ProgramlarPage() {
       title="Eğitim Programları"
       description="Uluslararası akredite sertifika programları ve uzmanlık eğitimleri ile dönüşüm yolculuğunuzu başlatın."
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-        {programs.map((prog, i) => (
-          <div
-            key={i}
-            className="flex flex-col justify-between p-8 bg-[#ced1bf]/5 rounded border border-[#ced1bf]/10 space-y-6 hover:border-[#ced1bf]/35 transition-colors duration-300"
-          >
-            <div className="space-y-4">
-              <span className="text-xs text-[#ca7d57] font-medium tracking-widest uppercase">Program {i + 1}</span>
-              <h2 className="text-24 md:text-30 font-light text-white leading-tight">{prog.title}</h2>
-              <p className="text-sm md:text-base font-light leading-relaxed text-[#ced1bf]/70">{prog.desc}</p>
-              
-              <div className="pt-4 grid grid-cols-3 gap-4 border-t border-[#ced1bf]/10 text-xs text-[#ced1bf]/60 font-light">
-                <div>
-                  <div>Süre</div>
-                  <div className="text-white mt-1">{prog.duration}</div>
+      {/* Intercom-style academy index: numbered chapters, fine rules, structured hierarchy. */}
+      <div className="mx-auto max-w-6xl">
+        <div className="flex items-center justify-between pb-5">
+          <TypographyLabel className="text-[#ca7d57]">Program Dizini</TypographyLabel>
+          <TypographyLabel className="text-[#ced1bf]/50">
+            {prependZero(programs.length)} Disiplin
+          </TypographyLabel>
+        </div>
+
+        <ul className="border-t border-[#ced1bf]/15">
+          {programs.map((prog, i) => (
+            <li key={i}>
+              <Link
+                href={prog.href}
+                className="group grid grid-cols-1 gap-x-8 gap-y-5 border-b border-[#ced1bf]/15 py-9 transition-colors duration-300 hover:bg-[#ced1bf]/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] md:grid-cols-[3.5rem_1fr_auto] md:items-baseline md:px-3 md:py-11"
+              >
+                <TypographyLabel className="text-[#ca7d57] md:pt-2">
+                  {prependZero(i + 1)}
+                </TypographyLabel>
+
+                <div className="space-y-3 md:max-w-2xl">
+                  <h2 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white transition-colors duration-300 group-hover:text-[#E0A878]">
+                    {prog.title}
+                  </h2>
+                  <p className="text-sm font-light leading-relaxed text-[#ced1bf]/70 md:text-base">
+                    {prog.desc}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1">
+                    <TypographyLabel className="text-[#ced1bf]/55">{prog.duration}</TypographyLabel>
+                    <span aria-hidden className="size-1 rounded-full bg-[#ca7d57]/60" />
+                    <TypographyLabel className="text-[#ced1bf]/55">{prog.format}</TypographyLabel>
+                    <span aria-hidden className="size-1 rounded-full bg-[#ca7d57]/60" />
+                    <TypographyLabel className="text-[#ced1bf]/55">{prog.price}</TypographyLabel>
+                  </div>
                 </div>
-                <div>
-                  <div>Format</div>
-                  <div className="text-white mt-1">{prog.format}</div>
-                </div>
-                <div>
-                  <div>Yatırım</div>
-                  <div className="text-white mt-1">{prog.price}</div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="pt-4">
-              <Link href={prog.href} className="w-full">
-                <BorderedButton className="w-full cursor-pointer flex items-center justify-between px-6 py-4.5 text-sm font-light text-white [&_path]:[stroke:white] [&_svg]:[stroke:white]">
-                  Programı İncele
-                  <NavigateSVG fill="#FFFFFF" className="size-2.5 mr-2.5" />
-                </BorderedButton>
+
+                <span className="flex items-center gap-2 self-center text-[#ced1bf]/70 transition-colors duration-300 group-hover:text-white">
+                  <TypographyLabel className="hidden md:inline">İncele</TypographyLabel>
+                  <span
+                    aria-hidden
+                    className="text-lg transition-transform duration-300 group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </span>
               </Link>
-            </div>
-          </div>
-        ))}
+            </li>
+          ))}
+        </ul>
       </div>
     </SubPageLayout>
   );

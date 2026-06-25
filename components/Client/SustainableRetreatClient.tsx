@@ -53,10 +53,10 @@ export default function SustainableRetreatClient() {
 
   return (
     <>
-      <div ref={imgContainerRef} className="relative overflow-hidden md:w-fit">
+      <div ref={imgContainerRef} aria-hidden="true" className="relative overflow-hidden bg-[#2b3530]/20 md:w-fit">
         <Image
           src={links[links.length - 1].img}
-          alt="placeholder"
+          alt=""
           aria-hidden={true}
           className="invisible w-full max-md:aspect-[0.82] md:h-full md:w-auto"
         />
@@ -69,7 +69,7 @@ export default function SustainableRetreatClient() {
           >
             <Image
               src={eachLink.img}
-              alt={eachLink.title}
+              alt=""
               className="size-full object-cover md:w-auto"
             />
           </motion.div>

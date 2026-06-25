@@ -147,6 +147,7 @@ export default function ClipImageCard({
         <div className="flex items-center gap-1 text-2xs md:text-sm">
           <AnimatedMaskText
             state={currentState}
+            delay={0}
             lines={[<>{prependZero(currentState)}</>]}
             className="[line-height:1]"
           />
@@ -155,6 +156,7 @@ export default function ClipImageCard({
         </div>
         <AnimatedMaskText
           state={currentState}
+          delay={0.06}
           lines={data[currentState - 1].title}
           className="-space-y-1 text-center text-lg [line-height:1] font-light md:text-28"
         />
@@ -176,6 +178,7 @@ export default function ClipImageCard({
         </div>
         <AnimatedMaskText
           state={currentState}
+          delay={0.12}
           lines={data[currentState - 1].description["desktop"]} //change this
           className="text-center text-sm [line-height:1.25] md:text-base"
         />

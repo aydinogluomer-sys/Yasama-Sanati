@@ -25,14 +25,17 @@ export default function FormContainer({ children }: FormContainerProps) {
   }, [state]);
 
   return (
-    <form ref={formRef} action={action} className="w-full max-w-102 px-5 py-24 md:p-0">
+    <form ref={formRef} action={action} className="w-full max-w-118 px-5 py-24 md:px-16 md:py-28 xl:px-20" aria-describedby="form-response">
       {children}
       {state && (
         <div
-          className={`mt-6 p-4 rounded text-sm font-medium ${
+          id="form-response"
+          role={state.success ? "status" : "alert"}
+          aria-live="polite"
+          className={`mt-6 rounded border p-4 text-sm font-medium ${
             state.success
-              ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/25"
-              : "bg-rose-500/10 text-rose-300 border border-rose-500/25"
+              ? "border-emerald-800/30 bg-emerald-900/10 text-emerald-950"
+              : "border-rose-800/30 bg-rose-900/10 text-rose-950"
           }`}
         >
           {state.success ? state.message : state.error}

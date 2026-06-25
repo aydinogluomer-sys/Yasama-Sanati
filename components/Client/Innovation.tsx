@@ -82,7 +82,7 @@ function Innovation() {
       {!isMobile && (
         <CustomCursor
           {...cursorProps}
-          className="flex -translate-x-1/2 translate-y-1/4 items-center justify-center gap-2 rounded-full px-5 py-2 text-white"
+          className="font-mono text-[10px] tracking-[0.16em] uppercase flex -translate-x-1/2 translate-y-1/4 items-center justify-center gap-2 rounded-full px-5 py-2 text-white"
         >
           Daha Fazlasını Keşfet
           <NavigateSVG style={{ fill: "white" }} className="size-2.5" />

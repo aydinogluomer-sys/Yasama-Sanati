@@ -20,20 +20,20 @@ export default function FormServer() {
   ];
 
   return (
-    <div className="flex flex-col bg-[#CED1BF] md:grid md:grid-cols-2" id="on-kayit">
+    <section aria-labelledby="form-title" className="flex flex-col bg-[#CED1BF] md:grid md:grid-cols-2" id="on-kayit">
       <ParallaxContainer parallaxAmount={20}>
-        <Image src={FormImage} alt="form-image" className="h-auto w-full" />
+        <Image src={FormImage} alt="Yaşama Sanatı'nda birebir görüşme için hazırlanmış huzurlu alan" className="h-auto w-full" />
       </ParallaxContainer>
       <div className="col-start-2 flex flex-col items-center justify-center">
         <FormContainer>
-          <div className="w-full text-xl font-light md:text-30">
+          <h2 id="form-title" className="w-full text-24 font-light leading-tight md:text-30">
             İlk Adımı At
-          </div>
-          <div className="mt-8 mb-10 text-base md:text-lg">
+          </h2>
+          <div className="mt-6 mb-10 max-w-[42ch] text-base leading-relaxed text-[#2b3530]/80 md:text-lg">
             Kısa bir ön kayıt bırak; 48 saat içinde seni arayalım. Sana uygun programı ve tempoyu birlikte netleştirelim.
           </div>
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Label label="Ad">
                 <Input type="text" name="ad" placeholder="Adını yaz" required />
               </Label>
@@ -77,6 +77,6 @@ export default function FormServer() {
           <SubmitButton />
         </FormContainer>
       </div>
-    </div>
+    </section>
   );
 }

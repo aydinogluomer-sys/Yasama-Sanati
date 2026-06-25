@@ -1,7 +1,6 @@
 "use client";
-import { motion, useScroll, useTransform } from "motion/react";
-import { Dispatch, SetStateAction, useRef } from "react";
-import useBackgroundImage from "@/dump/useBackgroundImage";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import PlaySVG from "@/components/SVGComponents/PlaySVG";
 import { useCursor } from "@/hooks/useCursor";
 import Cursor from "@/components/Client/Cursor";
@@ -14,6 +13,7 @@ export default function HeroDesktopClient({
   setPlayIntro,
 }: HeroDesktopClientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "50vh start"],
@@ -25,17 +25,39 @@ export default function HeroDesktopClient({
     vh: 100,
   });
   const { handlers, cursorProps } = useCursor();
+  const reduceMotion = useReducedMotion();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  useEffect(() => {
+    if (reduceMotion) {
+      videoRef.current?.pause();
+      return;
+    }
+    void videoRef.current?.play().catch(() => undefined);
+  }, [reduceMotion]);
   return (
     <>
       <div className="absolute inset-0 overflow-clip" ref={containerRef}>
-        <motion.div style={{ y, maskImage }} className="h-full">
-          <video className="size-full object-cover" autoPlay muted loop>
+        <motion.div
+          style={{ y: reduceMotion ? "0%" : y, maskImage: reduceMotion ? "none" : maskImage }}
+          className="h-full"
+        >
+          <video
+            ref={videoRef}
+            className="size-full object-cover"
+            autoPlay={!reduceMotion}
+            muted
+            loop
+            playsInline
+            poster="/Hero/elementis-cover-mjpg.png"
+            aria-hidden="true"
+          >
             <source src="/Hero/elementismp4.mp4" type="video/mp4"></source>
           </video>
         </motion.div>
-        <motion.div
-          className="absolute inset-x-0 top-0 flex h-screen cursor-pointer flex-col justify-end gap-8"
+        <motion.button
+          type="button"
+          aria-label="Tanıtım filmini oynat"
+          className="absolute inset-x-0 top-0 flex h-[100svh] cursor-pointer flex-col justify-end gap-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/80"
           {...handlers}
           onClick={() => {
             handlers.onMouseLeave(); //will exit the cursor

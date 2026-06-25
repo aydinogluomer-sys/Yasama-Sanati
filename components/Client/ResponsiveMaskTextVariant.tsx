@@ -1,5 +1,4 @@
 "use client";
-import { useIsMobile } from "@/app/providers";
 import MaskText from "../Server/MaskText";
 import cn from "@/utils/cn";
 import { CSSProperties, ReactNode } from "react";
@@ -16,19 +15,18 @@ export default function ResponsiveMaskTextVariant({
   className,
   style,
 }: ResponsiveMaskTextVariantProps) {
-  const isMobile = useIsMobile();
-  if (typeof isMobile !== "boolean") {
-    return null;
-  }
-  const lines = isMobile ? mobile : desktop;
+  const textClassName = cn(
+    "font-light text-nowrap text-[#D1CCBF] [&_span]:text-[#ca7d57]",
+    className,
+  );
   return (
-    <MaskText
-      lines={lines}
-      className={cn(
-        "font-light text-nowrap text-[#D1CCBF] [&_span]:text-[#ca7d57]",
-        className,
-      )}
-      style={{ ...style }}
-    />
+    <>
+      <div className="md:hidden">
+        <MaskText lines={mobile} className={textClassName} style={style} />
+      </div>
+      <div className="hidden md:block">
+        <MaskText lines={desktop} className={textClassName} style={style} />
+      </div>
+    </>
   );
 }

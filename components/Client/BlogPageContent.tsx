@@ -10,6 +10,7 @@ import BlogSearch from "./BlogSearch";
 import NewsletterForm from "./NewsletterForm";
 import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
+import Image from "next/image";
 
 interface BlogPageContentProps {
   posts: BlogPost[];
@@ -79,10 +80,12 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
           >
             {/* Background Image Overlay */}
             <div className="absolute inset-0 opacity-10 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none">
-              <img
+              <Image
                 src={featuredPost.coverImage}
                 alt=""
-                className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                fill
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
               />
             </div>
 

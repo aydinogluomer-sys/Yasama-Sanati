@@ -56,7 +56,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <SubPageLayout title="Blog & Bilgi Bankası">
+    <SubPageLayout title="Blog & Bilgi Bankası" hideHero>
       <BlogDetailContent post={post} relatedPosts={relatedPosts} />
     </SubPageLayout>
   );

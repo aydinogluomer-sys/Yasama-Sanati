@@ -6,7 +6,8 @@ This file is for AI agents and developers working on the Yasama Sanati site.
 
 - The project lives in `Elementis-SOTD`.
 - The GitHub remote is `https://github.com/aydinogluomer-sys/Yasama-Sanati.git`.
-- Main focus is the footer polish pass and the Awwwards quality loop artifacts under `awwwards-loop/`.
+- Main focus is the Awwwards polish workflow described in the source-of-truth implementation plan.
+- The repository now needs a disciplined phase-based workflow, with docs-backed decisions and verification before UI changes.
 - Local fonts are used so the build does not depend on remote Google Fonts.
 
 ## What Was Changed Recently
@@ -19,6 +20,9 @@ This file is for AI agents and developers working on the Yasama Sanati site.
 
 ## Editable Areas
 
+- `docs/**`
+- `design-system/**`
+- `sections/Hero/**`
 - `sections/Footer/**`
 - `components/Client/FooterBackgroundText.tsx`
 - `components/Client/FooterNewsletter.tsx`
@@ -31,6 +35,8 @@ This file is for AI agents and developers working on the Yasama Sanati site.
 - Header, hero, and unrelated page sections
 - Shared app-wide design decisions
 - User-owned untracked folders outside the main app flow
+- Phase order from the implementation plan
+- UI beyond the currently approved phase
 
 ## Verification Expectations
 
@@ -38,8 +44,11 @@ This file is for AI agents and developers working on the Yasama Sanati site.
 - Check the footer at desktop, tablet, and mobile widths.
 - Confirm newsletter focus and success states.
 - Keep `awwwards-loop/implementation.md`, iteration files, and reports in sync with the latest pass.
+- Update `docs/progress.md`, `docs/issues.md`, and `docs/decisions.md` whenever a phase changes state.
+- Do not touch UI until the current phase has been analyzed, documented, and approved by the phase plan.
 
 ## Working Notes
 
 - The repo already has a committed history of the footer loop.
 - Keep changes scoped and avoid broad rewrites unless the reference or tests require them.
+- Treat `docs/implementation-awwwards-polish.md` as the local mirror of the source-of-truth implementation plan when present.

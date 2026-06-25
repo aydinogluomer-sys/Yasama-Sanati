@@ -1,60 +1,50 @@
-# Yasama Sanati - Butunsel Sifa ve Egitim Akademisi
+# Yaşama Sanatı — Bütünsel Şifa ve Eğitim Akademisi
 
-This repository contains the Next.js site for Yasama Sanati Akademisi. The current focus is the premium footer experience, responsive behavior, and the supporting Awwwards quality loop artifacts used to verify the work.
+Bu proje, **Yaşama Sanatı Akademisi** için modern, premium ve Awwwards standartlarında tasarlanmış bir Next.js web uygulamasıdır. Nefes koçluğu, reiki, meridyen terapi, hipnoterapi ve bütünsel şifa eğitimleri için dijital bir platform sunar.
 
-## Stack
+## Teknolojik Altyapı
+- **Core:** Next.js 15+ (App Router), React 19, TypeScript
+- **Styling:** TailwindCSS (Premium HSL tabanlı renk paleti ve özel şablonlar)
+- **3D Render:** Three.js / React Three Fiber / @react-three/drei (Meridyen ve anatomi canlandırmaları için interaktif 3D sahne entegrasyonu)
+- **Animasyon:** Motion (Framer Motion) ile yumuşak mikro-etkileşimler, Scroll Parallax ve sayfa geçişleri
+- **Pürüzsüz Kaydırma:** React Lenis pürüzsüz kaydırma motoru
 
-- Next.js 15
-- React 19
-- TypeScript
-- Tailwind CSS
-- Motion
-- React Lenis
-
-## Project Layout
-
+## Proje Yapısı
 ```txt
-app/                  Next.js App Router pages, layouts, and global styles
-components/           Shared Client and Server components
-sections/             Page sections and composed blocks
-public/               Static assets
-utils/                Shared helpers
-types/                TypeScript type definitions
-awwwards-loop/        Iteration plans, reports, and quality-loop state
+├── app/                  # Next.js App Router (Sayfalar ve API route'ları)
+├── components/           # Yeniden kullanılabilir Server ve Client bileşenleri
+│   ├── Client/           # Client-side (interaktif, motion, 3D) bileşenler
+│   ├── Server/           # Server-side (statik, optimize) bileşenler
+│   └── SVGComponents/    # Optimize edilmiş inline SVG çizim ve logoları
+├── sections/             # Sayfa bazlı görsel bölümler ve grid kompozisyonları
+├── public/               # Statik varlıklar, 3D modeller (.glb/.gltf) ve resimler
+├── utils/                # Yardımcı kütüphaneler, kamera odaklama ve veri yönetimi
+└── types/                # TypeScript tip tanımlamaları
 ```
 
-## Current Focus
+## Öne Çıkan Özellikler & Son Güncellemeler
 
-- Footer redesign and reference matching
-- Responsive desktop, tablet, and mobile verification
-- Newsletter interaction states
-- Local-font stability so the build does not depend on remote font fetches
+### 1. 3D Meridyen ve Anatomi Görselleştirici
+- Etkileşimli 3D insan anatomisi modeli üzerinden bedenin meridyen kanallarını ve enerji noktalarını görselleştirme imkanı.
+- Akıcı kamera geçişleri (`utils/cameraFocus.ts`) ve materyal optimizasyonları (`utils/materials.ts`).
 
-## Development
+### 2. Awwwards Seviye Footer Tasarımı (Antigravity Redesign)
+- **4 - 5 - 3 Grid Yapısı:** Premium ve dengeli görsel kompozisyon.
+- **Hizalama Bütünlüğü:** Tüm sayfalarda geçerli olan sol kenar (Header "Y" harfi cetveli) ve sağ kenar (Header Hamburger Menü cetveli) hizasına sıfır hata ile entegre edilmiş yerleşim.
+- **Dekoratif Yaşam Çizgisi (Lifeline):**commit  Sol üst parlayan yıldızdan süzülerek arka planda hafifçe akan ve sonrasında sönen cila çizgisi.
+- **Gelişmiş Bülten Kartı (Newsletter):** 44px input yüksekliği, premium placeholder renkleri, kilit güvenlik simgesi ve üst seviye hover efektleri.
+- **Mikro-Animasyonlu Nokta:** Canlı durumu simgeleyen `animate-ping` ve `animate-pulse` efektli mikro konum imza alanı.
 
+## Çalıştırma ve Canlı Geliştirme
+Geliştirme sunucusunu başlatmak için:
 ```bash
 npm run dev
 ```
-
-## Production Build
-
+Üretim derlemesi oluşturmak için:
 ```bash
 npm run build
 ```
-
-## Start Production Server
-
+Derlenmiş projeyi başlatmak için:
 ```bash
 npm run start
 ```
-
-## GitHub
-
-The repository is currently tracked on GitHub under:
-
-`https://github.com/aydinogluomer-sys/Yasama-Sanati.git`
-
-## Notes
-
-- Footer work is documented in `awwwards-loop/`.
-- The repo includes several existing untracked local folders outside the main app scope; those are intentionally left untouched.

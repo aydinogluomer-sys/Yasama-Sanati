@@ -12,8 +12,18 @@ interface SelectProps {
   name?: string;
 }
 
-const COUNTRY_DATA_URL =
-  "https://gist.githubusercontent.com/anubhavshrimal/75f6183458db8c453306f93521e93d37/raw/f77e7598a8503f1f70528ae1cbf9f66755698a16/CountryCodes.json";
+const COUNTRY_DATA: CountryData[] = [
+  { name: "Türkiye", dial_code: "+90", code: "TR" },
+  { name: "Almanya", dial_code: "+49", code: "DE" },
+  { name: "Amerika Birleşik Devletleri", dial_code: "+1", code: "US" },
+  { name: "Avusturya", dial_code: "+43", code: "AT" },
+  { name: "Azerbaycan", dial_code: "+994", code: "AZ" },
+  { name: "Birleşik Krallık", dial_code: "+44", code: "GB" },
+  { name: "Fransa", dial_code: "+33", code: "FR" },
+  { name: "Hollanda", dial_code: "+31", code: "NL" },
+  { name: "İsviçre", dial_code: "+41", code: "CH" },
+  { name: "Kıbrıs", dial_code: "+357", code: "CY" },
+];
 
 const CITIES = [
   "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", 
@@ -29,7 +39,7 @@ const CITIES = [
   "Düzce"
 ];
 
-export default async function Select({ options, name }: SelectProps) {
+export default function Select({ options, name }: SelectProps) {
   if (options === "cities") {
     return (
       <SelectClient
@@ -40,15 +50,12 @@ export default async function Select({ options, name }: SelectProps) {
     );
   }
 
-  const response = await fetch(COUNTRY_DATA_URL, { cache: "force-cache" });
-  const countryData: CountryData[] = await response.json();
-
   const fieldToMap = options === "countries" ? "name" : "dial_code";
-  const arrayOfProperty = countryData.map((country) => country[fieldToMap]);
+  const arrayOfProperty = COUNTRY_DATA.map((country) => country[fieldToMap]);
 
   return (
     <SelectClient
-      defaultSelection={options === "countries" ? countryData[0].name : countryData[0].dial_code}
+      defaultSelection={options === "countries" ? COUNTRY_DATA[0].name : COUNTRY_DATA[0].dial_code}
       options={arrayOfProperty}
       name={name}
     />

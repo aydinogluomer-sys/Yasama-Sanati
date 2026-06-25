@@ -2,16 +2,20 @@
 import cn from "@/utils/cn";
 import { AnimatePresence, motion } from "motion/react";
 import { CSSProperties, ReactNode, useEffect, useRef } from "react";
+import { easing } from "@/utils/motion/tokens";
 
 interface MaskTextClientProps {
   lines: ReactNode[];
   className?: string;
   style?: CSSProperties;
   state: number;
+  /** stagger this block relative to its siblings (index → title → description cascade). */
+  delay?: number;
 }
 export default function MaskTextClient({
   state,
   lines,
+  delay = 0,
   ...rest
 }: MaskTextClientProps) {
   const currentState = useRef(state);
@@ -24,6 +28,7 @@ export default function MaskTextClient({
     animate: {
       transition: {
         staggerChildren: 0.05,
+        delayChildren: delay,
         staggerDirection: state > currentState.current ? 1 : -1,
       },
     },
@@ -41,16 +46,16 @@ export default function MaskTextClient({
       y: "0%",
       clipPath: "inset(0% 0% 0% 0%)",
       transition: {
-        ease: [0.24, 0.43, 0.15, 0.97] as const,
-        duration: 0.35,
+        ease: easing.editorial,
+        duration: 0.55,
       },
     },
     exit: (custom: boolean) => ({
       y: custom ? "-100%" : "100%",
       clipPath: custom ? "inset(100% 0% 0% 0%)" : "inset(0% 0% 100% 0%)",
       transition: {
-        ease: [0.24, 0.43, 0.15, 0.97] as const,
-        duration: 0.35,
+        ease: easing.editorial,
+        duration: 0.32,
       },
     }),
   };

@@ -22,7 +22,7 @@ function ResponsiveSideBar({
       {openSideBar && (
         <>
           {isMobile ? (
-            <SideBarMobile key="sidebar-mobile" />
+            <SideBarMobile key="sidebar-mobile" setOpenSideBar={setOpenSideBar} />
           ) : (
             <SideBar key="sidebar-desktop" setOpenSideBar={setOpenSideBar} />
           )}

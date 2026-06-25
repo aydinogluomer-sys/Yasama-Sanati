@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Meridian, Acupoint } from "../../types/meridian";
 
 interface MeridianSidebarProps {
@@ -166,35 +166,32 @@ export default function MeridianSidebar({
             <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-bold border-b border-white/[0.04] pb-2">Meridyen Terapi Raporu</span>
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-xs font-light text-[#a7c0b0]/80 scrollbar-thin scrollbar-thumb-white/5">
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5 hover:border-[#e0a96d]/20 transition-colors duration-200">
-                <h4 className="font-semibold text-[#e0a96d] text-xs">Meridyen Terapi Nedir?</h4>
+                <h4 className="font-semibold text-[#e0a96d] text-xs">Özet</h4>
                 <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90">
-                  Sağlığımızın temelinde, meridyenlerimizdeki enerji ve bilinç akışındaki dengesizlikler, tıkanıklıklar ve zayıflıklar yatar. Bu enerji kanallarındaki akış bozuklukları, çeşitli hastalıklara ve ağrılara yol açabilir. Meridyenlerin akış dengesini yeniden sağlamak, iyileşmenin anahtarıdır. İşte bu amaçla geliştirilen yeni nesil teknoloji ürünü meridyen terapi, doğal ve etkili bir alternatif tedavi seçeneği olarak hem ülkemizde hem de dünya genelinde hızla yaygınlaşmaktadır.
+                  Enerji akışını sade, görünür ve takip edilebilir tutan bir ince ayar yaklaşımı.
                 </p>
               </div>
               
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5 hover:border-[#e0a96d]/20 transition-colors duration-200">
-                <h4 className="font-semibold text-[#e0a96d] text-xs">Meridyenler: Enerjinin Gizli Yolları</h4>
+                <h4 className="font-semibold text-[#e0a96d] text-xs">Odak Alanı</h4>
                 <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90">
-                  Geleneksel Çin tıbbının temelini oluşturan meridyenler, bedenimizin yüzeyinde ve derinliklerinde bulunan enerji kanallarıdır. Bu kanallar, bedendeki enerji akışını düzenleyerek sağlığımızı korur. Batı dünyası, özel araştırmalar ve deneyler sonucunda bu kanalların varlığını kabul etmeye başlasa da, ilaç firmalarının baskısı nedeniyle bu bilgiler hemen yaygınlaşmamıştır. Ancak, tüm engellemelere rağmen, akupunktur gibi meridyen terapileri dünya çapında hızla kabul görmekte ve tercih edilen tedavi yöntemleri arasında yerini sağlamlaştırmaktadır.
+                  Geleneksel yapı, modern kullanım diliyle yeniden düzenlenir; nokta, kanal ve seans ilişkisi öne çıkar.
                 </p>
               </div>
 
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5 hover:border-[#e0a96d]/20 transition-colors duration-200">
-                <h4 className="font-semibold text-[#e0a96d] text-xs">Meridyen Terapi: Doğal ve Etkili Bir Çözüm</h4>
+                <h4 className="font-semibold text-[#e0a96d] text-xs">Kısa Not</h4>
                 <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90">
-                  Meridyen terapileri, bedenin sinir ağını iyileştirir ve enerji dengesini yeniden sağlar. Geleneksel Çin tıbbının temel mantığı, sağlıklı bir yaşam sürdürmek için gerekli önlemleri almanın önemini vurgular. Bu yaklaşım, zihinsel ve duygusal rahatsızlıkların hastalığa dönüşmeden önce terapilerle tedavi edilmesine dayanır.
+                  Panel, ana ilişkileri hızlı tarama için özetler ve gereksiz yoğunluğu geri çeker.
                 </p>
               </div>
 
               <div className="p-3 bg-white/[0.02] border border-[#e0a96d]/15 rounded-lg space-y-1.5 hover:border-[#e0a96d]/30 transition-colors duration-200 bg-[#e0a96d]/[0.01]">
                 <h4 className="font-semibold text-[#e0a96d] text-xs flex items-center gap-1.5">
-                  <span className="text-[#e0a96d]">✦</span> Sağınıza Yatırım Yapın
+                  <span className="text-[#e0a96d]">✦</span> Kullanım Notu
                 </h4>
                 <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90 font-light">
-                  Meridyen terapileri ile, sağlığınızı korumanın ve hastalıklardan kaçınmanın doğal yollarını keşfedin. Bedeninizin kendi kendini iyileştirme gücünü destekleyin. Meridyen terapi, başta ağrılar olmak üzere birçok sağlık sorununa karşı etkili bir çözüm sunar.
-                </p>
-                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90 font-light mt-1">
-                  Bu doğal ve yenilikçi yöntemle tanışarak, bedeninizin enerji akışını dengeleyebilir, genel sağlığınızı iyileştirebilir ve daha mutlu, sağlıklı bir yaşam sürebilirsiniz. Meridyen terapi ile enerjinizin yeniden akmasına izin verin ve sağlığınıza yatırım yapın.
+                  Kısa seçimler, temiz geri bildirim ve düşük görsel yük ile panel okunabilir kalır.
                 </p>
               </div>
             </div>
@@ -299,15 +296,15 @@ export default function MeridianSidebar({
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-xs font-light text-[#a7c0b0]/80">
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Anti-Stres & Anksiyete</h4>
-                <p className="text-[10px] leading-relaxed">Baş ağrısı, zihinsel gerginlik ve anksiyete için Yintang, Hegu (LI4) ve Shenmen (HT7) noktalarına uyarım önerilir.</p>
+                <p className="text-[10px] leading-relaxed">Yintang, Hegu (LI4) ve Shenmen (HT7) ile kısa rahatlama protokolü.</p>
               </div>
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Vitalite & Enerji Artışı</h4>
-                <p className="text-[10px] leading-relaxed">Kronik yorgunluk ve bağışıklık düşüşü yaşayanlarda Qihai (CV6) ve Zusanli (ST36) noktalarına hafif dairesel baskılar uygulanır.</p>
+                <p className="text-[10px] leading-relaxed">Qihai (CV6) ve Zusanli (ST36) ile destekleyici enerji çalışması.</p>
               </div>
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Hormonal Denge</h4>
-                <p className="text-[10px] leading-relaxed">Kadın sağlığı, regl sancıları ve genel hormonal denge için Sanyinjiao (SP6) noktası birinci derecede uyarım alanıdır.</p>
+                <p className="text-[10px] leading-relaxed">Sanyinjiao (SP6) ile ritim ve denge odaklı yaklaşım.</p>
               </div>
             </div>
           </div>
@@ -320,11 +317,11 @@ export default function MeridianSidebar({
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-xs font-light text-[#a7c0b0]/80">
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Kas Testi (Kinesiyoloji)</h4>
-                <p className="text-[10px] leading-relaxed">Bedensel biyoakımın kas gücü üzerindeki etkisini ölçerek bloke olmuş meridyen kanallarını tespit etme yöntemi.</p>
+                <p className="text-[10px] leading-relaxed">Kas yanıtı üzerinden blokaj ve dengesizlik okumak için kullanılır.</p>
               </div>
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Akustik Nabız Analizi</h4>
-                <p className="text-[10px] leading-relaxed">12 ana organ meridyeninin nabız dalgalarını dinleyerek yin-yang dengesizliklerini teşhis etme.</p>
+                <p className="text-[10px] leading-relaxed">Nabız kalıplarını izleyerek yin-yang dengesine dair ipuçları toplar.</p>
               </div>
             </div>
           </div>
@@ -347,7 +344,7 @@ export default function MeridianSidebar({
               </div>
               <div className="space-y-1.5">
                 <h4 className="font-medium text-white text-xs">WebGL Performansı</h4>
-                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/50 font-light">Tarayıcınızın donanım ivmesini aktif tutmanız akıcı bir 3D deneyimi sağlar.</p>
+                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/50 font-light">Donanım ivmesi açık olduğunda sahne daha akıcı çalışır.</p>
               </div>
               <div className="pt-3 border-t border-white/[0.04] space-y-2">
                 <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 block font-medium">Geliştirici Araçları</span>

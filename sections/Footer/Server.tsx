@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import FooterBackgroundText from "@/components/Client/FooterBackgroundText";
 import FooterNewsletter from "@/components/Client/FooterNewsletter";
+import HandwritingMark from "@/components/Client/HandwritingMark";
+import SignatureWordmark from "@/components/Server/SignatureWordmark";
 import SocialLogos from "@/components/SVGComponents/socials";
 
 const akademiLinks = [
@@ -50,15 +52,80 @@ export default function Footer() {
     <footer
       id="site-footer"
       ref={footerRef}
-      className="relative isolate overflow-hidden bg-[#293A32] px-5 pb-6 pt-20 text-[#F3EFE6] sm:px-8 md:px-12 md:pb-7 md:pt-24 lg:px-14 xl:px-[4.25rem]"
+      className="group relative isolate overflow-hidden bg-[#293A32] px-5 pb-6 pt-20 text-[#F3EFE6] md:px-8 lg:px-12 xl:px-16 md:pb-7 md:pt-24"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_76%_38%,rgba(67,103,84,0.24),transparent_40%),linear-gradient(180deg,#27352f_0%,#2a3831_100%)]"
+        className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_76%_38%,rgba(67,103,84,0.12),transparent_45%),linear-gradient(180deg,#28332e_0%,#293730_100%)]"
       />
       <FooterBackgroundText containerRef={footerRef} />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px]">
+      <div className="relative z-10 mx-auto w-full">
+        {/* Closing scene — the page's editorial finale before the practical sitemap. */}
+        <motion.section
+          initial={reduceMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ staggerChildren: 0.08 }}
+          aria-labelledby="footer-closing-title"
+          className="mb-16 border-b border-[#F3EFE6]/12 pb-14 md:mb-20 md:pb-20 lg:flex lg:items-end lg:justify-between lg:gap-14"
+        >
+          <div className="max-w-[46rem]">
+            <motion.span
+              variants={reveal}
+              transition={{ duration: 0.5 }}
+              className="block text-kicker font-medium uppercase tracking-[0.3em] text-[#D58D5D]"
+            >
+              Bir sonraki adım
+            </motion.span>
+            <motion.h2
+              variants={reveal}
+              transition={{ duration: 0.6 }}
+              id="footer-closing-title"
+              className="mt-5 font-serif text-display-m font-normal leading-[1.02] tracking-[-0.015em] text-[#F4EFE4]"
+            >
+              Başlamak için{" "}
+              <span className="relative inline-block">
+                <span className="italic">bir nefes</span>
+                <HandwritingMark
+                  trigger="inView"
+                  delay={0.2}
+                  className="absolute -bottom-1.5 left-0 h-3 w-full md:-bottom-2 md:h-4"
+                />
+              </span>{" "}
+              yeter.
+            </motion.h2>
+            <motion.p
+              variants={reveal}
+              transition={{ duration: 0.6 }}
+              className="mt-7 max-w-[34rem] text-body-lg font-light text-[#F3EFE6]/72"
+            >
+              Ön görüşme ücretsiz. Nereden başlayacağını birlikte netleştirelim.
+            </motion.p>
+          </div>
+          <motion.div
+            variants={reveal}
+            transition={{ duration: 0.6 }}
+            className="mt-9 flex flex-col gap-3 sm:flex-row lg:mt-0 lg:shrink-0 lg:flex-col lg:items-end"
+          >
+            <Link
+              href="/#on-kayit"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#C9875B] px-7 text-[11px] font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-[#d79a70] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
+            >
+              Ön Görüşme
+              <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
+                →
+              </span>
+            </Link>
+            <Link
+              href="/programlar"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-[#F3EFE6]/25 px-7 text-[11px] font-medium uppercase tracking-[0.14em] text-[#F3EFE6]/85 transition-colors duration-200 hover:border-[#F3EFE6]/55 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
+            >
+              Programları İncele
+            </Link>
+          </motion.div>
+        </motion.section>
+
         <motion.div
           initial={reduceMotion ? false : "hidden"}
           whileInView="visible"
@@ -76,14 +143,19 @@ export default function Footer() {
             <span aria-hidden="true" className="absolute -left-[0.925rem] -top-10 hidden text-sm text-[#D58D5D] sm:block">
               ×
             </span>
-            <h2
-              id="footer-brand-title"
-              className="font-serif text-[2.35rem] font-medium uppercase leading-[0.92] tracking-[-0.02em] md:text-[2.7rem]"
+            <Link
+              href="/"
+              className="group block w-fit focus-visible:outline-none"
             >
-              Yaşama
-              <br />
-              Sanatı
-            </h2>
+              <h2
+                id="footer-brand-title"
+                className="font-serif text-[2.35rem] font-medium uppercase leading-[0.92] tracking-[-0.02em] md:text-[2.7rem] text-[#F3EFE6] transition-colors duration-300 group-hover:text-[#D58D5D] [text-shadow:1px_1px_0px_rgba(0,0,0,0.45),2px_2px_0px_rgba(0,0,0,0.35)]"
+              >
+                YAŞAMA
+                <br />
+                SANATI
+              </h2>
+            </Link>
             <p className="mt-7 max-w-[18rem] text-sm leading-7 text-[#F3EFE6]/72">
               Yaşamı daha bilinçli, sade ve derin kurmak için eğitimler, atölyeler ve içerikler.
             </p>
@@ -157,27 +229,27 @@ export default function Footer() {
           <motion.section
             variants={reveal}
             transition={{ duration: 0.55, delay: 0.08 }}
-            className="md:col-span-2 lg:col-span-3 lg:border-l lg:border-[#F3EFE6]/12 lg:pl-10 xl:pl-10"
+            className="md:col-span-2 lg:col-span-3 rounded-[1.25rem] border border-[#F3EFE6]/12 bg-[#1b2b23]/40 p-6 md:p-8 lg:ml-8 xl:ml-10"
             aria-labelledby="footer-newsletter-title"
           >
             <Eyebrow>04</Eyebrow>
             <h3 id="footer-newsletter-title" className="mt-2 font-serif text-xl font-medium">
               Bülten
             </h3>
-            <div className="mt-5 max-w-[27rem] lg:max-w-none">
+            <div className="mt-5">
               <FooterNewsletter />
             </div>
           </motion.section>
         </motion.div>
 
         <div className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-[#F3EFE6]/16 to-transparent lg:mt-20" />
-        <div className="flex flex-col items-center gap-5 py-6 text-center text-xs text-[#F3EFE6]/52 lg:flex-row lg:justify-between lg:text-left">
+        <div className="flex flex-col items-center gap-4 py-5 text-center text-xs text-[#F3EFE6]/52 lg:flex-row lg:justify-between lg:text-left">
           <p className="shrink-0">© 2026 Yaşama Sanatı</p>
 
           <nav aria-label="Yasal bağlantılar">
-            <ul className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2">
+            <ul className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
               {legalLinks.map(([label, href], index) => (
-                <li key={label} className="flex items-center gap-2.5">
+                <li key={label} className="flex items-center gap-2">
                   {index > 0 && <span aria-hidden="true" className="size-1 rounded-full bg-[#D58D5D]/75" />}
                   <Link className="transition-colors hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none" href={href}>
                     {label}
@@ -187,7 +259,7 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <div className="flex shrink-0 items-center gap-5">
+          <div className="flex shrink-0 items-center gap-4">
             <button
               type="button"
               onClick={scrollToTop}
@@ -196,7 +268,10 @@ export default function Footer() {
               Yukarı Git ↑
             </button>
             <span>
-              Yaşama Sanatı Akademisi <span aria-hidden="true" className="ml-1 text-[#D58D5D]">✦</span>
+              <SignatureWordmark className="text-[1.15rem] leading-none text-[#E5C9A8]">
+                Yaşama Sanatı
+              </SignatureWordmark>{" "}
+              Akademisi <span aria-hidden="true" className="ml-1 text-[#D58D5D]">✦</span>
             </span>
           </div>
         </div>

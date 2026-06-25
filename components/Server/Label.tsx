@@ -9,7 +9,7 @@ interface LabelProps {
 const Label = ({ label, children, className }: LabelProps) => (
   <label
     className={cn(
-      "flex flex-col gap-3 text-2xs [line-height:1] text-[#2b3530] md:text-sm",
+      "flex flex-col gap-3 font-mono text-3xs tracking-[0.1em] uppercase [line-height:1] text-[#2b3530] md:text-2xs",
       className,
     )}
   >

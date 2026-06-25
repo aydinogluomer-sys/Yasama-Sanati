@@ -41,6 +41,23 @@ body {
   :root {
     --multiplier: calc(100vw / 375);
     --basesvh: 812;
+    --surface-deep: #2b3530;
+    --surface-warm: #30493d;
+    --surface-card: #ced1bf;
+    --surface-muted: #f3efe6;
+    --text-primary: rgba(243, 239, 230, 0.92);
+    --text-secondary: rgba(243, 239, 230, 0.72);
+    --text-muted: rgba(243, 239, 230, 0.58);
+    --text-inverse: #2b3530;
+    --accent-copper: #c9875b;
+    --accent-copper-hover: #d79a70;
+    --accent-sage: #ced1bf;
+    --focus-ring: #e1a37a;
+    --content-wide: 90rem;
+    --content-editorial: 48rem;
+    --section-space: clamp(6rem, 10vw, 12rem);
+    --motion-hover: 200ms;
+    --motion-reveal: 600ms;
   }
   @media only screen and (min-width: 768px) {
     :root {
@@ -50,6 +67,10 @@ body {
 }
 @theme {
   --font-serif: var(--font-serif);
+  /* Micro-label voice (Phase 2) — Space Mono, micro use only. */
+  --font-mono: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Signature/accent voice (Phase 2). Resolved to the premium Ogg display serif font. */
+  --font-kisthe: var(--font-serif);
   /* text utilities */
   --text-*: initial;
   --text-2xs: calc(12 * var(--multiplier));
@@ -65,6 +86,21 @@ body {
   --text-30: calc(30 * var(--multiplier));
   --text-40: calc(40 * var(--multiplier));
   --text-144: calc(144 * var(--multiplier));
+
+  /* Editorial display scale (Round 2) — viewport-fluid clamp, serif voice.
+     These are intentionally large and breathing; restraint lives in motion, not scale. */
+  --text-display-xl: clamp(3.25rem, 11.5vw, 12rem);
+  --text-display-xl--line-height: 0.92;
+  --text-display-l: clamp(2.75rem, 8vw, 7.5rem);
+  --text-display-l--line-height: 0.96;
+  --text-display-m: clamp(2.4rem, 5.6vw, 5rem);
+  --text-display-m--line-height: 1;
+  --text-display-s: clamp(1.85rem, 3.6vw, 3rem);
+  --text-display-s--line-height: 1.08;
+  --text-body-lg: clamp(1.15rem, 1.9vw, 1.6rem);
+  --text-body-lg--line-height: 1.45;
+  --text-kicker: clamp(0.68rem, 0.85vw, 0.78rem);
+  --text-kicker--line-height: 1;
 
   --text-1600svh: calc(1600svh / var(--basesvh));
   --text-3000svh: calc(3000svh / var(--basesvh));
@@ -171,6 +207,46 @@ body {
 /* Custom overrides for high-fidelity footer matching */
 .font-serif {
   font-family: var(--font-serif) !important;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 9999;
+  translate: 0 -200%;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text-inverse);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: translate var(--motion-hover) ease;
+}
+
+.skip-link:focus-visible {
+  translate: 0;
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  scroll-margin: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (min-width: 1024px) {

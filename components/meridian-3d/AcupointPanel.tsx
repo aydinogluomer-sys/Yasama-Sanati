@@ -17,7 +17,11 @@ export default function AcupointPanel({
   if (!acupoint) return null;
 
   return (
-    <div className="absolute right-6 md:right-16 top-20 bottom-4 w-full max-w-[380px] z-50 pointer-events-auto flex flex-col max-md:fixed max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:max-w-none max-md:h-[65vh] max-md:right-0">
+    <div
+      role="region"
+      aria-label={`${acupoint.name} akupresür noktası ayrıntıları`}
+      className="absolute bottom-4 right-6 top-20 z-50 flex w-full max-w-[380px] flex-col max-md:fixed max-md:inset-x-0 max-md:bottom-0 max-md:right-0 max-md:top-auto max-md:h-[65vh] max-md:max-w-none md:right-16"
+    >
       {/* Glassmorphism Panel Container */}
       <div className="flex-1 flex flex-col bg-[#0b1411]/85 backdrop-blur-xl border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden max-md:rounded-t-2xl max-md:border-x-0 max-md:border-b-0">
         
@@ -49,7 +53,8 @@ export default function AcupointPanel({
           
           <button
             onClick={onClose}
-            className="size-8 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/5 transition-all duration-200 cursor-pointer"
+            aria-label="Nokta ayrıntılarını kapat"
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full text-white/70 transition-all duration-200 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0a96d]"
             title="Kapat"
           >
             ✕
@@ -61,7 +66,7 @@ export default function AcupointPanel({
           
           {/* Meridian Relation */}
           <div className="space-y-1.5">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-medium">Bağlı Enerji Kanalı</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/75">Bağlı Enerji Kanalı</span>
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-full" style={{ backgroundColor: meridianColor }} />
               <span className="text-sm text-white font-light">{meridianName}</span>
@@ -70,7 +75,7 @@ export default function AcupointPanel({
 
           {/* Description */}
           <div className="space-y-1.5">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-medium">Terapötik Etki</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/75">Terapötik Etki</span>
             <p className="text-xs text-[#a7c0b0]/80 leading-relaxed font-light">
               {acupoint.description}
             </p>
@@ -78,7 +83,7 @@ export default function AcupointPanel({
 
           {/* Location */}
           <div className="space-y-1.5">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-medium">Nokta Konumu</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/75">Nokta Konumu</span>
             <p className="text-xs text-[#a7c0b0]/70 leading-relaxed font-light italic">
               {acupoint.location}
             </p>
@@ -86,7 +91,7 @@ export default function AcupointPanel({
 
           {/* Benefits List */}
           <div className="space-y-2.5">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-medium">Temel Yararları</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/75">Temel Yararları</span>
             <ul className="space-y-2">
               {acupoint.benefits.map((benefit, i) => (
                 <li key={i} className="flex items-start gap-2 text-xs text-[#a7c0b0]/80 font-light">
@@ -99,8 +104,8 @@ export default function AcupointPanel({
 
           {/* Caution Section */}
           <div className="p-3.5 bg-[#ef4444]/5 border border-[#ef4444]/15 rounded-lg space-y-1">
-            <span className="text-[9px] uppercase tracking-wider text-[#ef4444] font-semibold">Önemli Uyarı</span>
-            <p className="text-[10px] text-[#ef4444]/85 leading-relaxed font-light">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#ff8c8c]">Önemli Uyarı</span>
+            <p className="text-xs font-light leading-relaxed text-[#ffb0b0]">
               {acupoint.caution}
             </p>
           </div>
@@ -108,7 +113,7 @@ export default function AcupointPanel({
 
         {/* Footer Medical Disclaimer */}
         <div className="p-4 bg-black/30 border-t border-white/[0.04]">
-          <p className="text-[9px] text-[#a7c0b0]/35 text-center leading-relaxed font-light">
+          <p className="text-center text-xs font-light leading-relaxed text-[#a7c0b0]/75">
             Bu platformdaki bilgiler bilgilendirme amaçlıdır; tıbbi teşhis, tedavi veya profesyonel sağlık önerisi yerine geçmez. Sağlık sorunlarınız için her zaman bir uzmana başvurun.
           </p>
         </div>
