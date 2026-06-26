@@ -1,6 +1,6 @@
 "use client";
 import { useRef, ReactNode } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform, MotionValue } from "motion/react";
 import cn from "@/utils/cn";
 
 interface ScrollRevealTextProps {
@@ -12,12 +12,13 @@ interface WordProps {
   children: ReactNode;
   progress: MotionValue<number>;
   range: [number, number];
+  shouldReduceMotion: boolean;
 }
 
-function Word({ children, progress, range }: WordProps) {
+function Word({ children, progress, range, shouldReduceMotion }: WordProps) {
   const opacity = useTransform(progress, range, [0.25, 1]);
   return (
-    <motion.span style={{ opacity }} className="inline-block">
+    <motion.span style={{ opacity: shouldReduceMotion ? 1 : opacity }} className="inline-block">
       {children}
     </motion.span>
   );
@@ -25,8 +26,9 @@ function Word({ children, progress, range }: WordProps) {
 
 export default function ScrollRevealText({ text, className }: ScrollRevealTextProps) {
   const containerRef = useRef<HTMLParagraphElement>(null);
-  
-  // As the container scrolls from 85% of the viewport (near bottom) 
+  const shouldReduceMotion = useReducedMotion() === true;
+
+  // As the container scrolls from 85% of the viewport (near bottom)
   // to 60% of the viewport, we reveal the words from left to right.
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -42,7 +44,7 @@ export default function ScrollRevealText({ text, className }: ScrollRevealTextPr
         const start = i / total;
         const end = Math.min(1, (i + 1.2) / total); // Slightly overlapping transitions for smoothness
         return (
-          <Word key={i} progress={scrollYProgress} range={[start, end]}>
+          <Word key={i} progress={scrollYProgress} range={[start, end]} shouldReduceMotion={shouldReduceMotion}>
             {word}
           </Word>
         );
