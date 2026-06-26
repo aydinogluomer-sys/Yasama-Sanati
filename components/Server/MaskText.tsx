@@ -2,6 +2,7 @@ import * as motion from "motion/react-client";
 import { MotionProps } from "motion/react";
 import React, { CSSProperties, ReactNode } from "react";
 import cn from "@/utils/cn";
+import { easing, duration, stagger } from "@/utils/motion/tokens";
 
 interface MaskTextProps extends MotionProps {
   lines: ReactNode[];
@@ -18,7 +19,7 @@ export default function MaskText({
   const containerVariants = {
     inView: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: stagger.line,
         ...motionProps.transition,
       },
     },
@@ -29,8 +30,8 @@ export default function MaskText({
       y: "0%",
       clipPath: "inset(0% 0% 0% 0%)",
       transition: {
-        ease: [0.24, 0.43, 0.15, 0.97] as const,
-        duration: 0.8,
+        ease: easing.editorial,
+        duration: duration.textLine,
       },
     },
   };
