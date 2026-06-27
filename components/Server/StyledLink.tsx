@@ -4,6 +4,7 @@ import { CSSProperties } from "react";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { MotionConfig } from "motion/react";
 import cn from "@/utils/cn";
+import { easing, duration } from "@/utils/motion/tokens";
 interface StyledLinkProps extends LinkProps {
   children: string;
   className?: string;
@@ -37,8 +38,8 @@ export default function StyledLink({
         <NavigateSVG fill={arrowFill} />
         <MotionConfig
           transition={{
-            duration: 0.4,
-            ease: "circInOut",
+            duration: duration.hover,
+            ease: easing.editorial,
           }}
         >
           <div
