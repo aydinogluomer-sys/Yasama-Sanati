@@ -1,5 +1,6 @@
 "use client";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import PlaySVG from "@/components/SVGComponents/PlaySVG";
 import { useCursor } from "@/hooks/useCursor";
@@ -25,7 +26,7 @@ export default function HeroDesktopClient({
     vh: 100,
   });
   const { handlers, cursorProps } = useCursor();
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useMountedReducedMotion();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   useEffect(() => {
     if (reduceMotion) {

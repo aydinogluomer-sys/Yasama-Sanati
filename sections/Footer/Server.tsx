@@ -3,7 +3,8 @@
 import { useRef } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import FooterBackgroundText from "@/components/Client/FooterBackgroundText";
 import FooterNewsletter from "@/components/Client/FooterNewsletter";
 import HandwritingMark from "@/components/Client/HandwritingMark";
@@ -42,7 +43,7 @@ const footerLink =
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useMountedReducedMotion();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });

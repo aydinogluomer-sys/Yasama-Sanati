@@ -1,6 +1,7 @@
 "use client";
 import { ReactNode } from "react";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import { easing, duration } from "@/utils/motion/tokens";
 import cn from "@/utils/cn";
 
@@ -21,7 +22,7 @@ export default function SectionTransition({
   className,
   variant = "rise",
 }: SectionTransitionProps) {
-  const reduce = useReducedMotion();
+  const reduce = useMountedReducedMotion();
   const variants: Variants =
     variant === "clip"
       ? {
