@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import cn from "@/utils/cn";
 
 /**
@@ -21,7 +22,7 @@ export default function OutlineTypographyLayer({
   drift?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useMountedReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],

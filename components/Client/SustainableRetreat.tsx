@@ -1,7 +1,8 @@
 "use client";
 
 import { Fragment, useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import ResponsiveMaskTextVariant from "@/components/Client/ResponsiveMaskTextVariant";
 import SustainableRetreatClient from "@/components/Client/SustainableRetreatClient";
 import SectionTransition from "@/components/Client/SectionTransition";
@@ -10,7 +11,7 @@ import SectionSeam from "@/components/Client/SectionSeam";
 
 export default function SustainableRetreat() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useMountedReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

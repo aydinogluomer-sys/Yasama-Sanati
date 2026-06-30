@@ -1,5 +1,6 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import { easing } from "@/utils/motion/tokens";
 import cn from "@/utils/cn";
 
@@ -29,7 +30,7 @@ export default function HandwritingMark({
   variant = "standard",
   style,
 }: HandwritingMarkProps) {
-  const reduce = useReducedMotion();
+  const reduce = useMountedReducedMotion();
   const shown = { pathLength: 1, opacity: 0.9 };
   const hidden = { pathLength: 0, opacity: 0 };
 
