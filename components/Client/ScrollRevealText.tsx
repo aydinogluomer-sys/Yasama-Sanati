@@ -1,5 +1,5 @@
 "use client";
-import { useRef, ReactNode } from "react";
+import { useRef, useState, useEffect, ReactNode } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, MotionValue } from "motion/react";
 import cn from "@/utils/cn";
 
@@ -26,7 +26,13 @@ function Word({ children, progress, range, shouldReduceMotion }: WordProps) {
 
 export default function ScrollRevealText({ text, className }: ScrollRevealTextProps) {
   const containerRef = useRef<HTMLParagraphElement>(null);
-  const shouldReduceMotion = useReducedMotion() === true;
+  // Hydration-safe reduced-motion gate (D5): SSR and first client render both take the
+  // default (scroll-linked) path; the reduced-motion opacity override is applied only after
+  // mount, so server and client markup match. Reduced-motion users still settle to opacity 1.
+  const prefersReducedMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const shouldReduceMotion = mounted && prefersReducedMotion === true;
 
   // As the container scrolls from 85% of the viewport (near bottom)
   // to 60% of the viewport, we reveal the words from left to right.

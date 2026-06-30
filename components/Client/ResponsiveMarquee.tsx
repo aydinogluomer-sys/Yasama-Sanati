@@ -28,7 +28,6 @@ export default function ResponsiveMarquee({
   if (typeof isMobile !== "boolean") {
     return null;
   }
-  console.log(isMobile);
   return (
     <Marquee
       {...{ ...animationConfig[isMobile ? "mobile" : "desktop"], ...rest }}

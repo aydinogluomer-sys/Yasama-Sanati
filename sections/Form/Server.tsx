@@ -47,7 +47,7 @@ export default function FormServer() {
             <Label label="Telefon Numarası">
               <div className="flex -space-x-4 md:-space-x-6">
                 <Select options="dial code" name="telefon_kod" />
-                <Input type="tel" name="telefon" placeholder="Telefon numaranızı yazın" required />
+                <Input type="tel" name="telefon" aria-label="Telefon numarası" placeholder="Telefon numaranızı yazın" required />
               </div>
             </Label>
             <Label label="Şehir">
