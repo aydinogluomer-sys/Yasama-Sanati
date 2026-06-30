@@ -168,9 +168,9 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
             >
               <div className="text-[#2b3530]/80">Bize Ulaşın</div>
               <div className="flex items-center [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
-                <DashedLink>merhaba@yasamasanati.com</DashedLink>
+                <DashedLink>info@yasamasanati.com</DashedLink>
                 <div className="mx-5">|</div>
-                <DashedLink>+90 232 000 0000</DashedLink>
+                <DashedLink>+90 532 789 37 53</DashedLink>
               </div>
             </motion.div>
             <motion.div

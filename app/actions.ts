@@ -1,9 +1,16 @@
 "use server";
-import { supabase } from "@/utils/supabase";
+import { getSupabase } from "@/utils/supabase";
 import { headers } from "next/headers";
+
+const SERVICE_UNAVAILABLE =
+  "Form şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
 
 export async function submitOnKayit(prevState: unknown, formData: FormData) {
   try {
+    const supabase = getSupabase();
+    if (!supabase) {
+      return { success: false, error: SERVICE_UNAVAILABLE };
+    }
     const ad = formData.get("ad") as string;
     const soyad = formData.get("soyad") as string;
     const eposta = formData.get("eposta") as string;
@@ -48,6 +55,44 @@ export async function submitOnKayit(prevState: unknown, formData: FormData) {
     return { success: true, message: "Ön kaydınız başarıyla oluşturulmuştur. Sizinle en kısa sürede iletişime geçeceğiz." };
   } catch (err) {
     console.error("Form gönderim hatası:", err);
+    return { success: false, error: "Beklenmeyen bir hata oluştu." };
+  }
+}
+
+export interface NewsletterResult {
+  success: boolean;
+  error?: string;
+}
+
+/**
+ * Persists a newsletter signup into `public.newsletter_signups`. Real persistence —
+ * no simulated success. Returns a clear, user-safe error when Supabase is unconfigured
+ * or the insert fails (e.g. missing table / RLS policy).
+ */
+export async function submitNewsletter(email: string): Promise<NewsletterResult> {
+  try {
+    const normalized = (email ?? "").trim();
+    if (!normalized) {
+      return { success: false, error: "Lütfen geçerli bir e-posta adresi girin." };
+    }
+
+    const supabase = getSupabase();
+    if (!supabase) {
+      return { success: false, error: SERVICE_UNAVAILABLE };
+    }
+
+    const { error } = await supabase
+      .from("newsletter_signups")
+      .insert([{ email: normalized }]);
+
+    if (error) {
+      console.error("Newsletter kayıt hatası:", error);
+      return { success: false, error: "Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin." };
+    }
+
+    return { success: true };
+  } catch (err) {
+    console.error("Newsletter gönderim hatası:", err);
     return { success: false, error: "Beklenmeyen bir hata oluştu." };
   }
 }

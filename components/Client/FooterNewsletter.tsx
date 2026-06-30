@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { submitNewsletter } from "@/app/actions";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -16,9 +17,13 @@ export default function FooterNewsletter() {
 
     setStatus("loading");
     try {
-      await new Promise((resolve) => window.setTimeout(resolve, 650));
-      setEmail("");
-      setStatus("success");
+      const result = await submitNewsletter(email);
+      if (result.success) {
+        setEmail("");
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }

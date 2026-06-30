@@ -42,6 +42,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://yasamasanati.com"),
   title: "Yaşama Sanatı — Bütünsel Şifa ve Eğitim Akademisi",
   description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "tr_TR",
