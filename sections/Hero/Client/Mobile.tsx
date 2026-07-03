@@ -1,6 +1,6 @@
 "use client";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
-import { useReducedMotion } from "motion/react";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import Cursor from "@/components/Client/Cursor";
 import PlaySVG from "@/components/SVGComponents/PlaySVG";
 export default function HeroMobileClient({
@@ -10,7 +10,9 @@ export default function HeroMobileClient({
   setPlayIntro: Dispatch<SetStateAction<boolean>>;
   playIntro: boolean;
 }) {
-  const reduceMotion = useReducedMotion();
+  // Mounted-safe reduced motion: keeps SSR/first-render `autoPlay` consistent (no hydration mismatch),
+  // then pauses the loop for reduced-motion users after mount.
+  const reduceMotion = useMountedReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     if (reduceMotion) {

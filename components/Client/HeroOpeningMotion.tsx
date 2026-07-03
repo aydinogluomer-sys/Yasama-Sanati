@@ -1,21 +1,30 @@
 "use client";
 import Link from "next/link";
-import { motion, type Variants } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import ResponsiveMarquee from "@/components/Client/ResponsiveMarquee";
 import HandwritingMark from "@/components/Client/HandwritingMark";
 import OutlineTypographyLayer from "@/components/Client/OutlineTypographyLayer";
 import { easing, duration } from "@/utils/motion/tokens";
 
-/** Masked line reveal (used inside an overflow-hidden wrapper). */
-const maskLine = (delay: number): Variants => ({
+/** Masked line reveal (used inside an overflow-hidden wrapper). Reduced motion → instant. */
+const maskLine = (delay: number, reduce: boolean): Variants => ({
   hidden: { y: "115%" },
-  show: { y: "0%", transition: { ease: easing.editorial, duration: duration.textLine, delay } },
+  show: {
+    y: "0%",
+    transition: reduce
+      ? { duration: 0 }
+      : { ease: easing.editorial, duration: duration.textLine, delay },
+  },
 });
 
-/** Soft fade + lift for supporting elements. */
-const fadeUp = (delay: number): Variants => ({
+/** Soft fade + lift for supporting elements. Reduced motion → instant (no delayed opacity). */
+const fadeUp = (delay: number, reduce: boolean): Variants => ({
   hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { ease: easing.softOut, duration: 0.7, delay } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: reduce ? { duration: 0 } : { ease: easing.softOut, duration: 0.7, delay },
+  },
 });
 
 /**
@@ -24,6 +33,10 @@ const fadeUp = (delay: number): Variants => ({
  * Reduced motion: MotionConfig (layout) collapses the transforms to their final state.
  */
 export default function HeroOpeningMotion() {
+  // Reduced motion drives only transition timing here (not any SSR-rendered attribute), so the
+  // raw hook is hydration-safe and lets the opening settle instantly for reduced-motion users —
+  // no delayed/staggered opacity sequence. `initial="hidden"` stays identical on server + client.
+  const reduce = useReducedMotion() ?? false;
   return (
     <motion.div
       initial="hidden"
@@ -36,11 +49,13 @@ export default function HeroOpeningMotion() {
           hidden: { opacity: 1 },
           show: {
             opacity: 0,
-            transition: {
-              ease: [0.24, 0.43, 0.15, 0.97],
-              duration: 1.2,
-              delay: 0.35,
-            },
+            transition: reduce
+              ? { duration: 0 }
+              : {
+                  ease: [0.24, 0.43, 0.15, 0.97],
+                  duration: 1.2,
+                  delay: 0.35,
+                },
           },
         }}
         className="absolute inset-0 z-0 pointer-events-none"
@@ -51,7 +66,7 @@ export default function HeroOpeningMotion() {
         />
       </motion.div>
       {/* TOP — quiet service marquee */}
-      <motion.div variants={fadeUp(0.15)} className="relative z-10 overflow-hidden">
+      <motion.div variants={fadeUp(0.15, reduce)} className="relative z-10 overflow-hidden">
         <ResponsiveMarquee
           animationConfig={{
             mobile: { max: "-1482px", speed: 50 },
@@ -66,7 +81,7 @@ export default function HeroOpeningMotion() {
       {/* BOTTOM — editorial block */}
       <div className="relative z-10 flex flex-col gap-7 md:gap-9">
         <motion.p
-          variants={fadeUp(0.25)}
+          variants={fadeUp(0.25, reduce)}
           className="text-kicker font-medium uppercase tracking-[0.34em] text-[#E0A878]"
         >
           Bütünsel Şifa &amp; Eğitim Akademisi
@@ -74,18 +89,18 @@ export default function HeroOpeningMotion() {
 
         <h1 className="font-serif text-display-l font-normal leading-[0.94] tracking-[-0.02em] text-[#F4EFE4]">
           <span className="block overflow-hidden">
-            <motion.span variants={maskLine(0.3)} className="block">
+            <motion.span variants={maskLine(0.3, reduce)} className="block">
               Beden, zihin
             </motion.span>
           </span>
           <span className="block overflow-hidden">
-            <motion.span variants={maskLine(0.4)} className="block">
+            <motion.span variants={maskLine(0.4, reduce)} className="block">
               ve enerji,
             </motion.span>
           </span>
           <span className="relative inline-block">
             <span className="block overflow-hidden">
-              <motion.span variants={maskLine(0.52)} className="block italic">
+              <motion.span variants={maskLine(0.52, reduce)} className="block italic">
                 tek bütün.
               </motion.span>
             </span>
@@ -100,7 +115,7 @@ export default function HeroOpeningMotion() {
         </h1>
 
         <motion.p
-          variants={fadeUp(0.7)}
+          variants={fadeUp(0.7, reduce)}
           className="max-w-[19rem] text-body-lg font-light text-white/72 sm:max-w-[34rem] md:max-w-[40rem]"
         >
           Nefes, Reiki, Meridyen Terapi, Hipnoterapi ve Yaşam Koçluğu; köklü
@@ -108,7 +123,7 @@ export default function HeroOpeningMotion() {
         </motion.p>
 
         <motion.div
-          variants={fadeUp(0.9)}
+          variants={fadeUp(0.9, reduce)}
           className="pointer-events-auto flex flex-col gap-4 pt-1 md:flex-row md:items-end md:justify-between"
         >
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">

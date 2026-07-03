@@ -5,6 +5,7 @@ import {
   MotionStyle,
   useAnimationFrame,
   useMotionValue,
+  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -42,7 +43,10 @@ export default function Marquee({
   );
   const x = useTransform(baseX, (v) => `${wrap(0, value, v)}${unit}`);
   const directionFactor = useRef<number>(1);
+  // Reduced motion: hold the marquee static — no continuous scroll, no scroll-velocity response.
+  const reduce = useReducedMotion();
   useAnimationFrame((t, delta) => {
+    if (reduce) return;
     let moveBy = directionFactor.current * speed * (delta / 1000);
 
     if (velocityFactor.get() < 0) {
