@@ -71,7 +71,7 @@ export default function FooterNewsletter() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="E-posta adresiniz"
-                className="h-12 w-full rounded-lg border border-[#F3EFE6]/10 bg-[#1C2C25] px-4 text-sm text-[#F3EFE6] outline-none placeholder:text-[#F3EFE6]/40 focus:border-[#D58D5D]/50 focus:ring-1 focus:ring-[#D58D5D]/30 transition-all disabled:cursor-wait disabled:opacity-60"
+                className="h-12 w-full rounded-lg border border-[#F3EFE6]/10 bg-[#1C2C25] px-4 text-sm text-[#F3EFE6] outline-none placeholder:text-[#F3EFE6]/55 focus:border-[#D58D5D]/50 focus:ring-1 focus:ring-[#D58D5D]/30 transition-all disabled:cursor-wait disabled:opacity-60"
               />
               <button
                 type="submit"

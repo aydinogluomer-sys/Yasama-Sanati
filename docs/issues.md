@@ -1,17 +1,24 @@
 # Issues
 
-## Silhouette Sprint — open (visible-redesign gaps, Phase 0 intake)
+## Silhouette Sprint — open
 
-- S01 — Hero composition is generic (bottom marquee + small headline + pill CTAs); no giant editorial type, asymmetry, or human mark. (Phase 3)
-- S02 — No editorial display type scale; Cormorant serif loaded but unused. (Phase 2)
-- S03 — All sections share one fade-up reveal; transitions are predictable. (Phase 4/5)
-- S04 — No site-wide signature motion motif. (Phase 9)
-- S05 — `MaskText` uses hardcoded line arrays (manual breaks); intermediate-width break risk. (Phase 6)
-- S06 — `ClipImageCard` exits are abrupt; no crossfade/out-state. (Phase 7)
+- S10 — Awwwards memorability: baseline ~5.0 → 2026-07-12 section scores (desktop 1366, healthy render): Hero 92, Introduction 91, WellnessSanctuary 90, SignatureTypeScene 93, ElementisStory 89, Retreat/Programs ~88, Footer 91. Remaining sub-90: ElementisStory "ayrı/ayrı" line-wrap nit and Retreat mid-scroll pacing. Creative Wave 1B stays open for the next visible jump.
+
+## Environment — resolved (2026-07-12)
+
+- Dev-server chunk truncation: log files written into the repo root (dev/tunnel logs) caused a Next.js watcher recompile storm that aborted in-flight chunk responses → truncated `layout.js` → client `SyntaxError: Invalid or unexpected token` → hydration never ran (hero/manifesto stuck in their hidden initial state). Fix: keep all session logs outside the watched project directory. The intermittent SyntaxError seen in earlier phases was this same failure class.
+
+## Silhouette Sprint — resolved (verified against shipped components, 2026-07-12)
+
+- S01 — RESOLVED (Phase 3): asymmetric editorial hero with giant serif headline, copper kicker, `HeroOpeningMotion`, `HandwritingMark`.
+- S02 — RESOLVED (Phase 2): clamp display scale (`text-display-xl/l/m/s`, `text-kicker`) live; serif deployed via `EditorialSectionTitle` and section leads.
+- S03 — RESOLVED (Phases 4/5): tonal journey + `SectionSeam` / `SectionTransition` cinematic blends at tone changes.
+- S04 — RESOLVED (Phases 3/9): signature motif shipped as `MeridianDrawPath` + `ScrollMeridian` + handwriting underline.
+- S05 — RESOLVED (Phase 6): `DynamicLineReveal` word-level responsive reveal replaced hardcoded line arrays in Introduction.
+- S06 — RESOLVED (Phase 7): `ClipImageContainer` crossfade + settle; `MaskTextClient` cascade delays.
 - S07 — RESOLVED (Phase 8): `BorderedButton` now has `vectorEffect="non-scaling-stroke"`, no hover delay, 0.52s token duration, reduced-motion instant, `whileFocus` parity.
-- S08 — Motion constants (easing/durations) copy-pasted; no central tokens. (Phase 2)
-- S09 — Mobile hero is a calmer desktop variant, not a distinct dramatic composition. (Phase 3)
-- S10 — Awwwards memorability low (~5.0); site reads as a well-built clone. (whole sprint)
+- S08 — RESOLVED (Phase 2): central motion tokens in `utils/motion/tokens.ts` + `variants.ts`.
+- S09 — RESOLVED (Phase 3): distinct mobile hero composition (`sections/Hero/Client/Mobile.tsx`).
 
 ## Open — non-blocking follow-ups (from Round 1)
 

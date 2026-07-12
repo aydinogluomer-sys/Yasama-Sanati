@@ -13,8 +13,14 @@ export default function FooterBackgroundText({ containerRef }: FooterBackgroundT
     <div
       aria-hidden="true"
       className="pointer-events-none absolute inset-x-0 top-4 -z-0 hidden overflow-hidden px-14 lg:block"
+      style={{
+        maskImage:
+          "radial-gradient(ellipse at 42% 18%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 38%, rgba(0,0,0,0.2) 68%, transparent 100%)",
+        WebkitMaskImage:
+          "radial-gradient(ellipse at 42% 18%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 38%, rgba(0,0,0,0.2) 68%, transparent 100%)",
+      }}
     >
-      <p className="mx-auto max-w-[1360px] whitespace-nowrap text-center font-serif text-[8.7vw] font-medium uppercase leading-none tracking-[0.035em] text-transparent [-webkit-text-stroke:1px_rgba(243,239,230,0.08)] [text-shadow:2px_2px_0px_rgba(243,239,230,0.04)] transition-all duration-700 ease-out group-hover:[-webkit-text-stroke:1px_rgba(213,141,93,0.35)] group-hover:[text-shadow:2px_2px_0px_rgba(213,141,93,0.15)] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]">
+      <p className="mx-auto max-w-[1360px] whitespace-nowrap text-center font-serif text-[8.7vw] font-medium uppercase leading-none tracking-[0.035em] text-transparent [-webkit-text-stroke:1px_rgba(243,239,230,0.08)] [text-shadow:2px_2px_0px_rgba(243,239,230,0.04)] transition-all duration-700 ease-out group-hover:[-webkit-text-stroke:1px_rgba(213,141,93,0.14)] group-hover:[text-shadow:2px_2px_0px_rgba(213,141,93,0.06)] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]">
         YAŞAMASANATI
       </p>
     </div>

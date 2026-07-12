@@ -75,7 +75,7 @@ export default function Footer() {
             <motion.span
               variants={reveal}
               transition={{ duration: 0.5 }}
-              className="block text-kicker font-medium uppercase tracking-[0.3em] text-[#D58D5D]"
+              className="block text-kicker font-medium uppercase tracking-[0.3em] text-[#E09A6C]"
             >
               Bir sonraki adım
             </motion.span>
@@ -140,7 +140,28 @@ export default function Footer() {
             className="relative md:pr-8 lg:col-span-3 lg:pr-12"
             aria-labelledby="footer-brand-title"
           >
-            <div aria-hidden="true" className="absolute -left-3 -top-8 hidden h-[360px] w-px bg-gradient-to-b from-[#D58D5D]/70 via-[#D58D5D]/20 to-transparent sm:block" />
+            <svg
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-3 -top-8 hidden w-4 sm:block"
+              viewBox="0 0 16 360"
+              width="16"
+              height="360"
+              fill="none"
+            >
+              <defs>
+                <linearGradient id="footer-lifeline" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#C9875B" stopOpacity="0.5" />
+                  <stop offset="0.55" stopColor="#C9875B" stopOpacity="0.22" />
+                  <stop offset="1" stopColor="#C9875B" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M8 4 C8 60, 3 110, 6 170 C9 230, 13 280, 8 356"
+                stroke="url(#footer-lifeline)"
+                strokeWidth="1"
+                strokeLinecap="round"
+              />
+            </svg>
             <span aria-hidden="true" className="absolute -left-[0.925rem] -top-10 hidden text-sm text-[#D58D5D] sm:block">
               ×
             </span>
@@ -178,14 +199,14 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.key}
-                  className="grid size-9 place-items-center rounded-full border border-[#F3EFE6]/15 text-[#F3EFE6]/70 transition-colors hover:border-[#D58D5D]/70 hover:text-[#D58D5D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none [&>svg]:size-4 [&_path]:fill-current"
+                  className="grid size-9 place-items-center rounded-full border border-[#F3EFE6]/15 text-[#F3EFE6]/70 transition-[color,border-color,background-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-[#D58D5D]/70 hover:bg-[#D58D5D]/[0.07] hover:text-[#D58D5D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transform-none motion-reduce:transition-none [&>svg]:size-4 [&_path]:fill-current"
                 >
                   {social.logo}
                 </Link>
               ))}
             </div>
 
-            <div className="mt-8 flex max-w-[18rem] flex-wrap items-center gap-x-3 gap-y-1 border-t border-[#F3EFE6]/12 pt-4 text-[10px] uppercase tracking-[0.1em] text-[#F3EFE6]/48">
+            <div className="mt-10 flex max-w-[18rem] flex-wrap items-center gap-x-3 gap-y-1 border-t border-[#F3EFE6]/12 pt-4 text-[10px] uppercase tracking-[0.12em] text-[#F3EFE6]/50">
               <span aria-hidden="true" className="size-1.5 rounded-full bg-[#D58D5D]" />
               <span>38.4237° N · 27.1428° E</span>
               <span aria-hidden="true" className="h-3 w-px bg-[#D58D5D]/50" />
@@ -196,8 +217,16 @@ export default function Footer() {
           <motion.div
             variants={reveal}
             transition={{ duration: 0.55, delay: 0.04 }}
-            className="grid grid-cols-2 gap-x-8 gap-y-12 md:col-span-2 md:grid-cols-3 lg:col-span-6 lg:border-l lg:border-[#F3EFE6]/12 lg:px-10 xl:px-10"
+            className="relative grid grid-cols-2 gap-x-8 gap-y-12 md:col-span-2 md:grid-cols-3 lg:col-span-6 lg:px-10 xl:px-10"
           >
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-0 top-0 hidden h-full w-px lg:block"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent 0%, rgba(243,239,230,0.03) 6%, rgba(243,239,230,0.12) 30%, rgba(243,239,230,0.09) 68%, rgba(243,239,230,0.025) 90%, transparent 100%)",
+              }}
+            />
             <FooterNav index="01" title="Akademi" links={akademiLinks} />
             <FooterNav index="02" title="Kaynaklar" links={kaynaklarLinks} />
 
@@ -244,7 +273,7 @@ export default function Footer() {
         </motion.div>
 
         <div className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-[#F3EFE6]/16 to-transparent lg:mt-20" />
-        <div className="flex flex-col items-center gap-4 py-5 text-center text-xs text-[#F3EFE6]/52 lg:flex-row lg:justify-between lg:text-left">
+        <div className="flex flex-col items-center gap-4 py-5 text-center text-xs text-[#F3EFE6]/56 lg:flex-row lg:justify-between lg:text-left">
           <p className="shrink-0">© 2026 Yaşama Sanatı</p>
 
           <nav aria-label="Yasal bağlantılar">
@@ -264,9 +293,12 @@ export default function Footer() {
             <button
               type="button"
               onClick={scrollToTop}
-              className="transition-colors hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none"
+              className="group transition-colors hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none"
             >
-              Yukarı Git ↑
+              Yukarı Git{" "}
+              <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none">
+                ↑
+              </span>
             </button>
             <span>
               <SignatureWordmark className="text-[1.15rem] leading-none text-[#E5C9A8]">
