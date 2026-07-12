@@ -7,17 +7,20 @@ import { Fragment } from "react";
 export default function ElementisStoryServer() {
   const textLines = {
     mobile: [
-      <Fragment key="m-1">Bu akademi, yıllar içinde ayrı</Fragment>,
-      <Fragment key="m-2">ayrı öğrenilen disiplinlerin</Fragment>,
-      <Fragment key="m-3">
-        <span className="text-[#ca7d57] font-serif italic">tek bir soruda</span> birleşmesiyle
+      <Fragment key="m-1">Bu akademi,</Fragment>,
+      <Fragment key="m-2">yıllar içinde</Fragment>,
+      <Fragment key="m-3">ayrı ayrı öğrenilen</Fragment>,
+      <Fragment key="m-4">disiplinlerin</Fragment>,
+      <Fragment key="m-5">
+        <span className="text-[#ca7d57] font-serif italic">tek bir soruda</span>
       </Fragment>,
-      <Fragment key="m-4">doğdu: insan kendine</Fragment>,
-      <Fragment key="m-5">nasıl geri döner?</Fragment>,
+      <Fragment key="m-6">birleşmesiyle doğdu:</Fragment>,
+      <Fragment key="m-7">insan kendine</Fragment>,
+      <Fragment key="m-8">nasıl geri döner?</Fragment>,
     ],
     desktop: [
-      <Fragment key="d-1">Bu akademi, yıllar içinde ayrı</Fragment>,
-      <Fragment key="d-2">ayrı öğrenilen disiplinlerin</Fragment>,
+      <Fragment key="d-1">Bu akademi, yıllar içinde</Fragment>,
+      <Fragment key="d-2">ayrı ayrı öğrenilen disiplinlerin</Fragment>,
       <Fragment key="d-3">
         <span className="text-[#ca7d57] font-serif italic">tek bir soruda</span> birleşmesiyle
       </Fragment>,
