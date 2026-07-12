@@ -2,6 +2,18 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
+/** Standing-anatomy chakra heights as fractions of body height (feet = 0, crown of head = 1). */
+const CHAKRA_HEIGHT_FRACTIONS: Record<string, number> = {
+  crown: 1.03,
+  third_eye: 0.925,
+  throat: 0.845,
+  heart: 0.715,
+  solar: 0.615,
+  sacral: 0.525,
+  root: 0.465,
+};
 
 interface ChakraZone {
   id: string;
@@ -308,13 +320,9 @@ export default function TherapyScene3D() {
     sceneRef.current.group = group;
 
     // ── Human Figure ─────────────────────────────────────────────────────────
-    // TODO: Replace this block with GLTFLoader when GLB model is ready:
-    //   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-    //   new GLTFLoader().load('/models/therapy-client.glb', (gltf) => {
-    //     group.add(gltf.scene);
-    //     const mixer = new THREE.AnimationMixer(gltf.scene);
-    //     mixer.clipAction(gltf.animations[0]).play();
-    //   });
+    // Primary: anatomical GLB model (shared asset with the meridian scene), normalized to the
+    // scene and re-skinned with the translucent energy-body material. The primitive meditation
+    // figure below stays as the immediate paint + fallback if the GLB fails to load.
 
     const skinMat = new THREE.MeshPhysicalMaterial({
       color: 0x3d5248,
@@ -336,6 +344,9 @@ export default function TherapyScene3D() {
       depthWrite: false,
     });
 
+    const figureGroup = new THREE.Group();
+    group.add(figureGroup);
+
     const addBodyPart = (
       geom: THREE.BufferGeometry,
       pos: [number, number, number],
@@ -347,13 +358,13 @@ export default function TherapyScene3D() {
       mesh.rotation.set(...rot);
       mesh.scale.set(...scale);
       mesh.castShadow = true;
-      group.add(mesh);
+      figureGroup.add(mesh);
 
       const wire = new THREE.Mesh(geom, wireMat);
       wire.position.set(...pos);
       wire.rotation.set(...rot);
       wire.scale.set(scale[0] * 1.012, scale[1] * 1.012, scale[2] * 1.012);
-      group.add(wire);
+      figureGroup.add(wire);
     };
 
     // Head with more detail
@@ -424,15 +435,19 @@ export default function TherapyScene3D() {
     addBodyPart(new THREE.SphereGeometry(0.036, 12, 10), [-0.5, 0.5, 0.34], [0, 0, 0], [1.1, 0.7, 1.3]);
 
     // ── Central Energy Column (spine) ────────────────────────────────────────
-    const spinePoints = [];
-    for (let i = 0; i < 30; i++) {
-      const t = i / 29;
-      spinePoints.push(new THREE.Vector3(
-        Math.sin(t * 0.4) * 0.015,
-        0.3 + t * 1.4,
-        0.02
-      ));
-    }
+    const buildSpinePoints = (fromY: number, toY: number) => {
+      const pts: THREE.Vector3[] = [];
+      for (let i = 0; i < 30; i++) {
+        const t = i / 29;
+        pts.push(new THREE.Vector3(
+          Math.sin(t * 0.4) * 0.015,
+          fromY + t * (toY - fromY),
+          0.02
+        ));
+      }
+      return pts;
+    };
+    let spinePoints = buildSpinePoints(0.3, 1.7);
     const spineGeom = new THREE.BufferGeometry().setFromPoints(spinePoints);
     const spineMat = new THREE.LineBasicMaterial({
       color: 0xffffff,
@@ -519,7 +534,85 @@ export default function TherapyScene3D() {
     // ── Floating energy particles along spine ─────────────────────────────────
     const spineParticleCount = 60;
     const spineParticlePos = new Float32Array(spineParticleCount * 3);
-    const spineParticleCurve = new THREE.CatmullRomCurve3(spinePoints);
+    let spineParticleCurve = new THREE.CatmullRomCurve3(spinePoints);
+
+    // ── Camera home (updated when the GLB re-lays the anatomy) ────────────────
+    const homeLookAt = new THREE.Vector3(0, 0.9, 0);
+    const homeCamPos = new THREE.Vector3(0, 0.9, 2.8);
+
+    // Re-lay chakra nodes/halos/auras, spine and flow line onto a standing body
+    // spanning [feetY, feetY + bodyHeight].
+    const placeChakrasOnBody = (feetY: number, bodyHeight: number) => {
+      CHAKRA_ZONES.forEach((zone) => {
+        const f = CHAKRA_HEIGHT_FRACTIONS[zone.id];
+        if (f === undefined) return;
+        const y = feetY + f * bodyHeight;
+        const node = chakraNodesMap.get(zone.id);
+        if (node) node.position.set(zone.position[0], y, zone.position[2]);
+        (halosMap.get(zone.id) || []).forEach((h) => h.position.set(zone.position[0], y, zone.position[2]));
+        const aura = aurasMap.get(zone.id);
+        if (aura) aura.position.set(zone.position[0], y, zone.position[2]);
+      });
+      const rootY = feetY + CHAKRA_HEIGHT_FRACTIONS.root * bodyHeight;
+      const crownY = feetY + CHAKRA_HEIGHT_FRACTIONS.crown * bodyHeight;
+      spinePoints = buildSpinePoints(rootY, crownY);
+      spineGeom.setFromPoints(spinePoints);
+      spineParticleCurve = new THREE.CatmullRomCurve3(spinePoints);
+      const newFlowPoints: THREE.Vector3[] = [];
+      CHAKRA_ZONES.forEach((zone) => {
+        const node = chakraNodesMap.get(zone.id);
+        if (node) newFlowPoints.push(node.position.clone());
+      });
+      flowLineGeom.setFromPoints(newFlowPoints);
+      const heartY = feetY + CHAKRA_HEIGHT_FRACTIONS.heart * bodyHeight;
+      homeLookAt.set(0, heartY, 0);
+      homeCamPos.set(0, heartY + 0.1, 2.9);
+      sceneRef.current.targetLookAt.copy(homeLookAt);
+      sceneRef.current.targetCamPos.copy(homeCamPos);
+    };
+
+    // ── Anatomical GLB model (upgrade path; primitives remain as fallback) ────
+    const FLOOR_Y = -0.92;
+    const GLB_BODY_HEIGHT = 2.35;
+    let glbRoot: THREE.Group | null = null;
+    let glbBaseScale = 1;
+    const glbGeometries: THREE.BufferGeometry[] = [];
+    new GLTFLoader().load(
+      "/models/human.glb",
+      (gltf) => {
+        const model = gltf.scene;
+        const box = new THREE.Box3().setFromObject(model);
+        const size = new THREE.Vector3();
+        const center = new THREE.Vector3();
+        box.getSize(size);
+        box.getCenter(center);
+        const rawHeight = size.y > 0 ? size.y : 1;
+        glbBaseScale = GLB_BODY_HEIGHT / rawHeight;
+        model.scale.setScalar(glbBaseScale);
+        model.position.set(
+          -center.x * glbBaseScale,
+          FLOOR_Y - box.min.y * glbBaseScale,
+          -center.z * glbBaseScale
+        );
+        model.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            const mesh = child as THREE.Mesh;
+            glbGeometries.push(mesh.geometry);
+            mesh.material = skinMat;
+            mesh.castShadow = true;
+          }
+        });
+        figureGroup.visible = false;
+        cushion.visible = false;
+        group.add(model);
+        glbRoot = model;
+        placeChakrasOnBody(FLOOR_Y, GLB_BODY_HEIGHT);
+      },
+      undefined,
+      () => {
+        // GLB unavailable — the primitive meditation figure stays visible.
+      }
+    );
     for (let i = 0; i < spineParticleCount; i++) {
       const p = spineParticleCurve.getPointAt(i / spineParticleCount);
       spineParticlePos[i * 3] = p.x;
@@ -595,8 +688,8 @@ export default function TherapyScene3D() {
         sceneRef.current.targetCamPos.copy(worldPos).add(offset);
       } else {
         selectedNodeRef.current = null;
-        sceneRef.current.targetLookAt.set(0, 0.9, 0);
-        sceneRef.current.targetCamPos.set(0, 0.9, 2.8);
+        sceneRef.current.targetLookAt.copy(homeLookAt);
+        sceneRef.current.targetCamPos.copy(homeCamPos);
       }
     };
 
@@ -621,8 +714,11 @@ export default function TherapyScene3D() {
     const animate = () => {
       frameId = requestAnimationFrame(animate);
       const elapsed = clock.getElapsedTime();
-      const delta = clock.getDelta();
-      void delta; // mixer.update(delta) when GLB loaded
+
+      // Procedural breathing on the anatomical model (human.glb carries no animation clips)
+      if (glbRoot) {
+        glbRoot.scale.y = glbBaseScale * (1 + Math.sin(elapsed * 0.9) * 0.005);
+      }
 
       // Auto-rotate when idle
       if (!sceneRef.current.isDragging && !selectedNodeRef.current) {
@@ -673,8 +769,10 @@ export default function TherapyScene3D() {
       }
       pPos.needsUpdate = true;
 
-      // Subtle body breathing effect on skin mesh opacity
-      const breathe = 0.17 + Math.sin(elapsed * 1.1) * 0.02;
+      // Subtle body breathing effect on skin mesh opacity (slightly higher base once the
+      // anatomical GLB is in — its thin shell needs more presence than the primitive volumes)
+      const breatheBase = glbRoot ? 0.24 : 0.17;
+      const breathe = breatheBase + Math.sin(elapsed * 1.1) * 0.02;
       (skinMat as THREE.MeshPhysicalMaterial).opacity = breathe;
 
       // Spot light follows active chakra color (already set in other useEffect)
@@ -724,6 +822,10 @@ export default function TherapyScene3D() {
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      if (glbRoot) {
+        group.remove(glbRoot);
+        glbGeometries.forEach((g) => g.dispose());
+      }
       renderer.dispose();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -733,15 +835,15 @@ export default function TherapyScene3D() {
     <section className="space-y-10">
       {/* Header */}
       <div className="space-y-4 max-w-3xl">
-        <span className="text-xs text-[#ca7d57] font-semibold tracking-widest uppercase">
+        <span className="text-xs text-[#E09A6C] font-semibold tracking-widest uppercase">
           İnteraktif Terapi Sahnesi
         </span>
         <h2 className="text-28 md:text-40 font-light text-white leading-tight">
           Terapiye Gelen Kişinin Enerji Haritası
         </h2>
         <p className="text-sm md:text-base font-light text-[#ced1bf]/75 leading-relaxed">
-          Meditasyon pozisyonundaki figür üzerindeki parlayan enerji merkezlerine tıklayın.
-          Her çakranın duygusal anlamı, terapi yaklaşımı ve bağlantılı meridyanları ortaya çıksın.
+          Figür üzerindeki parlayan enerji merkezlerine tıklayın. Her çakranın duygusal anlamı,
+          terapi yaklaşımı ve bağlantılı meridyanları ortaya çıksın.
         </p>
       </div>
 
@@ -764,7 +866,7 @@ export default function TherapyScene3D() {
                 />
                 <span className="text-white font-medium text-sm">{selectedZone.name}</span>
               </div>
-              <p className="text-[10px] text-[#ced1bf]/55 font-light italic">{selectedZone.sanskritName}</p>
+              <p className="text-[10px] text-[#ced1bf]/75 font-light italic">{selectedZone.sanskritName}</p>
               <p className="text-xs text-[#ced1bf]/80 font-light leading-snug line-clamp-2">{selectedZone.emotion}</p>
             </div>
           </div>
