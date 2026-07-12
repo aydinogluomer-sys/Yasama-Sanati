@@ -24,15 +24,17 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
     restDelta: 0.001
   });
 
+  // Canonical article URL (matches metadataBase / sitemap). Deterministic on server and
+  // client — window.location here would SSR empty and hydrate different (attribute mismatch).
+  const canonicalUrl = `https://yasamasanati.com/blog/${post.slug}`;
+
   const handleCopyLink = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+    navigator.clipboard.writeText(canonicalUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const shareUrl = typeof window !== "undefined" ? encodeURIComponent(window.location.href) : "";
+  const shareUrl = encodeURIComponent(canonicalUrl);
   const shareText = encodeURIComponent(post.title);
 
   return (
