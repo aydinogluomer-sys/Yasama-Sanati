@@ -576,11 +576,18 @@ export default function TherapyScene3D() {
     const GLB_BODY_HEIGHT = 2.35;
     let glbRoot: THREE.Group | null = null;
     let glbBaseScale = 1;
+    let glbMixer: THREE.AnimationMixer | null = null;
     const glbGeometries: THREE.BufferGeometry[] = [];
     new GLTFLoader().load(
       "/models/human.glb",
       (gltf) => {
         const model = gltf.scene;
+        // Skeletal idle-breathing if the clip survived optimization; procedural fallback otherwise.
+        const idleClip = gltf.animations.find((c) => c.name === "Idle_Loop");
+        if (idleClip) {
+          glbMixer = new THREE.AnimationMixer(model);
+          glbMixer.clipAction(idleClip).play();
+        }
         const box = new THREE.Box3().setFromObject(model);
         const size = new THREE.Vector3();
         const center = new THREE.Vector3();
@@ -713,10 +720,13 @@ export default function TherapyScene3D() {
 
     const animate = () => {
       frameId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
+      const delta = clock.getDelta();
+      const elapsed = clock.elapsedTime;
 
-      // Procedural breathing on the anatomical model (human.glb carries no animation clips)
-      if (glbRoot) {
+      // Breathing: skeletal Idle_Loop when available, procedural micro-scale otherwise.
+      if (glbMixer) {
+        glbMixer.update(delta);
+      } else if (glbRoot) {
         glbRoot.scale.y = glbBaseScale * (1 + Math.sin(elapsed * 0.9) * 0.005);
       }
 
