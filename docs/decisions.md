@@ -155,3 +155,15 @@ Reason: Post-Phase-2 review flagged two real typography gaps. (1) **Line length:
 ## D034 — Blog articles lead with the article (SubPageLayout `hideHero`)
 
 Reason: Blog article pages rendered the giant "Blog & Bilgi Bankası" section hero before the article, burying the actual content. Added an opt-in `hideHero` prop to `SubPageLayout` (skips the section hero, adds `pt-32 md:pt-44` so content clears the fixed NavBar); `app/blog/[slug]/page.tsx` opts in so the article (back-nav + category + serif title + meta + cover) is the page hero. Default `false` keeps every other sub-page unchanged (verified via a `/programlar` regression check). Improves the reading flow without touching other routes.
+
+## D038 — human.glb ships lean; therapy scene breathes skeletally
+
+Reason: the shared anatomical model carried a 44-clip game-animation library (6.4MB total) of which nothing rendered. Kept only `A_TPose` (meridian bind pose) + `Idle_Loop`, then dedup/weld/quantize → 0.49MB. `TherapyScene3D` plays `Idle_Loop` via AnimationMixer (spec's "breathing idle"), with a procedural micro-scale fallback if the clip is ever absent. Both 3D scenes visually verified after the swap.
+
+## D039 — Video assets: 1080p CRF-based re-encode with SSIM gate
+
+Reason: hero autoplay videos (every visitor) and the opt-in film shipped at 1440p with generous bitrates. Policy: re-encode to display-appropriate resolution (1080p desktop / 810px mobile portrait), CRF 24-25 preset slow, faststart, drop muted streams' audio; accept only if SSIM ≥ 0.99 vs source. Result: hero -35%, film -24%, no visible quality change (SSIM 0.992-0.993).
+
+## D040 — Wave 1B opens with the "Opening Breath" cue, not a hero rebuild
+
+Reason: Agent-01's Wave 1 verdict reopened creative work on Hero/Introduction, but the hardened hero already scores 92. The visible jump is delivered as a nameable signature detail — a breath-rhythm copper ring bridging hero → Introduction — instead of re-staging the composition. Calm, on-brand (breath = core brand line), accessible (motion-safe static, instant scroll, focus ring), and md+-only so the mobile composition stays untouched.

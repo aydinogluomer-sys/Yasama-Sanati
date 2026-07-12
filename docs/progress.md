@@ -346,3 +346,38 @@ Open: Kisthe woff2/license (D035); P6 Intercom academy chapter structure not yet
 (Space Mono index + serif heading + rule) on every section; curriculum → numbered module chapter list
 (Accordion replaced, "Modül N:" prefix stripped); serif intro lead. Verified prod: build green, overflow 0,
 single h1, Turkish glyphs correct, desktop + mobile.
+
+---
+
+# 2026-07-12 — Backlog clearance sprint (3D upgrade, perf, Wave 1B, backend continuity)
+
+### 3D Therapy Scene upgrade ✅ (IMPLEMENTATION_3D_UPGRADE.md closed)
+
+`TherapyScene3D` now loads the shared anatomical `/models/human.glb` (normalized to the room,
+re-skinned with the translucent energy-body material), re-lays all seven chakra nodes / spine
+column / flow line onto standing anatomy via height fractions, and plays the skeletal
+`Idle_Loop` breathing clip. Primitive meditation figure kept as instant paint + load-failure
+fallback. Camera home follows the heart chakra. Verified: therapy + meridian scenes render
+clean, zero console errors.
+
+### Performance pass ✅
+
+- `human.glb` 6.36 → 0.49 MB (stripped 44 unused animation clips; dedup/weld/quantize).
+- Hero videos re-encoded (desktop 4.0→2.6 MB, mobile 2.9→1.8 MB, SSIM 0.993); intro film
+  36.1→27.5 MB (SSIM 0.992). All faststart, muted streams dropped from autoplay heroes.
+- Lighthouse (local prod): desktop Perf 96 / A11y 97 / BP 100 / SEO 100 (LCP 1.1s, CLS 0.027).
+  Mobile-emulated 42 under 4x-CPU lab throttle with no material waste found — real-device RUM
+  is the next signal, not further micro-optimization.
+
+### Wave 1B — "Opening Breath" signature cue ✅
+
+Breath-paced double copper ring ("Bir nefes al", 4.8s rhythm) bottom-center of the hero;
+click carries the visitor to `#tanisma` (Introduction) — the visible Karşılanma → Merak
+bridge. `motion-safe` pulse (static ring + instant scroll under reduced motion), focus-visible
+ring, md+ only.
+
+### Backend continuity ✅
+
+Supabase project found auto-paused (newsletter/ön-kayıt failing silently); restored and
+re-verified end-to-end. `.github/workflows/supabase-keepalive.yml` added (2x/week REST ping;
+requires SUPABASE_URL + SUPABASE_ANON_KEY repo secrets, activates on push).
