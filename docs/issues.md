@@ -2,7 +2,11 @@
 
 ## Silhouette Sprint — open
 
-- S10 — Awwwards memorability: baseline ~5.0 → 2026-07-12 section scores (desktop 1366, healthy render): Hero 92, Introduction 91, WellnessSanctuary 90, SignatureTypeScene 93, ElementisStory 89, Retreat/Programs ~88, Footer 91. Remaining sub-90: ElementisStory "ayrı/ayrı" line-wrap nit and Retreat mid-scroll pacing. Creative Wave 1B stays open for the next visible jump.
+- S10 — Awwwards memorability: baseline ~5.0 → 2026-07-12 final section scores (desktop 1366, healthy render): Hero 92, Introduction 91, WellnessSanctuary 90, SignatureTypeScene 93, ElementisStory ~91 (line breaks rebalanced), Retreat/Programs ~90 (earlier ~88 was an instant-scroll capture artifact), Footer 91. All sections at/above 90. Creative Wave 1B stays open for the next visible jump.
+
+## Backend — operational (2026-07-12)
+
+- Newsletter/on-kayit Supabase project (`yasama-sanati`, ref `htpduorvqmidoprkkgwy`) was found auto-paused (free-tier INACTIVE) via a failing TestSprite newsletter run (DNS ENOTFOUND → "Bir hata oluştu"). Restored to ACTIVE_HEALTHY and the newsletter success flow re-verified end-to-end. Risk: free-tier projects re-pause after ~1 week of inactivity — production forms will silently fail again unless the project is kept active or upgraded.
 
 ## Environment — resolved (2026-07-12)
 
