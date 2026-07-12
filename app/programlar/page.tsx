@@ -65,7 +65,7 @@ export default function ProgramlarPage() {
       {/* Intercom-style academy index: numbered chapters, fine rules, structured hierarchy. */}
       <div className="mx-auto max-w-6xl">
         <div className="flex items-center justify-between pb-5">
-          <TypographyLabel className="text-[#ca7d57]">Program Dizini</TypographyLabel>
+          <TypographyLabel className="text-[#E09A6C]">Program Dizini</TypographyLabel>
           <TypographyLabel className="text-[#ced1bf]/50">
             {prependZero(programs.length)} Disiplin
           </TypographyLabel>
@@ -78,7 +78,7 @@ export default function ProgramlarPage() {
                 href={prog.href}
                 className="group grid grid-cols-1 gap-x-8 gap-y-5 border-b border-[#ced1bf]/15 py-9 transition-colors duration-300 hover:bg-[#ced1bf]/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] md:grid-cols-[3.5rem_1fr_auto] md:items-baseline md:px-3 md:py-11"
               >
-                <TypographyLabel className="text-[#ca7d57] md:pt-2">
+                <TypographyLabel className="text-[#E09A6C] md:pt-2">
                   {prependZero(i + 1)}
                 </TypographyLabel>
 

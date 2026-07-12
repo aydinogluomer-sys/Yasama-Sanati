@@ -90,7 +90,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
             </div>
 
             <div className="relative z-10 space-y-4">
-              <span className="text-xs text-[#ca7d57] font-semibold tracking-widest uppercase">
+              <span className="text-xs text-[#E8A87C] font-semibold tracking-widest uppercase">
                 Öne Çıkan Makale
               </span>
               <h2 className="text-28 md:text-40 font-light text-white leading-tight">
@@ -175,7 +175,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
               setActiveCategory("TÜMÜ");
               setSearchQuery("");
             }}
-            className="text-xs text-[#ca7d57] underline hover:text-[#ca7d57]/80"
+            className="text-xs text-[#E09A6C] underline hover:text-[#E09A6C]/80"
           >
             Filtreleri Sıfırla
           </button>

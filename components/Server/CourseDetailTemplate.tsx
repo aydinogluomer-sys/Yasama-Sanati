@@ -13,7 +13,7 @@ const stripModulePrefix = (t: string) => t.replace(/^\s*(Modül|Bölüm)\s*\d+\s
 function ChapterHeading({ index, children }: { index: string; children: React.ReactNode }) {
   return (
     <div className="flex items-baseline gap-4 border-b border-[#ced1bf]/15 pb-4">
-      <TypographyLabel className="shrink-0 text-[#ca7d57]">{index}</TypographyLabel>
+      <TypographyLabel className="shrink-0 text-[#E09A6C]">{index}</TypographyLabel>
       <h3 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white">
         {children}
       </h3>
@@ -75,7 +75,7 @@ export default function CourseDetailTemplate({
       <div className="space-y-16 md:space-y-24">
         {/* Giriş Bloğu — serif lead */}
         <section className="space-y-6">
-          <TypographyLabel className="text-[#ca7d57]">Program · Genel Bakış</TypographyLabel>
+          <TypographyLabel className="text-[#E09A6C]">Program · Genel Bakış</TypographyLabel>
           <h2 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white">
             {introTitle}
           </h2>
@@ -94,7 +94,7 @@ export default function CourseDetailTemplate({
                   key={i}
                   className="grid grid-cols-[2.5rem_1fr] gap-x-5 gap-y-2 border-b border-[#ced1bf]/12 py-7 md:grid-cols-[3rem_1fr] md:py-8"
                 >
-                  <TypographyLabel className="text-[#ca7d57] md:pt-1">
+                  <TypographyLabel className="text-[#E09A6C] md:pt-1">
                     {prependZero(i + 1)}
                   </TypographyLabel>
                   <div className="space-y-2">
@@ -118,7 +118,7 @@ export default function CourseDetailTemplate({
             <h4 className="text-lg md:text-xl font-medium text-white">
               {instructor.name}
             </h4>
-            <p className="text-xs md:text-sm text-[#ca7d57] uppercase tracking-wider font-medium">
+            <p className="text-xs md:text-sm text-[#E09A6C] uppercase tracking-wider font-medium">
               {instructor.role}
             </p>
             <p className="max-w-[42rem] text-sm md:text-base font-light leading-relaxed text-[#ced1bf]/70">

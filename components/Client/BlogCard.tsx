@@ -31,7 +31,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             {/* Category Tag Overlay */}
-            <span className="absolute top-4 left-4 bg-[#2b3530]/90 backdrop-blur-md text-[#ca7d57] px-3 py-1 rounded-sm text-2xs font-medium border border-[#ca7d57]/20 uppercase tracking-widest">
+            <span className="absolute top-4 left-4 bg-[#2b3530]/90 backdrop-blur-md text-[#E09A6C] px-3 py-1 rounded-sm text-2xs font-medium border border-[#ca7d57]/20 uppercase tracking-widest">
               {post.category}
             </span>
           </div>
@@ -66,7 +66,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             />
             <span className="text-[#ced1bf]/60 font-light">{post.author.name}</span>
           </div>
-          <span className="text-[#ca7d57] font-medium flex items-center group-hover:translate-x-1 transition-transform duration-300">
+          <span className="text-[#E09A6C] font-medium flex items-center group-hover:translate-x-1 transition-transform duration-300">
             Devamını Oku 
             <span className="ml-1 opacity-70 group-hover:opacity-100 transition-opacity">&rarr;</span>
           </span>
