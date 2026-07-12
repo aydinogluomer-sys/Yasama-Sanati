@@ -24,12 +24,12 @@
 - S08 — RESOLVED (Phase 2): central motion tokens in `utils/motion/tokens.ts` + `variants.ts`.
 - S09 — RESOLVED (Phase 3): distinct mobile hero composition (`sections/Hero/Client/Mobile.tsx`).
 
-## Open — non-blocking follow-ups (from Round 1)
+## Open — non-blocking follow-ups (from Round 1; 2026-07-12 status)
 
-- Source photography remains large (several 2.5–5.5MB PNG files). `next/image` protects delivery, but source AVIF/WebP masters would reduce build/deploy storage.
-- `public/models/human.glb` is 6.7MB. The scene is dynamically loaded and absent on mobile/reduced-motion, but Draco/Meshopt/KTX2 compression remains worthwhile.
-- The optional 145-second intro film is 37.9MB. It mounts only after explicit user action; an adaptive multi-bitrate encode would improve slow-network playback.
-- Automated Lighthouse/field Core Web Vitals were not available in the local browser surface. Route-size and behavior gates passed; production RUM should confirm LCP, CLS, and INP targets.
+- Source photography remains large (several 2.5–5.5MB PNG files). `next/image` protects delivery, so this is repo/deploy weight only. Conversion deliberately deferred: static imports live partly in protected files (Innovation). `image-1.bak.png` (5.3MB) is an orphaned backup candidate for removal.
+- RESOLVED: `human.glb` 6.4MB → 0.49MB (stripped 44 unused animation clips, kept A_TPose + Idle_Loop; dedup/weld/quantize). Therapy scene now plays skeletal idle breathing.
+- RESOLVED: hero videos re-encoded (desktop 4.0→2.6MB, mobile 2.9→1.8MB, SSIM 0.993); intro film 36.1→27.5MB (SSIM 0.992).
+- Lighthouse (local prod, 2026-07-12): **desktop Perf 96 / A11y 97 / BP 100 / SEO 100** (LCP 1.1s, CLS 0.027, TBT 50ms). Mobile-emulated (4x CPU + slow-4G lab throttle): Perf 42 (LCP 7.0s, TBT 1.6s) with no material waste found (unused JS 24KiB, no >200ms opportunities) — the cost is hydration/motion main-thread work inherent to the editorial approach. Production RUM should confirm real-device INP/LCP before optimizing further.
 
 ## Resolved
 
