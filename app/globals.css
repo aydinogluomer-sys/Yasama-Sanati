@@ -290,3 +290,16 @@ body::after {
   }
 }
 
+
+/* Wave 1B — "Opening Breath" signature cue: a slow breath rhythm on the hero scroll ring.
+   Guarded by Tailwind's motion-safe variant at the usage site; reduced motion renders it static. */
+@keyframes breath {
+  0%, 100% {
+    transform: scale(0.82);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}

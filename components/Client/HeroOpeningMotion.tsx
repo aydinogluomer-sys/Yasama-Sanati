@@ -146,6 +146,35 @@ export default function HeroOpeningMotion() {
           </p>
         </motion.div>
       </div>
+
+      {/* Wave 1B — "Opening Breath": a breath-paced copper ring bridging Karşılanma → Merak.
+          Clicking carries the visitor into the Introduction. Reduced motion: static ring. */}
+      <motion.button
+        type="button"
+        variants={fadeUp(1.35, reduce)}
+        onClick={() => {
+          document.getElementById("tanisma")?.scrollIntoView({
+            behavior: reduce ? "auto" : "smooth",
+          });
+        }}
+        aria-label="Tanışma bölümüne geç"
+        className="group pointer-events-auto absolute bottom-7 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:flex"
+      >
+        <span className="relative flex size-11 items-center justify-center">
+          <span
+            aria-hidden
+            className="absolute inset-0 rounded-full border border-[#C9875B]/50 motion-safe:animate-[breath_4.8s_ease-in-out_infinite]"
+          />
+          <span
+            aria-hidden
+            className="absolute inset-1 rounded-full border border-[#C9875B]/25 motion-safe:animate-[breath_4.8s_ease-in-out_infinite_-2.4s]"
+          />
+          <span aria-hidden className="size-1.5 rounded-full bg-[#E0A878] transition-transform duration-500 group-hover:scale-125" />
+        </span>
+        <span className="text-[9px] font-medium uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 group-hover:text-white/85">
+          Bir nefes al
+        </span>
+      </motion.button>
     </motion.div>
   );
 }

@@ -8,7 +8,7 @@ import ResponsiveImage from "@/components/Client/ResponsiveImage";
 
 export default function IntroductionServer() {
   return (
-    <section aria-label="Akademiyle tanış" className="grid grid-rows-[auto_auto_auto] gap-y-12 bg-[#2B3530] px-3-75 pt-35 pb-35 text-[#D1CCBF] md:grid-cols-[1fr_1.9fr] md:grid-rows-[auto_auto] md:gap-y-28 md:px-15 md:pt-42-5 md:pb-50">
+    <section id="tanisma" aria-label="Akademiyle tanış" className="grid grid-rows-[auto_auto_auto] gap-y-12 bg-[#2B3530] px-3-75 pt-35 pb-35 text-[#D1CCBF] md:grid-cols-[1fr_1.9fr] md:grid-rows-[auto_auto] md:gap-y-28 md:px-15 md:pt-42-5 md:pb-50">
       <motion.div className="mb-2 md:col-start-2 md:mb-0">
         <ResponsiveImage parallaxAmount={8} disableParallaxOnReducedMotion>
           <Image
