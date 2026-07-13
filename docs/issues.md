@@ -8,6 +8,12 @@
 
 - Newsletter/on-kayit Supabase project (`yasama-sanati`, ref `htpduorvqmidoprkkgwy`) was found auto-paused (free-tier INACTIVE) via a failing TestSprite newsletter run (DNS ENOTFOUND → "Bir hata oluştu"). Restored to ACTIVE_HEALTHY and the newsletter success flow re-verified end-to-end. Risk: free-tier projects re-pause after ~1 week of inactivity — production forms will silently fail again unless the project is kept active or upgraded.
 
+## Environment — resolved (2026-07-13)
+
+- **Unstyled footer (white background, faded text):** a bare `Footer/` pattern added to `.git/info/exclude` (to protect the repo-root screenshots folder from stage-all sweeps) also matched **`sections/Footer/`**. Tailwind v4's scanner respects git ignore rules, so it stopped scanning `sections/Footer/Server.tsx` and never emitted footer-only utilities (`isolate`, `bg-[#293A32]`, `-z-20`, the gradient layer) — the DOM had the right classes, the CSS had no rules for them. It stayed hidden until `.next` was deleted and Tailwind regenerated from scratch. Fix: anchor every directory pattern to the repo root (`/Footer/`). Diagnose with `git check-ignore -v --no-index <path>` (plain `check-ignore` is silent for tracked files).
+- **"Site got very slow / pages disappeared":** two dev servers ran at once (a comparison worktree on :3002 sharing the main repo's `node_modules` via junction) and saturated the CPU — single requests took 50s and chunks arrived late/partial. Never run two dev servers against this project.
+- **Lighthouse measurements are worthless on a loaded machine:** leftover headless-Chrome processes made the same build score 27 → 94 on desktop. Always kill Chrome and re-run 2–3 times, trusting the cleanest run.
+
 ## Environment — resolved (2026-07-12)
 
 - Dev-server chunk truncation: log files written into the repo root (dev/tunnel logs) caused a Next.js watcher recompile storm that aborted in-flight chunk responses → truncated `layout.js` → client `SyntaxError: Invalid or unexpected token` → hydration never ran (hero/manifesto stuck in their hidden initial state). Fix: keep all session logs outside the watched project directory. The intermittent SyntaxError seen in earlier phases was this same failure class.
