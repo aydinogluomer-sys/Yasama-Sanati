@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
 import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 import MeridianDrawPath from "@/components/Client/MeridianDrawPath";
 import cn from "@/utils/cn";
@@ -79,6 +79,11 @@ export default function SectionSeam({
   const kickerOpacity = useTransform(scrollYProgress, [0.3, 0.55], [0, 1]);
   const kickerY = useTransform(scrollYProgress, [0.3, 0.55], [26, 0]);
 
+  // The thread SVG, breath node and wash are the expensive half of a seam. Mounting seven of them
+  // at hydration cost ~700ms of main-thread time, so they are gated on proximity: a seam only
+  // builds its scene when it is about to be seen, and tears it down again once it is far away.
+  const near = useInView(ref, { margin: "60% 0px 60% 0px" });
+
   const stage = Boolean(label);
   // Kicker sits on whichever half of the blend it will be read against; pick tone by destination.
   const dark = luminance(to) < 128;
@@ -94,7 +99,7 @@ export default function SectionSeam({
       )}
       style={{ background: seamGradient(from, to) }}
     >
-      {!reduce && (
+      {!reduce && near && (
         <motion.div
           className="absolute inset-x-0 h-2/3"
           style={{
@@ -105,7 +110,7 @@ export default function SectionSeam({
         />
       )}
 
-      {stage && (
+      {stage && near && (
         <>
           {/* Thread: curls in from the right gutter (where the fixed ScrollMeridian lives),
               dips to the centre node, and exits back toward the gutter. */}
