@@ -103,9 +103,11 @@ Innovation.Container = function Container({
   children: StaticImageData;
   isMobile: boolean | null;
 }) {
+  // Wipe resolves inside the first ~18% of the card's scroll window; the remaining budget is a
+  // composed dwell (image whole, scale settling) instead of a long half-striped state.
   const localScrollYProgress = useTransform(
     scrollYProgress,
-    [index * 0.25, (index + 1) * 0.25],
+    [index * 0.25, index * 0.25 + 0.045],
     [0, 1],
     {
       ease: cubicBezier(0, 0, 1, 1),

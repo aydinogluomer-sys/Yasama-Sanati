@@ -1,10 +1,11 @@
 "use client";
-import { motion, MotionValue, useMotionValueEvent } from "motion/react";
+import { motion, MotionValue, useMotionValueEvent, useTransform } from "motion/react";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import { CSSProperties, ReactNode, useState } from "react";
 import AnimatedMaskText from "@/components/Client/MaskTextClient";
-import ClipImageContainer from "@/components/Client/ClipImageContainer";
 import SectionTitle from "../Server/SectionTitle";
+import { easing } from "@/utils/motion/tokens";
 import cn from "@/utils/cn";
 interface ClipImageCardProps {
   scrollYProgress: MotionValue<number>;
@@ -121,6 +122,12 @@ export default function ClipImageCard({
   });
   const prependZero = (num: number) => (num < 10 ? `0${num}` : `${num}`);
 
+  // Exit choreography: at the end of the pinned journey the card shrinks slightly and hands the
+  // stage to the seam thread instead of being cut mid-air by the section edge.
+  const cardScale = useTransform(scrollYProgress, [0.94, 1], [1, 0.96]);
+  const cardY = useTransform(scrollYProgress, [0.94, 1], [0, -18]);
+  const cardOpacity = useTransform(scrollYProgress, [0.96, 1], [1, 0.85]);
+
   return (
     <motion.div
       initial="initial"
@@ -142,46 +149,71 @@ export default function ClipImageCard({
           ease: [0.24, 0.43, 0.15, 0.97],
           duration: 0.8,
         }}
-        className="relative z-20 my-[5vh] flex h-[70vh] min-h-fit w-[90%] flex-col items-center gap-8 bg-[#D1CCBF] p-5-75 text-[#2B3530] md:h-full md:max-h-172 md:w-full md:max-w-118 md:px-8 md:py-4"
+        style={{ scale: cardScale, y: cardY, opacity: cardOpacity }}
+        className="relative z-20 my-[5vh] flex w-[90%] flex-col gap-5 bg-[#D1CCBF] p-6 text-[#2B3530] md:my-0 md:w-full md:max-w-118 md:gap-6 md:p-8"
       >
-        <div className="flex items-center gap-1 text-2xs md:text-sm">
+        {/* Editorial chapter marker — mono index, hairline, running count */}
+        <div className="flex select-none items-center gap-3">
           <AnimatedMaskText
             state={currentState}
             delay={0}
             lines={[<>{prependZero(currentState)}</>]}
-            className="[line-height:1]"
+            className="font-mono text-[0.95rem] tracking-[0.06em] tabular-nums text-[#A85F33] [line-height:1]"
           />
-          <span className="opacity-60">-</span>
-          <span className="opacity-60">{prependZero(images.length)}</span>
+          <span aria-hidden className="h-px w-10 bg-current opacity-30" />
+          <span className="font-mono text-[0.7rem] tracking-[0.14em] text-[#2B3530]/55 tabular-nums">
+            {prependZero(images.length)}
+          </span>
         </div>
+
         <AnimatedMaskText
           state={currentState}
           delay={0.06}
           lines={data[currentState - 1].title}
-          className="-space-y-1 text-center text-lg [line-height:1] font-light md:text-28"
+          className="font-serif text-[1.55rem] font-normal tracking-[-0.01em] [line-height:1.08] md:text-[2.1rem]"
         />
 
-        <div className="relative aspect-[1.62] w-full overflow-hidden md:aspect-[1.85]">
+        {/* Always-composed image window: state-keyed crossfade + settle (no in-card stripe wipe) */}
+        <div className="relative aspect-[1.62] w-full overflow-hidden md:aspect-[1.7]">
           {images.map((eachImage: StaticImageData, index: number) => (
-            <ClipImageContainer
-              key={"card-image-container-" + (index + 1)}
-              index={index}
-              scrollYProgress={scrollYProgress}
+            <motion.div
+              key={"card-image-" + (index + 1)}
+              className="absolute inset-0"
+              initial={false}
+              animate={{
+                opacity: currentState - 1 === index ? 1 : 0,
+                scale: currentState - 1 === index ? 1 : 1.045,
+              }}
+              transition={{ duration: 0.55, ease: easing.editorial }}
             >
               <Image
                 src={eachImage}
                 alt={"card-image-" + (index + 1)}
                 className="size-full object-cover"
               />
-            </ClipImageContainer>
+            </motion.div>
           ))}
         </div>
+
         <AnimatedMaskText
           state={currentState}
           delay={0.12}
-          lines={data[currentState - 1].description["desktop"]} //change this
-          className="text-center text-sm [line-height:1.25] md:text-base"
+          lines={data[currentState - 1].description["desktop"]}
+          className="text-sm [line-height:1.45] text-[#2B3530]/85 md:text-[0.95rem]"
         />
+
+        <Link
+          href="/programlar"
+          className="group mt-1 inline-flex w-fit items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#A85F33] transition-colors hover:text-[#8a4c28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A85F33]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#D1CCBF] motion-reduce:transition-none"
+        >
+          Programı İncele
+          <span
+            aria-hidden
+            className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+          >
+            →
+          </span>
+        </Link>
       </motion.div>
       <span className="text-base [line-height:1] md:text-xl">
         ( Kaydırmaya Devam Edin ){" "}

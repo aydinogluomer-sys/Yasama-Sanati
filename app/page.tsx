@@ -17,17 +17,17 @@ export default function Home() {
       <ScrollMeridian />
       <Hero />
       <Introduction />
-      <SectionSeam from="#2b3530" to="#30493D" />
+      <SectionSeam from="#2b3530" to="#30493D" index="02" label="Yaklaşımımız" />
       <WellnessSanctuary />
-      <SectionSeam from="#30493D" to="#2b3530" />
+      <SectionSeam from="#30493D" to="#2b3530" label="Şifa Yolculuğu" />
       <Innovation />
-      <SectionSeam from="#2b3530" to="#222B27" />
+      <SectionSeam from="#2b3530" to="#222B27" label="Altı Disiplin" />
       <SignatureTypeScene />
-      <SectionSeam from="#222B27" to="#F3EFE6" />
+      <SectionSeam from="#222B27" to="#F3EFE6" index="04" label="Yaşama Sanatı Hikayesi" />
       <ElementisStory />
-      <SectionSeam from="#F3EFE6" to="#222B27" />
+      <SectionSeam from="#F3EFE6" to="#222B27" label="Çalışma Alanları" />
       <SustainableRetreat />
-      <SectionSeam from="#30493D" to="#CED1BF" />
+      <SectionSeam from="#30493D" to="#CED1BF" label="İlk Adımı At" />
       <Form />
       <Footer />
       <NavBar />

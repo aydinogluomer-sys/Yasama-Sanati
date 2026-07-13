@@ -130,10 +130,7 @@ export default function SustainableRetreat() {
                     geldim; nefesimle, sınırlarımla
                   </Fragment>,
                   <Fragment key="d2-2">
-                    ve kendimle tanışıp çıktım.
-                  </Fragment>,
-                  <Fragment key="d2-3">
-                    İyi ki."
+                    ve kendimle tanışıp çıktım. İyi ki."
                   </Fragment>,
                   <Fragment key="d2-4">
                     — Z. A., Nefes Koçluğu katılımcısı
@@ -147,10 +144,7 @@ export default function SustainableRetreat() {
                     geldim; nefesimle, sınırlarımla
                   </Fragment>,
                   <Fragment key="m2-2">
-                    ve kendimle tanışıp çıktım.
-                  </Fragment>,
-                  <Fragment key="m2-3">
-                    İyi ki."
+                    ve kendimle tanışıp çıktım. İyi ki."
                   </Fragment>,
                   <Fragment key="m2-4">
                     — Z. A., Nefes Koçluğu katılımcısı
