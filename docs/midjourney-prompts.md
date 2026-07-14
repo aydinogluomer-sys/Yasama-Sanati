@@ -8,6 +8,28 @@
 
 ---
 
+## Midjourney Panel Ayarları (bir kez ayarlayın)
+
+| Ayar | Değer | Neden |
+|---|---|---|
+| **Raw** | **Raw** (Standard DEĞİL) | En kritik ayar. Standard, MJ'nin otomatik güzelleştirmesini uygular → aşırı render / stok-AI havası. Raw ham, fotoğrafik sonuç verir. |
+| **Stylization** | Düşük (~0–100) | Yüksek stylization prompt'tan saptırır; mevcut görsellerle tutarlı bir set için prompt sadakati şart. |
+| **Weirdness** | 0 | Sürrealizm yok. |
+| **Variety** | 0 | Tutarlı set. |
+| **Version** | 8.1 | En yeni model. |
+| **Standard / HD** | HD | Yüksek detay, temiz upscale. |
+| **Aspect Ratio** | Panelde bırakılabilir | Promptlar `--ar` içeriyor ve **paneli ezer** — her görselde paneli değiştirmeye gerek yok. |
+| **Speed** | Relax | Kotasızsa ücretsiz; acele varsa Fast. |
+| **Video ayarları** | Yoksay | Sadece Animate (video) için. |
+
+**Negatif parametre** (kopyalanan promptun sonuna eklenir):
+
+```
+--no neon, mystical symbols, oversaturated, text, watermark, logo
+```
+
+---
+
 ## Marka Stil Bloğu (her prompta eklenir)
 
 Tüm promptların sonunda şu stil kuyruğu kullanılır — aşağıdaki kartlarda `[STYLE]` olarak
