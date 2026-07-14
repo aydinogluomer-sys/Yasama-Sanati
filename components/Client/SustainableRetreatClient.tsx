@@ -4,12 +4,12 @@ import { motion } from "motion/react";
 import StyledLinkClient from "@/components/Client/StyledLinkClient";
 // One image per discipline, named after the program it belongs to. Replacing a program's hover
 // image is a drop-in: overwrite the file of the same name (see docs/midjourney-prompts.md §6).
-import MeridyenTerapiImage from "@/public/group/meridyen-terapi.png";
-import NefesKoclugu from "@/public/group/nefes-koclugu.png";
-import MucizelerKursuImage from "@/public/group/mucizeler-kursu.png";
-import YasamKoclugu from "@/public/group/yasam-koclugu.png";
-import HipnoterapiImage from "@/public/group/hipnoterapi.png";
-import ReikiImage from "@/public/group/reiki.png";
+import MeridyenTerapiImage from "@/public/group/meridyen-terapi.jpg";
+import NefesKoclugu from "@/public/group/nefes-koclugu.jpg";
+import MucizelerKursuImage from "@/public/group/mucizeler-kursu.jpg";
+import YasamKoclugu from "@/public/group/yasam-koclugu.jpg";
+import HipnoterapiImage from "@/public/group/hipnoterapi.jpg";
+import ReikiImage from "@/public/group/reiki.jpg";
 import { useImageReveal } from "@/hooks/useImageReveal";
 
 interface LinkType {
