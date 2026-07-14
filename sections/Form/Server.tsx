@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FormImage from "@/public/FormImage.png";
+import FormImage from "@/public/FormImage.jpg";
 import ParallaxContainer from "@/components/Client/ParallaxContainer";
 import Input from "@/components/Server/Input";
 import Checkbox from "@/components/Client/Checkbox";

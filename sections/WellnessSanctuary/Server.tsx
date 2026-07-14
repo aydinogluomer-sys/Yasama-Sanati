@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Fragment } from "react";
-import WellnessSanctuaryImage from "@/public/WellnessSanctuaryImage.png";
+import WellnessSanctuaryImage from "@/public/WellnessSanctuaryImage.jpg";
 import ResponsiveMaskText from "@/components/Client/ResponsiveMaskTextVariant";
 import EditorialSectionTitle from "@/components/Server/EditorialSectionTitle";
 import MaskText from "@/components/Server/MaskText";
