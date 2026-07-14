@@ -151,27 +151,26 @@ small circle of people seated on floor cushions in warm conversation, genuine la
 
 ---
 
-## 6. SustainableRetreat Hover Seti (6 prompt) — PLACEHOLDER DEĞİŞİMİ
+## 6. SustainableRetreat Hover Seti (6 prompt) — EN ÖNCELİKLİ
 
-Mevcut 6 görsel eski Elementis şablonundan kalma jeneriklerdir (dosya adları
-our-vision, sustainability… — program başlıklarıyla ilgisiz; `Introduction.png` de tekrar
-kullanılıyor). `components/Client/SustainableRetreatClient.tsx:21-52`'deki bağlantı sırasına
-göre **disipline özel** üretim yapılacak; dosyalar aynı adlarla değiştirilecek (hepsi 576×740,
-0.78 dikey — üretimden sonra bu boyuta kırpılabilir ya da daha büyük bırakılabilir).
-Hover'da `bg-[#2b3530]/20` tonlu kutuda görünürler; hepsi dekoratif (`alt=""`).
+**Kod tarafı hazır (2026-07-13):** dosyalar program adlarıyla yeniden adlandırıldı ve
+`Introduction.png` çift-kullanımı bitirildi. Artık **üretilen görseli aynı adla üzerine
+yazmak yeterli — kod değişikliği gerekmez.** Hover'da `bg-[#2b3530]/20` tonlu kutuda
+görünürler; hepsi dekoratif (`alt=""`). Hedef boyut 576×740 (0.78 dikey) veya üzeri.
 
-| Sıra | Program başlığı | Dosya (aynı kalacak) | `aspect_ratio` |
-|---|---|---|---|
-| 1 | Meridyen Terapi | `public/group/discover-elementis.png` | 3:4 |
-| 2 | Nefes Koçluğu | `public/group/our-vision-and-mission.png` | 3:4 |
-| 3 | Mucizeler Kursu | `public/group/our-commitment.png` | 3:4 |
-| 4 | Yaşam Koçluğu | `public/group/our-pillars.png` | 3:4 |
-| 5 | Hipnoterapi | `public/group/sustainability.png` | 3:4 |
-| 6 | Reiki | `public/Introduction.png` yerine YENİ dosya* | 3:4 |
+Mevcut görseller **gözle doğrulandı** — eski Elementis şablonundan kalma, program içeriğiyle
+ilgisiz stok fotoğraflar:
 
-\* 6. görsel için `public/group/reiki.png` gibi yeni bir dosya oluşturup
-`SustainableRetreatClient.tsx:10`'daki importu güncellemek gerekir (tek satır — Introduction
-görselinin çifte kullanımı da böylece son bulur).
+| Sıra | Program | Dosya (üzerine yaz) | Şu anda ne var? | Aciliyet |
+|---|---|---|---|---|
+| 1 | Meridyen Terapi | `public/group/meridyen-terapi.png` | Alacakaranlıkta ahşap resort terası | orta |
+| 2 | **Nefes Koçluğu** | `public/group/nefes-koclugu.png` | **Dizüstüne bakan iki ofis çalışanı (kurumsal stok)** | **kritik** |
+| 3 | Mucizeler Kursu | `public/group/mucizeler-kursu.png` | Terasta çay içen kadın | orta |
+| 4 | Yaşam Koçluğu | `public/group/yasam-koclugu.png` | Dışarıda oturan sohbet grubu (kabul edilebilir) | düşük |
+| 5 | **Hipnoterapi** | `public/group/hipnoterapi.png` | **Bali pirinç tarlaları, hava çekimi** | **kritik** |
+| 6 | Reiki | `public/group/reiki.png` | Introduction görselinin geçici kopyası | yüksek |
+
+Tümü `aspect_ratio: 3:4`.
 
 ### 6.1 Meridyen Terapi
 ```

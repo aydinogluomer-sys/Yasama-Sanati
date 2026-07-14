@@ -2,12 +2,14 @@
 import Image, { StaticImageData } from "next/image";
 import { motion } from "motion/react";
 import StyledLinkClient from "@/components/Client/StyledLinkClient";
-import Image1 from "@/public/group/discover-elementis.png";
-import Image2 from "@/public/group/our-vision-and-mission.png";
-import Image3 from "@/public/group/our-commitment.png";
-import Image4 from "@/public/group/our-pillars.png";
-import Image5 from "@/public/group/sustainability.png";
-import Image6 from "@/public/Introduction.png";
+// One image per discipline, named after the program it belongs to. Replacing a program's hover
+// image is a drop-in: overwrite the file of the same name (see docs/midjourney-prompts.md §6).
+import MeridyenTerapiImage from "@/public/group/meridyen-terapi.png";
+import NefesKoclugu from "@/public/group/nefes-koclugu.png";
+import MucizelerKursuImage from "@/public/group/mucizeler-kursu.png";
+import YasamKoclugu from "@/public/group/yasam-koclugu.png";
+import HipnoterapiImage from "@/public/group/hipnoterapi.png";
+import ReikiImage from "@/public/group/reiki.png";
 import { useImageReveal } from "@/hooks/useImageReveal";
 
 interface LinkType {
@@ -22,32 +24,32 @@ export default function SustainableRetreatClient() {
     {
       title: "Meridyen Terapi",
       href: "/programlar/meridyen-terapi",
-      img: Image1,
+      img: MeridyenTerapiImage,
     },
     {
       title: "Nefes Koçluğu",
       href: "/programlar/nefes-koclugu",
-      img: Image2,
+      img: NefesKoclugu,
     },
     {
       title: "Mucizeler Kursu",
       href: "/programlar/mucizeler-kursu",
-      img: Image3,
+      img: MucizelerKursuImage,
     },
     {
       title: "Yaşam Koçluğu",
       href: "/programlar/yasam-kocu",
-      img: Image4,
+      img: YasamKoclugu,
     },
     {
       title: "Hipnoterapi",
       href: "/programlar/hipnoterapi",
-      img: Image5,
+      img: HipnoterapiImage,
     },
     {
       title: "Reiki",
       href: "/programlar/reiki",
-      img: Image6,
+      img: ReikiImage,
     },
   ];
 
