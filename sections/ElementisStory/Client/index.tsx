@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Picture1 from "@/public/elementis-stories/picture-1.png";
-import Picture2 from "@/public/elementis-stories/picture-2.png";
+import Picture1 from "@/public/elementis-stories/picture-1.jpg";
+import Picture2 from "@/public/elementis-stories/picture-2.jpg";
 import ParallaxContainer from "@/components/Client/ParallaxContainer";
 import { useIsMobile } from "@/app/providers";
 
