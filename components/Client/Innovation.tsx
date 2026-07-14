@@ -1,11 +1,11 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import Image1 from "@/public/ImageContainer/image-1.png";
-import Image2 from "@/public/ImageContainer/image-2.png";
-import Image3 from "@/public/ImageContainer/image-3.png";
-import Image4 from "@/public/ImageContainer/image-4.png";
-import Image5 from "@/public/ImageContainer/image-5.png";
+import Image1 from "@/public/ImageContainer/image-1.jpg";
+import Image2 from "@/public/ImageContainer/image-2.jpg";
+import Image3 from "@/public/ImageContainer/image-3.jpg";
+import Image4 from "@/public/ImageContainer/image-4.jpg";
+import Image5 from "@/public/ImageContainer/image-5.jpg";
 import {
   motion,
   MotionValue,
@@ -103,11 +103,13 @@ Innovation.Container = function Container({
   children: StaticImageData;
   isMobile: boolean | null;
 }) {
-  // Wipe resolves inside the first ~18% of the card's scroll window; the remaining budget is a
-  // composed dwell (image whole, scale settling) instead of a long half-striped state.
+  // The plate behind the card wipes to the next discipline exactly when the card itself flips
+  // (ClipImageCard changes state at the .125 midpoint of each quarter). Keeping the wipe short and
+  // centred on that moment means the background always shows the discipline the card is naming —
+  // and the rest of the window is a composed dwell instead of a long half-striped state.
   const localScrollYProgress = useTransform(
     scrollYProgress,
-    [index * 0.25, index * 0.25 + 0.045],
+    [index * 0.25 + 0.09, index * 0.25 + 0.16],
     [0, 1],
     {
       ease: cubicBezier(0, 0, 1, 1),
