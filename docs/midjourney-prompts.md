@@ -53,6 +53,11 @@ ekleyin.
 
 ## 1. Hero Film Stilleri (2 prompt + video notu)
 
+> **Rota B güncellemesi (2026-07-15):** ilk hero promptları çam ormanı / sisli dağ resortu
+> üretiyordu — Intro/Wellness/Form'un taşındığı Ege/Anadolu diliyle çelişiyordu. Aşağıdaki
+> promptlar aynı "eşik / karşılanma" konseptini koruyup coğrafyayı taşdan avlu, zeytin, teracotta
+> ve Ege ışığına taşır. `--no` bloğu resort/çam-ormanı sapmasını keser.
+
 ### 1A — Hero poster, dikey (mobil + ilk boya)
 - **Dosya:** `public/Hero/elementis-cover-mjpg.png` — 1080×1920 (9:16), 456 KB
 - **Render:** `sections/Hero/Client/index.tsx:19` (viewport çözülmeden ilk kare, LCP) +
@@ -60,7 +65,7 @@ ekleyin.
 - **`aspect_ratio`:** `9:16`
 - **Prompt:**
 ```
-a woman's hand gently resting on a wooden door frame of a warm forest retreat cabin at dusk, glimpse of a calm interior beyond, shallow depth of field, intimate welcoming moment, [STYLE] --ar 9:16
+a woman's hand gently resting on a weathered stone doorway framed by a flowing linen curtain, a glimpse of a warm lamplit room beyond with earthenware and soft textiles, an olive branch at the edge of frame, an Aegean stone village at golden dusk, intimate moment of arrival and welcome, shallow depth of field, muted deep forest green and warm parchment palette with soft copper accents, editorial wellness photography, soft cinematic natural light, calm negative space, quiet luxury, authentic human warmth, photorealistic, shot on medium format film --ar 9:16 --no pine forest, redwood, misty mountains, wooden cabin, lodge, resort, tropical, palm, cold blue light
 ```
 
 ### 1B — Modal film posteri, yatay
@@ -69,7 +74,7 @@ a woman's hand gently resting on a wooden door frame of a warm forest retreat ca
 - **`aspect_ratio`:** `16:9`
 - **Prompt:**
 ```
-cinematic wide establishing shot of a serene wellness academy nestled in misty forested hills at golden hour, warm interior lights glowing through wooden architecture, layers of fog, breathing landscape, [STYLE] --ar 16:9
+cinematic wide establishing shot of a small stone wellness academy nestled among olive groves and cypress trees on an Aegean hillside at golden hour, terracotta roofs and lime-washed walls, warm interior lights glowing, the distant sea and soft haze, timeless Mediterranean landscape, muted deep forest green and warm parchment palette with soft copper accents, editorial architectural photography, soft cinematic natural light, calm negative space, quiet luxury, photorealistic, shot on medium format film --ar 16:9 --no pine forest, redwood, misty blue mountains, alpine lodge, wooden resort, aerial drone, tropical, palm, cold blue light
 ```
 
 ### Video notu (elementismp4 / elementis-mmp4 / elementis-fullmp4)
