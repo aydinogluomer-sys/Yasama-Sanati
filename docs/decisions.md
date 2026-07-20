@@ -167,3 +167,29 @@ Reason: hero autoplay videos (every visitor) and the opt-in film shipped at 1440
 ## D040 — Wave 1B opens with the "Opening Breath" cue, not a hero rebuild
 
 Reason: Agent-01's Wave 1 verdict reopened creative work on Hero/Introduction, but the hardened hero already scores 92. The visible jump is delivered as a nameable signature detail — a breath-rhythm copper ring bridging hero → Introduction — instead of re-staging the composition. Calm, on-brand (breath = core brand line), accessible (motion-safe static, instant scroll, focus ring), and md+-only so the mobile composition stays untouched.
+
+## D041 — `--font-serif` silently moved from Cormorant Garamond to Ogg — CLOSED: keep Ogg, license purchase deliberately deferred
+
+Reason: this decision is being written after the fact (2026-07-20) because the change it describes shipped with no decision record at the time.
+
+**User decision (2026-07-20): keep Ogg, license purchase/verification deliberately deferred.** No
+revert to Cormorant Garamond. The user has knowingly accepted the unverified-commercial-license
+risk rather than resolving it now; a proper web-embedding license for Ogg will be obtained/confirmed
+only if prompted (a notice/takedown) or a concrete need arises — this is a conscious business
+decision, not a gap to keep flagging. The footer's Georgia fallback (`#footer-brand-title`) stays
+as-is regardless: that fix addresses a confirmed rendering defect in the font file itself,
+independent of the license question, and is unrelated to whether/when a license gets purchased.
+
+**What happened:** D035 (above) named Cormorant Garamond italic the *permanent* accent/signature voice specifically because Cormorant's license and Turkish glyph coverage (ş ğ ı İ ç) were known-good, while Kisthe was rejected for the opposite reason (license + glyph coverage unverified). Sometime before `awwwards-loop/reports/iteration-17.md` (no iteration report or decision covers the change itself — git history has it squashed into the single `9f495cf` "Golden Master baseline" commit, so the exact step is not recoverable), `--font-serif` was repointed from Cormorant Garamond to two local files, `app/fonts/Ogg-Roman.otf` / `Ogg-Italic.otf`. Iteration 22 then went further: rerouted `--font-kisthe` to Ogg too, deleted the Cormorant Garamond and Great Vibes loaders from `layout.tsx`, and dropped the font budget from 5 to 3 families (Ogg, Basis Grotesque Pro, Space Mono).
+
+**Why this matters:** Ogg is a commercial display serif in the exact same unverified category D035 used to *reject* Kisthe — no license file, purchase record, or `docs/decisions.md` entry exists anywhere in this repo for it (checked `app/fonts/`, repo root, and all `*.md`/`*.json` files on 2026-07-20; nothing found). This is not a theoretical risk: on 2026-07-19 the footer brand wordmark (`#footer-brand-title`, "YAŞAMA SANATI") was found rendering a stray mark over the letter N — a genuine Turkish-glyph-adjacent rendering defect in `Ogg-Roman.otf` under Chromium/Windows, root-caused via ~20 isolated tests plus a `fontTools` dump of the font's own tables (see `docs/issues.md`, "Typography — resolved (2026-07-19)"). That one instance was fixed locally with a Georgia fallback for just that element, but Ogg is still `--font-serif`/`--font-kisthe` everywhere else on the site.
+
+**Status: CLOSED (2026-07-20).** Keep Ogg. Commercial license verification/purchase is explicitly
+deferred, not abandoned — the user has accepted this risk knowingly and will obtain/confirm a
+proper web-embedding license for Ogg (Schick Toikka / OH no Type Co) only if prompted (e.g. a
+notice or takedown) or if a concrete need arises otherwise. This is a deliberate business call, not
+an oversight — do not re-raise it as an open question in future passes; only surface it again if
+one of those trigger conditions actually occurs. The rendering-defect lesson still stands
+independent of licensing: treat any new tight multi-line uppercase Ogg composition as carrying the
+same unverified-glyph-behavior risk as the footer bug, and re-test rather than assume it renders
+correctly.

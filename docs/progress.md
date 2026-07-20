@@ -347,6 +347,56 @@ Open: Kisthe woff2/license (D035); P6 Intercom academy chapter structure not yet
 (Accordion replaced, "Modül N:" prefix stripped); serif intro lead. Verified prod: build green, overflow 0,
 single h1, Turkish glyphs correct, desktop + mobile.
 
+## Iterations 17–22 — Ogg-era polish pass (belatedly logged 2026-07-20)
+
+> These shipped (all in `awwwards-loop/reports/iteration-{17..22}.md`, verdict PASS on each) but were
+> never copied into this file, so `awwwards-loop/state.json` (iteration 22, "PASS — SOTD-lens
+> 95/100") ran well ahead of what this doc showed. Backfilled here for continuity; see D041 for the
+> one load-bearing gap this pass exposed.
+>
+> Somewhere between "Phase 2 follow-up" above (Cormorant Garamond confirmed as the permanent
+> `--font-serif`, D035 resolved) and iteration 17 below (which already treats Ogg as the base serif),
+> `--font-serif` was repointed from Cormorant to the local `Ogg-Roman.otf`/`Ogg-Italic.otf` with no
+> report or decision covering the swap itself — git history has it squashed into the single `9f495cf`
+> "Golden Master baseline" commit, so the exact step isn't recoverable. See D041.
+
+- **17 — Extended wavy underline & intro accent scaling:** `HandwritingMark` gained a `"long"`
+  variant (`preserveAspectRatio`, wider viewBox) so the hero underline covers the full word; the
+  Introduction script accent scaled to `text-[1.35em]` to balance against the (already-swapped-in)
+  Ogg serif body type.
+- **18 — Tanışma description font-size polish:** description paragraph `text-base md:text-lg` →
+  `text-lg md:text-24`; layout/gap unchanged.
+- **19 — Retreat marquee typography alignment:** `SustainableRetreat` marquee switched from sans
+  (Basis Grotesque Pro) to `font-serif` (Ogg) to match the signature display voice.
+- **20 — Marquee size & outline matching:** marquee restyled to the ODDWORKS-scale treatment
+  (`clamp(4rem,18vw,15rem)`, alternating solid/outline glyphs, `✦` separators, percentage-based
+  seamless loop).
+- **21 — Scroll-linked paragraph reveal + wider column:** new `ScrollRevealText` (word-opacity
+  scroll reveal) replaces `DynamicLineReveal` on the Tanışma description; column widened
+  `md:max-w-[32rem]` → `md:max-w-[56rem]` to stop 1–2-word line stacking.
+- **22 — Typography system unification & font-load cleanup:** removed the still-wired `Great_Vibes`
+  and `Cormorant_Garamond` loaders from `layout.tsx`; re-routed `--font-kisthe` to `--font-serif`
+  (Ogg) in `globals.css`; brand logo (`LogoFull`) and footer signature now render in Ogg italic;
+  font budget 5 → 3 families (Ogg, Basis Grotesque Pro, Space Mono). Its own verification claimed
+  "Turkish typography correct... no blocking issues" — the footer wordmark's N-glyph defect (below)
+  shipped through this pass uncaught.
+
+## Font risk & footer fix — logged 2026-07-19/20
+
+- **Bug:** `#footer-brand-title` ("YAŞAMA / SANATI", `sections/Footer/Server.tsx`) rendered a stray
+  mark over the N in SANATI on every load. Root-caused via ~20 isolated CSS/DOM permutations plus a
+  `fontTools` dump of `Ogg-Roman.otf`'s own charstrings/GSUB tables (the glyph and its substitution
+  rules are clean) to a Chromium/Windows rasterizer defect triggered by two Ogg-Roman lines sitting
+  close together — not fixable via any CSS lever short of a design-breaking gap. **Fix:** that one
+  element now uses an inline `Georgia, 'Times New Roman', serif` fallback instead of `font-serif`;
+  rest of the site keeps Ogg. Full diagnosis in `docs/issues.md`, "Typography — resolved (2026-07-19)".
+- **D041 (new):** retroactively documents the undocumented Cormorant → Ogg swap above. **Closed
+  2026-07-20: user decision is to keep Ogg**, with commercial-license purchase/verification
+  deliberately deferred (user knowingly accepts the risk; will buy/verify only if prompted by a
+  notice or an actual need) — not an open item to keep re-raising. The rendering-defect lesson still
+  applies going forward: re-test for the same N-glyph-style artifact before shipping any new tight
+  multi-line uppercase Ogg display type.
+
 ---
 
 # 2026-07-12 — Backlog clearance sprint (3D upgrade, perf, Wave 1B, backend continuity)

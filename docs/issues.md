@@ -1,5 +1,26 @@
 # Issues
 
+## Typography — resolved (2026-07-19)
+
+- **Footer brand wordmark rendered "SAŇATI" (stray mark over N):** `#footer-brand-title` ("YAŞAMA
+  / SANATI", `sections/Footer/Server.tsx`) showed a phantom accent-like glyph above the N in
+  SANATI, reproducible on every load. Root-caused via ~20 isolated test permutations (weight,
+  tracking, text-shadow, font-size 1–4rem, `line-height` 0.92–1.2, every OpenType feature toggle
+  incl. `mark`/`mkmk`, DOM structure `<br>` vs sibling elements, GPU layer isolation) plus a
+  `fontTools` dump of `Ogg-Roman.otf`'s charstrings and GSUB tables (N's own outline is clean; no
+  `locl`/`calt` rule touches N). Conclusion: a Chromium/Windows rasterization defect tied to close
+  vertical proximity between two lines set in Ogg-Roman at this weight — only fix found was a
+  large (300px+) gap, incompatible with the tight `leading-[0.92]` wordmark. **Fix:** this one
+  element now uses `style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}` instead of
+  `font-serif` (Ogg); rest of the site is unaffected. Verified clean across repeated independent
+  headless captures.
+- **Open follow-up:** `Ogg-Roman.otf`/`Ogg-Italic.otf` (`app/layout.tsx`) were adopted as
+  `--font-serif` site-wide with no `docs/decisions.md` entry and no confirmed commercial license —
+  the same unresolved-license category that got Kisthe rejected in D035. The N-glyph bug above is
+  a concrete symptom of exactly that risk (unverified Turkish-glyph behavior). Recommend a
+  decision record (or reverting to a verified-licensed font) before shipping further Ogg-dependent
+  work.
+
 ## Silhouette Sprint — open
 
 - S10 — Awwwards memorability: baseline ~5.0 → 2026-07-12 final section scores (desktop 1366, healthy render): Hero 92, Introduction 91, WellnessSanctuary 90, SignatureTypeScene 93, ElementisStory ~91 (line breaks rebalanced), Retreat/Programs ~90 (earlier ~88 was an instant-scroll capture artifact), Footer 91. All sections at/above 90. Creative Wave 1B stays open for the next visible jump.

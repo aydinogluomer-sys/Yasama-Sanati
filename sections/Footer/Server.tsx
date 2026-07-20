@@ -171,7 +171,8 @@ export default function Footer() {
             >
               <h2
                 id="footer-brand-title"
-                className="font-serif text-[2.35rem] font-medium uppercase leading-[0.92] tracking-[-0.02em] md:text-[2.7rem] text-[#F3EFE6] transition-colors duration-300 group-hover:text-[#D58D5D] [text-shadow:1px_1px_0px_rgba(0,0,0,0.45),2px_2px_0px_rgba(0,0,0,0.35)]"
+                style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+                className="text-[2.35rem] font-medium uppercase leading-[0.92] tracking-[-0.02em] md:text-[2.7rem] text-[#F3EFE6] transition-colors duration-300 group-hover:text-[#D58D5D] [text-shadow:1px_1px_0px_rgba(0,0,0,0.45),2px_2px_0px_rgba(0,0,0,0.35)]"
               >
                 YAŞAMA
                 <br />

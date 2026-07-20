@@ -87,16 +87,18 @@ MJ yalnızca kısa atmosfer loop'ları için uygundur.
 
 ## 2. Introduction — Buluşma Alanı
 
-- **Dosya:** `public/Introduction.png` — 1734×1016 (~1.7:1), 2.53 MB
+- **Dosya:** `public/Introduction.png` — 1344×896 (3:2), 2.15 MB
 - **Render:** `sections/Introduction/Server.tsx:14` — split kompozisyonun sağ sütunu
-  (62vw), parallax 8px; mobilde `aspect-[1.18]` kırpılır. **Ayrıca** Retreat hover setinde
-  6. görsel olarak tekrar kullanılıyor (bkz. bölüm 6 — orada disipline özel yenisiyle
-  değiştirilecek).
+  (62vw), parallax 8px; mobilde `aspect-[1.18]` kırpılır. Daha önce Retreat hover setinde
+  6. görsel (Reiki) olarak da içe aktarılıyordu; bölüm 6'daki 2026-07-13 kod
+  güncellemesiyle bu çift-kullanım bitirildi — `public/group/reiki.jpg` artık ayrı bir
+  dosya (şu an bu görselin geçici bir kopyasını taşıyor, bkz. bölüm 6.6, disipline özel
+  yenisiyle değiştirilecek).
 - **Mevcut alt:** "Doğayla çevrili sakin bir Yaşama Sanatı buluşma alanı"
 - **`aspect_ratio`:** `3:2`
 - **Prompt:**
 ```
-tropical modern wellness pavilion with layered timber roofs surrounded by lush greenery at blue hour, softly lit stone pathway with warm garden lights, architectural photography, sense of arrival and welcome, [STYLE] --ar 3:2
+sunlit stone courtyard of a small Aegean wellness academy at blue hour, lime-washed walls and terracotta tiles, olive branches framing a softly lit stone pathway with warm garden lights, architectural photography, sense of arrival and welcome, [STYLE] --ar 3:2 --no pine forest, tropical, palm, thatched roof, resort, lodge
 ```
 
 ---
