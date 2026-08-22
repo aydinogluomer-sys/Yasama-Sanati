@@ -1,0 +1,62 @@
+name: Quality Gate
+
+# Her PR ve main push'unda: typecheck → lint → build → erişilebilirlik.
+# Kapı, RELEASE-PLAN §3.2'deki sıranın çalıştırılabilir hâli. Lighthouse CI ve bundle
+# budget henüz yok; onlar submission sonrasına bırakıldı (§22, sıra 15).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Bağımlılıkları kur
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+
+      - name: Playwright chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Sunucuyu başlat
+        run: |
+          npx next start -p 3400 &
+          npx wait-on http://127.0.0.1:3400 --timeout 90000
+
+      - name: Erişilebilirlik (axe — serious/critical = 0)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:a11y
+
+      - name: Viewport matrisi (8 boyut × 6 rota, taşma = 0)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:viewports
+
+      - name: Klavye ve zoom (skip link, focus trap, ESC, %200/%400)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:keyboard
