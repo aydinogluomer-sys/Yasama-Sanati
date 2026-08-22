@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
+import AccreditationProof from "@/components/Server/AccreditationProof";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
@@ -118,14 +119,25 @@ export default function MeridyenTerapiPage() {
       />
       <SubPageLayout
       title="Meridyen Terapi"
-      description="Vücudun enerji kanallarını (meridyenler) dengeleme, blokajları kaldırma ve bütünsel şifa metodolojisi."
+      description="Geleneksel öğretide meridyen olarak adlandırılan enerji kanalları ve bütünsel kinesiyoloji üzerine uzmanlık eğitimi."
       noPadding={true}
       heroFullScreen={true}
     >
       <div className="space-y-0">
         <MeridianParallaxContainer />
-        <div className="px-6 py-16 md:px-16 md:py-28">
+        <div className="space-y-16 px-6 py-16 md:px-16 md:py-28">
           <CourseDetailTemplate {...data} programSlug="meridyen-terapi" />
+          {/* Akreditasyon kanıtı yalnız BU programda: PRODUCT.md'ye göre IECCERT'in
+              Meridyen Terapi'yi kapsaması, projenin yayınlayabileceği tek doğrulanmış
+              akreditasyon gerçeği. Sicil no, doğrulama linki, eğitim saati ve
+              değerlendirme yöntemi alanları bileşende tanımlı ama BOŞ — değerleri
+              doğrulanmış olarak gelene kadar render edilmiyorlar. */}
+          <AccreditationProof
+            body="IECCERT"
+            bodyFullName="International Energy & Complementary Medicine Certification"
+            program="Meridyen Terapi Uzmanlık Programı"
+            certificateType="Meridyen Terapi Uzmanlık Sertifikası"
+          />
         </div>
       </div>
     </SubPageLayout>
