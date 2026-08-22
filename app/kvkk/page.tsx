@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
+
+export const metadata: Metadata = {
+  title: "KVKK ve Gizlilik | Yaşama Sanatı",
+  description:
+    "Kişisel verilerinizin işlenmesine ilişkin aydınlatma metni ve gizlilik uygulamalarımız.",
+  alternates: { canonical: "/kvkk" },
+  openGraph: {
+    title: "KVKK ve Gizlilik | Yaşama Sanatı",
+    description:
+      "Kişisel verilerinizin işlenmesine ilişkin aydınlatma metni ve gizlilik uygulamalarımız.",
+    url: "/kvkk",
+  },
+};
 
 export default function KVKKPage() {
   return (
@@ -18,7 +32,7 @@ export default function KVKKPage() {
 
         {/* Section 1 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">1. Veri Sorumlusu</h2>
+          <h2 className="text-24 font-light text-white">1. Veri Sorumlusu</h2>
           <p>
             KVKK uyarınca kişisel verileriniz, veri sorumlusu olarak <strong>Yaşama Sanatı Akademisi</strong> (İzmir, Türkiye) tarafından aşağıda açıklanan kapsamda işlenecektir.
           </p>
@@ -28,7 +42,7 @@ export default function KVKKPage() {
 
         {/* Section 2 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">2. İşlenen Kişisel Verileriniz ve Toplama Yöntemleri</h2>
+          <h2 className="text-24 font-light text-white">2. İşlenen Kişisel Verileriniz ve Toplama Yöntemleri</h2>
           <div className="space-y-3">
             <p>
               Web sitemizdeki ön kayıt formunu doldurarak bizimle paylaştığınız veya form gönderimi sırasında otomatik olarak kaydedilen aşağıdaki verileriniz işlenmektedir:
@@ -47,7 +61,7 @@ export default function KVKKPage() {
 
         {/* Section 3 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">3. Kişisel Verilerin İşlenme Amacı ve Hukuki Sebepleri</h2>
+          <h2 className="text-24 font-light text-white">3. Kişisel Verilerin İşlenme Amacı ve Hukuki Sebepleri</h2>
           <div className="space-y-3">
             <p>
               Kişisel verileriniz aşağıdaki amaçlarla ve kanuni sebepler doğrultusunda işlenmektedir:
@@ -60,7 +74,7 @@ export default function KVKKPage() {
                 <strong>Güvenlik ve Spam Önleme:</strong> Formun kötü niyetli botlar veya spam saldırıları tarafından suistimal edilmesini önlemek ve web sitemizin güvenliğini sağlamak amacıyla <strong>IP adresiniz</strong> işlenmektedir (KVKK m. 5/2-f: Veri sorumlusunun meşru menfaati).
               </li>
             </ul>
-            <div className="p-4 bg-[#ca7d57]/10 rounded border border-[#ca7d57]/30 text-sm text-[#ca7d57] font-medium">
+            <div className="p-4 bg-[#ca7d57]/10 rounded border border-[#ca7d57]/30 text-sm text-[var(--accent-copper-on-dark)] font-medium">
               💡 <strong>Kritik Bilgi:</strong> Güvenlik ve sahtecilik önleme amacıyla kaydedilen IP adresiniz, veritabanımızda en fazla 90 gün süreyle saklanır ve bu sürenin sonunda otomatik sistemler tarafından kalıcı olarak silinir (pruned).
             </div>
           </div>
@@ -70,7 +84,7 @@ export default function KVKKPage() {
 
         {/* Section 4 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">4. Kişisel Verilerin Aktarılması ve Saklanması</h2>
+          <h2 className="text-24 font-light text-white">4. Kişisel Verilerin Aktarılması ve Saklanması</h2>
           <p>
             Toplanan kişisel verileriniz, kesinlikle üçüncü şahıslarla, reklam ağlarıyla veya ticari kuruluşlarla paylaşılmaz ve satılmaz. Verileriniz, güvenliği uluslararası standartlarda sağlanan şifreli bulut altyapımızda (Supabase) saklanmaktadır. Veri tabanımıza erişim yetkileri sadece akademinin ilgili eğitim koordinatörleri ile sınırlandırılmıştır.
           </p>
@@ -80,7 +94,7 @@ export default function KVKKPage() {
 
         {/* Section 5 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">5. Haklarınız</h2>
+          <h2 className="text-24 font-light text-white">5. Haklarınız</h2>
           <p>
             KVKK'nın 11. maddesi uyarınca bize başvurarak kişisel verilerinizin; işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını ve uygun kullanılıp kullanılmadığını öğrenme, yurt içinde aktarıldığı kişileri bilme, eksik veya yanlış işlenmişse düzeltilmesini isteme, silinmesini veya yok edilmesini talep etme haklarına sahipsiniz.
           </p>

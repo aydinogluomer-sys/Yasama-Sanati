@@ -10,6 +10,8 @@ import FooterNewsletter from "@/components/Client/FooterNewsletter";
 import HandwritingMark from "@/components/Client/HandwritingMark";
 import SignatureWordmark from "@/components/Server/SignatureWordmark";
 import SocialLogos from "@/components/SVGComponents/socials";
+import { usePathname } from "next/navigation";
+import { consultationHref } from "@/utils/consultation-context";
 
 const akademiLinks = [
   ["Programlar", "/programlar"],
@@ -39,9 +41,11 @@ const reveal = {
 };
 
 const footerLink =
-  "w-fit text-sm leading-6 text-[#F3EFE6]/72 transition-colors duration-200 hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none";
+  "w-fit text-sm leading-6 text-[#F3EFE6]/85 transition-colors duration-200 hover:text-[#F3EFE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transition-none";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const consultationUrl = consultationHref({ from: pathname });
   const footerRef = useRef<HTMLElement>(null);
   const reduceMotion = useMountedReducedMotion();
 
@@ -99,7 +103,7 @@ export default function Footer() {
             <motion.p
               variants={reveal}
               transition={{ duration: 0.6 }}
-              className="mt-7 max-w-[34rem] text-body-lg font-light text-[#F3EFE6]/72"
+              className="mt-7 max-w-[34rem] text-body-lg font-light text-[#F3EFE6]/85"
             >
               Ön görüşme ücretsiz. Nereden başlayacağını birlikte netleştirelim.
             </motion.p>
@@ -110,8 +114,8 @@ export default function Footer() {
             className="mt-9 flex flex-col gap-3 sm:flex-row lg:mt-0 lg:shrink-0 lg:flex-col lg:items-end"
           >
             <Link
-              href="/#on-kayit"
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#C9875B] px-7 text-[11px] font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-[#d79a70] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
+              href={consultationUrl}
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#C9875B] px-7 text-3xs font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-[#d79a70] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
             >
               Ön Görüşme
               <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
@@ -120,7 +124,7 @@ export default function Footer() {
             </Link>
             <Link
               href="/programlar"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-[#F3EFE6]/25 px-7 text-[11px] font-medium uppercase tracking-[0.14em] text-[#F3EFE6]/85 transition-colors duration-200 hover:border-[#F3EFE6]/55 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-[#F3EFE6]/25 px-7 text-3xs font-medium uppercase tracking-[0.14em] text-[#F3EFE6]/85 transition-colors duration-200 hover:border-[#F3EFE6]/55 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
             >
               Programları İncele
             </Link>
@@ -167,19 +171,19 @@ export default function Footer() {
             </span>
             <Link
               href="/"
-              className="group block w-fit focus-visible:outline-none"
+              className="group block w-fit rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] focus-visible:ring-offset-4 focus-visible:ring-offset-[#293A32]"
             >
               <h2
                 id="footer-brand-title"
                 style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
                 className="text-[2.35rem] font-medium uppercase leading-[0.92] tracking-[-0.02em] md:text-[2.7rem] text-[#F3EFE6] transition-colors duration-300 group-hover:text-[#D58D5D] [text-shadow:1px_1px_0px_rgba(0,0,0,0.45),2px_2px_0px_rgba(0,0,0,0.35)]"
               >
-                YAŞAMA
+                YAŞAMA{" "}
                 <br />
                 SANATI
               </h2>
             </Link>
-            <p className="mt-7 max-w-[18rem] text-sm leading-7 text-[#F3EFE6]/72">
+            <p className="mt-7 max-w-[18rem] text-sm leading-7 text-[#F3EFE6]/85">
               Yaşamı daha bilinçli, sade ve derin kurmak için eğitimler, atölyeler ve içerikler.
             </p>
             <Link
@@ -199,15 +203,15 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={social.key}
-                  className="grid size-9 place-items-center rounded-full border border-[#F3EFE6]/15 text-[#F3EFE6]/70 transition-[color,border-color,background-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-[#D58D5D]/70 hover:bg-[#D58D5D]/[0.07] hover:text-[#D58D5D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transform-none motion-reduce:transition-none [&>svg]:size-4 [&_path]:fill-current"
+                  aria-label={social.label}
+                  className="grid size-11 place-items-center rounded-full border border-[#F3EFE6]/15 text-[#F3EFE6]/85 transition-[color,border-color,background-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-[#D58D5D]/70 hover:bg-[#D58D5D]/[0.07] hover:text-[#D58D5D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D58D5D] motion-reduce:transform-none motion-reduce:transition-none [&>svg]:size-4 [&_path]:fill-current"
                 >
                   {social.logo}
                 </Link>
               ))}
             </div>
 
-            <div className="mt-10 flex max-w-[18rem] flex-wrap items-center gap-x-3 gap-y-1 border-t border-[#F3EFE6]/12 pt-4 text-[10px] uppercase tracking-[0.12em] text-[#F3EFE6]/50">
+            <div className="mt-10 flex max-w-[18rem] flex-wrap items-center gap-x-3 gap-y-1 border-t border-[#F3EFE6]/12 pt-4 text-4xs uppercase tracking-[0.12em] text-[#F3EFE6]/85">
               <span aria-hidden="true" className="size-1.5 rounded-full bg-[#D58D5D]" />
               <span>38.4237° N · 27.1428° E</span>
               <span aria-hidden="true" className="h-3 w-px bg-[#D58D5D]/50" />
@@ -249,7 +253,7 @@ export default function Footer() {
                     +90 532 789 37 53
                   </a>
                 </li>
-                <li className="flex items-start gap-2 text-sm leading-6 text-[#F3EFE6]/68">
+                <li className="flex items-start gap-2 text-sm leading-6 text-[#F3EFE6]/85">
                   <ContactGlyph kind="location" />
                   <span>Online &amp; İzmir</span>
                 </li>
@@ -274,7 +278,7 @@ export default function Footer() {
         </motion.div>
 
         <div className="mt-16 h-px w-full bg-gradient-to-r from-transparent via-[#F3EFE6]/16 to-transparent lg:mt-20" />
-        <div className="flex flex-col items-center gap-4 py-5 text-center text-xs text-[#F3EFE6]/56 lg:flex-row lg:justify-between lg:text-left">
+        <div className="flex flex-col items-center gap-4 py-5 text-center text-xs text-[#F3EFE6]/85 lg:flex-row lg:justify-between lg:text-left">
           <p className="shrink-0">© 2026 Yaşama Sanatı</p>
 
           <nav aria-label="Yasal bağlantılar">
@@ -315,7 +319,7 @@ export default function Footer() {
 }
 
 function Eyebrow({ children }: { children: ReactNode }) {
-  return <span className="text-[10px] font-medium tracking-[0.16em] text-[#D58D5D]">{children}</span>;
+  return <span className="text-4xs font-medium tracking-[0.16em] text-[#D58D5D]">{children}</span>;
 }
 
 function FooterNav({

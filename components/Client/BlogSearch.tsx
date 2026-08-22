@@ -10,9 +10,13 @@ interface BlogSearchProps {
 export default function BlogSearch({ searchQuery, onSearchChange }: BlogSearchProps) {
   return (
     <div className="relative w-full max-w-sm">
+      <label htmlFor="blog-search" className="sr-only">
+        Makalelerde ara
+      </label>
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg
-          className="size-4 text-[#ced1bf]/50"
+          aria-hidden="true"
+          className="size-4 text-[#ced1bf]/85"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -27,18 +31,23 @@ export default function BlogSearch({ searchQuery, onSearchChange }: BlogSearchPr
         </svg>
       </div>
       <input
-        type="text"
+        id="blog-search"
+        name="blog-search"
+        type="search"
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Makale ara..."
-        className="w-full pl-9 pr-9 py-2 bg-[#ced1bf]/5 rounded border border-[#ced1bf]/15 text-[#d1ccbf] text-xs placeholder-[#ced1bf]/40 focus:outline-none focus:border-[#ced1bf]/40 focus:bg-[#ced1bf]/8 transition-all duration-300"
+        className="min-h-11 w-full rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 py-2 pr-11 pl-9 text-xs text-[#d1ccbf] transition-colors duration-300 placeholder:text-[#ced1bf]/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] [&::-webkit-search-cancel-button]:hidden"
       />
       {searchQuery && (
         <button
+          type="button"
+          aria-label="Aramayı temizle"
           onClick={() => onSearchChange("")}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#ced1bf]/50 hover:text-white transition-colors cursor-pointer"
+          className="absolute inset-y-0 right-0 flex min-h-11 min-w-11 cursor-pointer items-center justify-center text-[#ced1bf]/85 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#E09A6C]"
         >
           <svg
+            aria-hidden="true"
             className="size-3.5"
             fill="none"
             stroke="currentColor"

@@ -50,7 +50,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
         <div className="flex items-center justify-between">
           <Link
             href="/blog"
-            className="group inline-flex items-center text-xs md:text-sm font-medium text-[#ced1bf] hover:text-[#ca7d57] transition-colors duration-300"
+            className="group inline-flex items-center text-xs md:text-sm font-medium text-[#ced1bf] hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300"
           >
             <span className="mr-2 transform group-hover:-translate-x-1 transition-transform duration-300">
               &larr;
@@ -58,7 +58,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
             Bloga Geri Dön
           </Link>
           
-          <span className="bg-[#ca7d57]/10 text-[#ca7d57] px-3 py-1 rounded text-2xs font-semibold uppercase tracking-widest border border-[#ca7d57]/20">
+          <span className="bg-[#ca7d57]/10 text-[var(--accent-copper-on-dark)] px-3 py-1 rounded text-2xs font-semibold uppercase tracking-widest border border-[#ca7d57]/20">
             {post.category}
           </span>
         </div>
@@ -73,6 +73,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
             <div className="flex items-center space-x-3">
               <Image
                 src={post.author.avatar}
+              sizes="40px"
                 alt={post.author.name}
                 width={40}
                 height={40}
@@ -80,11 +81,11 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
               />
               <div>
                 <p className="text-xs md:text-sm font-medium text-white">{post.author.name}</p>
-                <p className="text-2xs text-[#ced1bf]/60">{post.author.role}</p>
+                <p className="text-2xs text-[#ced1bf]/85">{post.author.role}</p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4 text-2xs text-[#ced1bf]/60">
+            <div className="flex items-center space-x-4 text-2xs text-[#ced1bf]/85">
               <span>Yayınlanma: {post.date}</span>
               <span>•</span>
               <span>{post.readTime} Okuma</span>
@@ -108,21 +109,23 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Social Share Toolbar (Desktop) */}
           <div className="lg:col-span-1 space-y-4 lg:sticky lg:top-32 h-fit">
-            <p className="text-2xs font-semibold uppercase tracking-widest text-[#ced1bf]/40 hidden lg:block">
+            <p className="text-2xs font-semibold uppercase tracking-widest text-[#ced1bf]/85 hidden lg:block">
               Paylaş
             </p>
             <div className="flex lg:flex-col gap-3">
               {/* Copy link */}
               <button
+                type="button"
                 onClick={handleCopyLink}
-                className="flex items-center justify-center size-9 bg-[#ced1bf]/5 border border-[#ced1bf]/15 rounded hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 transition-all text-[#ced1bf] hover:text-white cursor-pointer relative"
+                aria-label="Makale bağlantısını kopyala"
+                className="relative flex size-11 cursor-pointer items-center justify-center rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 text-[#ced1bf] transition-colors hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
                 title="Linki Kopyala"
               >
-                <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 10.742s-1.077 1.341-1.077 2.99c0 1.647 1.372 2.99 3.064 2.99 1.69 0 3.063-1.343 3.063-2.99M15.316 13.258s1.078-1.342 1.078-2.99c0-1.647-1.372-2.99-3.064-2.99-1.69 0-3.063 1.343-3.063 2.99" />
                 </svg>
                 {copied && (
-                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#30493D] border border-[#ced1bf]/10 text-2xs text-[#ced1bf] px-2 py-0.5 rounded shadow whitespace-nowrap">
+                  <span role="status" className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#30493D] border border-[#ced1bf]/10 text-2xs text-[#ced1bf] px-2 py-0.5 rounded shadow whitespace-nowrap">
                     Kopyalandı!
                   </span>
                 )}
@@ -133,10 +136,11 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
                 href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center size-9 bg-[#ced1bf]/5 border border-[#ced1bf]/15 rounded hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 transition-all text-[#ced1bf] hover:text-white"
+                aria-label="Makaleyi X'te paylaş"
+                className="flex size-11 items-center justify-center rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 text-[#ced1bf] transition-colors hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
                 title="X'te Paylaş"
               >
-                <svg className="size-3.5 fill-current" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="size-3.5 fill-current" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
@@ -146,10 +150,11 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
                 href={`https://api.whatsapp.com/send?text=${shareText}%20${shareUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center size-9 bg-[#ced1bf]/5 border border-[#ced1bf]/15 rounded hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 transition-all text-[#ced1bf] hover:text-white"
+                aria-label="Makaleyi WhatsApp'ta paylaş"
+                className="flex size-11 items-center justify-center rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 text-[#ced1bf] transition-colors hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
                 title="WhatsApp'ta Paylaş"
               >
-                <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg aria-hidden="true" className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </a>
@@ -159,7 +164,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
           {/* Main Body text */}
           <div className="lg:col-span-3">
             <div 
-              className="prose prose-invert prose-headings:font-light prose-headings:text-white prose-p:text-[#ced1bf]/80 prose-p:font-light prose-p:leading-relaxed prose-a:text-[#ca7d57] prose-a:no-underline hover:prose-a:underline font-light text-sm md:text-base leading-relaxed text-[#ced1bf]/80 space-y-6"
+              className="prose prose-invert prose-headings:font-light prose-headings:text-white prose-p:text-[#ced1bf]/80 prose-p:font-light prose-p:leading-relaxed prose-a:text-[var(--accent-copper-on-dark)] prose-a:no-underline hover:prose-a:underline font-light text-sm md:text-base leading-relaxed text-[#ced1bf]/80 space-y-6"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
@@ -168,7 +173,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-1 bg-[#ced1bf]/5 hover:bg-[#ced1bf]/10 text-2xs text-[#ced1bf]/60 hover:text-white rounded border border-[#ced1bf]/10 transition-colors"
+                  className="px-2.5 py-1 bg-[#ced1bf]/5 hover:bg-[#ced1bf]/10 text-2xs text-[#ced1bf]/85 hover:text-white rounded border border-[#ced1bf]/10 transition-colors"
                 >
                   #{tag}
                 </span>

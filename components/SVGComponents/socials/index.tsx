@@ -1,34 +1,16 @@
-import FaceBookLogo from "./FaceBookLogo";
-import InstagramLogo from "./InstagramLogo";
-import TiktokLogo from "./TiktokLogo";
 import WhatsappLogo from "./WhatsappLogo";
-import YoutubeLogo from "./YoutubeLogo";
 
+// Only channels the academy actually owns belong here. The Instagram / Facebook /
+// TikTok / YouTube entries that shipped with the template pointed at elementis.co's
+// own accounts (and an Indonesian +62 WhatsApp line), so they were removed rather
+// than left routing visitors to another brand. Re-add an entry only once a real
+// Yaşama Sanatı account URL is confirmed.
 const SocialLogos = [
   {
-    logo: <InstagramLogo />,
-    href: "https://www.instagram.com/elementis.co/",
-    key: "instagram",
-  },
-  {
-    logo: <FaceBookLogo />,
-    href: "https://www.facebook.com/share/Qfswyjm8Uz44otYs/?mibextid=LQQJ4d",
-    key: "facebook",
-  },
-  {
-    logo: <TiktokLogo />,
-    href: "https://www.tiktok.com/@elementis.co",
-    key: "tiktok",
-  },
-  {
     logo: <WhatsappLogo />,
-    href: "https://wa.me/6282340781817",
+    href: "https://wa.me/905327893753",
     key: "whatsapp",
-  },
-  {
-    logo: <YoutubeLogo />,
-    href: "https://www.youtube.com/@elementis-co",
-    key: "youtube",
+    label: "WhatsApp'tan yazın",
   },
 ];
 

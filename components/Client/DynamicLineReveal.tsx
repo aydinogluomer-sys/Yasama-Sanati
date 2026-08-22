@@ -46,7 +46,7 @@ export default function DynamicLineReveal({
   text,
   highlight,
   className,
-  accentClassName = "text-[#C9875B]",
+  accentClassName = "text-[var(--accent-copper-on-dark)]",
   as = "p",
   delay = 0,
   maxStagger = 0.9,

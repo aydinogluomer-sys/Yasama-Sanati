@@ -31,14 +31,14 @@ export default function SubPageLayout({
             {title}
           </h1>
           {description && (
-            <p className="mt-8 text-lg md:text-30 font-light text-[#ced1bf]/80 max-w-3xl [line-height:1.2] animate-hero-desc">
+            <p className="mt-8 text-lg md:text-30 font-light text-[#ced1bf]/90 max-w-3xl [line-height:1.2] animate-hero-desc">
               {description}
             </p>
           )}
           
           {/* Subtle scroll down indicator for the green hero */}
-          <div className="absolute bottom-12 left-6 md:left-16 flex items-center gap-3 text-[#ced1bf]/40 animate-pulse">
-            <span className="text-[10px] tracking-widest uppercase font-mono">Keşfetmek İçin Kaydırın</span>
+          <div className="absolute bottom-12 left-6 md:left-16 flex items-center gap-3 text-[#ced1bf]/85 animate-pulse">
+            <span className="text-4xs tracking-widest uppercase font-mono">Keşfetmek İçin Kaydırın</span>
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               fill="none" 
@@ -57,7 +57,7 @@ export default function SubPageLayout({
             {title}
           </h1>
           {description && (
-            <p className="mt-8 text-lg md:text-30 font-light text-[#ced1bf]/80 max-w-3xl [line-height:1.2] animate-hero-desc">
+            <p className="mt-8 text-lg md:text-30 font-light text-[#ced1bf]/90 max-w-3xl [line-height:1.2] animate-hero-desc">
               {description}
             </p>
           )}
@@ -66,11 +66,12 @@ export default function SubPageLayout({
 
       {/* Main content */}
       {noPadding ? (
-        <main className="w-full overflow-hidden">
+        <main id="main-content" className="w-full overflow-hidden">
           {children}
         </main>
       ) : (
         <main
+          id="main-content"
           className={
             hideHero
               ? "px-6 pt-32 pb-16 md:px-16 md:pt-44 md:pb-28"

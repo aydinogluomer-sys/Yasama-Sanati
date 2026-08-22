@@ -14,9 +14,11 @@ interface SectionSeamProps {
   className?: string;
   /** wash tint that sweeps through the seam (default warm copper). */
   wash?: string;
-  /** incoming section's chapter index (only when that section itself shows one, e.g. "02"). */
-  index?: string;
-  /** incoming section's kicker label — presence upgrades the seam to a full Breathing Thread stage. */
+  /**
+   * Incoming section's name. Not rendered: the section announces itself once, through its own
+   * EditorialSectionTitle (which is the semantic heading; this seam is aria-hidden). Presence here
+   * upgrades the seam to a full Breathing Thread stage.
+   */
   label?: string;
 }
 
@@ -64,7 +66,6 @@ export default function SectionSeam({
   to,
   className,
   wash = "rgba(201,135,91,0.14)",
-  index,
   label,
 }: SectionSeamProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -76,8 +77,6 @@ export default function SectionSeam({
   const y = useTransform(scrollYProgress, [0, 1], ["-70%", "170%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
   const thread = useTransform(scrollYProgress, [0.08, 0.72], [0, 1]);
-  const kickerOpacity = useTransform(scrollYProgress, [0.3, 0.55], [0, 1]);
-  const kickerY = useTransform(scrollYProgress, [0.3, 0.55], [26, 0]);
 
   // The thread SVG, breath node and wash are the expensive half of a seam. Mounting seven of them
   // at hydration cost ~700ms of main-thread time, so they are gated on proximity: a seam only
@@ -85,8 +84,6 @@ export default function SectionSeam({
   const near = useInView(ref, { margin: "60% 0px 60% 0px" });
 
   const stage = Boolean(label);
-  // Kicker sits on whichever half of the blend it will be read against; pick tone by destination.
-  const dark = luminance(to) < 128;
 
   return (
     <div
@@ -139,29 +136,6 @@ export default function SectionSeam({
             </span>
           </div>
 
-          {/* Kicker hand-off: the incoming chapter announces itself inside the seam. */}
-          <motion.div
-            style={reduce ? undefined : { opacity: kickerOpacity, y: kickerY }}
-            className={cn(
-              "absolute left-1/2 top-1/2 mt-14 flex -translate-x-1/2 select-none items-center gap-4 md:mt-16",
-              dark ? "text-[#D1CCBF]" : "text-[#2B3530]",
-            )}
-          >
-            {index && (
-              <span
-                className={cn(
-                  "font-mono text-[0.95rem] leading-none tracking-[0.06em] tabular-nums",
-                  dark ? "text-[#C9875B]" : "text-[#A85F33]",
-                )}
-              >
-                {index}
-              </span>
-            )}
-            <span aria-hidden className="h-px w-10 shrink-0 bg-current opacity-40 md:w-14" />
-            <span className="whitespace-nowrap text-kicker font-medium uppercase tracking-[0.32em]">
-              {label}
-            </span>
-          </motion.div>
         </>
       )}
     </div>

@@ -10,8 +10,12 @@ import ResponsiveSideBar from "./ResponsiveSideBar";
 import CloseIcon from "../SVGComponents/CloseIcon";
 import cn from "@/utils/cn";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { consultationHref } from "@/utils/consultation-context";
 
 export default function NavBar() {
+  const pathname = usePathname();
+  const consultationUrl = consultationHref({ from: pathname });
   const isMobile = useIsMobile();
   const [openSideBar, setOpenSideBar] = useState(false);
   const [state, setState] = useState(false);
@@ -26,6 +30,26 @@ export default function NavBar() {
     };
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [openSideBar]);
+  useEffect(() => {
+    if (!openSideBar) return;
+
+    const backgroundElements = [
+      document.getElementById("main-content"),
+      document.getElementById("site-footer"),
+    ].filter((element): element is HTMLElement => element instanceof HTMLElement);
+    const bodyOverflow = document.body.style.overflow;
+    const inertState = backgroundElements.map((element) => element.hasAttribute("inert"));
+
+    document.body.style.overflow = "hidden";
+    backgroundElements.forEach((element) => element.setAttribute("inert", ""));
+
+    return () => {
+      document.body.style.overflow = bodyOverflow;
+      backgroundElements.forEach((element, index) => {
+        if (!inertState[index]) element.removeAttribute("inert");
+      });
+    };
   }, [openSideBar]);
   useEffect(() => {
     if (wasOpenRef.current && !openSideBar) menuButtonRef.current?.focus();
@@ -88,7 +112,9 @@ export default function NavBar() {
           />
         </Link>
         <div className="flex items-center gap-8">
-          <Link href="/#on-kayit">
+          {/* Buton yalnız lg+ görünür; bağlantıyı da aynı kırılımda tutuyoruz, yoksa mobilde
+              içeriği gizli boş bir <a> kalıyor ve erişilebilirlik ağacında adsız link oluyor. */}
+          <Link href={consultationUrl} className="hidden lg:block">
             <BorderedButton
               className={cn(
                 "relative hidden w-fit cursor-pointer items-center gap-4 px-5 py-4.5 text-base [line-height:0.8] font-normal lg:flex",
@@ -122,7 +148,7 @@ export default function NavBar() {
               }
               setOpenSideBar(!isOpen);
             }}
-            className="cursor-pointer p-2"
+            className="grid min-h-11 min-w-11 cursor-pointer place-items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
             disabled={isMobile == null}
             type="button"
             aria-label={openSideBar ? "Menüyü kapat" : "Menüyü aç"}

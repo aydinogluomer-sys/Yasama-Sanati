@@ -58,14 +58,14 @@ export default function RotatedTypeMass({
             >
               {w}
             </span>
-            <span className="mx-[0.18em] text-[0.3em] text-[#C9875B]">✦</span>
+            <span className="mx-[0.18em] text-[0.3em] text-[var(--accent-copper-on-dark)]">✦</span>
           </span>
         ))}
       </motion.div>
 
       {rotatedWord && (
         <span
-          className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 select-none font-mono text-[0.78rem] uppercase tracking-[0.22em] text-[#C9875B] [writing-mode:vertical-rl] md:block"
+          className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 select-none font-mono text-[0.78rem] uppercase tracking-[0.22em] text-[var(--accent-copper-on-dark)] [writing-mode:vertical-rl] md:block"
         >
           {rotatedWord}
         </span>

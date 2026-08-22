@@ -22,7 +22,14 @@ export default function StayConnected({
       <div>Takipte Kalın</div>
       <div className="flex items-center">
         {SocialLogos.map((eachSocial) => (
-          <Link href={eachSocial.href} key={eachSocial.key}>
+          <Link
+            href={eachSocial.href}
+            key={eachSocial.key}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={eachSocial.label}
+            className="grid min-h-11 min-w-11 place-items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+          >
             <motion.div
               className="cursor-pointer [&>svg]:size-4 md:[&>svg]:size-7"
               initial={{ opacity: 1 }}

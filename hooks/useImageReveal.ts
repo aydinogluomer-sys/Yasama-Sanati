@@ -1,5 +1,6 @@
 import { useAnimate } from "motion/react";
 import { useCallback, useRef } from "react";
+import { easing } from "@/utils/motion/tokens";
 
 export function useImageReveal() {
   const [imgContainerRef, animate] = useAnimate();
@@ -21,11 +22,11 @@ export function useImageReveal() {
           {
             scale: {
               duration: 0.6,
-              ease: [0.24, 0.43, 0.15, 0.97],
+              ease: easing.editorial,
             },
             clipPath: {
               duration: 0.45,
-              ease: [0.24, 0.43, 0.15, 0.97],
+              ease: easing.editorial,
             },
           },
         );
@@ -33,7 +34,7 @@ export function useImageReveal() {
         zIndex.current = zIndex.current + 1;
       }
     },
-    [],
+    [animate],
   );
   return { imgContainerRef, handleFocus };
 }

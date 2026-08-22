@@ -4,6 +4,8 @@ import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import FAQList from "@/components/Client/FAQList";
 import TypographyLabel from "@/components/Server/TypographyLabel";
+import type { ConsultationProgramSlug } from "@/data/consultation-programs";
+import { consultationHref } from "@/utils/consultation-context";
 
 const prependZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 /** Strip a leading "Modül N:" / "Bölüm N:" so the Space Mono index carries the number. */
@@ -37,12 +39,11 @@ export interface FAQItem {
 }
 
 export interface CourseDetailProps {
+  programSlug: ConsultationProgramSlug;
   duration: string;
   format: string;
   prerequisites: string;
   certification: string;
-  price: string;
-  startDate: string;
   introTitle: string;
   introText: string;
   curriculum: AccordionItem[];
@@ -56,12 +57,11 @@ export interface CourseDetailProps {
 }
 
 export default function CourseDetailTemplate({
+  programSlug,
   duration,
   format,
   prerequisites,
   certification,
-  price,
-  startDate,
   introTitle,
   introText,
   curriculum,
@@ -69,6 +69,11 @@ export default function CourseDetailTemplate({
   testimonials,
   faqs,
 }: CourseDetailProps) {
+  const consultationUrl = consultationHref({
+    program: programSlug,
+    from: `/programlar/${programSlug}`,
+  });
+
   return (
     <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.8fr_1fr] lg:gap-16 items-start">
       {/* Sol Sütun: İçerik */}
@@ -101,7 +106,7 @@ export default function CourseDetailTemplate({
                     <h4 className="text-lg font-normal text-white md:text-xl">
                       {stripModulePrefix(m.title)}
                     </h4>
-                    <p className="text-sm font-light leading-relaxed text-[#ced1bf]/70 md:text-base">
+                    <p className="text-sm font-light leading-relaxed text-[#ced1bf]/85 md:text-base">
                       {m.content}
                     </p>
                   </div>
@@ -121,7 +126,7 @@ export default function CourseDetailTemplate({
             <p className="text-xs md:text-sm text-[#E09A6C] uppercase tracking-wider font-medium">
               {instructor.role}
             </p>
-            <p className="max-w-[42rem] text-sm md:text-base font-light leading-relaxed text-[#ced1bf]/70">
+            <p className="max-w-[42rem] text-sm md:text-base font-light leading-relaxed text-[#ced1bf]/82">
               {instructor.bio}
             </p>
           </div>
@@ -140,7 +145,7 @@ export default function CourseDetailTemplate({
                   <p className="text-base md:text-lg font-light italic text-[#ced1bf]/80">
                     &ldquo;{t.quote}&rdquo;
                   </p>
-                  <cite className="block text-xs md:text-sm text-[#ced1bf]/60 not-italic font-normal">
+                  <cite className="block text-xs md:text-sm text-[#ced1bf]/85 not-italic font-normal">
                     — {t.author}
                   </cite>
                 </blockquote>
@@ -159,9 +164,9 @@ export default function CourseDetailTemplate({
 
         {/* Sayfa Sonu CTA */}
         <section className="pt-8 text-center lg:text-left">
-          <Link href="/#on-kayit">
+          <Link href={consultationUrl}>
             <BorderedButton className="inline-flex cursor-pointer items-center gap-4 px-8 py-5 text-base text-white [&_path]:[stroke:white] [&_svg]:[stroke:white]">
-              Hemen Ön Kayıt Ol
+              Ücretsiz Ön Görüşme
               <NavigateSVG fill="#FFFFFF" className="size-2.5 mr-2.5" />
             </BorderedButton>
           </Link>
@@ -171,15 +176,18 @@ export default function CourseDetailTemplate({
       {/* Sağ Sütun: Program Kartı */}
       <aside className="sticky top-32 p-6 md:p-8 bg-[#30493D] rounded border border-[#ced1bf]/10 space-y-8 text-[#ced1bf]">
         <div className="space-y-2 border-b border-[#ced1bf]/15 pb-6">
-          <span className="text-xs text-[#ced1bf]/60 uppercase tracking-widest">Yatırım Bedeli</span>
-          <div className="text-28 md:text-40 font-light text-white">{price}</div>
+          <span className="text-xs text-[#ced1bf]/85 uppercase tracking-widest">Yatırım Bedeli</span>
+          <div className="text-28 md:text-40 font-light text-white">Ön Görüşmede</div>
+          <p className="text-sm font-light leading-relaxed text-[#ced1bf]/85">
+            Güncel eğitim ücreti, başlangıç tarihi ve ödeme seçenekleri ücretsiz ön görüşmede paylaşılır.
+          </p>
         </div>
 
         <div className="space-y-6">
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
             <div className="size-2 bg-[#ca7d57] rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/60 font-light">Eğitim Süresi</div>
+              <div className="text-xs text-[#ced1bf]/85 font-light">Eğitim Süresi</div>
               <div className="text-base text-white font-light">{duration}</div>
             </div>
           </div>
@@ -187,7 +195,7 @@ export default function CourseDetailTemplate({
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
             <div className="size-2 bg-[#ca7d57] rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/60 font-light">Eğitim Formatı</div>
+              <div className="text-xs text-[#ced1bf]/85 font-light">Eğitim Formatı</div>
               <div className="text-base text-white font-light">{format}</div>
             </div>
           </div>
@@ -195,7 +203,7 @@ export default function CourseDetailTemplate({
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
             <div className="size-2 bg-[#ca7d57] rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/60 font-light">Gerekli Ön Koşul</div>
+              <div className="text-xs text-[#ced1bf]/85 font-light">Gerekli Ön Koşul</div>
               <div className="text-base text-white font-light">{prerequisites}</div>
             </div>
           </div>
@@ -203,25 +211,18 @@ export default function CourseDetailTemplate({
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
             <div className="size-2 bg-[#ca7d57] rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/60 font-light">Sertifikasyon</div>
+              <div className="text-xs text-[#ced1bf]/85 font-light">Sertifikasyon</div>
               <div className="text-base text-white font-light">{certification}</div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
-            <div className="size-2 bg-[#ca7d57] rounded-full" />
-            <div>
-              <div className="text-xs text-[#ced1bf]/60 font-light">Başlangıç Tarihi</div>
-              <div className="text-base text-white font-light">{startDate}</div>
             </div>
           </div>
         </div>
 
         <div className="pt-4">
-          <Link href="/#on-kayit" className="block w-full">
-            <button className="w-full bg-[#CED1BF] hover:bg-[#D1CCBF] text-[#2B3530] font-medium py-4 rounded text-center transition-all duration-300 cursor-pointer">
-              Ön Kayıt Başvurusu
-            </button>
+          <Link
+            href={consultationUrl}
+            className="block min-h-12 w-full rounded bg-[#CED1BF] py-4 text-center font-medium text-[#2B3530] transition-colors duration-300 hover:bg-[#D1CCBF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530]"
+          >
+            Görüşme Talebi
           </Link>
         </div>
       </aside>

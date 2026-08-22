@@ -2,6 +2,7 @@
 import React, { CSSProperties, ReactNode, useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 import cn from "@/utils/cn";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 
 export default function ParallaxContainer({
   style,
@@ -15,29 +16,20 @@ export default function ParallaxContainer({
   parallaxAmount: number;
 }) {
   const imageContainer = useRef<HTMLDivElement>(null);
+  const reduceMotion = useMountedReducedMotion();
   const { scrollYProgress } = useScroll({
     target: imageContainer,
     offset: ["start end", "end start"],
   });
-  const scrollY = useTransform(
-    scrollYProgress,
-    (latest) =>
-      latest *
-      ((globalThis.window?.innerHeight as number) +
-        (imageContainer.current?.getBoundingClientRect().height as number)),
-  );
-  const transform = useTransform(scrollY, (latest) => {
-    const containerHeight = imageContainer.current?.getBoundingClientRect()
-      .height as number;
-    return containerHeight >= (globalThis.window?.innerHeight as number)
-      ? `translateY(${scrollYProgress.get() * parallaxAmount * 2 - parallaxAmount}%) scale(1)`
-      : `translateY(${(parallaxAmount / ((globalThis.window?.innerHeight as number) - containerHeight)) * (latest - containerHeight)}%) scale(${1 + 0.01 * parallaxAmount})`;
+  const transform = useTransform(scrollYProgress, (latest) => {
+    const offset = latest * parallaxAmount * 2 - parallaxAmount;
+    return `translateY(${offset}%) scale(${1 + 0.01 * parallaxAmount})`;
   });
   return (
     <motion.div className="overflow-hidden" ref={imageContainer}>
       <motion.div
         style={{
-          transform,
+          transform: reduceMotion ? "none" : transform,
           ...style,
         }}
         className={cn(className, "origin-bottom")}

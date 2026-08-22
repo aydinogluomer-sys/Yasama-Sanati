@@ -5,7 +5,7 @@ import {
   useTransform,
   useVelocity,
 } from "motion/react";
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 
 export function useCursor() {
   const [renderCursor, setRenderCursor] = useState(false);
@@ -16,13 +16,13 @@ export function useCursor() {
   const velocity = useVelocity(displacement);
   const scale = useTransform(velocity, [-5000, 0, 5000], [0.8, 1, 0.8]);
 
-  const onMouseEnter = (e: any) => {
+  const onMouseEnter = (e: MouseEvent<HTMLElement>) => {
     left.jump(e.clientX);
     top.jump(e.clientY);
     setRenderCursor(true);
   };
   const onMouseLeave = () => setRenderCursor(false);
-  const onMouseMove = (e: any) => {
+  const onMouseMove = (e: MouseEvent<HTMLElement>) => {
     if (!renderCursor) {
       onMouseEnter(e);
     }
@@ -35,9 +35,9 @@ export function useCursor() {
   };
 
   const handlers: {
-    onMouseEnter: (e: any) => void;
+    onMouseEnter: (e: MouseEvent<HTMLElement>) => void;
     onMouseLeave: () => void;
-    onMouseMove: (e: any) => void;
+    onMouseMove: (e: MouseEvent<HTMLElement>) => void;
   } = { onMouseEnter, onMouseLeave, onMouseMove };
   const cursorProps: {
     renderCursor: boolean;

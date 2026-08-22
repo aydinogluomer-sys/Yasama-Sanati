@@ -47,9 +47,17 @@ function Innovation() {
   const imgs = [Image1, Image2, Image3, Image4, Image5];
   return (
     <div
-      className="relative h-[500vh] cursor-pointer overflow-clip bg-[#2b3530]"
+      className="relative h-[360vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"
       ref={ref}
     >
+      {/* Pinned bir bölümü 3,6 ekran boyunca kaydırmak zorunda kalmak bir çıkmazdır.
+          Klavye ve fare için görünür bir çıkış: bölümü atlayıp bir sonrakine geç. */}
+      <a
+        href="#alti-disiplin"
+        className="absolute top-4 right-4 z-30 rounded-full border border-[#D1CCBF]/30 bg-[#2b3530]/70 px-4 py-2 text-3xs uppercase tracking-[0.16em] text-[#D1CCBF]/80 opacity-0 backdrop-blur-sm transition-opacity focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] hover:opacity-100 motion-reduce:hidden"
+      >
+        Bölümü geç
+      </a>
       <motion.div
         {...handlers}
         onClick={() => {
@@ -57,7 +65,7 @@ function Innovation() {
             router.push("/programlar");
           }
         }}
-        className="sticky -top-[5vh] h-[110vh] md:-top-[15vh] md:h-[130vh]"
+        className="sticky -top-[5vh] h-[110vh] motion-reduce:relative motion-reduce:top-auto motion-reduce:h-auto motion-reduce:min-h-[100svh] md:-top-[15vh] md:h-[130vh]"
       >
         <ClipImageCard
           scrollYProgress={parentProgress}
@@ -82,7 +90,7 @@ function Innovation() {
       {!isMobile && (
         <CustomCursor
           {...cursorProps}
-          className="font-mono text-[10px] tracking-[0.16em] uppercase flex -translate-x-1/2 translate-y-1/4 items-center justify-center gap-2 rounded-full px-5 py-2 text-white"
+          className="font-mono text-4xs tracking-[0.16em] uppercase flex -translate-x-1/2 translate-y-1/4 items-center justify-center gap-2 rounded-full px-5 py-2 text-white"
         >
           Daha Fazlasını Keşfet
           <NavigateSVG style={{ fill: "white" }} className="size-2.5" />
@@ -128,7 +136,9 @@ Innovation.Container = function Container({
     >
       <Image
         src={children}
-        alt={`image-${index + 1}`}
+        alt=""
+        aria-hidden="true"
+        sizes="100vw"
         className="h-full w-full origin-bottom object-cover"
       />
     </motion.div>

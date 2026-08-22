@@ -99,7 +99,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
               <p className="text-sm md:text-base font-light text-[#ced1bf]/80 leading-relaxed max-w-3xl">
                 {featuredPost.excerpt}
               </p>
-              <div className="flex items-center text-xs text-[#ced1bf]/50 space-x-4">
+              <div className="flex items-center text-xs text-[#ced1bf]/85 space-x-4">
                 <span>{featuredPost.date}</span>
                 <span>•</span>
                 <span>{featuredPost.readTime} Okuma Süresi</span>
@@ -129,6 +129,9 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
       </div>
 
       {/* Grid List */}
+      <p role="status" aria-live="polite" className="sr-only">
+        {filteredPosts.length} makale gösteriliyor.
+      </p>
       <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <AnimatePresence mode="popLayout">
           {filteredPosts.map((post) => (
@@ -154,7 +157,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
           className="text-center py-16 space-y-4"
         >
           <svg
-            className="mx-auto h-12 w-12 text-[#ced1bf]/20"
+            className="mx-auto h-12 w-12 text-[#ced1bf]/85"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -167,15 +170,16 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
             />
           </svg>
           <h3 className="text-lg text-white font-light">Aramanızla eşleşen makale bulunamadı</h3>
-          <p className="text-xs text-[#ced1bf]/50">
+          <p className="text-xs text-[#ced1bf]/85">
             Lütfen farklı kelimelerle arama yapmayı veya filtreyi sıfırlamayı deneyin.
           </p>
           <button
+            type="button"
             onClick={() => {
               setActiveCategory("TÜMÜ");
               setSearchQuery("");
             }}
-            className="text-xs text-[#E09A6C] underline hover:text-[#E09A6C]/80"
+            className="min-h-11 rounded px-3 text-xs text-[#E09A6C] underline underline-offset-4 hover:text-[#E09A6C]/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
           >
             Filtreleri Sıfırla
           </button>

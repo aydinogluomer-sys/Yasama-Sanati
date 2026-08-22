@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
+
+export const metadata: Metadata = {
+  title: "Politikalar ve Şartlar | Yaşama Sanatı",
+  description:
+    "Yaşama Sanatı web sitesi kullanım koşulları, gizlilik politikası ve mesafeli satış şartları.",
+  alternates: { canonical: "/privacy-terms" },
+  openGraph: {
+    title: "Politikalar ve Şartlar | Yaşama Sanatı",
+    description:
+      "Yaşama Sanatı web sitesi kullanım koşulları, gizlilik politikası ve mesafeli satış şartları.",
+    url: "/privacy-terms",
+  },
+};
 
 export default function PrivacyTermsPage() {
   return (
@@ -18,7 +32,7 @@ export default function PrivacyTermsPage() {
 
         {/* Section 1 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">1. Yorumlama ve Tanımlar</h2>
+          <h2 className="text-24 font-light text-white">1. Yorumlama ve Tanımlar</h2>
           <div className="space-y-3">
             <h3 className="text-lg font-medium text-white">Yorumlama</h3>
             <p>
@@ -27,9 +41,12 @@ export default function PrivacyTermsPage() {
             <h3 className="text-lg font-medium text-white">Tanımlar</h3>
             <ul className="list-disc pl-6 space-y-2 text-sm">
               <li><strong>Hesap:</strong> Hizmetimize veya Hizmetimizin bölümlerine erişmeniz için sizin adınıza oluşturulan benzersiz bir hesaptır.</li>
-              <li><strong>Şirket:</strong> ELEMENTIS Development Group (bu Sözleşmede "Şirket", "Biz", "Bize" veya "Bizim" olarak anılacaktır).</li>
-              <li><strong>Hizmet:</strong> Web sitesini ifade eder (elementis.co).</li>
-              <li><strong>Ülke:</strong> Endonezya'yı ifade eder.</li>
+              {/* TODO (hukuk): tescilli ticaret unvanı, merkez adresi, vergi dairesi ve numarası
+                  buraya eklenmeli. Aşağıdaki ticari ad doğrulanmış (PRODUCT.md), tescil
+                  bilgileri değil — uydurulmadı, eksik bırakıldı. */}
+              <li><strong>Şirket:</strong> Yaşama Sanatı (bu Sözleşmede "Şirket", "Biz", "Bize" veya "Bizim" olarak anılacaktır).</li>
+              <li><strong>Hizmet:</strong> Web sitesini ifade eder (yasamasanati.com).</li>
+              <li><strong>Ülke:</strong> Türkiye'yi ifade eder.</li>
               <li><strong>Kişisel Veri:</strong> Kimliği belirlenmiş veya belirlenebilir bir gerçek kişiye ilişkin her türlü bilgidir.</li>
             </ul>
           </div>
@@ -39,7 +56,7 @@ export default function PrivacyTermsPage() {
 
         {/* Section 2 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">2. Kişisel Verilerinizin Toplanması ve Kullanılması</h2>
+          <h2 className="text-24 font-light text-white">2. Kişisel Verilerinizin Toplanması ve Kullanılması</h2>
           <div className="space-y-3">
             <p>
               Hizmetimizi kullanırken, sizinle iletişim kurmak veya kimliğinizi belirlemek için kullanılabilecek belirli kişisel olarak tanımlanabilir bilgileri bize sağlamanızı isteyebiliriz. Bu bilgiler aşağıdakileri içerebilir, ancak bunlarla sınırlı değildir:
@@ -57,7 +74,7 @@ export default function PrivacyTermsPage() {
 
         {/* Section 3 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">3. Çerezler ve Takip Teknolojileri</h2>
+          <h2 className="text-24 font-light text-white">3. Çerezler ve Takip Teknolojileri</h2>
           <p>
             Hizmetimizdeki aktiviteyi izlemek ve belirli bilgileri depolamak için Çerezler ve benzeri takip teknolojilerini kullanıyoruz. Kullanılan takip teknolojileri, bilgileri toplamak/izlemek ve Hizmetimizi geliştirmek ve analiz etmek amacıyla kullanılan web işaretçileri (beacons), etiketler (tags) ve komut dosyalarıdır (scripts).
           </p>
@@ -74,7 +91,7 @@ export default function PrivacyTermsPage() {
 
         {/* Section 4 */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-light text-white">4. Verilerinizin Güvenliği ve İrtibat</h2>
+          <h2 className="text-24 font-light text-white">4. Verilerinizin Güvenliği ve İrtibat</h2>
           <p>
             Kişisel Verilerinizin güvenliği bizim için önemlidir, ancak İnternet üzerinden hiçbir iletim yönteminin veya elektronik depolama yönteminin %100 güvenli olmadığını unutmayın. Kişisel Verilerinizi korumak için ticari olarak kabul edilebilir araçları kullanmaya çalışsak da, mutlak güvenliğini garanti edemeyiz.
           </p>
@@ -82,8 +99,8 @@ export default function PrivacyTermsPage() {
             <h3 className="text-lg font-medium text-white">Bizimle İletişime Geçin</h3>
             <p className="text-sm">Bu Gizlilik Politikası hakkında herhangi bir sorunuz varsa, bizimle iletişime geçebilirsiniz:</p>
             <ul className="list-none space-y-1 text-sm pt-2">
-              <li><strong>E-posta:</strong> info@elementis.co</li>
-              <li><strong>Telefon:</strong> +62 823 4078 1817</li>
+              <li><strong>E-posta:</strong> info@yasamasanati.com</li>
+              <li><strong>Telefon:</strong> +90 532 789 37 53</li>
             </ul>
           </div>
         </section>

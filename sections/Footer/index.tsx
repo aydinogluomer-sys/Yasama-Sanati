@@ -1,4 +1,4 @@
 import Footer from "./Server";
-export default function () {
+export default function FooterSection() {
   return <Footer />;
 }

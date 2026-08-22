@@ -38,7 +38,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
           {/* Text Content */}
           <div className="space-y-3">
-            <div className="flex items-center text-2xs text-[#ced1bf]/60 space-x-2">
+            <div className="flex items-center text-2xs text-[#ced1bf]/85 space-x-2">
               <span>{post.date}</span>
               <span>•</span>
               <span>{post.readTime} Okuma</span>
@@ -48,7 +48,7 @@ export default function BlogCard({ post }: BlogCardProps) {
               {post.title}
             </h3>
             
-            <p className="text-xs md:text-sm font-light text-[#ced1bf]/70 leading-relaxed line-clamp-3">
+            <p className="text-xs md:text-sm font-light text-[#ced1bf]/85 leading-relaxed line-clamp-3">
               {post.excerpt}
             </p>
           </div>
@@ -59,12 +59,13 @@ export default function BlogCard({ post }: BlogCardProps) {
           <div className="flex items-center space-x-2">
             <Image
               src={post.author.avatar}
+              sizes="24px"
               alt={post.author.name}
               width={24}
               height={24}
               className="size-6 rounded-full object-cover border border-[#ced1bf]/20"
             />
-            <span className="text-[#ced1bf]/60 font-light">{post.author.name}</span>
+            <span className="text-[#ced1bf]/85 font-light">{post.author.name}</span>
           </div>
           <span className="text-[#E09A6C] font-medium flex items-center group-hover:translate-x-1 transition-transform duration-300">
             Devamını Oku 

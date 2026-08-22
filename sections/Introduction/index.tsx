@@ -1,4 +1,4 @@
 import IntroductionServer from "./Server";
-export default function () {
+export default function Introduction() {
   return <IntroductionServer />;
 }

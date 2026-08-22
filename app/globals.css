@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  overflow-x: clip;
+}
+
 html.lenis,
 html.lenis body {
   height: auto;
@@ -63,6 +67,10 @@ body::after {
 [data-d1-grain="off"] body::after {
   display: none;
 }
+/* The focused consultation workspace intentionally uses untextured, paper-flat surfaces. */
+body:has([data-consultation-route])::after {
+  display: none;
+}
 /* D1 is static under reduced motion (no animation exists by design). */
 @media (prefers-reduced-motion: reduce) {
   body::after {
@@ -72,7 +80,7 @@ body::after {
 
 @layer base {
   :root {
-    --multiplier: calc(100vw / 375);
+    --multiplier: clamp(0.9px, calc(100vw / 375), 1px);
     --basesvh: 812;
     --surface-deep: #2b3530;
     --surface-warm: #30493d;
@@ -84,8 +92,22 @@ body::after {
     --text-inverse: #2b3530;
     --accent-copper: #c9875b;
     --accent-copper-hover: #d79a70;
+    /* Metin için erişilebilir bakır varyantları. Marka bakırı (#C9875B) küçük punto metinde
+       koyu zeminde 4,29:1 veriyor (gereken 4,5) ve sıcak yeşilde 3,3:1'e düşüyor. Bu iki değer
+       ölçülerek seçildi: dark üzerinde 6,07:1 / 4,68:1, açık sage üzerinde 5,13:1.
+       Dolgu, çizgi ve ikon için marka bakırı kullanılmaya devam eder — kısıt yalnız metinde. */
+    --accent-copper-on-dark: #E0A878;
+    --accent-copper-on-light: #7A3F1C;
     --accent-sage: #ced1bf;
     --focus-ring: #e1a37a;
+    --field-surface: #c4c7b3;
+    --field-border: #677260;
+    --status-success-surface: rgba(23, 61, 45, 0.1);
+    --status-success-border: rgba(23, 61, 45, 0.35);
+    --status-success-text: #173d2d;
+    --status-error-surface: rgba(101, 31, 31, 0.1);
+    --status-error-border: rgba(101, 31, 31, 0.35);
+    --status-error-text: #651f1f;
     --content-wide: 90rem;
     --content-editorial: 48rem;
     --section-space: clamp(6rem, 10vw, 12rem);
@@ -94,7 +116,7 @@ body::after {
   }
   @media only screen and (min-width: 768px) {
     :root {
-      --multiplier: calc(100vw / 1440);
+      --multiplier: clamp(1px, calc(100vw / 1440), 1.25px);
     }
   }
 }
@@ -105,7 +127,15 @@ body::after {
   /* Signature/accent voice (Phase 2). Resolved to the premium Ogg display serif font. */
   --font-kisthe: var(--font-serif);
   /* text utilities */
+  /* Closed scale: Tailwind's rem defaults are cleared so every text-* class
+     resolves to the viewport-fluid --multiplier scale below. */
   --text-*: initial;
+  /* Mikro-etiket adımları. 9px ve 10px sabit değerler olarak 58 yerde kullanılıyordu —
+     bu bir sapma değil, fiilen kullanılan iki ölçek adımıydı; ölçeğin dışında kaldıkları için
+     tek başlarına viewport'la ölçeklenmiyorlardı. Tokena çevrilerek rampanın parçası oldular. */
+  --text-5xs: calc(9 * var(--multiplier));
+  --text-4xs: calc(10 * var(--multiplier));
+  --text-3xs: calc(11 * var(--multiplier));
   --text-2xs: calc(12 * var(--multiplier));
   --text-xs: calc(13 * var(--multiplier));
   --text-sm: calc(14 * var(--multiplier));
@@ -117,7 +147,9 @@ body::after {
   --text-26: calc(26 * var(--multiplier));
   --text-28: calc(28 * var(--multiplier));
   --text-30: calc(30 * var(--multiplier));
+  --text-36: calc(36 * var(--multiplier));
   --text-40: calc(40 * var(--multiplier));
+  --text-52: calc(52 * var(--multiplier));
   --text-144: calc(144 * var(--multiplier));
 
   /* Editorial display scale (Round 2) — viewport-fluid clamp, serif voice.

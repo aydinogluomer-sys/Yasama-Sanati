@@ -16,7 +16,10 @@ interface WordProps {
 }
 
 function Word({ children, progress, range, shouldReduceMotion }: WordProps) {
-  const opacity = useTransform(progress, range, [0.25, 1]);
+  // 0.45 is the contrast floor, not a taste call: at 0.25 the un-revealed words measured
+  // 1.86:1 against #2B3530 — below the 3:1 large-text minimum — and a reader who stops
+  // mid-paragraph sits in that state. 0.45 measures 3.56:1 and keeps the reveal legible.
+  const opacity = useTransform(progress, range, [0.45, 1]);
   return (
     <motion.span style={{ opacity: shouldReduceMotion ? 1 : opacity }} className="inline-block">
       {children}
@@ -34,11 +37,13 @@ export default function ScrollRevealText({ text, className }: ScrollRevealTextPr
   useEffect(() => setMounted(true), []);
   const shouldReduceMotion = mounted && prefersReducedMotion === true;
 
-  // As the container scrolls from 85% of the viewport (near bottom)
-  // to 60% of the viewport, we reveal the words from left to right.
+  // As the container scrolls from 90% of the viewport (near bottom)
+  // to 35% of the viewport, we reveal the words from left to right.
+  // Widened from the original 85%->60% (25% of viewport) to 90%->35% (55% of
+  // viewport) so the reveal reads at a comfortable pace instead of flashing by.
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 85%", "start 60%"],
+    offset: ["start 90%", "start 35%"],
   });
 
   const words = text.split(/\s+/).filter(Boolean);

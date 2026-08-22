@@ -38,9 +38,10 @@ export default function EditorialSectionTitle({
     <>
       {index && (
         <span
+          aria-hidden
           className={cn(
             "font-mono text-[0.95rem] leading-none tracking-[0.06em] tabular-nums md:text-[1.05rem]",
-            tone === "dark" ? "text-[#A85F33]" : "text-[#C9875B]",
+            tone === "dark" ? "text-[var(--accent-copper-on-light)]" : "text-[var(--accent-copper-on-dark)]",
           )}
         >
           {index}

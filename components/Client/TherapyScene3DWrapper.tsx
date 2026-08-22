@@ -9,7 +9,7 @@ const TherapyScene3D = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-[520px] md:h-[600px] bg-[#1a2420] rounded border border-[#ced1bf]/10 animate-pulse flex items-center justify-center text-sm text-[#ced1bf]/40">
+      <div className="h-[520px] md:h-[600px] bg-[#1a2420] rounded border border-[#ced1bf]/10 animate-pulse flex items-center justify-center text-sm text-[#ced1bf]/85">
         3D Terapi Sahnesi Yükleniyor...
       </div>
     ),
@@ -34,9 +34,9 @@ export default function TherapyScene3DWrapper() {
     return (
       <div className="rounded border border-[#ced1bf]/10 bg-[#1a2420] p-6 md:p-8 text-[#ced1bf]/80">
         <div className="space-y-3">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-[#ced1bf]/40">3D Terapi Sahnesi</p>
-          <h3 className="text-2xl md:text-3xl font-light text-white">Bedenin enerji haritası</h3>
-          <p className="max-w-2xl text-sm md:text-base leading-relaxed text-[#ced1bf]/70">
+          <p className="text-4xs uppercase tracking-[0.3em] text-[#ced1bf]/85">3D Terapi Sahnesi</p>
+          <h3 className="text-24 md:text-30 font-light text-white">Bedenin enerji haritası</h3>
+          <p className="max-w-2xl text-sm md:text-base leading-relaxed text-[#ced1bf]/85">
             Bu sabit özet, üç boyutlu sahne yerine temel kavramları ve bağlamı öne çıkarır; hareket
             tercihine ve mobil performansına saygı duyar.
           </p>

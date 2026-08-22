@@ -37,7 +37,7 @@ export default function Accordion({ items }: { items: AccordionItem[] }) {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
-                  <div className="py-3 text-sm md:text-base leading-relaxed text-[#ced1bf]/70 font-light whitespace-pre-line">
+                  <div className="py-3 text-sm md:text-base leading-relaxed text-[#ced1bf]/85 font-light whitespace-pre-line">
                     {item.content}
                   </div>
                 </motion.div>

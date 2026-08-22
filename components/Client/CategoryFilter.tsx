@@ -17,7 +17,11 @@ export default function CategoryFilter({
   categoryCounts,
 }: CategoryFilterProps) {
   return (
-    <div className="w-full overflow-x-auto no-scrollbar py-2 border-b border-[#ced1bf]/10">
+    <div
+      role="group"
+      aria-label="Makale kategorileri"
+      className="w-full overflow-x-auto no-scrollbar py-2 border-b border-[#ced1bf]/10"
+    >
       <div className="flex space-x-2 md:space-x-4 min-w-max pb-1 px-1">
         {categories.map((category) => {
           const isActive = activeCategory === category;
@@ -25,9 +29,11 @@ export default function CategoryFilter({
 
           return (
             <button
+              type="button"
               key={category}
               onClick={() => onSelectCategory(category)}
-              className="relative px-4 py-2 rounded text-2xs md:text-xs font-light uppercase tracking-wider transition-colors duration-300 focus:outline-none cursor-pointer text-white"
+              aria-pressed={isActive}
+              className="relative min-h-11 cursor-pointer rounded px-4 py-2 text-2xs font-light uppercase tracking-wider text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] md:text-xs"
             >
               {/* Background capsule animation */}
               {isActive && (
@@ -41,13 +47,13 @@ export default function CategoryFilter({
               {/* Text with dynamic color depending on active state */}
               <span
                 className={`relative z-10 font-medium transition-colors duration-300 ${
-                  isActive ? "text-[#2b3530]" : "text-[#ced1bf]/70 hover:text-white"
+                  isActive ? "text-[#2b3530]" : "text-[#ced1bf]/85 hover:text-white"
                 }`}
               >
                 {category}
                 <span
-                  className={`ml-1.5 text-[10px] ${
-                    isActive ? "text-[#2b3530]/60" : "text-[#ced1bf]/40"
+                  className={`ml-1.5 text-4xs ${
+                    isActive ? "text-[#2b3530]/85" : "text-[#ced1bf]/85"
                   }`}
                 >
                   ({count})

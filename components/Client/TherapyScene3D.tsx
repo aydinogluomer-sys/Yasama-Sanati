@@ -701,6 +701,7 @@ export default function TherapyScene3D() {
     };
 
     const handleWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey) return;
       e.preventDefault();
       const dir = new THREE.Vector3().subVectors(camera.position, sceneRef.current.targetLookAt).normalize();
       const dist = camera.position.distanceTo(sceneRef.current.targetLookAt);
@@ -851,7 +852,7 @@ export default function TherapyScene3D() {
         <h2 className="text-28 md:text-40 font-light text-white leading-tight">
           Terapiye Gelen Kişinin Enerji Haritası
         </h2>
-        <p className="text-sm md:text-base font-light text-[#ced1bf]/75 leading-relaxed">
+        <p className="text-sm md:text-base font-light text-[#ced1bf]/85 leading-relaxed">
           Figür üzerindeki parlayan enerji merkezlerine tıklayın. Her çakranın duygusal anlamı,
           terapi yaklaşımı ve bağlantılı meridyanları ortaya çıksın.
         </p>
@@ -876,14 +877,14 @@ export default function TherapyScene3D() {
                 />
                 <span className="text-white font-medium text-sm">{selectedZone.name}</span>
               </div>
-              <p className="text-[10px] text-[#ced1bf]/75 font-light italic">{selectedZone.sanskritName}</p>
+              <p className="text-4xs text-[#ced1bf]/85 font-light italic">{selectedZone.sanskritName}</p>
               <p className="text-xs text-[#ced1bf]/80 font-light leading-snug line-clamp-2">{selectedZone.emotion}</p>
             </div>
           </div>
 
           {/* Control hints */}
-          <div className="absolute bottom-4 left-4 bg-[#1a2420]/80 backdrop-blur-sm px-3 py-2 rounded border border-[#ced1bf]/10 text-[10px] text-[#ced1bf]/55 space-y-0.5 pointer-events-none">
-            <div>Sürükle — döndür &nbsp;·&nbsp; Scroll — yaklaştır</div>
+          <div className="absolute bottom-4 left-4 bg-[#1a2420]/80 backdrop-blur-sm px-3 py-2 rounded border border-[#ced1bf]/10 text-4xs text-[#ced1bf]/85 space-y-0.5 pointer-events-none">
+            <div>Sürükle — döndür &nbsp;·&nbsp; Ctrl / ⌘ + kaydır — yaklaştır</div>
             <div>Parlayan noktaya tıkla — detay aç</div>
           </div>
 
@@ -904,16 +905,24 @@ export default function TherapyScene3D() {
           <div className="absolute top-4 right-4 flex flex-col gap-1.5">
             {CHAKRA_ZONES.map((z) => (
               <button
+                type="button"
                 key={z.id}
                 title={z.name}
+                aria-label={`${z.name} enerji merkezini seç`}
+                aria-pressed={z.id === selectedZone.id}
                 onClick={() => setSelectedZone(z)}
-                className="size-3 rounded-full border transition-all duration-200 cursor-pointer"
-                style={{
-                  backgroundColor: z.id === selectedZone.id ? z.color : "transparent",
-                  borderColor: z.color,
-                  opacity: z.id === selectedZone.id ? 1 : 0.45,
-                }}
-              />
+                className="grid size-11 cursor-pointer place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+              >
+                <span
+                  aria-hidden="true"
+                  className="size-3 rounded-full border transition-all duration-200"
+                  style={{
+                    backgroundColor: z.id === selectedZone.id ? z.color : "transparent",
+                    borderColor: z.color,
+                    opacity: z.id === selectedZone.id ? 1 : 0.55,
+                  }}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -942,7 +951,7 @@ export default function TherapyScene3D() {
                 }
               >
                 <span className="font-medium block leading-tight">{z.name}</span>
-                <span className="text-[10px] opacity-60 italic">{z.sanskritName}</span>
+                <span className="text-4xs opacity-85 italic">{z.sanskritName}</span>
               </button>
             ))}
           </div>
@@ -964,12 +973,12 @@ export default function TherapyScene3D() {
                 />
                 <h3 className="text-lg font-medium text-white">{selectedZone.name}</h3>
               </div>
-              <p className="text-xs text-[#ced1bf]/45 italic pl-5">{selectedZone.sanskritName} — {selectedZone.bodyArea}</p>
+              <p className="text-xs text-[#ced1bf]/85 italic pl-5">{selectedZone.sanskritName} — {selectedZone.bodyArea}</p>
             </div>
 
             {/* Emotion */}
             <div className="space-y-1">
-              <span className="text-[10px] uppercase tracking-widest text-[#ced1bf]/40">Duygusal Tema</span>
+              <span className="text-4xs uppercase tracking-widest text-[#ced1bf]/85">Duygusal Tema</span>
               <p className="text-sm font-medium" style={{ color: selectedZone.color }}>
                 {selectedZone.emotion}
               </p>
@@ -977,26 +986,26 @@ export default function TherapyScene3D() {
 
             {/* Description */}
             <div className="space-y-1.5">
-              <span className="text-[10px] uppercase tracking-widest text-[#ced1bf]/40">Klinik Bağlam</span>
-              <p className="text-xs font-light leading-relaxed text-[#ced1bf]/75">
+              <span className="text-4xs uppercase tracking-widest text-[#ced1bf]/85">Klinik Bağlam</span>
+              <p className="text-xs font-light leading-relaxed text-[#ced1bf]/85">
                 {selectedZone.desc}
               </p>
             </div>
 
             {/* Therapy approach */}
             <div className="space-y-1.5">
-              <span className="text-[10px] uppercase tracking-widest text-[#ced1bf]/40">Terapi Yaklaşımı</span>
-              <p className="text-xs font-light text-[#ced1bf]/70 italic">{selectedZone.therapy}</p>
+              <span className="text-4xs uppercase tracking-widest text-[#ced1bf]/85">Terapi Yaklaşımı</span>
+              <p className="text-xs font-light text-[#ced1bf]/85 italic">{selectedZone.therapy}</p>
             </div>
 
             {/* Meridians */}
             <div className="space-y-2">
-              <span className="text-[10px] uppercase tracking-widest text-[#ced1bf]/40">İlişkili Meridyanlar</span>
+              <span className="text-4xs uppercase tracking-widest text-[#ced1bf]/85">İlişkili Meridyanlar</span>
               <div className="flex flex-wrap gap-1.5">
                 {selectedZone.meridians.map((m) => (
                   <span
                     key={m}
-                    className="text-[10px] px-2 py-0.5 rounded font-mono border"
+                    className="text-4xs px-2 py-0.5 rounded font-mono border"
                     style={{
                       backgroundColor: `${selectedZone.color}12`,
                       borderColor: `${selectedZone.color}30`,

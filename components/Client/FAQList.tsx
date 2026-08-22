@@ -39,11 +39,11 @@ export default function FAQList({ items }: FAQListProps) {
                 className="w-full flex items-center justify-between text-left group cursor-pointer py-1"
                 aria-expanded={isOpen}
               >
-                <span className="text-base md:text-lg lg:text-xl font-light text-white group-hover:text-[#ca7d57] transition-colors duration-300 tracking-wide pr-6">
+                <span className="text-base md:text-lg lg:text-xl font-light text-white group-hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300 tracking-wide pr-6">
                   {item.question}
                 </span>
                 <span className="flex-shrink-0 flex items-center justify-center size-7 border border-[#ced1bf]/20 rounded-full group-hover:border-[#ca7d57] group-hover:bg-[#ca7d57]/10 transition-all duration-300">
-                  <span className={`text-base text-[#ced1bf] group-hover:text-[#ca7d57] transform transition-transform duration-300 leading-none ${isOpen ? "rotate-45" : ""}`}>
+                  <span className={`text-base text-[#ced1bf] group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${isOpen ? "rotate-45" : ""}`}>
                     +
                   </span>
                 </span>

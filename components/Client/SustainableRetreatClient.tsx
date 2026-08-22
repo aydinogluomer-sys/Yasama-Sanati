@@ -2,14 +2,16 @@
 import Image, { StaticImageData } from "next/image";
 import { motion } from "motion/react";
 import StyledLinkClient from "@/components/Client/StyledLinkClient";
-// One image per discipline, named after the program it belongs to. Replacing a program's hover
-// image is a drop-in: overwrite the file of the same name (see docs/midjourney-prompts.md §6).
-import MeridyenTerapiImage from "@/public/group/meridyen-terapi.jpg";
-import NefesKoclugu from "@/public/group/nefes-koclugu.jpg";
-import MucizelerKursuImage from "@/public/group/mucizeler-kursu.jpg";
-import YasamKoclugu from "@/public/group/yasam-koclugu.jpg";
-import HipnoterapiImage from "@/public/group/hipnoterapi.jpg";
-import ReikiImage from "@/public/group/reiki.jpg";
+// Bu bölüm artık programları değil **katılım formatlarını** listeler. Altı program burada
+// tekrar ediliyordu; aynı katalog 8 ekran önce Şifa Yolculuğu sahnesinde zaten sunuluyor
+// (RELEASE-PLAN §8B.1). Bölümün kendi başlığı "Üç farklı katılım yolu" diyor ve bu bilgi
+// sitede başka hiçbir yerde yok — artık başlığın verdiği sözü tutuyor.
+//
+// GEÇİCİ görseller: her formatın kendi karesi henüz üretilmedi, en yakın mevcut Ege kareleri
+// kullanılıyor. Üretilince aynı adla değiştirilecek (docs/midjourney-prompts.md §6).
+import BirebirImage from "@/public/group/meridyen-terapi.jpg";
+import GrupImage from "@/public/group/yasam-koclugu.jpg";
+import SertifikaImage from "@/public/group/mucizeler-kursu.jpg";
 import { useImageReveal } from "@/hooks/useImageReveal";
 
 interface LinkType {
@@ -22,34 +24,19 @@ export default function SustainableRetreatClient() {
   const { imgContainerRef, handleFocus } = useImageReveal();
   const links: LinkType[] = [
     {
-      title: "Meridyen Terapi",
-      href: "/programlar/meridyen-terapi",
-      img: MeridyenTerapiImage,
+      title: "Birebir Seanslar",
+      href: "/on-gorusme",
+      img: BirebirImage,
     },
     {
-      title: "Nefes Koçluğu",
-      href: "/programlar/nefes-koclugu",
-      img: NefesKoclugu,
+      title: "Küçük Grup Programları",
+      href: "/programlar",
+      img: GrupImage,
     },
     {
-      title: "Mucizeler Kursu",
-      href: "/programlar/mucizeler-kursu",
-      img: MucizelerKursuImage,
-    },
-    {
-      title: "Yaşam Koçluğu",
-      href: "/programlar/yasam-kocu",
-      img: YasamKoclugu,
-    },
-    {
-      title: "Hipnoterapi",
-      href: "/programlar/hipnoterapi",
-      img: HipnoterapiImage,
-    },
-    {
-      title: "Reiki",
-      href: "/programlar/reiki",
-      img: ReikiImage,
+      title: "Sertifikalı Eğitimler",
+      href: "/programlar",
+      img: SertifikaImage,
     },
   ];
 
@@ -58,6 +45,7 @@ export default function SustainableRetreatClient() {
       <div ref={imgContainerRef} aria-hidden="true" className="relative overflow-hidden bg-[#2b3530]/20 md:w-fit">
         <Image
           src={links[links.length - 1].img}
+          sizes="(min-width: 768px) 440px, 90vw"
           alt=""
           aria-hidden={true}
           className="invisible w-full max-md:aspect-[0.82] md:h-full md:w-auto"
@@ -71,13 +59,14 @@ export default function SustainableRetreatClient() {
           >
             <Image
               src={eachLink.img}
+              sizes="(min-width: 768px) 440px, 90vw"
               alt=""
               className="size-full object-cover md:w-auto"
             />
           </motion.div>
         ))}
       </div>
-      <div className="-mx-8-25 grid grid-rows-6 divide-y divide-[#D1CCBF] border-y border-[#D1CCBF] md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
+      <div className="-mx-8-25 grid auto-rows-fr divide-y divide-[#D1CCBF] border-y border-[#D1CCBF] md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
         {links.map((eachLink, index) => (
           <StyledLinkClient
             handleFocus={handleFocus}

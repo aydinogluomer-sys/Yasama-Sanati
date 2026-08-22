@@ -38,7 +38,7 @@ export default function LogoFull({ className, ...props }: LogoFullProps) {
           strokeWidth="1.3"
           fill="currentColor"
           fillOpacity="0.1"
-          className="text-[#C9875B]"
+          className="text-[var(--accent-copper-on-dark)]"
         />
         <path
           d="M12 8C7.5 10.2 7.5 13.2 12 18.5C16.5 13.2 16.5 10.2 12 8Z"
@@ -50,7 +50,7 @@ export default function LogoFull({ className, ...props }: LogoFullProps) {
         />
         
         {/* Meridian center point in copper */}
-        <circle cx="12" cy="12" r="1.25" fill="currentColor" className="text-[#C9875B]" />
+        <circle cx="12" cy="12" r="1.25" fill="currentColor" className="text-[var(--accent-copper-on-dark)]" />
       </svg>
 
       {/* Typography Block */}

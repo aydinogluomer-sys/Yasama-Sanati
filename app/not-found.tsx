@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#2B3530] px-6 text-center text-[#F3EFE6]">
+    <main id="main-content" className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#2B3530] px-6 text-center text-[#F3EFE6]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_30%,rgba(67,103,84,0.28),transparent_55%)]"
@@ -25,7 +25,7 @@ export default function NotFound() {
       <div className="mt-10 flex flex-col gap-3 sm:flex-row">
         <Link
           href="/"
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#C9875B] px-7 text-[11px] font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-[#d79a70] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] motion-reduce:transition-none"
+          className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#C9875B] px-7 text-3xs font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-[#d79a70] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] motion-reduce:transition-none"
         >
           Ana Sayfa
           <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
@@ -34,7 +34,7 @@ export default function NotFound() {
         </Link>
         <Link
           href="/programlar"
-          className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 px-7 text-[11px] font-medium uppercase tracking-[0.14em] text-white/85 transition-colors duration-200 hover:border-white/55 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] motion-reduce:transition-none"
+          className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 px-7 text-3xs font-medium uppercase tracking-[0.14em] text-white/85 transition-colors duration-200 hover:border-white/55 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] motion-reduce:transition-none"
         >
           Programları İncele
         </Link>

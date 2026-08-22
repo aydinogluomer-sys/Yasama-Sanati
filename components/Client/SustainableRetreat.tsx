@@ -24,14 +24,14 @@ export default function SustainableRetreat() {
   return (
     <div className="text-[#D1CCBF]">
       {/* 1. Full-screen Sticky Scroll-locked Section for the "Çalışma Alanları" Marquee */}
-      <div ref={containerRef} className="relative h-[220vh] bg-[#222B27]">
+      <div ref={containerRef} className="relative h-[220vh] bg-[#222B27] motion-reduce:h-auto motion-reduce:min-h-[100svh]">
         <section
           aria-label="Çalışma alanları"
-          className="sticky top-0 flex h-screen w-full flex-col justify-center gap-10 overflow-hidden bg-[#222B27]"
+          className="sticky top-0 flex h-screen w-full flex-col justify-center gap-10 overflow-hidden bg-[#222B27] motion-reduce:relative motion-reduce:top-auto motion-reduce:min-h-[100svh]"
         >
           <div className="flex flex-col gap-3 px-5 md:flex-row md:items-center md:gap-4 md:px-12">
             <div className="flex items-center gap-3 text-[#D1CCBF]">
-              <TypographyLabel className="text-[#C9875B]">Çalışma Alanları</TypographyLabel>
+              <TypographyLabel className="text-[var(--accent-copper-on-dark)]">Çalışma Alanları</TypographyLabel>
               <span aria-hidden className="h-px w-10 shrink-0 bg-[#D1CCBF] opacity-40 md:w-16" />
             </div>
             <h2 className="font-serif text-display-s font-normal tracking-[-0.01em] text-[#F4EFE4]">
@@ -59,12 +59,12 @@ export default function SustainableRetreat() {
                 >
                   Çalışma Alanları
                 </span>
-                <span className="mx-[0.18em] text-[0.3em] text-[#C9875B] align-middle">✦</span>
+                <span className="mx-[0.18em] text-[0.3em] text-[var(--accent-copper-on-dark)] align-middle">✦</span>
               </Fragment>
             ))}
           </motion.div>
 
-          <p className="max-w-[40rem] px-5 text-body-lg font-light text-[#D1CCBF]/72 md:px-12">
+          <p className="max-w-[40rem] px-5 text-body-lg font-light text-[#D1CCBF]/85 md:px-12">
             Akademide üç formatta çalışıyoruz: Birebir seanslar, küçük grup programları ve sertifikalı
             eğitimler ile ihtiyacınıza en uygun derinleşme yollarını sunuyoruz.
           </p>
