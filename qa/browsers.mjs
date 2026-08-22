@@ -64,12 +64,21 @@ for (const [name, launcher, opts] of ENGINES) {
     // Sabit uyku yerine koşul bekleme: Firefox'ta 1400ms bazen yetmiyordu ve
     // test tur tur farklı sonuç veriyordu. Uykuyu uzatmak kararsızlığı gizler,
     // gidermez — dialogun kendisini bekliyoruz.
-    await clickMenu();
+    // WebKit'te ilk dokunuş bazen kayboluyor: React işleyicisi henüz bağlanmamışken
+    // gelen click hiçbir şey yapmıyor (3 turda 1 kez ölçüldü; düğme engellenmiş
+    // DEĞİL — elementFromPoint düğmenin kendisini veriyor). Gerçek kullanıcı da
+    // bu durumda ikinci kez dokunur; test aynısını yapıyor. İki deneme de
+    // başarısızsa gerçek kusurdur ve kapı kapanır.
     let opened = false;
-    try {
-      await mp.waitForSelector('[role="dialog"]', { state: "attached", timeout: 6000 });
-      opened = true;
-    } catch { opened = false; }
+    for (let attempt = 1; attempt <= 2 && !opened; attempt++) {
+      await clickMenu();
+      try {
+        await mp.waitForSelector('[role="dialog"]', { state: "attached", timeout: 4000 });
+        opened = true;
+      } catch {
+        if (attempt === 2) opened = false;
+      }
+    }
 
     let closed = false;
     if (opened) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/SideBar/topluluk.jpg";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 export default function CommunityPage() {
   return (
     <SubPageLayout
+      heroImage={heroImage}
       title="Topluluk"
       description="Hayata, paylaşıma ve içimizdeki sınırsız potansiyele değer veren bütünsel bir topluluk"
     >

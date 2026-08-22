@@ -1,5 +1,7 @@
 import React, { ReactNode } from "react";
+import type { StaticImageData } from "next/image";
 import NavBar from "@/components/Client/NavBar";
+import SubPageHeroMedia from "@/components/Client/SubPageHeroMedia";
 import Footer from "@/sections/Footer/Server";
 
 interface SubPageLayoutProps {
@@ -10,6 +12,13 @@ interface SubPageLayoutProps {
   heroFullScreen?: boolean;
   /** Skip the big section hero so the page content itself leads (e.g. a blog article). */
   hideHero?: boolean;
+  /**
+   * Hero arkasına tam genişlik görsel. Verilmezse eski düz zemin korunur —
+   * hukuki sayfalar gibi görsel istemeyen yerler için.
+   */
+  heroImage?: StaticImageData;
+  /** Görsel sayfanın konusunu anlatıyorsa alt metni; salt dekoratifse "" bırak. */
+  heroImageAlt?: string;
 }
 
 export default function SubPageLayout({
@@ -19,6 +28,8 @@ export default function SubPageLayout({
   noPadding = false,
   heroFullScreen = false,
   hideHero = false,
+  heroImage,
+  heroImageAlt = "",
 }: SubPageLayoutProps) {
   return (
     <div className="min-h-screen bg-[#2B3530] text-[#d1ccbf] font-sans selection:bg-[#ced1bf] selection:text-[#2B3530]">
@@ -52,15 +63,36 @@ export default function SubPageLayout({
           </div>
         </div>
       ) : (
-        <div className="relative flex flex-col justify-center px-6 pt-40 pb-20 md:px-16 md:pt-48 md:pb-28 border-b border-[#ced1bf]/15">
-          <h1 className="font-serif text-display-l font-normal tracking-[-0.02em] text-white animate-hero-title">
-            {title}
-          </h1>
-          {description && (
-            <p className="mt-8 text-lg md:text-30 font-light text-[#ced1bf]/90 max-w-3xl [line-height:1.2] animate-hero-desc">
-              {description}
-            </p>
-          )}
+        <div
+          className={
+            heroImage
+              ? // Görsel varsa hero bir kapak gibi davranıyor: içerik dibe hizalı,
+                // başlık görselin üstünde duruyor. Yükseklik svh — mobil tarayıcı
+                // adres çubuğu daralınca zıplamasın.
+                "relative flex min-h-[68svh] flex-col justify-end px-6 pt-40 pb-14 md:min-h-[72svh] md:px-16 md:pb-20"
+              : "relative flex flex-col justify-center border-b border-[#ced1bf]/15 px-6 pt-40 pb-20 md:px-16 md:pt-48 md:pb-28"
+          }
+        >
+          {heroImage && <SubPageHeroMedia image={heroImage} alt={heroImageAlt} />}
+
+          <div className="relative">
+            {/* Bakır saç teli — sayfanın başladığı yeri işaretleyen marka öğesi.
+                Aynı çizgi ChapterHeading ve bölüm kartlarında da kullanılıyor. */}
+            {heroImage && (
+              <span
+                aria-hidden
+                className="mb-7 block h-px w-16 bg-[var(--accent-copper)] md:w-20"
+              />
+            )}
+            <h1 className="animate-hero-title font-serif text-display-l font-normal tracking-[-0.02em] text-white">
+              {title}
+            </h1>
+            {description && (
+              <p className="animate-hero-desc mt-8 max-w-3xl text-lg font-light [line-height:1.2] text-[#ced1bf]/90 md:text-30">
+                {description}
+              </p>
+            )}
+          </div>
         </div>
         ))}
 

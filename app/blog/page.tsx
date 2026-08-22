@@ -1,4 +1,5 @@
 import React from "react";
+import heroImage from "@/public/SideBar/blog.jpg";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import BlogPageContent from "@/components/Client/BlogPageContent";
 import { BLOG_POSTS } from "@/utils/blogData";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <SubPageLayout
+      heroImage={heroImage}
       title="Blog & Bilgi Bankası"
       description="Bütünsel sağlık, kadim öğretiler, nefes pratikleri ve zihinsel dönüşüm üzerine makaleler"
     >

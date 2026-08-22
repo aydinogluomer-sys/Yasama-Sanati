@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/SideBar/reiki.jpg";
 import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
@@ -82,6 +83,7 @@ export default function ReikiPage() {
         path="/programlar/reiki"
       />
       <SubPageLayout
+      heroImage={heroImage}
       title="Reiki"
       description="Evrensel yaşam enerjisi (Ki) kanallarını açma, çakra dengeleme ve ellerle şifa aktarma dereceleri."
     >

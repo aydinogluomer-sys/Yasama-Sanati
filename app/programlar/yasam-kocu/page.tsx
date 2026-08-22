@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/SideBar/yasam-koclugu.jpg";
 import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
@@ -124,6 +125,7 @@ export default function YasamKocuPage() {
         path="/programlar/yasam-kocu"
       />
       <SubPageLayout
+      heroImage={heroImage}
       title="Yaşam Koçluğu"
       description="Bireysel potansiyeli keşfetme, etkin iletişim, hedef yönetimi ve uluslararası standartlarda koçluk sertifikasyonu."
     >

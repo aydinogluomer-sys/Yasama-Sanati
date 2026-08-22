@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/SideBar/programlar.jpg";
 import React from "react";
 import Link from "next/link";
 import SubPageLayout from "@/components/Server/SubPageLayout";
@@ -67,6 +68,7 @@ export default function ProgramlarPage() {
 
   return (
     <SubPageLayout
+      heroImage={heroImage}
       title="Eğitim Programları"
       description="Sertifika programları ve uzmanlık eğitimleri ile dönüşüm yolculuğunuzu başlatın."
     >

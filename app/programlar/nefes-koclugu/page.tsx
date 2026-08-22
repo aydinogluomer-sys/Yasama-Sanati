@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/SideBar/nefes-koclugu.jpg";
 import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
@@ -116,6 +117,7 @@ export default function NefesKocluguPage() {
         path="/programlar/nefes-koclugu"
       />
       <SubPageLayout
+      heroImage={heroImage}
       title="Nefes Koçluğu"
       description="Doğru nefes teknikleriyle zihinsel arınma, duygusal özgürleşme ve hücresel düzeyde canlanma."
     >

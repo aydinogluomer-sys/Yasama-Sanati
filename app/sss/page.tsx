@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import heroImage from "@/public/SideBar/sss.jpg";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import Link from "next/link";
 import BorderedButton from "@/components/Server/BorderedButton";
@@ -21,6 +22,7 @@ export default function SSSPage() {
 
   return (
     <SubPageLayout
+      heroImage={heroImage}
       title="Sıkça Sorulan Sorular"
       description="Yaşama Sanatı Akademisi eğitimleri, seanslar ve kayıt süreçleri hakkında merak edilenler"
     >

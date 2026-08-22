@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import heroImage from "@/public/akademi-hikayesi/picture-2.jpg";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import Link from "next/link";
 import BorderedButton from "@/components/Server/BorderedButton";
@@ -81,6 +82,7 @@ export default function EgitmenlerPage() {
 
   return (
     <SubPageLayout
+      heroImage={heroImage}
       title="Eğitmenlerimiz"
       description="Yolculuğunuza eşlik eden, alanında derinleşmiş rehber kadromuz."
     >

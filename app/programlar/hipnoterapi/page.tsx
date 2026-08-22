@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/SideBar/hipnoterapi.jpg";
 import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
@@ -82,6 +83,7 @@ export default function HipnoterapiPage() {
         path="/programlar/hipnoterapi"
       />
       <SubPageLayout
+      heroImage={heroImage}
       title="Hipnoterapi"
       description="Bilinçaltı kalıplarını dönüştürme, hipnotik dil ve telkin teknikleriyle derin gelişim uzmanlığı."
     >

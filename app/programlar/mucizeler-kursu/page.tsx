@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/SideBar/mucizeler-kursu.jpg";
 import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
@@ -82,6 +83,7 @@ export default function MucizelerKursuPage() {
         path="/programlar/mucizeler-kursu"
       />
       <SubPageLayout
+      heroImage={heroImage}
       title="Mucizeler Kursu"
       description="Korkudan sevgiye geçişi, zihinsel arınmayı ve evrensel spiritüel uyanışı hedefleyen yıllık çalışma grubu."
     >

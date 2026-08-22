@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import heroImage from "@/public/akademi-hikayesi/picture-1.jpg";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import TherapyScene3DWrapper from "@/components/Client/TherapyScene3DWrapper";
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
 export default function TheStoryPage() {
   return (
     <SubPageLayout
+      heroImage={heroImage}
       title="Hikayemiz"
       description="Zihinsel, bedensel ve enerjetik dönüşüm için kadim bilgelik ve modern bilim sentezi"
     >

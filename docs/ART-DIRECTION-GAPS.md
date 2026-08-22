@@ -34,18 +34,47 @@ Bunlar başka bir markanın iklimidir; Yaşama Sanatı'nın konumu "Online ve İ
 | **`public/ImageContainer/image-5.jpg`** | **Şifa Yolculuğu 05** | ❌ Nordic retreat, sık yeşil orman |
 | **`public/group/mucizeler-kursu.jpg`** | **Ana sayfa, 3 format** | ❌ yeşil boyalı doğrama, yağmur |
 | **`public/group/yasam-koclugu.jpg`** | **Ana sayfa, 3 format** | ❌ yağmurlu ahşap pencere |
-| `public/group/reiki.jpg` | **hiçbir yerde** | ❌ god-ray çam ormanı — ama render edilmiyor |
-| `public/group/nefes-koclugu.jpg` | **hiçbir yerde** | ✅ doğru ama render edilmiyor |
+| `public/group/reiki.jpg` | **hiçbir yerde** | ✅ doğru (sıcak keten, omuzda eller) ama render edilmiyor |
+| `public/group/nefes-koclugu.jpg` | **hiçbir yerde** | ❌ god-ray çam ormanı — ama render edilmiyor |
 | `public/group/hipnoterapi.jpg` | **hiçbir yerde** | ✅ doğru ama render edilmiyor |
 
 **Görünür sorun 5 karede** ve hepsi **ana sayfada** — yani markanın en çok görülen
 yüzeyinde. `group/` altındaki üç dosya hiçbir bileşenden referans almıyor
 (`grep` ile doğrulandı); ya kullanılmalı ya silinmeli.
 
-### `SideBar/on-gorusme.jpg` — PLACEHOLDER — USER ASSET REQUIRED
+### 2026-08-22 güncellemesi — `SideBar/` ailesi artık sayfa hero'su
 
-`public/FormImage.jpg`'nin geçici kırpması (255 KB / 516 KB, aynı kaynak).
-Menüdeki diğer 11 karenin hepsi kendi görseline sahip; bu değil.
+Menüden gidilen sayfalar düz koyu zeminden çıkarıldı: `public/SideBar/` kareleri
+artık yalnız menü hover'ında değil, ilgili sayfanın tam genişlik hero'sunda da
+kullanılıyor (`SubPageHeroMedia`). Bu, o karelerin sanat yönetimi ağırlığını
+küçük bir thumbnail'den sayfanın açılış görüntüsüne yükseltti; hepsi bu gözle
+yeniden denetlendi.
+
+**Sonuç: 12 karenin 12'si de doğru dilde.** Kireç badanalı taş, zeytin, keten,
+terracotta, kil, Ege ışığı. Tek bir orman / yağmur / Nordic kare yok. Deponun
+en marka-tutarlı görsel ailesi buymuş ve hover'ın arkasında saklıydı.
+
+| Kare | Sayfa | Değerlendirme |
+|---|---|---|
+| ana-sayfa · programlar · topluluk · blog · sss · on-gorusme | menü + ilgili sayfa | ✅ |
+| nefes-koclugu · reiki · meridyen-terapi · mucizeler-kursu · hipnoterapi · yasam-koclugu | menü + program sayfaları | ✅ |
+
+**Denenip vazgeçilen:** `ImageContainer/image-5.jpg` (Nordic orman penceresi)
+yerine `group/hipnoterapi.jpg` konması denendi. Group kareleri 1200×1603 (3:4),
+ImageContainer ise 2560×1433 (16:9); 16:9'a kırpınca üç denemede de rahatsız
+edici yakınlıkta yüz planı çıktı ve bölüm kartına uygun olmadı. **Takas
+yapılmadı** — o beş kare gerçekten yeni üretim istiyor.
+
+### `SideBar/on-gorusme.jpg` — `FormImage.jpg`'nin kırpması (görsel olarak doğrulandı)
+
+Yan yana karşılaştırıldı: aynı sahne — aynı demlik, aynı iki koltuk, aynı zeytin
+dalı; yalnız kadraj biraz farklı. Yani "aynı kaynak" iddiası doğrulandı.
+
+**Ama önem derecesi düzeltilmeli.** Bu kare YANLIŞ dilde değil; tam tersine ön
+görüşme için çok uygun (oturup konuşmaya davet eden iki koltuk ve çay). Sorun
+sanat yönetimi değil **tekrar**: aynı fotoğraf hem ana sayfadaki form bölümünde
+hem menüde/`/on-gorusme` hero'sunda görünüyor. Kendi karesi üretilirse daha iyi
+olur, ama bu bir gönderim engeli değil, cila maddesidir.
 
 ---
 
