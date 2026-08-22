@@ -7,6 +7,7 @@ import AnimatedMaskText from "@/components/Client/MaskTextClient";
 import SectionTitle from "../Server/SectionTitle";
 import { easing } from "@/utils/motion/tokens";
 import cn from "@/utils/cn";
+import { JOURNEY_CHAPTERS } from "@/data/journey-chapters";
 interface ClipImageCardProps {
   scrollYProgress: MotionValue<number>;
   images: StaticImageData[];
@@ -29,83 +30,16 @@ export default function ClipImageCard({
   style,
 }: ClipImageCardProps) {
   const [currentState, setCurrentState] = useState(1);
-  const data: DataItem[] = [
-    {
-      title: [<>Nefes Koçluğu</>, <>Eğitimi</>],
-      description: {
-        mobile: [
-          <>Doğru nefes alarak zihinsel berraklık, duygusal</>,
-          <>denge ve daha derin bir nefes kapasitesi.</>,
-          <>Yaşama Sanatı Akademisi eğitmenlik programı.</>,
-        ],
-        desktop: [
-          <>Doğru nefes alarak zihinsel berraklık, duygusal</>,
-          <>denge ve daha derin bir nefes kapasitesi.</>,
-          <>Yaşama Sanatı Akademisi eğitmenlik programı.</>,
-        ],
-      },
+  // Bölüm metinleri artık data/journey-chapters.ts'te — mobil akış (JourneyMobile)
+  // ile ORTAK kaynak. Satırlar dizi olarak geliyor çünkü buradaki maskeli açılım
+  // satır satır çalışıyor; mobilde aynı satırlar tek paragrafa birleştiriliyor.
+  const data: DataItem[] = JOURNEY_CHAPTERS.map((c) => ({
+    title: c.title.map((line, i) => <span key={i}>{line}</span>),
+    description: {
+      mobile: c.lines.map((line, i) => <span key={i}>{line}</span>),
+      desktop: c.lines.map((line, i) => <span key={i}>{line}</span>),
     },
-    {
-      title: [<>Meridyen Terapisi</>, <>ve Kinesiyoloji</>],
-      description: {
-        mobile: [
-          <>Vücudun enerji kanallarını bloke eden</>,
-          <>engelleri kaldırın. Bütünsel kinesiyoloji</>,
-          <>teknikleriyle bütünsel bir çalışma.</>,
-        ],
-        desktop: [
-          <>Vücudun enerji kanallarını bloke eden</>,
-          <>engelleri kaldırın. Bütünsel kinesiyoloji</>,
-          <>teknikleriyle bütünsel bir çalışma.</>,
-        ],
-      },
-    },
-    {
-      title: [<>Mucizeler Kursu</>, <>(ACIM)</>],
-      description: {
-        mobile: [
-          <>Korkudan sevgiye geçişi hedefleyen,</>,
-          <>zihinsel arınma ve spiritüel uyanış. Yıllık</>,
-          <>çevrimiçi rehberlik ve çalışma programı.</>,
-        ],
-        desktop: [
-          <>Korkudan sevgiye geçişi hedefleyen,</>,
-          <>zihinsel arınma ve spiritüel uyanış. Yıllık</>,
-          <>çevrimiçi rehberlik ve çalışma programı.</>,
-        ],
-      },
-    },
-    {
-      title: [<>Reiki Enerji</>, <>Eğitimleri</>],
-      description: {
-        mobile: [
-          <>Evrensel yaşam enerjisini yönlendirerek</>,
-          <>enerji çalışmasının geleneksel yolunu öğrenin.</>,
-          <>Birinci aşamadan master seviyesine uzanan yol.</>,
-        ],
-        desktop: [
-          <>Evrensel yaşam enerjisini yönlendirerek</>,
-          <>enerji çalışmasının geleneksel yolunu öğrenin.</>,
-          <>Birinci aşamadan master seviyesine uzanan yol.</>,
-        ],
-      },
-    },
-    {
-      title: [<>Hipnoterapi &</>, <>Yaşam Koçluğu</>],
-      description: {
-        mobile: [
-          <>Bilinçaltı kalıplarını fark ederek</>,
-          <>kendi ritminizde ilerleyin ve bireysel</>,
-          <>potansiyelinizi gerçeğe dönüştürün.</>,
-        ],
-        desktop: [
-          <>Bilinçaltı kalıplarını fark ederek</>,
-          <>kendi ritminizde ilerleyin ve bireysel</>,
-          <>potansiyelinizi gerçeğe dönüştürün.</>,
-        ],
-      },
-    },
-  ];
+  }));
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (latest < 0.125) {

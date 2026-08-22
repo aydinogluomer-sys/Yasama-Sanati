@@ -16,10 +16,21 @@ interface WordProps {
 }
 
 function Word({ children, progress, range, shouldReduceMotion }: WordProps) {
-  // 0.45 is the contrast floor, not a taste call: at 0.25 the un-revealed words measured
-  // 1.86:1 against #2B3530 — below the 3:1 large-text minimum — and a reader who stops
-  // mid-paragraph sits in that state. 0.45 measures 3.56:1 and keeps the reveal legible.
-  const opacity = useTransform(progress, range, [0.45, 1]);
+  // Opaklık tabanı bir zevk kararı değil, ölçüm sonucu.
+  //
+  // Eski taban 0.45'ti ve gerekçesi "3:1 büyük metin tabanını geçiyor" idi. İki
+  // yönden yanlıştı: (1) bu paragraf mobilde 18px NORMAL ağırlıkta render ediliyor,
+  // yani büyük metin değil — gereken 4.5:1; (2) 0.45 ölçüldüğünde #2B3530 üzerinde
+  // 2.86:1 veriyor, 3:1 büyük-metin eşiğini bile geçmiyor.
+  //
+  // #D1CCBF'nin #2B3530 üzerinde ölçülen değerleri:
+  //   α 0.45 -> 2.86:1   (AA'nın altında, büyük metin için bile)
+  //   α 0.55 -> 3.53:1   (yalnız büyük metin için yeterdi)
+  //   α 0.70 -> 4.74:1   (18px normal metin için AA)
+  //
+  // Açılım etkisi 0.70 -> 1.0 aralığında daha ince kalıyor; okunabilirlik tabanı
+  // etkiye feda edilmiyor. Paragrafta duraklayan bir okur bu tabanda oturuyor.
+  const opacity = useTransform(progress, range, [0.7, 1]);
   return (
     <motion.span style={{ opacity: shouldReduceMotion ? 1 : opacity }} className="inline-block">
       {children}

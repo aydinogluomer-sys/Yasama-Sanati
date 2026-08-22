@@ -21,6 +21,7 @@ import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { useRouter } from "next/navigation";
 import { cubicBezier } from "motion";
 import { useIsMobile } from "@/app/providers";
+import JourneyMobile from "@/components/Client/JourneyMobile";
 
 function Innovation() {
   const isMobile = useIsMobile();
@@ -45,6 +46,16 @@ function Innovation() {
     }
   });
   const imgs = [Image1, Image2, Image3, Image4, Image5];
+
+  // Mobilde masaüstünün daraltılmışı yerine kendi akışı. `isMobile` null iken
+  // (henüz ölçülmedi) sticky sürüm mount EDİLMEZ: aksi halde mobil cihazda önce
+  // 3,6 ekranlık kapsayıcı kurulur, sonra sökülür — hem yerleşim sıçraması hem
+  // boşuna scroll hesabı. null durumunda mobil akış gösteriliyor; daha hafif
+  // olan ve her iki cihazda da doğru okunan sürüm bu.
+  if (isMobile !== false) {
+    return <JourneyMobile />;
+  }
+
   return (
     <div
       className="relative h-[360vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"
