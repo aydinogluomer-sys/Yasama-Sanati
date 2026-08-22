@@ -87,16 +87,12 @@ export default function CommunityPage() {
           <p className="text-base font-light leading-relaxed text-[#ced1bf]/80">
             Zihinsel berraklık, fiziksel canlılık, bütünsel şifa, nefes koçluğu ve kadim felsefeler gibi çeşitli konulara değinen, esenliğe doğru yaptığımız sesli yolculuk serisi. Podcast yayınımızda akademimizin eğitmenleri ve alanında uzman konuklarla şifa pratiklerini, klinik yaklaşımları ve gündelik yaşam ipuçlarını konuşuyoruz.
           </p>
-          <div className="pt-2">
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-6 py-3 bg-[#ced1bf] text-[#2b3530] font-medium text-sm rounded hover:bg-[#b0b3a2] transition-colors"
-            >
-              YouTube Kanalımızı Ziyaret Edin
-            </a>
-          </div>
+          {/* CTA kaldırıldı: "YouTube Kanalımızı Ziyaret Edin" düğmesi doğrulanmış bir
+              kanal adresine değil, youtube.com ana sayfasına gidiyordu — sahip olunmayan
+              bir kanalı varmış gibi gösteren bir vaat. Aynı ilke components/SVGComponents/
+              socials/index.tsx içinde de uygulanıyor: yalnız akademinin gerçekten sahip
+              olduğu kanallar bağlanır. Gerçek kanal URL'i doğrulandığında buraya geri
+              eklenmeli. Kayıt: FINAL-VERIFICATION J-11. */}
         </section>
       </div>
     </SubPageLayout>
