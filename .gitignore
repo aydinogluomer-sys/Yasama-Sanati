@@ -49,3 +49,9 @@ next-env.d.ts
 
 # impeccable arac durumu: cache, mock gorseller, kritik gunlugu.
 /.impeccable/
+
+# Gorsel regresyon: baseline PNG'ler makineye ozgudur (font rasterlestirmesi
+# Linux CI ile yerel Windows arasinda farkli). ~6.6MB depo sismesine deger
+# gormedik; ilk calistirmada yerelde uretilirler. Bu yuzden kapi YERELDIR,
+# CI'da kosmaz. Bkz. qa/visual.mjs basligi.
+/qa/visual/

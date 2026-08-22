@@ -1,8 +1,14 @@
 name: Quality Gate
 
-# Her PR ve main push'unda: typecheck → lint → build → erişilebilirlik.
-# Kapı, RELEASE-PLAN §3.2'deki sıranın çalıştırılabilir hâli. Lighthouse CI ve bundle
-# budget henüz yok; onlar submission sonrasına bırakıldı (§22, sıra 15).
+# Her PR ve main push'unda tam kapı zinciri.
+#
+# Sıra kasıtlı: önce ucuz statik kapılar (typecheck/lint/build), sonra sunucu
+# gerektiren runtime kapıları. Runtime kapıları prod build'e karşı koşar —
+# `next dev` değil, çünkü ölçülmek istenen kullanıcıya giden çıktı.
+#
+# Görsel regresyon (qa/visual.mjs) bilerek CI'da KOŞMAZ: baseline PNG'ler font
+# rasterleştirmesi yüzünden makineye özgüdür ve Linux runner'da yerel baseline'la
+# eşleşmez. Yerel kapı olarak `npm run test:visual` ile çalıştırılır.
 
 on:
   pull_request:
@@ -16,7 +22,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
@@ -38,13 +44,28 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: Playwright chromium
-        run: npx playwright install --with-deps chromium
+      - name: Playwright motorları
+        run: npx playwright install --with-deps chromium firefox webkit
 
       - name: Sunucuyu başlat
         run: |
           npx next start -p 3400 &
           npx wait-on http://127.0.0.1:3400 --timeout 90000
+
+      - name: E2E smoke (17 rota — landmark, h1, nav, footer, CTA)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:e2e
+
+      - name: İç bağlantılar (kırık link = 0)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:links
+
+      - name: Görseller (kırık img + optimizer 4xx = 0)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:images
 
       - name: Erişilebilirlik (axe — serious/critical = 0)
         env:
@@ -56,7 +77,17 @@ jobs:
           PW_CHANNEL: chromium
         run: npm run test:viewports
 
-      - name: Klavye ve zoom (skip link, focus trap, ESC, %200/%400)
+      - name: Klavye (skip link, focus trap, ESC)
         env:
           PW_CHANNEL: chromium
         run: npm run test:keyboard
+
+      - name: Zoom ve reflow (WCAG 1.4.10 + 1.4.4)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:zoom
+
+      - name: Cross-browser (chromium + firefox + webkit)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:browsers
