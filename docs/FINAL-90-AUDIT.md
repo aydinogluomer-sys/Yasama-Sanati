@@ -7,6 +7,8 @@
 
 ## ÖZET
 
+**Denetim anı (bu turun başı):**
+
 ```
 TOPLAM            32
 DONE               8
@@ -15,6 +17,32 @@ OPEN              10
 UNVERIFIED         4
 BLOCKED_EXTERNAL   5
 ```
+
+**Tur sonu:**
+
+```
+TOPLAM            32
+DONE              21
+PARTIAL            3
+OPEN               1
+UNVERIFIED         3
+BLOCKED_EXTERNAL   4
+```
+
+**Kapatılanlar:** A-01..A-11 (blog + cihaz iddiaları) · B-01 (blog kimlikleri) ·
+B-06 (testimonial fail-closed) · B-07/B-08 (IECCERT — dış kaynaktan doğrulandı,
+yanlış kurum adı ve kategori uyuşmazlığı bulundu, public iddia kaldırıldı) ·
+C-01/C-02 (journey gerçek split) · C-07 (5 koşu + medyan) · D-01 (otomatik rota
+keşfi, 17→21) · D-02 (script adları) · D-04 (BASELINE MISSING) · F-06 (ölü asset).
+
+**Açık kalan tek repo-içi madde:** C-03/C-06 — mobil Slow 4G LCP 3244 ms, hedef
+<2500 ms. Kritik yol bayt azaltma ayrı ve derin bir çalışma.
+
+**Doğrulanamayan (dış):** D-03 (CI gerçek koşusu — `gh` yok), E-02 (RLS — proje
+kapalı), E-05 (deployment parity — domain erişimi yok).
+
+**Dış veriye bağlı:** B-03 (eğitmen ilişkisi), akreditasyon kanıtı, testimonial
+izinleri, F-04 (5 görsel).
 
 **Bu denetimin en önemli bulgusu:** önceki turda "sağlık iddiaları temiz" diye
 raporladım. **Değildi.** Taramalarım `app components data` yollarını geziyordu;

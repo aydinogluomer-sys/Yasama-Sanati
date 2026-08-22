@@ -42,36 +42,29 @@ edilebilir ama ideal değil — formların tamamen kaldırılması ya da "şu an
 alınmıyor" gibi baştan dürüst bir duruma çevrilmesi ayrı bir karar. Proje
 sahibinin talebi olmadan içeriğe dokunulmadı.
 
-### 2. Mobil LCP hedefi yalnız AĞ KISITLIYKEN karşılanmıyor
-Temiz makinede 5'er koşu, medyan (yayılım), soğuk önbellek, prod build, 390×844:
+### 2. Mobil LCP hedefi hâlâ karşılanmıyor (ama iyileşti)
 
-| Koşul | FCP | LCP | yayılım |
+5 koşu medyanı, soğuk önbellek, prod build, 390×844 — **LAB ölçümü, p75 DEĞİL**:
+
+| Koşul | LCP medyan | yayılım | TBT medyan |
 |---|---|---|---|
-| kısıtsız | 816 ms | **816 ms** | 584–2740 |
-| 4× CPU | 728 ms | **2328 ms** | 1496–4412 |
-| 4× CPU + Slow 4G | 3864 ms | **3864 ms** | 3396–4340 |
+| masaüstü kısıtsız | 684 ms | 592–2136 | 68 ms |
+| mobil 4× CPU | 1052 ms | 892–1476 | 2786 ms |
+| **mobil 4× CPU + Slow 4G** | **3244 ms** | 3032–3660 | 3021 ms |
 
-**Bu tablo daha önceki teşhisi düzeltiyor.** Bu dosyanın ilk sürümü darboğazı
-"hidrasyon yükü" diye yazmıştı. Yanlış: 4× CPU tek başınayken LCP 2328 ms, yani
-hedefin ALTINDA. Hedef yalnız ağ kısıtı eklenince kırılıyor.
+**Önceki baseline** (2026-08-22, HEAD `78fbf49`): Slow 4G LCP 3864 ms · TBT 3323 ms.
+**Delta:** LCP −620 ms (%16) · TBT −302 ms.
 
-Darboğaz kritik yoldaki **bayt toplamı**: ana sayfa ~1294 KB (JS 687 KB
-ayrıştırılmış, görsel 180 KB, font 172 KB, CSS 92 KB). 1.6 Mbps'te bu ~6,5 sn'lik
-bir boru demek ve ilk boya (FCP = LCP = 3864 ms) tam da bu rekabetin içinde
-gerçekleşiyor.
+> Uyarı: iki ölçüm farklı HEAD'lerde ve aralarında içerik değişiklikleri de var.
+> Bu, journey split'inin tek başına etkisinin kontrollü bir A/B'si **değildir**.
 
-Kaynak zaman çizelgesi (Slow 4G): HTML 303 ms · CSS 888 ms · tüm JS 2058 ms.
-SSR içerik gizli DEĞİL — JS kapalıyken hero, başlık ve "ŞİFA" görünüyor;
-ekranın üstünde yalnız destek paragrafı ve CTA satırı hidrasyona kadar saklı.
+Journey runtime'ı mobil/masaüstü olarak gerçekten ayrıldı (CSS gizleme JS'i
+bundle'dan çıkarmıyordu). Mobil artık masaüstü journey chunk'ını indirmiyor —
+ama **bayt kazancı yok** (212 KB → 212 KB): modül küçük ve ağır bağımlılıkları
+zaten paylaşımlı. Kazanç hidrasyon işinde.
 
-→ **Kod işi, ama teşhis edildiği kadar dar değil.** Çözüm hero koreografisi
-değil, kritik yol bayt azaltma: JS bölme/erteleme, hero görselinin `priority`
-ile diğer kaynaklarla yarışması, font alt kümeleme. Kapsamlı bir performans
-çalışması; bu turda YAPILMADI ve aceleye getirilmedi.
-
-**Ölçüm uyarısı:** ilk denemelerde FCP 5228 ve 6544 ms okundu. Bunlar makine
-yüklüyken (önceki testlerden kalan onlarca node süreci) alınmıştı ve gürültüydü.
-Tek koşuya güvenilmemeli; medyan + yayılım verilmeli.
+Kalan darboğaz: kritik yoldaki toplam bayt (~1301 KB mobil) ve React+Motion
+hidrasyon maliyeti. <2500 ms için daha derin bir bundle çalışması gerekir.
 
 ### 3. Görünür sanat yönetimi çatlağı — 5 kare, hepsi ana sayfada
 `ImageContainer/image-1,3,5` ve `group/mucizeler-kursu, yasam-koclugu` hâlâ
