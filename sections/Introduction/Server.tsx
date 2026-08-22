@@ -44,7 +44,7 @@ export default function IntroductionServer() {
         />
 
         <ScrollRevealText
-          text="Bütünsel yaklaşımımız; zihinsel, bedensel ve enerjetik düzeyleri birbirinden ayırmadan, tek bir akışın parçaları olarak ele alır. Bizim için şifa, sadece yüzeysel semptomları bastırmak ya da geçici rahatlamalar sağlamak değil; bireyin kendi içsel bilgeliğiyle bağ kurarak dengenin kökten ve kalıcı olarak yeniden kurulmasına alan açmaktır. Bu yolculukta kadim öğretileri çağdaş yöntemlerle harmanlayarak, her bir seviyede derin bir uyanış, dönüşüm ve bütünleşme hedefliyoruz."
+          text="Bütünsel yaklaşımımız; zihinsel, bedensel ve enerjetik düzeyleri birbirinden ayırmadan, tek bir akışın parçaları olarak ele alır. Bizim için şifa bir teknik değil; kişinin kendi ritmini ve dengesini tanımasına alan açan bir çalışma biçimidir. Bu yolculukta kadim öğretileri çağdaş yöntemlerle harmanlayarak, her bir seviyede derin bir uyanış, dönüşüm ve bütünleşme hedefliyoruz."
           className="max-w-[86vw] text-lg md:text-24 font-light [line-height:1.8] text-[#D1CCBF] md:max-w-[56rem] md:ml-auto gap-y-[0.3em]"
         />
       </div>

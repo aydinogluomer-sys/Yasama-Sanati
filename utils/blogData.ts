@@ -21,7 +21,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Şifa Bir Teknik Değildir: Bütünsel Sağlığa Giden Yol",
     category: "Bütünsel Şifa",
     date: "24 Mayıs 2026",
-    excerpt: "Modern tıp semptomları bastırmaya odaklanırken, kadim öğretiler bizi bir bütün olarak ele alır. Fiziksel bir rahatsızlığın ardındaki zihinsel ve enerjetik kökleri bulup bunları dönüştürmediğimiz sürece gerçek şifalanma gerçekleşemez.",
+    excerpt: "Bütünsel yaklaşımlar insanı fiziksel, zihinsel ve duygusal katmanlarıyla birlikte ele almayı önerir. Bu yazı, o bakışın ne anlama geldiğini ve altı disiplinin hangi ortak zeminde buluştuğunu anlatıyor.",
     readTime: "7 Dk",
     coverImage: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80",
     author: {
@@ -31,7 +31,7 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Bütünsel Sağlık", "Kadim Öğretiler", "Farkındalık", "Enerji Bedeni"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Modern tıp semptomları bastırmaya odaklanırken, kadim öğretiler bizi bir bütün olarak ele alır. Fiziksel bir rahatsızlığın ardındaki zihinsel ve enerjetik kökleri bulup bunları dönüştürmediğimiz sürece gerçek şifalanma gerçekleşemez.</p>
+      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Bütünsel yaklaşımlar insanı fiziksel, zihinsel ve duygusal katmanlarıyla birlikte ele almayı önerir. Bu yazı, o bakışın ne anlama geldiğini ve altı disiplinin hangi ortak zeminde buluştuğunu anlatıyor.</p>
       
       <p class="mb-6">Hepimiz hayatımızın bir döneminde kendimizi fiziksel veya duygusal olarak tıkanmış hissetmişizdir. Genellikle bu durumlarda hemen en yakın semptom gidericiye koşarız: Bir ağrı kesici, geçici bir rahatlama seansı ya da zihnimizi dağıtacak bir meşguliyet. Ancak gerçek şifa, sadece belirtileri yok etmekle değil, bu belirtilerin altındaki derin mesajları okumakla başlar.</p>
       
@@ -43,10 +43,10 @@ export const BLOG_POSTS: BlogPost[] = [
       <p class="mb-6">Bütünsel şifa yaklaşımında, insan varlığı sadece et ve kemikten oluşan biyolojik bir makine olarak görülmez. Bizler fiziksel bedenimiz, zihinsel yapımız, duygusal dünyamız ve enerjetik alanımızla bir bütünüz. Bir bölgede meydana gelen tıkanıklık (örneğin aşırı zihinsel yorgunluk), er ya da geç fiziksel bedende ağrı veya hastalık olarak kendini gösterir.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Altı Şifa Disiplininin Ortak Rolü</h3>
-      <p class="mb-6">Nefes Koçluğu, Meridyen Terapisi, Hipnoterapi ve Reiki gibi farklı kadim ve modern teknikler aslında aynı amaca hizmet eder: Bedenin kendi kendini iyileştirme gücünü (homeostazis) harekete geçirmek.</p>
+      <p class="mb-6">Nefes Koçluğu, Meridyen Terapisi, Hipnoterapi ve Reiki gibi kadim ve modern yaklaşımlar ortak bir zeminde buluşur: kişinin kendi bedenine ve zihnine dikkatini yöneltmesi.</p>
       <ul class="list-disc list-inside space-y-3 mb-8 text-[#ced1bf]/80 font-light">
-        <li><strong>Nefes:</strong> Oksijenlenmeyi artırarak sinir sistemini dengeler ve hücresel düzeyde toksin atımını hızlandırır.</li>
-        <li><strong>Meridyenler:</strong> Akupunktur noktaları boyunca akan yaşam enerjisini (Qi) dengeleyerek organların fonksiyonlarını düzenler.</li>
+        <li><strong>Nefes:</strong> Yavaş ve bilinçli nefes çalışmaları, gevşeme ve dikkat üzerine en çok araştırılan uygulamalardan biridir.</li>
+        <li><strong>Meridyenler:</strong> Geleneksel Çin tıbbı, akupunktur noktaları ve Qi kavramı üzerinden bedeni bütünsel bir harita olarak okur.</li>
         <li><strong>Zihinsel Dönüşüm:</strong> Bilinçaltı seviyesinde çalışan hipnoterapi gibi yöntemlerle bizi sınırlayan eski inanç kalıplarını serbest bırakır.</li>
         <li><strong>Reiki:</strong> Evrensel yaşam enerjisini doğrudan çakralarımıza aktararak derin bir zihinsel ve fiziksel dinlenme sağlar.</li>
       </ul>
@@ -77,7 +77,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p class="mb-6">Burun, nefes almak için tasarlanmış özel bir organdır. Aldığımız havayı filtre eder, ısıtır, nemlendirir ve akciğerlerimize en uygun seviyeye getirir. Ağızdan alınan nefes ise sinir sistemine sürekli bir 'savaş veya kaç' sinyali gönderir. Gün boyunca ağzınızın kapalı, dilinizin ise damağınızda hafifçe dinleniyor olmasına özen gösterin.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">2. Diyafram Kasını Hissedin (Karın Nefesi)</h3>
-      <p class="mb-6">Elinizi karnınızın üzerine koyun. Nefes alırken karnınızın bir balon gibi şiştiğini, nefes verirken ise indiğini hissedin. Göğsünüzün ve omuzlarınızın yukarı kalkmadığından emin olun. Günde sadece 5 dakika boyunca bu diyafram hareketini izlemek, kortizol (stres) seviyenizi yarı yarıya indirecektir.</p>
+      <p class="mb-6">Elinizi karnınızın üzerine koyun. Nefes alırken karnınızın bir balon gibi şiştiğini, nefes verirken ise indiğini hissedin. Göğsünüzün ve omuzlarınızın yukarı kalkmadığından emin olun. Günde birkaç dakika diyafram hareketini izlemek, pek çok kişinin fark edilir bir sakinleşme olarak tarif ettiği basit bir alışkanlıktır.</p>
 
       <blockquote class="border-l-2 border-[#ca7d57] pl-6 my-8 italic text-lg text-white/90 font-light">
         "Nefesinizi kontrol ettiğinizde zihninizi kontrol edersiniz. Nefesinizi serbest bıraktığınızda ise kendinizi serbest bırakırsınız."
@@ -107,10 +107,10 @@ export const BLOG_POSTS: BlogPost[] = [
       <p class="mb-6">Modern anatomi bize kan damarlarını ve sinir yollarını öğretir. Ancak kadim doğu bilgeliği, fiziksel bedenimizin hemen altında, gözle görülmeyen muazzam bir enerji haritası olduğunu söyler. Meridyenler, yaşam enerjimiz olan "Qi"nin tüm bedeni dolaşmasını sağlayan nehirler gibidir.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Enerji Tıkanıklıkları Nasıl Oluşur?</h3>
-      <p class="mb-6">Yaşadığımız travmalar, bastırılmış duygular, hareketsiz yaşam tarzı ve sağlıksız beslenme alışkanlıkları bu meridyen kanallarında tıkanıklıklara (blokajlara) yol açar. Tıpkı bir nehirde biriken çöplerin suyun akışını engellemesi gibi, enerji akışı engellendiğinde de o meridyenin beslediği organlarda fiziksel rahatsızlıklar veya kronik ağrılar baş gösterir.</p>
+      <p class="mb-6">Geleneksel öğreti, yoğun duygusal yaşantıları, hareketsizliği ve düzensiz beslenmeyi meridyen kanallarındaki akışla ilişkilendirir. Bu, bedeni bir akarsu gibi düşünen kadim bir benzetmedir; modern anatomik bir mekanizma tarifi değildir.</p>
 
       <blockquote class="border-l-2 border-[#ca7d57] pl-6 my-8 italic text-lg text-white/90 font-light">
-        "Bedeniniz asla yalan söylemez. Her fiziksel semptom, enerjetik bir tıkanıklığın dışa vurulmuş çığlığıdır."
+        "Geleneksel öğreti bedeni bir bütün olarak okur; duygusal yaşantıyla bedensel duyum arasında bir bağ kurar."
       </blockquote>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Duygular ve Meridyenlerin Bağlantısı</h3>
@@ -122,7 +122,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </ul>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Meridyen Terapisinin Faydaları</h3>
-      <p class="mb-6">Özel bası teknikleri (akupresür), esneme hareketleri ve enerjetik çalışmalar sayesinde tıkanıklıklar çözülür. Enerji akışı dengelendiğinde, derin bir gevşeme hissiyle birlikte bedenin kronik ağrılardan arındığı, uyku kalitesinin arttığı ve zihinsel berraklığa ulaşıldığı görülür.</p>
+      <p class="mb-6">Özel bası teknikleri (akupresür), esneme hareketleri ve enerjetik çalışmalar bu geleneksel çerçeve içinde uygulanır. Katılımcılar çoğunlukla derin bir gevşeme ve zihinsel berraklık hissi bildirir. Bunlar kişisel deneyim aktarımlarıdır; tıbbi bir sonuç vaadi değildir.</p>
     `
   },
   {

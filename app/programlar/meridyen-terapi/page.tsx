@@ -67,19 +67,19 @@ export default function MeridyenTerapiPage() {
       },
       {
         question: "Meridyen Terapi Cihazı Nedir?",
-        answer: "Enerji (meridyen) kanalları ve iç organlar hakkında geleneksel Çin tıbbı teorisi temelinde geliştirilen üst teknoloji cihazıdır. Bu cihaz bioinformatik, enerji, nöroloji ve diğer alanlarda son başarıları kendinde toplamıştır. Akupunktur, guasha masajı, tuina masajı, dağlama ve vakum terapisine benzer kapsamlı bir fizyoterapi etkisi göstermektedir. Enerji kanallarına ve biyolojik olarak aktif noktalara özel fizyoterapi etkisi sayesinde, hızla enerji kanallarının temizliği sağlanmaktadır. Geleneksel öğreti bu etkiyi chi'nin serbest dolaşımı ve yin-yang dengesi kavramlarıyla açıklar. Bunlar geleneksel Çin tıbbının kendi terminolojisine ait kavramlardır; tıbbi bir tedavi ya da iyileşme vaadi taşımaz.",
+        answer: "Geleneksel Çin tıbbının meridyen öğretisi temel alınarak geliştirilen, akupresür ve masaj tekniklerine düşük voltajlı elektriksel uyarım ekleyen bir cihazdır. Eğitim programında cihazın kullanımı, güvenlik kuralları ve seans kurgusu öğretilir. Cihaz tıbbi tanı veya tedavi aracı değildir.",
       },
       {
         question: "Meridyen Terapi Cihazı Sertifikalı Bir Fizyoterapi Cihazı Mıdır?",
-        answer: "Bu cihaz Fohow kuruluşunun en iyi ürünlerinden biridir. Ürünün tasarımı ve geliştirilmesi sırasında, yasallık, güvenlik ve etkinlik, doğal malzeme ve çevreyi koruma, geleneksel Çin tıbbı sağlığı destekleme kültürü ön planda tutulmuştur. Cihaz yasal ve normatif düzenlemelere uygun olmalı, ayrıca gerekli tüm izinlere sahip olmalıdır; ancak bundan sonra piyasaya sürülmesine izin verilmektedir. Bu yüzden cihaz uygunluk belgesi ve satış izni alınmış tamamen yasal bir üründür.",
+        answer: "Programımız cihazın tıbbi cihaz sınıflandırması hakkında bir iddiada bulunmaz. Üreticinin kendi tanıtım belgeleri bağımsız tıbbi kanıt yerine geçmez; cihazın yasal statüsü ve izinleriyle ilgili güncel bilgi üreticiden ve ilgili resmî kurumdan doğrulanmalıdır.",
       },
       {
         question: "Cihaz Güvenli Midir? Yan Etkisi Mevcut Mudur?",
-        answer: "Meridyen Terapi Cihazı tamamen güvenli bir üründür. Bu da kalite uygunluk belgesi ile tasdiklidir. Cihazın çıkış voltajı 8 volt olup, organizmanın hücre biyoakımıyla uyumludur. Cihaz, onu kullanan danışan ve uzman için son derece güvenlidir. Elektrik darbelerini insan hücresinin elektrik yükü ile uyumlu biyoakımlara dönüştürmektedir. Geleneksel öğretide bu uygulama, enerji kanallarının serbestleşmesi olarak tanımlanır.",
+        answer: "Hiçbir uygulama için \"tamamen güvenli\" denemez. Cihazın çıkış voltajı düşüktür (8 volt) ve eğitim boyunca güvenli kullanım kuralları ayrıntılı olarak işlenir. Buna karşın aşağıdaki kontrendikasyon listesi bağlayıcıdır ve her uygulama öncesinde gözden geçirilmelidir. Tanı konmuş bir sağlık sorununuz varsa uygulamadan önce hekiminize danışın.",
       },
       {
         question: "Cihazın Çalışma Prensibi Nasıldır?",
-        answer: "Cihaz temel bir ünite ve özel eldivenlerden oluşmaktadır. Enerji kanallarına ve biyolojik olarak aktif noktalara özel fizyoterapi etkisi sayesinde bunların aktif temizliği yapılmakta ve içlerinde bulunan birincil chi enerjisi yenilenmektedir. Geleneksel öğreti bu süreci, serbest chi sirkülasyonu ve yin-yang dengesinin kurulması olarak tanımlar. Bu tanım geleneksel bir çerçeveye aittir; tıbbi bir etki iddiası değildir.",
+        answer: "Cihaz temel bir ünite ve özel eldivenlerden oluşur. Geleneksel öğretide aktif kabul edilen noktalar ve enerji kanalları üzerine düşük voltajlı uyarım ve bası uygulanır. Geleneksel öğreti bu süreci chi'nin serbest dolaşımı ve yin-yang dengesinin kurulması olarak tanımlar; bu tanım geleneksel bir çerçeveye aittir, tıbbi bir etki mekanizması açıklaması değildir.",
       },
       {
         question: "Hangi Amaçlarla Cihazın Kullanımı Tavsiye Edilmektedir?",
@@ -95,7 +95,7 @@ export default function MeridyenTerapiPage() {
       },
       {
         question: "İşlem Sırasında Üzerinizde Cep Telefonu ve Metal Süs Eşyaları Bulundurmak Mümkün Mü?",
-        answer: "Hayır. Metal ve elektronik cihazlar cihazın biyoakım dalgalarını etkileyebilir. Bu nedenle işlem sırasında tüm metal süs eşyalarının çıkarılması ve yakında cep telefonu bulundurulmaması gerekmektedir.",
+        answer: "Hayır. Metal ve elektronik cihazlar, cihazın verdiği elektriksel uyarımı etkileyebilir. Bu nedenle işlem sırasında tüm metal süs eşyalarının çıkarılması ve yakında cep telefonu bulundurulmaması gerekmektedir.",
       },
       {
         question: "Uygulamaya Ne Kadar Süreyle Devam Edilir?",
