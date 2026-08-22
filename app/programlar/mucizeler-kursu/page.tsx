@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CourseSchema } from "@/components/Server/StructuredData";
+import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
@@ -69,6 +69,13 @@ export default function MucizelerKursuPage() {
   };
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Eğitim Programları", path: "/programlar" },
+          { name: "Mucizeler Kursu", path: "/programlar/mucizeler-kursu" },
+        ]}
+      />
       <CourseSchema
         name="Mucizeler Kursu (ACIM)"
         description="Bir yıllık zihinsel arınma çalışması; haftalık canlı dersler ve günlük pratik."

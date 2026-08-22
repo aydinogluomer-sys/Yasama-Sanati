@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CourseSchema } from "@/components/Server/StructuredData";
+import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
@@ -104,6 +104,13 @@ export default function MeridyenTerapiPage() {
   };
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Eğitim Programları", path: "/programlar" },
+          { name: "Meridyen Terapi", path: "/programlar/meridyen-terapi" },
+        ]}
+      />
       <CourseSchema
         name="Meridyen Terapi Eğitimi"
         description="IECCERT onaylı meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı."

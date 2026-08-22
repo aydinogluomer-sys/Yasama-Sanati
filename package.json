@@ -11,6 +11,7 @@
     "test:e2e": "node qa/e2e.mjs",
     "test:links": "node qa/links.mjs",
     "test:images": "node qa/images.mjs",
+    "test:seo": "node qa/seo.mjs",
     "test:a11y": "node qa/a11y.mjs",
     "test:viewports": "node qa/viewports.mjs",
     "test:keyboard": "node qa/keyboard.mjs",
@@ -19,7 +20,7 @@
     "test:browsers": "node qa/browsers.mjs",
     "test:perf": "node qa/perf.mjs",
     "verify": "npm run typecheck && npm run lint && npm run build",
-    "verify:runtime": "npm run test:e2e && npm run test:links && npm run test:images && npm run test:a11y && npm run test:viewports && npm run test:keyboard && npm run test:zoom && npm run test:visual",
+    "verify:runtime": "npm run test:e2e && npm run test:links && npm run test:images && npm run test:seo && npm run test:a11y && npm run test:viewports && npm run test:keyboard && npm run test:zoom && npm run test:visual",
     "verify:all": "npm run verify && npm run verify:runtime"
   },
   "dependencies": {

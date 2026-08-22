@@ -67,6 +67,11 @@ jobs:
           PW_CHANNEL: chromium
         run: npm run test:images
 
+      - name: SEO (sitemap, robots, canonical, JSON-LD)
+        env:
+          PW_CHANNEL: chromium
+        run: npm run test:seo
+
       - name: Erişilebilirlik (axe — serious/critical = 0)
         env:
           PW_CHANNEL: chromium

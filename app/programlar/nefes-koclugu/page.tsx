@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CourseSchema } from "@/components/Server/StructuredData";
+import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
@@ -103,6 +103,13 @@ export default function NefesKocluguPage() {
   };
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Eğitim Programları", path: "/programlar" },
+          { name: "Nefes Koçluğu", path: "/programlar/nefes-koclugu" },
+        ]}
+      />
       <CourseSchema
         name="Nefes Koçluğu Eğitimi"
         description="Nefes anatomisi, doğal nefes analizi ve koçluk metodolojisi üzerine çevrimiçi canlı program."

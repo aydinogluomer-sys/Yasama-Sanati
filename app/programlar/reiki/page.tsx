@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CourseSchema } from "@/components/Server/StructuredData";
+import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
@@ -69,6 +69,13 @@ export default function ReikiPage() {
   };
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Eğitim Programları", path: "/programlar" },
+          { name: "Reiki", path: "/programlar/reiki" },
+        ]}
+      />
       <CourseSchema
         name="Reiki Eğitimi"
         description="Usui Reiki 1. ve 2. derece; enerji uyumlanması ve uygulama pratiği."

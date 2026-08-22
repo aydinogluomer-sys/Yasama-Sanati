@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import BlogDetailContent from "@/components/Client/BlogDetailContent";
 import { BLOG_POSTS } from "@/utils/blogData";
+import { ArticleSchema, BreadcrumbSchema } from "@/components/Server/StructuredData";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -56,9 +57,41 @@ export default async function BlogPostPage({ params }: Props) {
     relatedPosts.push(...extraPosts);
   }
 
+  // Türkçe tarihi ("24 Mayıs 2026") ISO'ya çevir; çevrilemezse alan yayınlanmaz.
+  const isoDate = toIsoDate(post.date);
+
   return (
-    <SubPageLayout title="Blog & Bilgi Bankası" hideHero>
-      <BlogDetailContent post={post} relatedPosts={relatedPosts} />
-    </SubPageLayout>
+    <>
+      <ArticleSchema
+        headline={post.title}
+        description={post.excerpt}
+        path={`/blog/${post.slug}`}
+        datePublished={isoDate}
+        image={post.coverImage}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]}
+      />
+      <SubPageLayout title="Blog & Bilgi Bankası" hideHero>
+        <BlogDetailContent post={post} relatedPosts={relatedPosts} />
+      </SubPageLayout>
+    </>
   );
+}
+
+const TR_MONTHS: Record<string, number> = {
+  ocak: 0, şubat: 1, mart: 2, nisan: 3, mayıs: 4, haziran: 5,
+  temmuz: 6, ağustos: 7, eylül: 8, ekim: 9, kasım: 10, aralık: 11,
+};
+
+function toIsoDate(value: string): string | undefined {
+  const m = value.trim().toLowerCase().match(/^(\d{1,2})\s+(\S+)\s+(\d{4})$/);
+  if (!m) return undefined;
+  const month = TR_MONTHS[m[2]];
+  if (month === undefined) return undefined;
+  return new Date(Date.UTC(Number(m[3]), month, Number(m[1]))).toISOString().slice(0, 10);
 }

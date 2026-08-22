@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CourseSchema } from "@/components/Server/StructuredData";
+import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
@@ -111,6 +111,13 @@ export default function YasamKocuPage() {
   };
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Eğitim Programları", path: "/programlar" },
+          { name: "Yaşam Koçluğu", path: "/programlar/yasam-kocu" },
+        ]}
+      />
       <CourseSchema
         name="Yaşam Koçluğu Eğitimi"
         description="Etkin dinleme, güçlü soru sorma ve hedef yönetimi üzerine profesyonel koçluk eğitimi."
