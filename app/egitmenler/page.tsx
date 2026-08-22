@@ -5,6 +5,7 @@ import SubPageLayout from "@/components/Server/SubPageLayout";
 import Link from "next/link";
 import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
+import { consultationHref } from "@/utils/consultation-context";
 import { motion, AnimatePresence } from "motion/react";
 
 interface Instructor {
@@ -81,7 +82,7 @@ export default function EgitmenlerPage() {
   return (
     <SubPageLayout
       title="Eğitmenlerimiz"
-      description="Yolculuğunuza eşlik eden, alanında derinleşmiş ve uluslararası sertifikalı rehber kadromuz."
+      description="Yolculuğunuza eşlik eden, alanında derinleşmiş rehber kadromuz."
     >
       <div className="max-w-6xl mx-auto space-y-16">
         {/* Category Filters */}
@@ -95,8 +96,8 @@ export default function EgitmenlerPage() {
               }}
               className={`relative pb-3 text-xs md:text-sm uppercase tracking-widest font-mono transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat
-                  ? "text-[#ca7d57] font-medium"
-                  : "text-[#ced1bf]/60 hover:text-white"
+                  ? "text-[var(--accent-copper-on-dark)] font-medium"
+                  : "text-[#ced1bf]/85 hover:text-white"
               }`}
             >
               {cat}
@@ -124,10 +125,10 @@ export default function EgitmenlerPage() {
                 >
                   {/* Left Col: Space Mono index and disciplines */}
                   <div className="flex items-center gap-4 md:gap-6 min-w-[200px] mb-2 md:mb-0">
-                    <span className="font-mono text-xs md:text-sm text-[#ca7d57]/60 group-hover:text-[#ca7d57] transition-colors duration-300 select-none">
+                    <span className="font-mono text-xs md:text-sm text-[var(--accent-copper-on-dark)]/90 group-hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300 select-none">
                       {padZero(idx)}
                     </span>
-                    <span className="font-mono text-2xs uppercase tracking-wider text-[#ced1bf]/40 group-hover:text-[#ced1bf]/60 transition-colors duration-300">
+                    <span className="font-mono text-2xs uppercase tracking-wider text-[#ced1bf]/85 group-hover:text-[#ced1bf]/85 transition-colors duration-300">
                       {ins.disciplines.join(" · ")}
                     </span>
                   </div>
@@ -141,13 +142,13 @@ export default function EgitmenlerPage() {
 
                   {/* Right Col: Role / Title & Plus Icon */}
                   <div className="flex items-center justify-between md:justify-end gap-6 min-w-[320px] w-full md:w-auto">
-                    <span className="text-2xs md:text-xs uppercase tracking-widest text-[#ca7d57] font-medium transition-colors duration-300">
+                    <span className="text-2xs md:text-xs uppercase tracking-widest text-[var(--accent-copper-on-dark)] font-medium transition-colors duration-300">
                       {ins.role}
                     </span>
 
                     <span className="flex-shrink-0 flex items-center justify-center size-8 border border-[#ced1bf]/20 rounded-full group-hover:border-[#ca7d57] group-hover:bg-[#ca7d57]/10 transition-all duration-300">
                       <span
-                        className={`text-base font-light text-[#ced1bf] group-hover:text-[#ca7d57] transform transition-transform duration-300 leading-none ${
+                        className={`text-base font-light text-[#ced1bf] group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${
                           isOpen ? "rotate-45" : ""
                         }`}
                       >
@@ -182,13 +183,13 @@ export default function EgitmenlerPage() {
                           </p>
 
                           <div className="flex flex-wrap gap-2 pt-2">
-                            <span className="text-2xs font-mono text-[#ced1bf]/40 uppercase tracking-widest block self-center mr-2">
+                            <span className="text-2xs font-mono text-[#ced1bf]/85 uppercase tracking-widest block self-center mr-2">
                               Uzmanlık Alanları:
                             </span>
                             {ins.disciplines.map((d, i) => (
                               <span
                                 key={i}
-                                className="bg-[#ced1bf]/8 text-[#ced1bf]/70 text-xs px-2.5 py-1 rounded border border-[#ced1bf]/5"
+                                className="bg-[#ced1bf]/8 text-[#ced1bf]/85 text-xs px-2.5 py-1 rounded border border-[#ced1bf]/5"
                               >
                                 {d}
                               </span>
@@ -196,9 +197,9 @@ export default function EgitmenlerPage() {
                           </div>
 
                           <div className="pt-4">
-                            <Link href="/#on-kayit">
+                            <Link href={consultationHref({ from: "/egitmenler" })}>
                               <BorderedButton className="inline-flex cursor-pointer items-center gap-4 px-6 py-4 text-sm text-white [&_path]:[stroke:white] [&_svg]:[stroke:white]">
-                                Görüşme Randevusu Al
+                                Görüşme Talebi Gönder
                                 <NavigateSVG fill="#FFFFFF" className="size-2.5 mr-2.5" />
                               </BorderedButton>
                             </Link>
@@ -215,7 +216,7 @@ export default function EgitmenlerPage() {
 
         {/* Quality Handoff Statement */}
         <div className="p-8 bg-[#ced1bf]/5 rounded border border-[#ced1bf]/10 text-center max-w-3xl mx-auto">
-          <p className="text-sm md:text-base font-light text-[#ced1bf]/70 leading-relaxed">
+          <p className="text-sm md:text-base font-light text-[#ced1bf]/85 leading-relaxed">
             Tüm seanslarımız ve eğitim programlarımız, katılımcılarımızın fiziksel ve zihinsel durumuna göre kişiselleştirilir. İhtiyacınıza en uygun uzmanla ön görüşme yapmak için formu doldurabilirsiniz.
           </p>
         </div>
