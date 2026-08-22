@@ -335,3 +335,47 @@ body:has([data-consultation-route])::after {
     opacity: 1;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Alt sayfa bölüm açılımı — ilerlemeci geliştirme (progressive enhancement).
+
+   Alt sayfaların hero altındaki içeriği hiç hareket etmiyordu. Buraya scroll'a
+   bağlı bir açılım eklenirken bilinçli olarak JS KULLANILMADI ve içerik SSR'da
+   ASLA gizlenmedi.
+
+   Nedeni ölçülmüş bir derstir: sunucudan gelen içeriği `opacity:0` ile gizleyip
+   hidrasyonun açmasını beklemek, JS gelene kadar boş sayfa demektir ve
+   erişilebilirlik açısından da metni okunmaz halde bırakır (bkz. docs/
+   RELEASE-READINESS.md, ScrollRevealText kontrast tabanı).
+
+   Bunun yerine CSS `animation-timeline: view()` kullanılıyor:
+     • destekleyen tarayıcıda (Chromium) bölümler görünürlüğe girerken yükselir
+     • desteklemeyende (bugün Firefox/WebKit) içerik olduğu gibi, statik görünür
+     • JS yok, SSR'da hiçbir şey gizli değil, tek bayt ek yük yok
+     • prefers-reduced-motion'da hiç çalışmaz
+
+   OPAKLIK ANİMASYONU YOK — bilerek. İlk sürüm 0.6'dan 1'e opaklık da
+   animasyonluyordu; ölçünce sayfa açılışında GÖRÜNÜR alandaki bir bölümün 0.75
+   opaklıkta durduğu çıktı. Bu, mevcut metin token opaklıklarıyla çarpışıp
+   (örn. text-[#ced1bf]/70 × 0.75) kontrastı tabanın altına indirebilirdi.
+   Sadece hareket animasyonu yapılıyor: aynı "yükselme" hissi, sıfır
+   okunabilirlik riski.
+   --------------------------------------------------------------------------- */
+@keyframes sectionRise {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal-sections > * > * {
+      animation: sectionRise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+  }
+}

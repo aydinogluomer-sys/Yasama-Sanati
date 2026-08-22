@@ -105,9 +105,12 @@ export default function SubPageLayout({
         <main
           id="main-content"
           className={
+            // `reveal-sections`: bölümler görünürlüğe girerken yükselir. Saf CSS
+            // (animation-timeline: view()) — desteklemeyen tarayıcıda içerik
+            // statik ve tam görünür kalır. Bkz. app/globals.css.
             hideHero
-              ? "px-6 pt-32 pb-16 md:px-16 md:pt-44 md:pb-28"
-              : "px-6 py-16 md:px-16 md:py-28"
+              ? "reveal-sections px-6 pt-32 pb-16 md:px-16 md:pt-44 md:pb-28"
+              : "reveal-sections px-6 py-16 md:px-16 md:py-28"
           }
         >
           {children}
