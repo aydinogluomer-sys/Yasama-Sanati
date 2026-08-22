@@ -51,4 +51,7 @@ This file is for AI agents and developers working on the Yasama Sanati site.
 
 - The repo already has a committed history of the footer loop.
 - Keep changes scoped and avoid broad rewrites unless the reference or tests require them.
-- Treat `docs/implementation-awwwards-polish.md` as the local mirror of the source-of-truth implementation plan when present.
+- **Tek aktif plan: `docs/RELEASE-PLAN.md`.** Başka bir "implementation" planı açma.
+- Geçmiş planların tamamı `docs/archive/` altında tarihli adlarla durur (2026-08-21'de 10 dosya
+  taşındı). Oradakiler **tarihsel kayıt**; güncel iş için referans alınmaz.
+- `awwwards-loop/implementation.md` awwwards döngüsünün kendi çalışma dosyasıdır, plan değildir.
