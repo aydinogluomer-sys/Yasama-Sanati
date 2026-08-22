@@ -125,4 +125,17 @@ for (const [vpLabel, width, height, mobile] of VIEWPORTS) {
 await browser.close();
 if (created) console.log(`\n${created} baseline olusturuldu (ilk calistirma veya --update).`);
 console.log(`\n${VIEWPORTS.length} viewport x ${ROUTES.length} rota — gorsel regresyon sorunu: ${failures}`);
+// Baseline yoksa bu bir KARŞILAŞTIRMA değildir; "PASS" demek yanıltıcı olur.
+// Daha önce baseline'ı olmayan kareler sessizce üretilip kapı yeşil görünüyordu.
+if (created > 0 && !UPDATE) {
+  console.log(
+    `
+BASELINE MISSING — ${created} kare ilk kez üretildi, karşılaştırma YAPILMADI.
+` +
+      `Bu koşu bir regresyon kapısı değildir. Kareleri gözle onayladıktan sonra tekrar
+` +
+      `çalıştırın; ikinci koşu gerçek karşılaştırmadır.`,
+  );
+  process.exit(2);
+}
 process.exit(failures > 0 ? 1 : 0);

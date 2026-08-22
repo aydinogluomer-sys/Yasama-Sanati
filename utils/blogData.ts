@@ -50,7 +50,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </blockquote>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Bütünsel Sağlık Nedir?</h3>
-      <p class="mb-6">Bütünsel şifa yaklaşımında, insan varlığı sadece et ve kemikten oluşan biyolojik bir makine olarak görülmez. Bizler fiziksel bedenimiz, zihinsel yapımız, duygusal dünyamız ve enerjetik alanımızla bir bütünüz. Bir bölgede meydana gelen tıkanıklık (örneğin aşırı zihinsel yorgunluk), er ya da geç fiziksel bedende ağrı veya hastalık olarak kendini gösterir.</p>
+      <p class="mb-6">Bütünsel şifa yaklaşımında, insan varlığı sadece et ve kemikten oluşan biyolojik bir makine olarak görülmez. Bizler fiziksel bedenimiz, zihinsel yapımız, duygusal dünyamız ve enerjetik alanımızla bir bütünüz. Geleneksel öğreti bu katmanları birbirinden ayırmaz; zihinsel yorgunluğun bedende de hissedildiğini söyleyen kadim bir bakıştır. Bu, bir hastalık nedeni açıklaması değildir.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Altı Şifa Disiplininin Ortak Rolü</h3>
       <p class="mb-6">Nefes Koçluğu, Meridyen Terapisi, Hipnoterapi ve Reiki gibi kadim ve modern yaklaşımlar ortak bir zeminde buluşur: kişinin kendi bedenine ve zihnine dikkatini yöneltmesi.</p>
@@ -58,7 +58,7 @@ export const BLOG_POSTS: BlogPost[] = [
         <li><strong>Nefes:</strong> Yavaş ve bilinçli nefes çalışmaları, gevşeme ve dikkat üzerine en çok araştırılan uygulamalardan biridir.</li>
         <li><strong>Meridyenler:</strong> Geleneksel Çin tıbbı, akupunktur noktaları ve Qi kavramı üzerinden bedeni bütünsel bir harita olarak okur.</li>
         <li><strong>Zihinsel Dönüşüm:</strong> Bilinçaltı seviyesinde çalışan hipnoterapi gibi yöntemlerle bizi sınırlayan eski inanç kalıplarını serbest bırakır.</li>
-        <li><strong>Reiki:</strong> Evrensel yaşam enerjisini doğrudan çakralarımıza aktararak derin bir zihinsel ve fiziksel dinlenme sağlar.</li>
+        <li><strong>Reiki:</strong> Geleneksel öğretide evrensel yaşam enerjisinin çakralar üzerinden yönlendirilmesi olarak tarif edilir; katılımcılar çoğunlukla derin bir dinlenme hissi bildirir.</li>
       </ul>
 
       <p class="mb-6">Kendinize şu soruyu sorun: En son ne zaman sadece nefesinizle baş başa kaldınız ve bedeninizin ne anlatmak istediğini dinlediniz? Şifalanma süreci bir yolculuktur ve bu yolculukta atacağınız ilk adım, kendi bütünlüğünüzü kabul etmektir.</p>
@@ -101,7 +101,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Meridyen Terapisi Nedir? Bedenin Enerji Ağlarını Keşfedin",
     category: "Meridyen Terapi",
     date: "28 Nisan 2026",
-    excerpt: "Geleneksel Çin Tıbbı'nın temelini oluşturan 14 ana enerji kanalını ve bu hatlar üzerindeki tıkanıklıkların fiziksel / duygusal rahatsızlıklara olan etkilerini detaylıca inceliyoruz.",
+    excerpt: "Geleneksel Çin Tıbbı'nın temelini oluşturan 14 ana enerji kanalını ve geleneksel öğretinin bu hatlarla ilişkilendirdiği fiziksel / duygusal temaları detaylıca inceliyoruz.",
     readTime: "6 Dk",
     coverImage: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80",
     author: {
@@ -110,7 +110,7 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Meridyen", "Akupresür", "Çin Tıbbı", "Yaşam Enerjisi"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Geleneksel Çin Tıbbı'nın temelini oluşturan 14 ana enerji kanalını ve bu hatlar üzerindeki tıkanıklıkların fiziksel / duygusal rahatsızlıklara olan etkilerini detaylıca inceliyoruz.</p>
+      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Geleneksel Çin Tıbbı'nın temelini oluşturan 14 ana enerji kanalını ve geleneksel öğretinin bu hatlarla ilişkilendirdiği fiziksel / duygusal temaları detaylıca inceliyoruz.</p>
       
       <p class="mb-6">Modern anatomi bize kan damarlarını ve sinir yollarını öğretir. Ancak kadim doğu bilgeliği, fiziksel bedenimizin hemen altında, gözle görülmeyen muazzam bir enerji haritası olduğunu söyler. Meridyenler, yaşam enerjimiz olan "Qi"nin tüm bedeni dolaşmasını sağlayan nehirler gibidir.</p>
 
@@ -181,7 +181,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p class="mb-6">Japonca bir kelime olan Reiki; "Rei" (Evrensel, heryerde var olan) ve "Ki" (Ruhsal yaşam enerjisi) sözcüklerinin birleşiminden oluşur. Bu yöntem, evrende serbestçe dolaşan saf ve yüksek frekanslı şifa enerjisini ellerimiz aracılığıyla kendimize veya bir başkasına aktarma sanatıdır.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Reiki'nin 5 Temel Prensibi</h3>
-      <p class="mb-6">Reiki sadece seanslarda ellerimizi koymak değildir; o bir zihinsel yaşam disiplinidir. Mikao Usui tarafından ortaya konan bu 5 altın kuralı her gün tekrarlamak enerjisel korumanızı güçlendirir:</p>
+      <p class="mb-6">Reiki sadece seanslarda ellerimizi koymak değildir; o bir zihinsel yaşam disiplinidir. Mikao Usui tarafından ortaya konan geleneksel Reiki öğretisinde bu 5 ilke günlük bir pratik olarak önerilir:</p>
       <ol class="list-decimal list-inside space-y-2 mb-8 text-[#ced1bf]/80 font-light">
         <li>Sırf bugün, öfkelenme.</li>
         <li>Sırf bugün, endişelenme.</li>
