@@ -21,7 +21,10 @@ const VIEWPORTS = [
   ["1920×1080", 1920, 1080, false],
 ];
 
-const ROUTES = ["/", "/programlar", "/programlar/reiki", "/on-gorusme", "/sss", "/the-story"];
+// Ortak rota listesi. Eskiden burada 6 rotalık ayrı bir liste vardı ve /blog
+// içinde yoktu; blog görselleri kırıldığında bu kapı konsol hatalarını topluyor
+// olmasına rağmen o rotayı hiç ziyaret etmediği için regresyonu kaçırdı.
+import { ROUTES } from "./routes.mjs";
 
 const browser = await chromium.launch(CHANNEL === "chromium" ? {} : { channel: CHANNEL });
 let failures = 0;

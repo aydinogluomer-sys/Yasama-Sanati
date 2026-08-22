@@ -8,19 +8,8 @@ import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 
 const BASE = process.argv[2] || "http://127.0.0.1:3400";
-const ROUTES = [
-  "/",
-  "/programlar",
-  "/programlar/reiki",
-  "/on-gorusme",
-  "/sss",
-  "/egitmenler",
-  "/the-story",
-  "/blog",
-  "/community",
-  "/kvkk",
-  "/privacy-terms",
-];
+// Ortak rota listesi (qa/routes.mjs) — yeni sayfa eklenince tek yerde guncellenir.
+import { ROUTES } from "./routes.mjs";
 const VIEWPORTS = [
   ["masaustu", 1440, 900],
   ["mobil", 390, 844],

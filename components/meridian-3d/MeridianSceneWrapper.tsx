@@ -38,9 +38,19 @@ export default function MeridianSceneWrapper() {
 
   return (
     <div ref={rootRef} className="h-full w-full" aria-label="Meridyen anatomi deneyimi">
-      <p id="meridian-scene-description" className="sr-only">{SCENE_DESCRIPTION}</p>
+      {/* Sahne açıklaması yalnız WebGL sürümünde gizli metin olarak verilir.
+          Statik görünümde aynı metin zaten GÖRÜNÜR paragrafta duruyor; ikisi
+          birden render edilirse ekran okuyucu aynı cümleyi iki kez okur. */}
+      {!useStaticFallback && (
+        <p id="meridian-scene-description" className="sr-only">{SCENE_DESCRIPTION}</p>
+      )}
       {useStaticFallback ? (
-        <div className="flex h-full min-h-[560px] items-center justify-center bg-[#030806] px-6 text-center" role="img" aria-describedby="meridian-scene-description">
+        /* role="img" kaldırıldı. İki gerekçe: (1) axe `role-img-alt` erişilebilir
+           AD ister, aria-describedby yalnız açıklamadır — kural ihlal ediyordu;
+           (2) daha önemlisi bu kutu gerçek metin taşıyor (başlık + iki paragraf).
+           role="img" onu tek bir etikete indirgeyip içeriği yardımcı teknolojiden
+           gizler. Metin olarak okunması doğru davranış. */
+        <div className="flex h-full min-h-[560px] items-center justify-center bg-[#030806] px-6 text-center">
           <div className="max-w-md rounded-2xl border border-white/[0.08] bg-[#0b1411]/90 p-7 shadow-2xl">
             <span className="text-4xs font-medium uppercase tracking-[0.24em] text-[#e0a96d]">Erişilebilir görünüm</span>
             <h3 className="mt-3 text-xl font-medium text-white">Bedenin enerji haritası</h3>

@@ -11,8 +11,15 @@ const nextConfig: NextConfig = {
     // elle AVIF'e çevirmeye gerek yok. AVIF önce denenir, desteklemeyen tarayıcı
     // WebP'ye, o da yoksa orijinale düşer.
     formats: ["image/avif", "image/webp"],
-    // `images.unsplash.com` remote pattern'i kaldırıldı: kodda hiçbir yerde
-    // uzak görsel kullanılmıyor, açık bırakmanın faydası yok.
+    // Blog kapak görselleri ve yazar avatarları `utils/blogData.ts` içinde uzak
+    // Unsplash URL'leri olarak duruyor ve `next/image` ile render ediliyor.
+    // Bu izin kaldırıldığında optimizer istek anında 400 döner ve /blog ile
+    // /blog/[slug] üzerindeki tüm görseller kırılır (build bunu yakalamaz —
+    // doğrulama derleme değil istek anındadır). Regresyon kaydı: D072.
+    // Görseller yerel varlıklara taşındığında bu izin tekrar kaldırılabilir.
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
+    ],
   },
 };
 
