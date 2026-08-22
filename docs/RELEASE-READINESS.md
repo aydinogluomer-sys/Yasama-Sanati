@@ -10,11 +10,26 @@
 
 ## SUBMISSION BLOCKER — bunlar kapanmadan gönderilmemeli
 
-### 1. Supabase projesi duraklamış — formlar production'da çalışmıyor
-`htpduorvqmidoprkkgwy` (`yasama-sanati`) durumu **INACTIVE**. Ücretsiz katmanda
-otomatik duraklama. Bu haliyle ön kayıt ve bülten formları canlıda veri yazamaz.
-Ayrıca duraklamış proje RLS denetimine de kapalı (bağlantı zaman aşımı).
-→ **Kullanıcı işlemi:** projeyi geri yükle, sonra RLS denetimi yapılabilir.
+### 1. Supabase projesi duraklamış — ve ücretsiz slot dolu
+`htpduorvqmidoprkkgwy` (`yasama-sanati`) durumu **INACTIVE**. Ön kayıt ve bülten
+formları canlıda veri yazamaz; duraklamış proje RLS denetimine de kapalı
+(bağlantı zaman aşımı).
+
+**Geri yükleme denendi ve REDDEDİLDİ.** Supabase ücretsiz katmanı organizasyon
+başına **aynı anda 2 aktif proje** veriyor ve iki slot da dolu:
+
+| Proje | Durum |
+|---|---|
+| Mas Technic Site | ACTIVE_HEALTHY |
+| MeritFlow | ACTIVE_HEALTHY |
+| **yasama-sanati** | **INACTIVE** |
+| Y Project · Alışkanlık Uygulaması | INACTIVE |
+
+Yani bu bir "butona bas" işi değil; bir slot boşaltma kararı gerektiriyor:
+diğer iki projeden biri duraklatılacak ya da hesap Pro'ya yükseltilecek.
+
+→ **Kullanıcı kararı.** Başka bir canlı ürünü kapatmak bu çalışmanın kapsamı
+dışında; karar verilmeden dokunulmadı.
 
 ### 2. Mobil LCP hedefi yalnız AĞ KISITLIYKEN karşılanmıyor
 Temiz makinede 5'er koşu, medyan (yayılım), soğuk önbellek, prod build, 390×844:
