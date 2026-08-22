@@ -10,26 +10,37 @@
 
 ## SUBMISSION BLOCKER — bunlar kapanmadan gönderilmemeli
 
-### 1. Supabase projesi duraklamış — ve ücretsiz slot dolu
-`htpduorvqmidoprkkgwy` (`yasama-sanati`) durumu **INACTIVE**. Ön kayıt ve bülten
-formları canlıda veri yazamaz; duraklamış proje RLS denetimine de kapalı
-(bağlantı zaman aşımı).
+> 1. madde 2026-08-22'de kapandı; numaralandırma tarihsel tutuldu.
 
-**Geri yükleme denendi ve REDDEDİLDİ.** Supabase ücretsiz katmanı organizasyon
-başına **aynı anda 2 aktif proje** veriyor ve iki slot da dolu:
+### ~~1. Supabase~~ — KAPANDI: backend gerekmiyor (proje sahibi kararı, 2026-08-22)
 
-| Proje | Durum |
-|---|---|
-| Mas Technic Site | ACTIVE_HEALTHY |
-| MeritFlow | ACTIVE_HEALTHY |
-| **yasama-sanati** | **INACTIVE** |
-| Y Project · Alışkanlık Uygulaması | INACTIVE |
+Site bir **vitrin** olarak yayınlanıyor; form gönderimlerinin veri yazması
+beklenmiyor. `yasama-sanati` projesi INACTIVE kalacak. (Zaten geri
+yüklenemiyordu: ücretsiz katmanın 2 aktif proje slotu *Mas Technic Site* ve
+*MeritFlow* tarafından dolu ve başka bir canlı ürünü kapatmak bu işin kapsamı
+dışındaydı.)
 
-Yani bu bir "butona bas" işi değil; bir slot boşaltma kararı gerektiriyor:
-diğer iki projeden biri duraklatılacak ya da hesap Pro'ya yükseltilecek.
+**Formların bu haldeki davranışı ölçüldü** — sessizce kırılmıyorlar:
 
-→ **Kullanıcı kararı.** Başka bir canlı ürünü kapatmak bu çalışmanın kapsamı
-dışında; karar verilmeden dokunulmadı.
+```
+POST (server action)        HTTP 200
+geri bildirim               535 ms
+kullanıcının gördüğü        role="alert" → "Kayıt sırasında bir hata oluştu.
+                            Lütfen tekrar deneyin."
+```
+
+Donma yok, ham hata yok, çökme yok; mesaj erişilebilir bir uyarı bölgesinde ve
+yarım saniyede geliyor. `utils/supabase.ts` yapılandırma yoksa `null` dönüyor ve
+`app/actions.ts` her hata yolunda kullanıcı-güvenli Türkçe mesaj veriyor.
+
+Keepalive workflow'unun **zamanlaması kapatıldı**: duraklamış bir API'yi haftada
+iki kez yoklayıp her seferinde başarısız bildirim üretecekti. İş elle
+tetiklenebilir olarak duruyor; backend tekrar gerekirse cron satırı geri açılır.
+
+**Kalan not:** ziyaretçi formu doldurup hata mesajı alıyor. Vitrin için kabul
+edilebilir ama ideal değil — formların tamamen kaldırılması ya da "şu an kayıt
+alınmıyor" gibi baştan dürüst bir duruma çevrilmesi ayrı bir karar. Proje
+sahibinin talebi olmadan içeriğe dokunulmadı.
 
 ### 2. Mobil LCP hedefi yalnız AĞ KISITLIYKEN karşılanmıyor
 Temiz makinede 5'er koşu, medyan (yayılım), soğuk önbellek, prod build, 390×844:

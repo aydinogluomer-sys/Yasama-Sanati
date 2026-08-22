@@ -1,16 +1,24 @@
-# Keeps the free-tier Supabase project (yasama-sanati) from auto-pausing.
-# Paused projects drop their API from DNS and the newsletter / ön-kayıt forms
-# silently fail with "Bir hata oluştu" (see docs/issues.md, 2026-07-12).
+# ZAMANLAMA KAPALI — 2026-08-22.
 #
-# Setup (one-time, repo Settings → Secrets and variables → Actions):
+# Bu iş, ücretsiz katmandaki Supabase projesinin (yasama-sanati) otomatik
+# duraklamasını engellemek içindi. Proje sahibi backend'e ihtiyaç olmadığına
+# karar verdi: site bir vitrin olarak yayınlanıyor, formlar veri yazmıyor.
+# Proje INACTIVE kalacak ve zaten geri yüklenemiyor — organizasyonun ücretsiz
+# 2 aktif proje slotu başka iki ürün tarafından dolu.
+#
+# Zamanlama açık bırakılsaydı haftada iki kez duraklamış bir API'yi yoklayıp
+# başarısız olacak ve her seferinde bildirim üretecekti. Bu yüzden `schedule`
+# kaldırıldı; iş yalnız elle tetiklenebilir durumda duruyor.
+#
+# Backend tekrar gerekirse: bir slot boşalt, projeyi geri yükle, aşağıdaki
+# cron satırını geri aç.
 #   SUPABASE_URL      = https://htpduorvqmidoprkkgwy.supabase.co
-#   SUPABASE_ANON_KEY = the publishable anon key (NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY)
-name: Supabase keep-alive
+#   SUPABASE_ANON_KEY = publishable anon key
+name: Supabase keep-alive (elle)
 
 on:
-  schedule:
-    # Twice a week (Mon & Thu 06:17 UTC) — well inside the ~7-day pause window.
-    - cron: "17 6 * * 1,4"
+  # schedule:
+  #   - cron: "17 6 * * 1,4"
   workflow_dispatch: {}
 
 jobs:
