@@ -4,7 +4,7 @@ import HandwritingMark from "@/components/Client/HandwritingMark";
 import StyledLink from "@/components/Server/StyledLink";
 import { Fragment } from "react";
 
-export default function ElementisStoryServer() {
+export default function AkademiHikayesiServer() {
   const textLines = {
     mobile: [
       <Fragment key="m-1">Bu akademi,</Fragment>,
@@ -12,7 +12,7 @@ export default function ElementisStoryServer() {
       <Fragment key="m-3">ayrı ayrı öğrenilen</Fragment>,
       <Fragment key="m-4">disiplinlerin</Fragment>,
       <Fragment key="m-5">
-        <span className="text-[#ca7d57] font-serif italic">tek bir soruda</span>
+        <span className="text-[var(--accent-copper-on-dark)] font-serif italic">tek bir soruda</span>
       </Fragment>,
       <Fragment key="m-6">birleşmesiyle doğdu:</Fragment>,
       <Fragment key="m-7">insan kendine</Fragment>,
@@ -22,7 +22,7 @@ export default function ElementisStoryServer() {
       <Fragment key="d-1">Bu akademi, yıllar içinde</Fragment>,
       <Fragment key="d-2">ayrı ayrı öğrenilen disiplinlerin</Fragment>,
       <Fragment key="d-3">
-        <span className="text-[#ca7d57] font-serif italic">tek bir soruda</span> birleşmesiyle
+        <span className="text-[var(--accent-copper-on-dark)] font-serif italic">tek bir soruda</span> birleşmesiyle
       </Fragment>,
       <Fragment key="d-4">doğdu: insan kendine</Fragment>,
       <Fragment key="d-5">nasıl geri döner?</Fragment>,
@@ -30,14 +30,14 @@ export default function ElementisStoryServer() {
   };
   return (
     <>
-      <EditorialSectionTitle index="04" tone="dark" className="md:col-span-3">
+      <EditorialSectionTitle index="03" as="h2" tone="dark" className="md:col-span-3">
         Yaşama Sanatı Hikayesi
       </EditorialSectionTitle>
       <div className="text-[#2B3530] max-md:mt-12 md:col-span-6 md:col-start-6">
         <div className="relative inline-block">
           <ResponsiveMaskText
             {...textLines}
-            className="font-serif font-normal text-display-s tracking-[-0.01em] text-wrap [&_span]:text-[#A85F33] [&>:first-child]:indent-23"
+            className="font-serif font-normal text-display-s tracking-[-0.01em] text-wrap [&_span]:text-[var(--accent-copper-on-light)] [&>:first-child]:indent-23"
           />
           <HandwritingMark
             trigger="inView"

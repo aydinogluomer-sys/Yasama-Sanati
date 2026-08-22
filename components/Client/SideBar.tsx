@@ -1,24 +1,32 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import Image, { StaticImageData } from "next/image";
 import CustomLink from "@/components/Server/CustomLink";
 import DashedLink from "@/components/Server/DashedLink";
 import CloseIcon from "@/components/SVGComponents/CloseIcon";
-import Home from "@/public/SideBar/home.png";
-import Destinations from "@/public/SideBar/destination.png";
-import Wellness from "@/public/SideBar/wellness.png";
-import Innovation from "@/public/SideBar/innovation.png";
-import Nature from "@/public/SideBar/nature.png";
-import Community from "@/public/SideBar/community.png";
-import TheStory from "@/public/SideBar/the-story.png";
-import NewDevelopments from "@/public/SideBar/new-developments.png";
-import PressRoom from "@/public/SideBar/press-room.png";
-import Careers from "@/public/SideBar/careers.png";
+// One authored frame per menu entry, named after the entry it belongs to. The set this replaced
+// was the Elementis template's (careers / press-room / new-developments / destination …), mapped
+// to Turkish labels at random, and two files were doing double duty: community.png served both
+// Topluluk and Hipnoterapi, destination.png both Programlarımız and Meridyen Terapi.
+import AnaSayfa from "@/public/SideBar/ana-sayfa.jpg";
+import Programlar from "@/public/SideBar/programlar.jpg";
+import Topluluk from "@/public/SideBar/topluluk.jpg";
+import Blog from "@/public/SideBar/blog.jpg";
+import Sss from "@/public/SideBar/sss.jpg";
+import OnGorusme from "@/public/SideBar/on-gorusme.jpg";
+import YasamKoclugu from "@/public/SideBar/yasam-koclugu.jpg";
+import NefesKoclugu from "@/public/SideBar/nefes-koclugu.jpg";
+import MucizelerKursu from "@/public/SideBar/mucizeler-kursu.jpg";
+import Hipnoterapi from "@/public/SideBar/hipnoterapi.jpg";
+import MeridyenTerapi from "@/public/SideBar/meridyen-terapi.jpg";
+import Reiki from "@/public/SideBar/reiki.jpg";
 import { useImageReveal } from "@/hooks/useImageReveal";
 import StayConnected from "@/components//Server/StayConnected";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { consultationHref } from "@/utils/consultation-context";
 
 interface LinkItem {
   href: string;
@@ -30,20 +38,23 @@ interface SideBarProps {
   setOpenSideBar: Dispatch<SetStateAction<boolean>>;
 }
 export default function SideBar({ setOpenSideBar }: SideBarProps) {
+  const pathname = usePathname();
+  const consultationUrl = consultationHref({ from: pathname });
   const { imgContainerRef, handleFocus } = useImageReveal();
+  const panelRef = useRef<HTMLDivElement>(null);
   const data: LinkItem[] = [
-    { href: "/", link: "Ana Sayfa", src: Home },
-    { href: "/programlar", link: "Programlarımız", src: Destinations },
-    { href: "/community", link: "Topluluk", src: Community },
-    { href: "/blog", link: "Blog", src: PressRoom },
-    { href: "/sss", link: "Sık Kullanılan Sorular", src: NewDevelopments },
-    { href: "/#on-kayit", link: "İletişim", src: Careers },
-    { href: "/programlar/yasam-kocu", link: "Yaşam Koçluğu", src: Nature },
-    { href: "/programlar/nefes-koclugu", link: "Nefes Koçluğu", src: Wellness },
-    { href: "/programlar/mucizeler-kursu", link: "Mucizeler Kursu", src: Innovation },
-    { href: "/programlar/hipnoterapi", link: "Hipnoterapi", src: Community },
-    { href: "/programlar/meridyen-terapi", link: "Meridyen Terapi", src: Destinations },
-    { href: "/programlar/reiki", link: "Reiki", src: TheStory },
+    { href: "/", link: "Ana Sayfa", src: AnaSayfa },
+    { href: "/programlar", link: "Programlarımız", src: Programlar },
+    { href: "/community", link: "Topluluk", src: Topluluk },
+    { href: "/blog", link: "Blog", src: Blog },
+    { href: "/sss", link: "Sık Kullanılan Sorular", src: Sss },
+    { href: consultationUrl, link: "Ön Görüşme", src: OnGorusme },
+    { href: "/programlar/yasam-kocu", link: "Yaşam Koçluğu", src: YasamKoclugu },
+    { href: "/programlar/nefes-koclugu", link: "Nefes Koçluğu", src: NefesKoclugu },
+    { href: "/programlar/mucizeler-kursu", link: "Mucizeler Kursu", src: MucizelerKursu },
+    { href: "/programlar/hipnoterapi", link: "Hipnoterapi", src: Hipnoterapi },
+    { href: "/programlar/meridyen-terapi", link: "Meridyen Terapi", src: MeridyenTerapi },
+    { href: "/programlar/reiki", link: "Reiki", src: Reiki },
   ];
 
   const temp = {
@@ -62,8 +73,37 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
       opacity: 1,
     },
   };
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const focusable = Array.from(
+      panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+    );
+    focusable[0]?.focus();
+
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== "Tab" || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    panel.addEventListener("keydown", trapFocus);
+    return () => panel.removeEventListener("keydown", trapFocus);
+  }, []);
   return (
     <motion.div
+      ref={panelRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site menüsü"
       key="Side-bar"
       initial={{ backgroundColor: "rgba(0,0,0,0)" }}
       animate={{
@@ -82,9 +122,12 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
         },
       }}
       className="fixed top-0 z-[200] w-full"
+      onClick={(event) => {
+        if ((event.target as HTMLElement).closest("a")) setOpenSideBar(false);
+      }}
     >
       <motion.div
-        className="flex h-screen bg-[#CED1BF]"
+        className="flex h-screen overflow-y-auto bg-[#CED1BF]"
         initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
         animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
         transition={{
@@ -121,14 +164,14 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
               style={{ zIndex: -i }}
               className="absolute inset-0"
             >
-              <Image src={src} alt={link} fill style={{ objectFit: "cover" }} />
+              <Image src={src} alt="" aria-hidden="true" fill sizes="45vw" style={{ objectFit: "cover" }} />
             </motion.div>
           ))}
         </motion.div>
         <div className="flex-1 pt-7000svh pr-16 pb-3500svh pl-48">
           <span className="text-1800svh text-[#2b3530]/80">Sayfaları keşfedin</span>
           <nav
-            aria-label="pages"
+            aria-label="Sayfalar"
             className="mt-6400svh mb-8000svh grid grid-flow-col-dense grid-cols-2 grid-rows-6"
           >
             {data.map((eachColData, i) => (
@@ -168,9 +211,13 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
             >
               <div className="text-[#2b3530]/80">Bize Ulaşın</div>
               <div className="flex items-center [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
-                <DashedLink>info@yasamasanati.com</DashedLink>
+                <a href="mailto:info@yasamasanati.com">
+                  <DashedLink>info@yasamasanati.com</DashedLink>
+                </a>
                 <div className="mx-5">|</div>
-                <DashedLink>+90 532 789 37 53</DashedLink>
+                <a href="tel:+905327893753">
+                  <DashedLink>+90 532 789 37 53</DashedLink>
+                </a>
               </div>
             </motion.div>
             <motion.div
@@ -204,9 +251,11 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
           </motion.div>
         </div>
         <motion.button
+          type="button"
+          aria-label="Menüyü kapat"
           initial="initial"
           whileHover="whileHover"
-          className="absolute top-8 right-16 cursor-pointer"
+          className="absolute top-6 right-14 grid min-h-11 min-w-11 cursor-pointer place-items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
           // p-2000svh
           onClick={() => setOpenSideBar((prev) => !prev)}
         >
