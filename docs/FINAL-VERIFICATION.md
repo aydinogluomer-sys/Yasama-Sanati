@@ -12,7 +12,7 @@
 
 ## PHASE 1 — DENETİM SONUCU
 
-### Özet
+### Özet — denetim anı (bu turun BAŞI)
 
 ```
 TOPLAM MADDE   47
@@ -22,11 +22,75 @@ OPEN           15
 UNVERIFIED      7
 ```
 
+### Özet — bu turun SONU
+
+```
+TOPLAM MADDE   47
+DONE           30
+PARTIAL         3
+OPEN            5
+UNVERIFIED      9
+```
+
+`UNVERIFIED` sayısı arttı çünkü denetim, önceki turda "tamamlandı" sayılan üç
+maddenin aslında doğrulanmamış olduğunu ortaya çıkardı (CI koşusu, RUM, ekran
+okuyucu). Bunları `DONE` bırakmak yerine dürüst etikete taşımak sayıyı yükseltti.
+
+**Kapatılanlar:** V-01 (blog görsel regresyonu), B-02/B-03/B-06 (toolchain),
+C-04/C-05/C-06 (e2e, links, visual), D-03/D-04/D-06 (zoom metodolojisi,
+cross-browser, konsol toplama), E-02/E-03 (ağ kısıtı, soğuk önbellek),
+F-02/F-03 (Firefox, WebKit), H-02..H-07 (SEO), H-10 (yanlış PARTIAL'dı),
+J-05 (akreditasyon bileşeni), K-01 (mobil akış), K-05 (hero A/B), L-01 (DOM hijyeni),
+ve denetim sırasında ortaya çıkan üç yeni kusur: `role="img"` ihlali,
+`ScrollRevealText` kontrast tabanı, community sayfasındaki sahte YouTube CTA'sı.
+
+**Açık kalanlar ve nedenleri** `docs/RELEASE-READINESS.md` içinde.
+
+---
+
+## BU TURDA ORTAYA ÇIKAN VE KAPATILAN KUSURLAR
+
+Kapsam genişletmenin gerçek kusur bulduğu üç yer — denetimin kendisi işe yaradı:
+
+| Kusur | Nasıl bulundu |
+|---|---|
+| `/blog` 7 kırık görsel, 7× HTTP 400 | runtime ölçümü; build ve iki QA kapısı da kaçırmıştı |
+| `/programlar/meridyen-terapi` `role="img"` erişilebilir ad yok | a11y rota listesi 11 → 17'ye çıkınca |
+| `ScrollRevealText` opaklık tabanı 0.45 → ölçülen 2.86:1 | mobil akış değişince bölüm açılış görünümüne taşındı |
+| Community'de `https://youtube.com`'a giden "Kanalımızı Ziyaret Edin" | links kapısı dış bağlantıları listeleyince |
+| `on-gorusme` production DOM'unda internal tooling metadata | kod denetimi |
+| `StructuredData` başlığı ile çıktısı çelişiyor | kod denetimi |
+| Şifa Yolculuğu 2. bölüm metni "engelleri kaldırın" | mobil akış için metin ortak kaynağa taşınırken |
+
+Ayrıca **kendi getirdiğim iki regresyon** ölçümle yakalandı ve düzeltildi:
+mobil akışın JS state ile devreye alınması (masaüstünde takas + hidrasyon
+ayrışması, cross-browser kapısı yakaladı) ve `AccreditationProof` disclaimer'ının
+/60 opaklıkta 4.01:1 ölçülmesi.
+
+## ÖLÇÜM YÖNTEMİ DÜZELTMELERİ
+
+Bu turda üç ölçüm yönteminin yanlış olduğu bulundu. Sonuçların kendisi kadar
+önemli, çünkü yanlış yöntem "yeşil" gösteriyordu:
+
+1. **Zoom.** Viewport küçültmeye "%400 zoom" deniyordu. WCAG 1.4.10 Reflow için
+   320 CSS px'e inmek resmî eşdeğerdir ve doğrudur; ama WCAG 1.4.4 Resize Text
+   (yalnız yazı %200) bununla HİÇ simüle edilmez. Eksik olan oydu, eklendi.
+2. **Performans.** CPU kısıtı vardı, ağ kısıtı yoktu. "Mid-range mobile" iddiası
+   bu yüzden eksikti: gerçekçi koşulda LCP 1668 ms değil **3920 ms**.
+3. **Scroll-linked motion.** Programatik `window.scrollTo` ile ölçmek Lenis
+   yüzünden Firefox'ta "bölüm bozuk" sonucu veriyordu. Gerçek tekerlek girdisiyle
+   üç motor da doğru çalışıyor. Yanlış yöntem burada **yanlış alarm** üretti.
+
 **Bu turda ortaya çıkan en önemli bulgu bir regresyondur** (V-01): önceki turda
 "iyileştirme" olarak yapılan bir değişiklik `/blog` ve `/blog/[slug]` rotalarındaki
 tüm uzak görselleri kırmış, ve o turun QA kapıları bunu yakalamamıştır.
 
 ---
+
+> **Aşağıdaki tabloların STATUS sütunu denetim ANINA aittir** (bu turun başı) —
+> kasıtlı olarak dondurulmuştur, çünkü bu dosyanın işlevi "neyi bulduk"tur.
+> Bunların hangilerinin kapandığı yukarıdaki *Kapatılanlar* listesinde,
+> güncel açık durum ise `docs/RELEASE-READINESS.md` içindedir.
 
 ## A. REGRESYONLAR
 
