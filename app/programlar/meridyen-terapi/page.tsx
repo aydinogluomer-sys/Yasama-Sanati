@@ -26,7 +26,7 @@ export default function MeridyenTerapiPage() {
     prerequisites: "Yok",
     certification: "IECCERT Onaylı Meridyen Terapi Uzmanlık Sertifikası",
     introTitle: "Bedenin Enerji Ağlarını Keşfedin",
-    introText: "Meridyen Terapisi, vücudun yaşam enerjisinin aktığı gizli kanalları uyararak enerjisel tıkanıklıkları çözer. Bütünsel kinesiyoloji pratikleriyle zenginleştirilen bu programda, enerji dengesizliklerini teşhis etmeyi ve beden zihnine hücresel düzeyde şifa vermeyi öğreneceksiniz.",
+    introText: "Meridyen Terapisi, geleneksel Çin tıbbında meridyen olarak adlandırılan enerji kanalları öğretisine dayanır. Bütünsel kinesiyoloji pratikleriyle zenginleştirilen bu programda bu geleneksel çerçevenin kavramlarını, uygulama tekniklerini ve seans kurgusunu öğrenirsiniz. Program tıbbi tanı veya tedavi yetkisi vermez.",
     curriculum: [
       {
         title: "Modül 1: Geleneksel Çin Tıbbı ve Meridyen Teorisi",

@@ -25,7 +25,7 @@ export default function NefesKocluguPage() {
     prerequisites: "Yok",
     certification: "Yaşama Sanatı Akademisi Nefes Koçluğu Sertifikası",
     introTitle: "Nefes, Yaşamın Kendisidir",
-    introText: "Doğru nefes alarak zihinsel karmaşayı durdurun, duygusal tıkanıklıkları aşın ve vücudunuzun oksijen kapasitesini artırın. Bu eğitim hem kendiniz için derin bir dönüşüm süreci sunar hem de profesyonel düzeyde nefes koçluğu yapma yetisi kazandırır.",
+    introText: "Nefesi bilinçli kullanarak zihinsel berraklık ve duygusal denge üzerine çalışın, kendi nefes kapasitenizi tanıyın. Bu eğitim hem kişisel bir çalışma süreci sunar hem de profesyonel düzeyde nefes koçluğu yapma yetisi kazandırır.",
     curriculum: [
       {
         title: "Modül 1: Nefes Anatomisi ve Fizyolojisi",
@@ -119,7 +119,7 @@ export default function NefesKocluguPage() {
       <SubPageLayout
       heroImage={heroImage}
       title="Nefes Koçluğu"
-      description="Doğru nefes teknikleriyle zihinsel arınma, duygusal özgürleşme ve hücresel düzeyde canlanma."
+      description="Doğru nefes teknikleriyle zihinsel berraklık, duygusal denge ve daha derin bir nefes kapasitesi."
     >
       <CourseDetailTemplate {...data} programSlug="nefes-koclugu" />
     </SubPageLayout>

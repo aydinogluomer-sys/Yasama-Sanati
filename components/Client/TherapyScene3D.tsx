@@ -996,6 +996,14 @@ export default function TherapyScene3D() {
             <div className="space-y-1.5">
               <span className="text-4xs uppercase tracking-widest text-[#ced1bf]/85">Terapi Yaklaşımı</span>
               <p className="text-xs font-light text-[#ced1bf]/85 italic">{selectedZone.therapy}</p>
+              {/* Bu sahne "Travma iyileştirme", "Duygusal iyileşmenin merkezi" gibi
+                  terapötik modaliteler sayıyordu ama kardeş bileşenlerin (Meridian3D,
+                  AcupointPanel) aksine hiç çerçevesi yoktu. Aynı sınır burada da
+                  görünür kılındı. */}
+              <p className="pt-2 text-3xs leading-relaxed text-[#ced1bf]/85">
+                Burada sayılanlar çalışma alanlarının adlarıdır; tıbbi teşhis, tedavi
+                veya sonuç vaadi değildir. Sağlık sorunlarınız için hekiminize başvurun.
+              </p>
             </div>
 
             {/* Meridians */}

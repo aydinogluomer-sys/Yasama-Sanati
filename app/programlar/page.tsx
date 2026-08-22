@@ -24,14 +24,14 @@ export default function ProgramlarPage() {
   const programs = [
     {
       title: "Meridyen Terapi",
-      desc: "Vücudun enerji kanallarını (meridyenler) dengeleme, blokajları kaldırma ve bütünsel şifa metodolojisi.",
+      desc: "Geleneksel öğretide meridyen olarak adlandırılan enerji kanalları ve bütünsel kinesiyoloji üzerine uzmanlık eğitimi.",
       href: "/programlar/meridyen-terapi",
       duration: "8 Hafta",
       format: "Karma",
     },
     {
       title: "Nefes Koçluğu",
-      desc: "Doğru nefes teknikleriyle zihinsel arınma, duygusal özgürleşme ve hücresel düzeyde canlanma.",
+      desc: "Doğru nefes teknikleriyle zihinsel berraklık, duygusal denge ve daha derin bir nefes kapasitesi.",
       href: "/programlar/nefes-koclugu",
       duration: "6 Hafta",
       format: "Online / Canlı",
