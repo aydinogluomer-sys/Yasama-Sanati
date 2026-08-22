@@ -42,3 +42,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Optimizasyon oncesi kaynak dosyalar (~98MB PNG/OTF). Depo gecmisini sismemek icin
+# haric tutuldu; gerekirse ayri bir asset deposuna alinmali.
+/assets-source/
+
+# impeccable arac durumu: cache, mock gorseller, kritik gunlugu.
+/.impeccable/
