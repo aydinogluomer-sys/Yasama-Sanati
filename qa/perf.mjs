@@ -38,7 +38,7 @@ const CONDITIONS = [
 
 const browser = await chromium.launch(CHANNEL === "chromium" ? {} : { channel: CHANNEL });
 
-for (const c of CONDITIONS) {
+async function measureOnce(c) {
   const ctx = await browser.newContext({
     viewport: { width: c.w, height: c.h },
     isMobile: c.mobile,
@@ -119,16 +119,38 @@ for (const c of CONDITIONS) {
   }));
 
   const tbt = m.long.filter((d) => d > 50).reduce((a, d) => a + (d - 50), 0);
-  const kb = (n) => Math.round(n / 1024);
   const total = Object.values(bytes).reduce((a, b) => a + b, 0);
-
-  console.log(`\n=== ${c.label} ===`);
-  console.log(`  LCP ${m.lcp} ms   CLS ${m.cls}   TBT ~${tbt} ms   load ${m.nav?.load ?? "?"} ms   duvar saati ${Date.now() - t0} ms`);
-  console.log(`  LCP ogesi: ${m.lcpEl}`);
-  console.log(`  uzun gorev >50ms: ${m.long.filter((d) => d > 50).length}   >200ms: ${m.long.filter((d) => d > 200).length}`);
-  console.log(`  transfer  toplam ${kb(total)} KB  (js ${kb(bytes.js)} · css ${kb(bytes.css)} · img ${kb(bytes.img)} · font ${kb(bytes.font)} · diger ${kb(bytes.other)})   istek ${requests}`);
-
   await ctx.close();
+  return {
+    lcp: m.lcp, lcpEl: m.lcpEl, cls: m.cls, tbt,
+    long50: m.long.filter((d) => d > 50).length,
+    long200: m.long.filter((d) => d > 200).length,
+    bytes, total, requests,
+  };
+}
+
+// 5 kosu + medyan: tek kosu makine yukune gore 4.6-6.7 sn arasi savruluyordu.
+const RUNS = Number(process.env.PERF_RUNS ?? 5);
+const med = (a) => [...a].sort((x, y) => x - y)[Math.floor(a.length / 2)];
+const kb = (n) => Math.round(n / 1024);
+const span = (a) => `${Math.min(...a)}–${Math.max(...a)}`;
+
+for (const c of CONDITIONS) {
+  const rows = [];
+  for (let i = 0; i < RUNS; i++) rows.push(await measureOnce(c));
+  const lcps = rows.map((r) => r.lcp);
+  const tbts = rows.map((r) => r.tbt);
+  const clss = rows.map((r) => r.cls);
+  const last = rows[rows.length - 1];
+
+  console.log(`
+=== ${c.label} — ${RUNS} kosu ===`);
+  console.log(`  LCP  LAB MEDIAN ${med(lcps)} ms   (yayilim ${span(lcps)})`);
+  console.log(`  TBT  LAB MEDIAN ~${med(tbts)} ms  (yayilim ${span(tbts)})`);
+  console.log(`  CLS  LAB MEDIAN ${med(clss)}      (yayilim ${span(clss)})`);
+  console.log(`  LCP ogesi (son kosu): ${last.lcpEl}`);
+  console.log(`  uzun gorev >50ms ${last.long50} · >200ms ${last.long200}   istek ${last.requests}`);
+  console.log(`  transfer ${kb(last.total)} KB  (js ${kb(last.bytes.js)} · css ${kb(last.bytes.css)} · img ${kb(last.bytes.img)} · font ${kb(last.bytes.font)})`);
 }
 
 await browser.close();
