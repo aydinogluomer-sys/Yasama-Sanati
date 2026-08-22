@@ -59,7 +59,25 @@ en marka-tutarlı görsel ailesi buymuş ve hover'ın arkasında saklıydı.
 | ana-sayfa · programlar · topluluk · blog · sss · on-gorusme | menü + ilgili sayfa | ✅ |
 | nefes-koclugu · reiki · meridyen-terapi · mucizeler-kursu · hipnoterapi · yasam-koclugu | menü + program sayfaları | ✅ |
 
-**Denenip vazgeçilen:** `ImageContainer/image-5.jpg` (Nordic orman penceresi)
+### Uygulanan: iki ana sayfa karesine sıcak derecelendirme
+
+`group/yasam-koclugu.jpg` ve `group/mucizeler-kursu.jpg` yerinde renk
+derecelendirmesinden geçirildi (ffmpeg `colorbalance` + hafif doygunluk/gama):
+soğuk gri-mavi döküm alındı, orta tonlar sıcağa çekildi. Ahşap, terracotta kupa
+ve ten tonu artık marka paletiyle konuşuyor.
+
+Konu değişmedi — ikisi de hâlâ yağmurlu pencere içeriyor. Ama "iki fotoğraf
+dünyası" sorununun baskın sinyali **renk sıcaklığıydı** ve o kapandı. Kendi
+karesi üretilene kadar bu iki kare artık göze batmıyor.
+
+Orijinaller git geçmişinde duruyor (`git show HEAD~1:public/group/...`).
+
+**Derecelendirme UYGULANMAYANLAR — ve nedeni.** `ImageContainer/image-1`, `-3`,
+`-5` denendi ve **vazgeçildi**: bu üçünde orman kadrajın kendisi. Isıtmak insanı
+sıcak yapıp arkadaki yoğun yeşil ormanı olduğu gibi bıraktığı için tutarsızlık
+üretiyor, sorunu çözmüyor. Onlar gerçekten yeniden üretim istiyor.
+
+**Denenip vazgeçilen (takas):** `ImageContainer/image-5.jpg` (Nordic orman penceresi)
 yerine `group/hipnoterapi.jpg` konması denendi. Group kareleri 1200×1603 (3:4),
 ImageContainer ise 2560×1433 (16:9); 16:9'a kırpınca üç denemede de rahatsız
 edici yakınlıkta yüz planı çıktı ve bölüm kartına uygun olmadı. **Takas
