@@ -1,20 +1,13 @@
 "use client";
 import { motion, useScroll, useTransform } from "motion/react";
+import Image from "next/image";
 import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
-import PlaySVG from "@/components/SVGComponents/PlaySVG";
-import { useCursor } from "@/hooks/useCursor";
-import Cursor from "@/components/Client/Cursor";
+import { useRef } from "react";
 import useMaskImage from "@/hooks/useMaskImage";
+import heroDesktop from "@/public/Hero/hero-desktop.jpg";
 
-interface HeroDesktopClientProps {
-  setPlayIntro: Dispatch<SetStateAction<boolean>>;
-}
-export default function HeroDesktopClient({
-  setPlayIntro,
-}: HeroDesktopClientProps) {
+export default function HeroDesktopClient() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "50vh start"],
@@ -25,53 +18,33 @@ export default function HeroDesktopClient({
     gap: 0.3,
     vh: 100,
   });
-  const { handlers, cursorProps } = useCursor();
   const reduceMotion = useMountedReducedMotion();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  useEffect(() => {
-    if (reduceMotion) {
-      videoRef.current?.pause();
-      return;
-    }
-    void videoRef.current?.play().catch(() => undefined);
-  }, [reduceMotion]);
   return (
-    <>
-      <div className="absolute inset-0 overflow-clip" ref={containerRef}>
-        <motion.div
-          style={{ y: reduceMotion ? "0%" : y, maskImage: reduceMotion ? "none" : maskImage }}
-          className="h-full"
-        >
-          <video
-            ref={videoRef}
-            className="size-full object-cover"
-            autoPlay={!reduceMotion}
-            muted
-            loop
-            playsInline
-            poster="/Hero/elementis-cover-mjpg.png"
-            aria-hidden="true"
-          >
-            <source src="/Hero/elementismp4.mp4" type="video/mp4"></source>
-          </video>
-        </motion.div>
-        <motion.button
-          type="button"
-          aria-label="Tanıtım filmini oynat"
-          className="absolute inset-x-0 top-0 flex h-[100svh] cursor-pointer flex-col justify-end gap-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/80"
-          {...handlers}
-          onClick={() => {
-            handlers.onMouseLeave(); //will exit the cursor
-            setPlayIntro((prev) => !prev);
-          }}
-        />
-      </div>
-      <Cursor
-        {...cursorProps}
-        className="-translate-x-1/2 -translate-y-1/2 rounded-full p-6"
+    <div className="absolute inset-0 overflow-clip" ref={containerRef}>
+      <motion.div
+        style={{ y: reduceMotion ? "0%" : y, maskImage: reduceMotion ? "none" : maskImage }}
+        className="h-full"
       >
-        <PlaySVG />
-      </Cursor>
-    </>
+        {/* The movement is authored here rather than shot: a single slow settle across the still
+            on arrival. One-shot, not a loop — it is an entrance gesture, and an endless drift
+            would keep a compositor layer alive for the whole visit. Held for reduced motion. */}
+        <motion.div
+          className="h-full"
+          animate={reduceMotion ? { scale: 1 } : { scale: [1.06, 1] }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 28, ease: "easeOut" }}
+        >
+          <Image
+            src={heroDesktop}
+            alt=""
+            aria-hidden
+            priority
+            sizes="100vw"
+            placeholder="blur"
+            className="size-full object-cover"
+          />
+        </motion.div>
+      </motion.div>
+    </div>
   );
 }
