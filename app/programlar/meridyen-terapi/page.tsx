@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { BreadcrumbSchema, CourseSchema } from "@/components/Server/StructuredData";
-import AccreditationProof from "@/components/Server/AccreditationProof";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
@@ -9,12 +8,12 @@ import MeridianParallaxContainer from "@/components/meridian-3d/MeridianParallax
 export const metadata: Metadata = {
   title: "Meridyen Terapi Eğitimi | Yaşama Sanatı",
   description:
-    "IECCERT onaylı meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı; 8 hafta karma format.",
+    "Meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı; 8 hafta karma format.",
   alternates: { canonical: "/programlar/meridyen-terapi" },
   openGraph: {
     title: "Meridyen Terapi Eğitimi | Yaşama Sanatı",
     description:
-      "IECCERT onaylı meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı; 8 hafta karma format.",
+      "Meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı; 8 hafta karma format.",
     url: "/programlar/meridyen-terapi",
   },
 };
@@ -24,7 +23,7 @@ export default function MeridyenTerapiPage() {
     duration: "8 Hafta",
     format: "Karma (Online Teorik + Yüz yüze Uygulama)",
     prerequisites: "Yok",
-    certification: "IECCERT Onaylı Meridyen Terapi Uzmanlık Sertifikası",
+    certification: "Yaşama Sanatı Akademisi Meridyen Terapi Uzmanlık Sertifikası",
     introTitle: "Bedenin Enerji Ağlarını Keşfedin",
     introText: "Meridyen Terapisi, geleneksel Çin tıbbında meridyen olarak adlandırılan enerji kanalları öğretisine dayanır. Bütünsel kinesiyoloji pratikleriyle zenginleştirilen bu programda bu geleneksel çerçevenin kavramlarını, uygulama tekniklerini ve seans kurgusunu öğrenirsiniz. Program tıbbi tanı veya tedavi yetkisi vermez.",
     curriculum: [
@@ -114,7 +113,7 @@ export default function MeridyenTerapiPage() {
       />
       <CourseSchema
         name="Meridyen Terapi Eğitimi"
-        description="IECCERT onaylı meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı."
+        description="Meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı."
         path="/programlar/meridyen-terapi"
       />
       <SubPageLayout
@@ -127,17 +126,22 @@ export default function MeridyenTerapiPage() {
         <MeridianParallaxContainer />
         <div className="space-y-16 px-6 py-16 md:px-16 md:py-28">
           <CourseDetailTemplate {...data} programSlug="meridyen-terapi" />
-          {/* Akreditasyon kanıtı yalnız BU programda: PRODUCT.md'ye göre IECCERT'in
-              Meridyen Terapi'yi kapsaması, projenin yayınlayabileceği tek doğrulanmış
-              akreditasyon gerçeği. Sicil no, doğrulama linki, eğitim saati ve
-              değerlendirme yöntemi alanları bileşende tanımlı ama BOŞ — değerleri
-              doğrulanmış olarak gelene kadar render edilmiyorlar. */}
-          <AccreditationProof
-            body="IECCERT"
-            bodyFullName="International Energy & Complementary Medicine Certification"
-            program="Meridyen Terapi Uzmanlık Programı"
-            certificateType="Meridyen Terapi Uzmanlık Sertifikası"
-          />
+          {/* AKREDİTASYON BLOĞU KALDIRILDI — 2026-08-23, fail-closed.
+
+              İki ayrı sorun doğrulandı:
+              1) Yayınlanan kurum adı YANLIŞTI. Kodda "International Energy &
+                 Complementary Medicine Certification" yazıyordu; ieccert.com'un
+                 resmî adı "İECCERT — ULUSLARARASI EĞİTİM KONSEYİ"
+                 (International Education Council).
+              2) İECCERT, uygunluk değerlendirme KURULUŞLARINI akredite ediyor —
+                 eğitim programlarını değil. "IECCERT onaylı program" ifadesi bu
+                 nedenle kategori olarak da uyuşmuyor.
+
+              Programa özel bir onay belgesi/sicil no/doğrulama bağlantısı repoda
+              yok. Doğrulanmamış akreditasyonu rozet gibi göstermek yarım kanıttan
+              kötüdür; blok kaldırıldı. AccreditationProof bileşeni duruyor ve
+              doğrulanmış alanlar geldiğinde tek yerden geri açılır.
+              Kayıt: docs/TRUST-PROOF-MATRIX.md */}
         </div>
       </div>
     </SubPageLayout>

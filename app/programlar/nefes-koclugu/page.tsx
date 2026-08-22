@@ -62,7 +62,7 @@ export default function NefesKocluguPage() {
       },
       {
         question: "Eğitim sonunda hangi sertifikayı alıyorum?",
-        answer: "Programı ve uygulama değerlendirmesini tamamlayan katılımcılara Yaşama Sanatı Akademisi Nefes Koçluğu Sertifikası verilir. Uluslararası akreditasyon hiçbir programda öne sürülmez; yalnızca Meridyen Terapi programımız IECCERT onaylıdır."
+        answer: "Programı ve uygulama değerlendirmesini tamamlayan katılımcılara Yaşama Sanatı Akademisi Nefes Koçluğu Sertifikası verilir. Programlarımız için dış akreditasyon iddiasında bulunulmaz; sertifika akademinin kendi belgesidir."
       },
       {
         question: "Nefes sadece doğru nefes almak için mi yapılır?",

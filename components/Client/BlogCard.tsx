@@ -57,13 +57,11 @@ export default function BlogCard({ post }: BlogCardProps) {
         {/* Footer Area */}
         <div className="pt-4 mt-6 border-t border-[#ced1bf]/10 flex items-center justify-between text-2xs">
           <div className="flex items-center space-x-2">
-            <Image
-              src={post.author.avatar}
-              sizes="24px"
-              alt={post.author.name}
-              width={24}
-              height={24}
-              className="size-6 rounded-full object-cover border border-[#ced1bf]/20"
+            {/* Stok portre kaldırıldı: yazar atfı kurumsal (bkz. utils/blogData.ts).
+                Yerine nötr bir marka işareti — uydurma kimlik taşımıyor. */}
+            <span
+              aria-hidden
+              className="size-6 shrink-0 rounded-full border border-[#ced1bf]/25 bg-[#ced1bf]/10"
             />
             <span className="text-[#ced1bf]/85 font-light">{post.author.name}</span>
           </div>

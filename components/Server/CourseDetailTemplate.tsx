@@ -13,6 +13,7 @@ const stripModulePrefix = (t: string) => t.replace(/^\s*(Modül|Bölüm)\s*\d+\s
 
 /** Intercom academy chapter heading: Space Mono index + serif heading + fine rule. */
 function ChapterHeading({ index, children }: { index: string; children: React.ReactNode }) {
+
   return (
     <div className="flex items-baseline gap-4 border-b border-[#ced1bf]/15 pb-4">
       <TypographyLabel className="shrink-0 text-[#E09A6C]">{index}</TypographyLabel>
@@ -31,6 +32,20 @@ export interface AccordionItem {
 export interface TestimonialItem {
   quote: string;
   author: string;
+  /**
+   * Katılımcının yayın izni KAYIT ALTINDA mı?
+   *
+   * Fail-closed: bu alan `true` olmadıkça testimonial public UI'da render
+   * EDİLMEZ. Şu an hiçbir kayıt için izin/kaynak belgesi yok — "D. S., Mimar"
+   * gibi anonim atıflar provenance taşımıyor. Veri repoda korunuyor ki izin
+   * alındığında tek alan değişikliğiyle geri gelsin; ama izinsiz sosyal kanıt
+   * yayınlanmıyor.
+   *
+   * İzin kaydı geldiğinde: consentVerified: true (+ internal sourceReference).
+   */
+  consentVerified?: boolean;
+  /** Internal provenance notu — public UI'da GÖSTERİLMEZ. */
+  sourceReference?: string;
 }
 
 export interface FAQItem {
@@ -73,6 +88,11 @@ export default function CourseDetailTemplate({
     program: programSlug,
     from: `/programlar/${programSlug}`,
   });
+
+  // Fail-closed sosyal kanıt: izni kayıtlı olmayan testimonial yayınlanmaz.
+  const publishableTestimonials = (testimonials ?? []).filter(
+    (t) => t.consentVerified === true,
+  );
 
   return (
     <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.8fr_1fr] lg:gap-16 items-start">
@@ -133,11 +153,12 @@ export default function CourseDetailTemplate({
         </section>
 
         {/* Testimonials */}
-        {testimonials && testimonials.length > 0 && (
+        {/* Yalnız izni kayıtlı olanlar. Bkz. TestimonialItem.consentVerified. */}
+        {publishableTestimonials.length > 0 && (
           <section className="space-y-8">
             <ChapterHeading index="03">Katılımcı Yorumları</ChapterHeading>
             <div className="space-y-6">
-              {testimonials.map((t, i) => (
+              {publishableTestimonials.map((t, i) => (
                 <blockquote
                   key={i}
                   className="border-l-2 border-[#ca7d57] pl-6 py-2 space-y-2"

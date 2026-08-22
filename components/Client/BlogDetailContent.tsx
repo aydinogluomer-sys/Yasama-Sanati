@@ -71,13 +71,10 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
 
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-b border-[#ced1bf]/10 pb-6">
             <div className="flex items-center space-x-3">
-              <Image
-                src={post.author.avatar}
-              sizes="40px"
-                alt={post.author.name}
-                width={40}
-                height={40}
-                className="size-10 rounded-full border border-[#ced1bf]/20 object-cover"
+              {/* Stok portre kaldırıldı: yazar atfı kurumsal (bkz. utils/blogData.ts). */}
+              <span
+                aria-hidden
+                className="size-10 shrink-0 rounded-full border border-[#ced1bf]/25 bg-[#ced1bf]/10"
               />
               <div>
                 <p className="text-xs md:text-sm font-medium text-white">{post.author.name}</p>

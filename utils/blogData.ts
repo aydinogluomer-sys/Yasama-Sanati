@@ -6,10 +6,21 @@ export interface BlogPost {
   excerpt: string;
   readTime: string;
   coverImage: string;
+  /**
+   * Yazar atfı KURUMSAL.
+   *
+   * Önceden burada "Elif Kozanoğlu — Kurucu & Eğitmen", "Ahmet Yılmaz",
+   * "Selin Aksoy" gibi gerçek kişi adları ve her birine eşlik eden Unsplash
+   * STOK PORTRELERİ vardı. Bu isimlerin hiçbiri eğitmen listesinde yok ve
+   * akademiyle ilişkileri doğrulanamıyor; biri "Kurucu" olarak sunuluyordu.
+   * Gerçek kişi adı + stok portre birleşimi production'da uydurma kimliktir.
+   *
+   * Doğrulanmış yazar verisi geldiğinde `name`/`role` kişiye çevrilebilir;
+   * portre alanı ancak GERÇEK portre varsa geri eklenmelidir.
+   */
   author: {
     name: string;
     role: string;
-    avatar: string;
   };
   content: string; // HTML-safe content for reading
   tags: string[];
@@ -25,9 +36,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "7 Dk",
     coverImage: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80",
     author: {
-      name: "Elif Kozanoğlu",
-      role: "Kurucu & Eğitmen",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+      name: "Yaşama Sanatı Editoryal Ekibi",
+      role: "Akademi editörü",
     },
     tags: ["Bütünsel Sağlık", "Kadim Öğretiler", "Farkındalık", "Enerji Bedeni"],
     content: `
@@ -63,9 +73,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 Dk",
     coverImage: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
     author: {
-      name: "Elif Kozanoğlu",
-      role: "Kurucu & Eğitmen",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+      name: "Yaşama Sanatı Editoryal Ekibi",
+      role: "Akademi editörü",
     },
     tags: ["Nefes", "Stres Yönetimi", "Pranayama", "Zindelik"],
     content: `
@@ -96,9 +105,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 Dk",
     coverImage: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80",
     author: {
-      name: "Ahmet Yılmaz",
-      role: "Meridyen Terapisti",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+      name: "Yaşama Sanatı Editoryal Ekibi",
+      role: "Akademi editörü",
     },
     tags: ["Meridyen", "Akupresür", "Çin Tıbbı", "Yaşam Enerjisi"],
     content: `
@@ -134,9 +142,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 Dk",
     coverImage: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=800&q=80",
     author: {
-      name: "Selin Aksoy",
-      role: "Klinik Hipnoterapist",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80",
+      name: "Yaşama Sanatı Editoryal Ekibi",
+      role: "Akademi editörü",
     },
     tags: ["Bilinçaltı", "Hipnoz", "Zihinsel Dönüşüm", "Telkin"],
     content: `
@@ -164,9 +171,8 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 Dk",
     coverImage: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
     author: {
-      name: "Elif Kozanoğlu",
-      role: "Reiki Master & Eğitmen",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+      name: "Yaşama Sanatı Editoryal Ekibi",
+      role: "Akademi editörü",
     },
     tags: ["Reiki", "Çakra", "Enerji Şifası", "Meditasyon"],
     content: `

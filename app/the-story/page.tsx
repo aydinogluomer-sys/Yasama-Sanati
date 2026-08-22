@@ -59,7 +59,7 @@ export default function TheStoryPage() {
             <div className="p-6 bg-[#ced1bf]/5 rounded border border-[#ced1bf]/10 space-y-4">
               <h3 className="text-xl font-medium text-white">Sertifikalı Dönüşüm</h3>
               <p className="text-base font-light leading-relaxed text-[#ced1bf]/82">
-                Sadece kişisel dönüşüm sunmakla kalmıyor, bu pratikleri meslek haline getirmek veya mevcut terapistlik yetkinliklerini artırmak isteyenlere akademi sertifikasyonu sağlıyoruz. Meridyen Terapi programımız ayrıca IECCERT onaylıdır.
+                Sadece kişisel dönüşüm sunmakla kalmıyor, bu pratikleri meslek haline getirmek veya mevcut terapistlik yetkinliklerini artırmak isteyenlere akademi sertifikasyonu sağlıyoruz.
               </p>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function TheStoryPage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {[
-              { name: "IECCERT", role: "Uluslararası Enerji ve Tamamlayıcı Tıp Sertifikasyonu" },
+              
               { name: "Matlas Akademi", role: "Klinik Kinesiyoloji ve Uygulama Partneri" },
               { name: "Nevsah Enstitü", role: "Nefes ve Zihinsel Dönüşüm Bilimsel Araştırma Ortağı" }
             ].map((partner, i) => (

@@ -30,7 +30,19 @@ Published contact points are `info@yasamasanati.com` and `+90 532 789 3753`.
 
 - The existing product is a Turkish-language web experience built with Next.js, React, TypeScript, and Tailwind CSS.
 - Program discovery, detailed program pages, instructor information, FAQs, consultation/contact flows, certification details, testimonials, and academy-story content already exist.
-- **Accreditation is IECCERT-only.** IECCERT (International Energy & Complementary Medicine Certification) genuinely covers Meridyen Terapi, and it is the single accreditation fact this project may state. The unnamed "uluslararası akredite", "uluslararası standartlarda", and "federasyonlar tarafından akredite" claims in `app/programlar/nefes-koclugu/`, `app/programlar/hipnoterapi/`, `app/programlar/yasam-kocu/`, `app/programlar/page.tsx`, `app/egitmenler/page.tsx`, `app/the-story/page.tsx`, and the `app/layout.tsx` metadata description are unsupported and must be narrowed to what is provable. No further accrediting body may be named or implied.
+- **Accreditation: UNVERIFIED BUSINESS CLAIM (2026-08-23).** The site previously published
+  "IECCERT onaylı" as fact, expanded as *International Energy & Complementary Medicine
+  Certification*. Two problems were verified against the registrar's own site:
+  (1) that English expansion is **wrong** — ieccert.com's official name is
+  **"İECCERT — ULUSLARARASI EĞİTİM KONSEYİ"** (International Education Council);
+  (2) İECCERT accredits **conformity-assessment bodies**, not training courses, so
+  "IECCERT-approved programme" is a category mismatch.
+  No programme-specific certificate, registration number or verification link exists in this
+  repository. All public "IECCERT onaylı" claims were therefore removed (metadata, Course
+  schema, certification field, SSS, the-story, accreditation block) and the claim is tracked
+  as `UNVERIFIED` in `docs/TRUST-PROOF-MATRIX.md`. It may be republished only with
+  programme-specific proof. Unnamed "uluslararası akredite" style claims remain forbidden.
+
 - **All pricing and enrollment terms currently on the site are placeholder, not committed.** The six TL figures (Reiki 9.000, Mucizeler Kursu 12.000, Nefes Koçluğu 15.000, Yaşam Koçluğu 16.000, Hipnoterapi 16.500, Meridyen Terapi 18.500), the "15 Eylül 2026" start dates, the 3/6/12-month installment terms, and the EFT discount policy in `app/sss/page.tsx` are all unconfirmed, and the live site is presently displaying them. Pricing, enrollment rules, cohort sizes, and payment terms must not be treated as truth or carried onto new surfaces until the academy confirms them.
 - The experience must preserve functional keyboard navigation, focus behavior, readable contrast, reduced-motion parity, and progressive enhancement for motion and 3D content.
 - Deployment and hosting claims must not be invented beyond the confirmed domain above.

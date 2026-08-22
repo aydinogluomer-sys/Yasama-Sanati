@@ -16,7 +16,7 @@ export const FAQS: FAQ[] = [
   },
   {
     q: "Sertifikalarınız uluslararası geçerliliğe sahip midir?",
-    a: "Meridyen Terapi uzmanlık programımız IECCERT (International Energy & Complementary Medicine Certification) onaylıdır; bu programı ve pratik sınavını tamamlayan katılımcılara İngilizce uzmanlık belgesi sunulur. Diğer programlarımızı tamamlayanlara Yaşama Sanatı Akademisi sertifikası verilir.",
+    a: "Programlarımızı tamamlayan katılımcılara Yaşama Sanatı Akademisi'nin kendi uzmanlık sertifikası verilir. Sertifika, tamamlanan modülleri ve uygulama değerlendirmesini belgeler; tıbbi tanı veya tedavi yetkisi vermez.",
   },
   {
     q: "Eğitimler online mı yoksa yüz yüze mi gerçekleşiyor?",
