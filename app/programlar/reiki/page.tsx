@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
+import { CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
+
+export const metadata: Metadata = {
+  title: "Reiki Eğitimi | Yaşama Sanatı",
+  description:
+    "Usui Reiki 1. ve 2. derece; enerji uyumlanması, çakra dengeleme ve uygulama pratiği.",
+  alternates: { canonical: "/programlar/reiki" },
+  openGraph: {
+    title: "Reiki Eğitimi | Yaşama Sanatı",
+    description:
+      "Usui Reiki 1. ve 2. derece; enerji uyumlanması, çakra dengeleme ve uygulama pratiği.",
+    url: "/programlar/reiki",
+  },
+};
 
 export default function ReikiPage() {
   const data = {
@@ -8,8 +23,6 @@ export default function ReikiPage() {
     format: "Karma (Online Teorik + Bireysel Uyumlanma Seansı)",
     prerequisites: "Yok",
     certification: "Usui Reiki 1. ve 2. Derece Uygulayıcı Sertifikası",
-    price: "9.000 TL",
-    startDate: "01 Kasım 2026",
     introTitle: "İçinizdeki Şifa Gücünü Uyandırın",
     introText: "Reiki, evrensel şifa enerjisinin eller vasıtasıyla aktarılmasına dayanan geleneksel bir Japon enerji dengeleme tekniğidir. Bu eğitimle şifa enerjisine uyumlanacak (inisiyasyon), kendi çakra sisteminizi dengelemeyi öğrenecek ve başkalarına şifa enerjisi aktarma yeteneği kazanacaksınız.",
     curriculum: [
@@ -54,13 +67,19 @@ export default function ReikiPage() {
       },
     ],
   };
-
   return (
-    <SubPageLayout
+    <>
+      <CourseSchema
+        name="Reiki Eğitimi"
+        description="Usui Reiki 1. ve 2. derece; enerji uyumlanması ve uygulama pratiği."
+        path="/programlar/reiki"
+      />
+      <SubPageLayout
       title="Reiki"
       description="Evrensel yaşam enerjisi (Ki) kanallarını açma, çakra dengeleme ve ellerle şifa aktarma dereceleri."
     >
-      <CourseDetailTemplate {...data} />
+      <CourseDetailTemplate {...data} programSlug="reiki" />
     </SubPageLayout>
+    </>
   );
 }

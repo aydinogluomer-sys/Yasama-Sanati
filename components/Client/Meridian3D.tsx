@@ -31,14 +31,14 @@ const MERIDIANS: MeridianInfo[] = [
     element: "Metal",
     time: "03:00 - 05:00",
     emotion: "Hüzün ve Bırakabilme",
-    physical: "Solunum sistemi, akciğerler, cilt ve bağışıklık",
-    desc: "Yaşam enerjisinin (Qi) dış dünyadan bedenimize giriş kapısıdır. Doğru solunum pratikleriyle bu kanal uyarılır, göğüs kafesi açılır ve bedensel direnç artar.",
+    physical: "Solunum sistemi, akciğerler, cilt ve direnç teması",
+    desc: "Yaşam enerjisinin (Qi) dış dünyadan bedenimize giriş kapısıdır. Geleneksel öğretide solunum pratikleriyle bu kanalın uyarıldığı ve göğüs alanının açıldığı kabul edilir.",
     color: "#e2e8f0", // Metalic white
     organName: "Akciğerler (Lungs)",
     acupoints: [
-      { code: "LU1", name: "Zhongfu", trName: "Orta Depo", desc: "Göğüs kafesini açar, öksürük ve solunum sıkıntılarını yatıştırır.", position: [0.18, 1.05, 0.08] },
-      { code: "LU7", name: "Lieque", trName: "Çatlak Geçit", desc: "Baş ve boyun ağrılarını hafifletir, bağışıklık sistemini destekler.", position: [0.48, 0.65, 0.01] },
-      { code: "LU9", name: "Taiyuan", trName: "Büyük Derinlik", desc: "Akciğer enerjisini (Qi) güçlendirir, nabız dolaşımını düzenler.", position: [0.60, 0.46, 0.01] }
+      { code: "LU1", name: "Zhongfu", trName: "Orta Depo", desc: "Geleneksel öğretide göğüs alanı ve solunumla ilişkilendirilen noktadır.", position: [0.18, 1.05, 0.08] },
+      { code: "LU7", name: "Lieque", trName: "Çatlak Geçit", desc: "Geleneksel öğretide baş ve boyun bölgesiyle ilişkilendirilen noktadır.", position: [0.48, 0.65, 0.01] },
+      { code: "LU9", name: "Taiyuan", trName: "Büyük Derinlik", desc: "Geleneksel öğretide akciğer Qi'si ve nabız ile ilişkilendirilen noktadır.", position: [0.60, 0.46, 0.01] }
     ]
   },
   {
@@ -48,13 +48,13 @@ const MERIDIANS: MeridianInfo[] = [
     time: "11:00 - 13:00",
     emotion: "Neşe, Huzur ve Sevgi",
     physical: "Kalp, kan dolaşımı, uyku düzeni ve zihinsel berraklık",
-    desc: "Zihnin ve duyguların merkezidir. Sevgi akışını, samimiyeti ve içsel huzuru yönetir. Dengelendiğinde derin bir sükunet ve duygusal denge hissi verir.",
+    desc: "Zihnin ve duyguların merkezidir. Sevgi akışını, samimiyeti ve içsel huzuru yönetir. Geleneksel öğretide sükunet ve duygusal denge ile ilişkilendirilir.",
     color: "#ef4444", // Fire red
     organName: "Kalp (Heart)",
     acupoints: [
-      { code: "HT1", name: "Jiquan", trName: "Zirve Kaynağı", desc: "Stres, kaygı ve göğüsteki daralma hissini hafifletir.", position: [-0.16, 0.88, 0.08] },
-      { code: "HT7", name: "Shenmen", trName: "Ruh Kapısı", desc: "Zihni yatıştırır, uykusuzluk ve çarpıntıya iyi gelir.", position: [-0.46, 0.54, 0.02] },
-      { code: "HT9", name: "Shaochong", trName: "Küçük Hücum", desc: "Duygusal kriz anlarında kalbi rahatlatır, bilinci açar.", position: [-0.60, 0.44, 0.01] }
+      { code: "HT1", name: "Jiquan", trName: "Zirve Kaynağı", desc: "Geleneksel öğretide göğüs bölgesindeki gerginlik hissiyle ilişkilendirilir.", position: [-0.16, 0.88, 0.08] },
+      { code: "HT7", name: "Shenmen", trName: "Ruh Kapısı", desc: "Geleneksel öğretide zihinsel sükunet ve uyku düzeniyle ilişkilendirilir.", position: [-0.46, 0.54, 0.02] },
+      { code: "HT9", name: "Shaochong", trName: "Küçük Hücum", desc: "Geleneksel öğretide yoğun duygusal anlarla ilişkilendirilen noktadır.", position: [-0.60, 0.44, 0.01] }
     ]
   },
   {
@@ -68,9 +68,9 @@ const MERIDIANS: MeridianInfo[] = [
     color: "#eab308", // Earth yellow
     organName: "Mide (Stomach)",
     acupoints: [
-      { code: "ST1", name: "Chengqi", trName: "Yaş Kabı", desc: "Göz yorgunluğunu giderir, görme yetisini destekler.", position: [0.04, 1.36, 0.12] },
-      { code: "ST25", name: "Tianshu", trName: "Cennet Ekseni", desc: "Sindirim sistemini düzenler, şişkinlik ve kabızlığı azaltır.", position: [0.09, 0.78, 0.11] },
-      { code: "ST36", name: "Zusanli", trName: "Üç Mil Noktası", desc: "Vücudun genel enerji seviyesini artırır, bağışıklığı güçlendirir.", position: [0.15, -0.34, 0.06] }
+      { code: "ST1", name: "Chengqi", trName: "Yaş Kabı", desc: "Geleneksel öğretide göz çevresi ve dinlenmeyle ilişkilendirilir.", position: [0.04, 1.36, 0.12] },
+      { code: "ST25", name: "Tianshu", trName: "Cennet Ekseni", desc: "Geleneksel öğretide sindirim ritmiyle ilişkilendirilen noktadır.", position: [0.09, 0.78, 0.11] },
+      { code: "ST36", name: "Zusanli", trName: "Üç Mil Noktası", desc: "Geleneksel öğretide genel canlılık hissiyle ilişkilendirilen noktadır.", position: [0.15, -0.34, 0.06] }
     ]
   },
   {
@@ -80,13 +80,13 @@ const MERIDIANS: MeridianInfo[] = [
     time: "17:00 - 19:00",
     emotion: "Korku ve Yaşam Gücü",
     physical: "Böbrekler, kemikler, eklemler ve üreme sistemi",
-    desc: "Doğumla getirdiğimiz temel yaşam enerjisinin (Jing) deposudur. Korkuları dönüştürerek irade gücü, cesaret, canlılık ve yaşlanma karşıtı direnç kazandırır.",
+    desc: "Doğumla getirdiğimiz temel yaşam enerjisinin (Jing) deposudur. Geleneksel öğretide irade, cesaret ve canlılık temalarıyla ilişkilendirilir.",
     color: "#3b82f6", // Water blue
     organName: "Böbrekler (Kidneys)",
     acupoints: [
-      { code: "KI1", name: "Yongquan", trName: "Fışkıran Kaynak", desc: "Bedeni topraklar, zihni yatıştırır, uykuya dalmayı kolaylaştırır.", position: [-0.14, -0.78, 0.02] },
-      { code: "KI3", name: "Taixi", trName: "Büyük Vadi", desc: "Böbrek özünü besler, bel ağrısı ve yorgunluğu giderir.", position: [-0.10, -0.74, 0.03] },
-      { code: "KI27", name: "Shufu", trName: "Depo Evi", desc: "Solunumu rahatlatır, astım ve öksürük krizlerini hafifletir.", position: [-0.035, 1.08, 0.09] }
+      { code: "KI1", name: "Yongquan", trName: "Fışkıran Kaynak", desc: "Geleneksel öğretide topraklanma ve dinginlik hissiyle ilişkilendirilir.", position: [-0.14, -0.78, 0.02] },
+      { code: "KI3", name: "Taixi", trName: "Büyük Vadi", desc: "Geleneksel öğretide böbrek Jing'i ve bel bölgesiyle ilişkilendirilir.", position: [-0.10, -0.74, 0.03] },
+      { code: "KI27", name: "Shufu", trName: "Depo Evi", desc: "Geleneksel öğretide göğüs üstü bölgesi ve solunumla ilişkilendirilir.", position: [-0.035, 1.08, 0.09] }
     ]
   },
   {
@@ -95,14 +95,14 @@ const MERIDIANS: MeridianInfo[] = [
     element: "Ağaç",
     time: "01:00 - 03:00",
     emotion: "Öfke ve Vizyonerlik",
-    physical: "Karaciğer, gözler, tendonlar ve toksin arınımı",
+    physical: "Karaciğer, gözler, tendonlar ve arınma teması",
     desc: "Bedenin genel enerji akışının pürüzsüz olmasını sağlar. Planlama, yaratıcılık, vizyon geliştirme ve esneklik yeteneğimizi kontrol eder.",
     color: "#10b981", // Tree green
     organName: "Karaciğer (Liver)",
     acupoints: [
-      { code: "LR1", name: "Dadun", trName: "Büyük Platform", desc: "Öfke patlamalarını yatıştırır, üreme sistemi enerjisini dengeler.", position: [0.14, -0.78, 0.08] },
-      { code: "LR3", name: "Taichong", trName: "Büyük Taşkın", desc: "Vücuttaki Qi sıkışmasını çözer, baş ağrısı ve stresi azaltır.", position: [0.13, -0.76, 0.07] },
-      { code: "LR14", name: "Qimen", trName: "Döngü Kapısı", desc: "Karaciğer meridyenini rahatlatır, hazımsızlık ve göğüs ağrısını hafifletir.", position: [0.06, 0.90, 0.09] }
+      { code: "LR1", name: "Dadun", trName: "Büyük Platform", desc: "Geleneksel öğretide öfke teması ve alt karın bölgesiyle ilişkilendirilir.", position: [0.14, -0.78, 0.08] },
+      { code: "LR3", name: "Taichong", trName: "Büyük Taşkın", desc: "Geleneksel öğretide Qi akışı ve gerginlik temasıyla ilişkilendirilir.", position: [0.13, -0.76, 0.07] },
+      { code: "LR14", name: "Qimen", trName: "Döngü Kapısı", desc: "Geleneksel öğretide karaciğer meridyeni ve göğüs bölgesiyle ilişkilendirilir.", position: [0.06, 0.90, 0.09] }
     ]
   },
   {
@@ -112,13 +112,13 @@ const MERIDIANS: MeridianInfo[] = [
     time: "05:00 - 07:00",
     emotion: "Tutma ve Arınma",
     physical: "Kalın bağırsak, cilt sağlığı ve eliminasyon sistemi",
-    desc: "Hem fiziksel hem zihinsel olarak artık bize hizmet etmeyen, toksik yükleri serbest bırakma ve arınma kanalıdır. Bırakmanın şifasını taşır.",
+    desc: "Geleneksel öğretide bırakma ve arınma temasını taşıyan kanaldır. Bırakmanın şifasını taşır.",
     color: "#64748b", // Slate gray
     organName: "Kalın Bağırsak (Large Intestine)",
     acupoints: [
-      { code: "LI4", name: "Hegu", trName: "Vadi Birleşimi", desc: "Vücuttaki tüm ağrıları yatıştırır, baş ağrısı ve sinüzite iyi gelir.", position: [-0.54, 0.49, 0.02] },
-      { code: "LI11", name: "Quchi", trName: "Kıvrımlı Havuz", desc: "Bedendeki aşırı ısıyı (ateşi) temizler, cilt kaşıntılarını azaltır.", position: [-0.35, 0.74, 0.03] },
-      { code: "LI20", name: "Yingxiang", trName: "Koku Karşılama", desc: "Burun tıkanıklığını giderir, koku alma duyusunu iyileştirir.", position: [0.02, 1.34, 0.13] }
+      { code: "LI4", name: "Hegu", trName: "Vadi Birleşimi", desc: "Geleneksel öğretide en çok bilinen noktalardan biridir; baş bölgesiyle ilişkilendirilir.", position: [-0.54, 0.49, 0.02] },
+      { code: "LI11", name: "Quchi", trName: "Kıvrımlı Havuz", desc: "Geleneksel öğretide “ısı” teması ve cilt ile ilişkilendirilir.", position: [-0.35, 0.74, 0.03] },
+      { code: "LI20", name: "Yingxiang", trName: "Koku Karşılama", desc: "Geleneksel öğretide burun çevresi ve koku duyusuyla ilişkilendirilir.", position: [0.02, 1.34, 0.13] }
     ]
   },
 ];
@@ -744,13 +744,13 @@ export default function Meridian3D() {
   return (
     <section className="space-y-12 border-b border-[#ced1bf]/15 pb-16 md:pb-24">
       <div className="space-y-4 max-w-3xl">
-        <span className="text-xs text-[#ca7d57] font-semibold tracking-widest uppercase">
+        <span className="text-xs text-[var(--accent-copper-on-dark)] font-semibold tracking-widest uppercase">
           Anatomik Deneyim
         </span>
         <h2 className="text-28 md:text-40 font-light text-white leading-tight">
           İnteraktif 3D Meridyen & Organ Bağlantıları
         </h2>
-        <p className="text-sm md:text-base font-light text-[#ced1bf]/75 leading-relaxed">
+        <p className="text-sm md:text-base font-light text-[#ced1bf]/85 leading-relaxed">
           Geleneksel Çin Tıbbı (TCM) doğrultusunda vücuttaki enerji akışını ve meridyen hatlarını 3D hologram üzerinde inceleyin. 
           Soldaki menüden bir kanal seçtiğinizde, **ilgili iç organ (Zang-Fu)** beden içinde aydınlanacak, canlanacak ve onunla bağlantılı enerji akışı akmaya başlayacaktır. 
           🔘 Glowing noktalara tıklayarak akupresür noktalarının detaylarını öğrenebilirsiniz.
@@ -773,15 +773,15 @@ export default function Meridian3D() {
             style={{ transform: "translate(-50%, -120%)", top: 0, left: 0 }}
           >
             <div className="flex justify-between items-center border-b border-[#ced1bf]/10 pb-1">
-              <span className="font-bold text-[#ca7d57]" id="tooltip-code">LU9</span>
+              <span className="font-bold text-[var(--accent-copper-on-dark)]" id="tooltip-code">LU9</span>
               <span className="font-medium text-white" id="tooltip-name">Taiyuan</span>
             </div>
             <p className="text-white/90 font-semibold" id="tooltip-trname">Büyük Derinlik</p>
-            <p className="text-[#ced1bf]/75 font-light leading-relaxed" id="tooltip-desc">Detaylar...</p>
+            <p className="text-[#ced1bf]/85 font-light leading-relaxed" id="tooltip-desc">Detaylar...</p>
           </div>
 
           {/* Floating UI Helper (Desktop only) */}
-          <div className="absolute bottom-4 left-4 bg-[#2B3530]/80 backdrop-blur-sm px-3 py-1.5 rounded border border-[#ced1bf]/10 text-[11px] text-[#ced1bf]/70 space-y-0.5 pointer-events-none">
+          <div className="absolute bottom-4 left-4 bg-[#2B3530]/80 backdrop-blur-sm px-3 py-1.5 rounded border border-[#ced1bf]/10 text-3xs text-[#ced1bf]/85 space-y-0.5 pointer-events-none">
             <div>🖱️ Sürükleyerek 3D modeli döndürün</div>
             <div>🔘 Glowing noktalara tıklayarak detayları açın</div>
           </div>
@@ -798,7 +798,7 @@ export default function Meridian3D() {
                 className={`px-4 py-3 text-left rounded text-xs transition-all duration-300 border cursor-pointer ${
                   selectedId === m.id
                     ? "bg-[#ca7d57] border-[#ca7d57] text-white font-medium shadow-md shadow-[#ca7d57]/20"
-                    : "bg-[#30493D]/30 border-[#ced1bf]/10 text-[#ced1bf]/70 hover:bg-[#30493D]/60 hover:text-[#ced1bf]"
+                    : "bg-[#30493D]/30 border-[#ced1bf]/10 text-[#ced1bf]/85 hover:bg-[#30493D]/60 hover:text-[#ced1bf]"
                 }`}
               >
                 {m.name.split(" ")[0]} {m.name.split(" ")[1]}
@@ -827,28 +827,28 @@ export default function Meridian3D() {
 
               <div className="grid grid-cols-2 gap-4 text-xs md:text-sm">
                 <div>
-                  <span className="text-[#ced1bf]/55 block">İlişkili Organ</span>
+                  <span className="text-[#ced1bf]/85 block">İlişkili Organ</span>
                   <span className="text-white font-medium">{selectedInfo.organName}</span>
                 </div>
                 <div>
-                  <span className="text-[#ced1bf]/55 block">Aktif Saat Dilimi</span>
+                  <span className="text-[#ced1bf]/85 block">Aktif Saat Dilimi</span>
                   <span className="text-white font-medium">{selectedInfo.time}</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4 text-xs md:text-sm">
                 <div>
-                  <span className="text-[#ced1bf]/55 block">İlişkili Duygu</span>
+                  <span className="text-[#ced1bf]/85 block">İlişkili Duygu</span>
                   <span className="text-white font-medium">{selectedInfo.emotion}</span>
                 </div>
                 <div>
-                  <span className="text-[#ced1bf]/55 block">Fiziksel Etki Alanı</span>
+                  <span className="text-[#ced1bf]/85 block">Fiziksel Etki Alanı</span>
                   <p className="text-white/90 font-medium">{selectedInfo.physical}</p>
                 </div>
               </div>
 
               <div className="space-y-1 pt-2">
-                <span className="text-xs text-[#ced1bf]/55 block">Açıklama & Önemi</span>
+                <span className="text-xs text-[#ced1bf]/85 block">Açıklama & Önemi</span>
                 <p className="text-sm text-[#ced1bf]/80 font-light leading-relaxed">
                   {selectedInfo.desc}
                 </p>
@@ -857,7 +857,7 @@ export default function Meridian3D() {
 
             {/* List of Acupoints on this meridian as inline indicators */}
             <div className="border-t border-[#ced1bf]/10 pt-4 space-y-2">
-              <span className="text-[11px] text-[#ced1bf]/55 block">Bu Kanal Üzerindeki Temel Noktalar:</span>
+              <span className="text-3xs text-[#ced1bf]/85 block">Bu Kanal Üzerindeki Temel Noktalar:</span>
               <div className="flex flex-wrap gap-2">
                 {selectedInfo.acupoints.map((pt) => (
                   <span
@@ -869,6 +869,13 @@ export default function Meridian3D() {
                 ))}
               </div>
             </div>
+
+            {/* Bu sahnedeki her açıklama geleneksel Çin tıbbı öğretisinin tarifidir; tedavi
+                vaadi değildir. Sağlık iddiası temizliğinin (RELEASE-PLAN §9.1) görünür yüzü. */}
+            <p className="border-t border-[#ced1bf]/10 pt-4 text-3xs leading-relaxed text-[#ced1bf]/85">
+              Buradaki açıklamalar geleneksel Çin tıbbı öğretisini tanıtır; tıbbi teşhis, tedavi
+              veya sonuç vaadi içermez. Sağlık sorunlarınız için hekiminize başvurun.
+            </p>
           </div>
         </div>
       </div>

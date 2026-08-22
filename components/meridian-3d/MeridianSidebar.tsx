@@ -96,7 +96,7 @@ export default function MeridianSidebar({
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} className="size-7 text-[#e0a96d]">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.004 9.004 0 0 1 8.716 6.747M12 3a9.004 9.004 0 0 0-8.716 6.747" />
         </svg>
-        <span className="text-[11px] font-bold tracking-[0.25em] text-[#e0a96d] uppercase font-sans">ELEMENTIS</span>
+        <span className="text-3xs font-bold tracking-[0.25em] text-[#e0a96d] uppercase font-sans">YAŞAMA SANATI</span>
       </div>
 
       {/* 1. Main Navigation Tab Bubble */}
@@ -114,13 +114,13 @@ export default function MeridianSidebar({
                   setIsPanelOpen(true);
                 }
               }}
-              className={`w-full flex items-center gap-3.5 py-3 px-4 rounded-lg text-[10px] tracking-widest transition-all duration-300 cursor-pointer text-left font-sans font-medium max-md:w-auto max-md:py-2.5 max-md:px-3.5 max-md:flex-1 max-md:justify-center ${
+              className={`w-full flex items-center gap-3.5 py-3 px-4 rounded-lg text-4xs tracking-widest transition-all duration-300 cursor-pointer text-left font-sans font-medium max-md:w-auto max-md:py-2.5 max-md:px-3.5 max-md:flex-1 max-md:justify-center ${
                 isActive
                   ? "bg-[#e0a96d]/15 text-[#e0a96d] border border-[#e0a96d]/20"
-                  : "text-[#a7c0b0]/60 border border-transparent hover:text-white/80 hover:bg-white/[0.02]"
+                  : "text-[#a7c0b0]/85 border border-transparent hover:text-white/80 hover:bg-white/[0.02]"
               }`}
             >
-              <span className={`transition-colors duration-300 ${isActive ? "text-[#e0a96d]" : "text-[#a7c0b0]/60"}`}>
+              <span className={`transition-colors duration-300 ${isActive ? "text-[#e0a96d]" : "text-[#a7c0b0]/85"}`}>
                 {tab.icon}
               </span>
               <span className="max-md:hidden uppercase">{tab.label}</span>
@@ -163,25 +163,25 @@ export default function MeridianSidebar({
         {/* Tab content: REPORT */}
         {activeTab === "report" && (
           <div className="flex-col flex flex-1 min-h-0 space-y-3">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-bold border-b border-white/[0.04] pb-2">Meridyen Terapi Raporu</span>
+            <span className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 font-bold border-b border-white/[0.04] pb-2">Meridyen Terapi Raporu</span>
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-xs font-light text-[#a7c0b0]/80 scrollbar-thin scrollbar-thumb-white/5">
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5 hover:border-[#e0a96d]/20 transition-colors duration-200">
                 <h4 className="font-semibold text-[#e0a96d] text-xs">Özet</h4>
-                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90">
+                <p className="text-4xs leading-relaxed text-[#a7c0b0]/90">
                   Enerji akışını sade, görünür ve takip edilebilir tutan bir ince ayar yaklaşımı.
                 </p>
               </div>
               
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5 hover:border-[#e0a96d]/20 transition-colors duration-200">
                 <h4 className="font-semibold text-[#e0a96d] text-xs">Odak Alanı</h4>
-                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90">
+                <p className="text-4xs leading-relaxed text-[#a7c0b0]/90">
                   Geleneksel yapı, modern kullanım diliyle yeniden düzenlenir; nokta, kanal ve seans ilişkisi öne çıkar.
                 </p>
               </div>
 
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5 hover:border-[#e0a96d]/20 transition-colors duration-200">
                 <h4 className="font-semibold text-[#e0a96d] text-xs">Kısa Not</h4>
-                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90">
+                <p className="text-4xs leading-relaxed text-[#a7c0b0]/90">
                   Panel, ana ilişkileri hızlı tarama için özetler ve gereksiz yoğunluğu geri çeker.
                 </p>
               </div>
@@ -190,7 +190,7 @@ export default function MeridianSidebar({
                 <h4 className="font-semibold text-[#e0a96d] text-xs flex items-center gap-1.5">
                   <span className="text-[#e0a96d]">✦</span> Kullanım Notu
                 </h4>
-                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/90 font-light">
+                <p className="text-4xs leading-relaxed text-[#a7c0b0]/90 font-light">
                   Kısa seçimler, temiz geri bildirim ve düşük görsel yük ile panel okunabilir kalır.
                 </p>
               </div>
@@ -202,11 +202,11 @@ export default function MeridianSidebar({
         {activeTab === "meridians" && (
           <div className="flex-col flex flex-1 min-h-0 space-y-3">
             <div className="flex justify-between items-center pb-2 border-b border-white/[0.04]">
-              <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-bold">Kanal Listesi</span>
+              <span className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 font-bold">Kanal Listesi</span>
               {selectedMeridianId && (
                 <button
                   onClick={() => onSelectMeridian(null)}
-                  className="text-[9px] text-[#e0a96d] hover:underline cursor-pointer"
+                  className="text-5xs text-[#e0a96d] hover:underline cursor-pointer"
                 >
                   Temizle
                 </button>
@@ -230,7 +230,7 @@ export default function MeridianSidebar({
                       <span className="size-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: m.color }} />
                       <div className="flex flex-col">
                         <span className="text-xs text-white leading-snug">{m.name}</span>
-                        <span className="text-[9px] text-[#a7c0b0]/40 font-mono leading-none">
+                        <span className="text-5xs text-[#a7c0b0]/85 font-mono leading-none">
                           {m.shortName} · {m.element}
                         </span>
                       </div>
@@ -247,11 +247,11 @@ export default function MeridianSidebar({
         {activeTab === "acupoints" && (
           <div className="flex-col flex flex-1 min-h-0 space-y-3">
             <div className="flex justify-between items-center pb-2 border-b border-white/[0.04]">
-              <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-bold">Terapi Noktaları</span>
+              <span className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 font-bold">Terapi Noktaları</span>
               {selectedAcupointId && (
                 <button
                   onClick={() => onSelectAcupoint(null)}
-                  className="text-[9px] text-[#e0a96d] hover:underline cursor-pointer"
+                  className="text-5xs text-[#e0a96d] hover:underline cursor-pointer"
                 >
                   Sıfırla
                 </button>
@@ -276,7 +276,7 @@ export default function MeridianSidebar({
                       <span className="size-2 rounded-full flex-shrink-0" style={{ backgroundColor: mColor }} />
                       <div className="flex flex-col">
                         <span className="text-xs text-white leading-snug">{ap.name}</span>
-                        <span className="text-[9px] text-[#a7c0b0]/40 font-mono leading-none">
+                        <span className="text-5xs text-[#a7c0b0]/85 font-mono leading-none">
                           {ap.code} · {ap.trName}
                         </span>
                       </div>
@@ -292,19 +292,19 @@ export default function MeridianSidebar({
         {/* Tab content: THERAPY */}
         {activeTab === "therapy" && (
           <div className="flex-col flex flex-1 min-h-0 space-y-3">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-bold border-b border-white/[0.04] pb-2">Terapi Protokolleri</span>
+            <span className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 font-bold border-b border-white/[0.04] pb-2">Terapi Protokolleri</span>
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-xs font-light text-[#a7c0b0]/80">
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Anti-Stres & Anksiyete</h4>
-                <p className="text-[10px] leading-relaxed">Yintang, Hegu (LI4) ve Shenmen (HT7) ile kısa rahatlama protokolü.</p>
+                <p className="text-4xs leading-relaxed">Yintang, Hegu (LI4) ve Shenmen (HT7) ile kısa rahatlama protokolü.</p>
               </div>
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Vitalite & Enerji Artışı</h4>
-                <p className="text-[10px] leading-relaxed">Qihai (CV6) ve Zusanli (ST36) ile destekleyici enerji çalışması.</p>
+                <p className="text-4xs leading-relaxed">Qihai (CV6) ve Zusanli (ST36) ile destekleyici enerji çalışması.</p>
               </div>
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Hormonal Denge</h4>
-                <p className="text-[10px] leading-relaxed">Sanyinjiao (SP6) ile ritim ve denge odaklı yaklaşım.</p>
+                <p className="text-4xs leading-relaxed">Sanyinjiao (SP6) ile ritim ve denge odaklı yaklaşım.</p>
               </div>
             </div>
           </div>
@@ -313,15 +313,15 @@ export default function MeridianSidebar({
         {/* Tab content: DIAGNOSTICS */}
         {activeTab === "diagnostics" && (
           <div className="flex-col flex flex-1 min-h-0 space-y-3">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-bold border-b border-white/[0.04] pb-2">Enerji Teşhisi</span>
+            <span className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 font-bold border-b border-white/[0.04] pb-2">Enerji Teşhisi</span>
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-xs font-light text-[#a7c0b0]/80">
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Kas Testi (Kinesiyoloji)</h4>
-                <p className="text-[10px] leading-relaxed">Kas yanıtı üzerinden blokaj ve dengesizlik okumak için kullanılır.</p>
+                <p className="text-4xs leading-relaxed">Kas yanıtı üzerinden blokaj ve dengesizlik okumak için kullanılır.</p>
               </div>
               <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg space-y-1.5">
                 <h4 className="font-medium text-white text-xs">Akustik Nabız Analizi</h4>
-                <p className="text-[10px] leading-relaxed">Nabız kalıplarını izleyerek yin-yang dengesine dair ipuçları toplar.</p>
+                <p className="text-4xs leading-relaxed">Nabız kalıplarını izleyerek yin-yang dengesine dair ipuçları toplar.</p>
               </div>
             </div>
           </div>
@@ -330,36 +330,35 @@ export default function MeridianSidebar({
         {/* Tab content: SETTINGS */}
         {activeTab === "settings" && (
           <div className="flex-col flex flex-1 min-h-0 space-y-4">
-            <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 font-bold border-b border-white/[0.04] pb-2">Görsel Ayarlar</span>
+            <span className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 font-bold border-b border-white/[0.04] pb-2">Görsel Ayarlar</span>
             <div className="space-y-4 text-xs font-light text-[#a7c0b0]/80">
               <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 block font-medium">Beden Opaklığı</label>
-                <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-mono text-white/40">Düşük</span>
-                  <div className="flex-1 h-1 bg-white/10 rounded relative overflow-hidden">
-                    <div className="absolute left-0 top-0 bottom-0 w-[60%] bg-[#e0a96d]" />
-                  </div>
-                  <span className="text-[10px] font-mono text-white/40">Yüksek</span>
-                </div>
+                <h4 className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 font-medium">Sahne Görünümü</h4>
+                <p className="text-4xs leading-relaxed text-[#a7c0b0]/85">
+                  Beden görünürlüğü, meridyenlerin okunabilirliği ve performans için dengeli tutulur.
+                </p>
               </div>
               <div className="space-y-1.5">
                 <h4 className="font-medium text-white text-xs">WebGL Performansı</h4>
-                <p className="text-[10px] leading-relaxed text-[#a7c0b0]/50 font-light">Donanım ivmesi açık olduğunda sahne daha akıcı çalışır.</p>
+                <p className="text-4xs leading-relaxed text-[#a7c0b0]/85 font-light">Donanım ivmesi açık olduğunda sahne daha akıcı çalışır.</p>
               </div>
-              <div className="pt-3 border-t border-white/[0.04] space-y-2">
-                <span className="text-[10px] uppercase tracking-wider text-[#a7c0b0]/40 block font-medium">Geliştirici Araçları</span>
-                <button
-                  onClick={onToggleCalibration}
-                  className={`w-full flex items-center justify-between p-2 rounded text-[10px] transition-all duration-200 border cursor-pointer font-medium font-mono ${
-                    calibrationMode
-                      ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
-                      : "bg-white/[0.02] border-white/[0.06] text-white/50 hover:text-white/80 hover:bg-white/[0.04]"
-                  }`}
-                >
-                  <span>🔧 Kalibrasyon Modu</span>
-                  <span>{calibrationMode ? "AÇIK" : "KAPALI"}</span>
-                </button>
-              </div>
+              {process.env.NODE_ENV !== "production" && (
+                <div className="pt-3 border-t border-white/[0.04] space-y-2">
+                  <span className="text-4xs uppercase tracking-wider text-[#a7c0b0]/85 block font-medium">Geliştirici Araçları</span>
+                  <button
+                    type="button"
+                    onClick={onToggleCalibration}
+                    className={`w-full flex min-h-11 items-center justify-between rounded border p-2 font-mono text-4xs font-medium transition-colors duration-200 ${
+                      calibrationMode
+                        ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
+                        : "bg-white/[0.02] border-white/[0.06] text-white/50 hover:text-white/80 hover:bg-white/[0.04]"
+                    }`}
+                  >
+                    <span>Kalibrasyon Modu</span>
+                    <span>{calibrationMode ? "AÇIK" : "KAPALI"}</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

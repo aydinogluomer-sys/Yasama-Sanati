@@ -1,15 +1,28 @@
+import type { Metadata } from "next";
+import { CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
+
+export const metadata: Metadata = {
+  title: "Hipnoterapi Eğitimi | Yaşama Sanatı",
+  description:
+    "Bilinçaltı çalışma prensipleri, telkin kalıpları ve etik sınırlar içinde indüksiyon teknikleri.",
+  alternates: { canonical: "/programlar/hipnoterapi" },
+  openGraph: {
+    title: "Hipnoterapi Eğitimi | Yaşama Sanatı",
+    description:
+      "Bilinçaltı çalışma prensipleri, telkin kalıpları ve etik sınırlar içinde indüksiyon teknikleri.",
+    url: "/programlar/hipnoterapi",
+  },
+};
 
 export default function HipnoterapiPage() {
   const data = {
     duration: "8 Hafta",
     format: "Çevrimiçi / Canlı (Zoom)",
     prerequisites: "Yok",
-    certification: "Uluslararası Onaylı Hipnoterapi Uzmanlık Sertifikası",
-    price: "16.500 TL",
-    startDate: "12 Kasım 2026",
+    certification: "Yaşama Sanatı Akademisi Hipnoterapi Uzmanlık Sertifikası",
     introTitle: "Bilinçaltının Gücünü Yönetin",
     introText: "Hipnoterapi, bilinçli zihnin filtrelerini aşarak doğrudan bilinçaltı düzeyde köklü ve kalıcı dönüşümler gerçekleştirme sanatıdır. Bu eğitimle bilinçaltının çalışma prensiplerini kavrayacak, telkin kalıpları yazmayı ve etik sınırlar dahilinde indüksiyon (hipnoza geçiş) tekniklerini uygulamayı öğreneceksiniz.",
     curriculum: [
@@ -54,13 +67,19 @@ export default function HipnoterapiPage() {
       },
     ],
   };
-
   return (
-    <SubPageLayout
+    <>
+      <CourseSchema
+        name="Hipnoterapi Eğitimi"
+        description="Bilinçaltı çalışma prensipleri, telkin kalıpları ve indüksiyon teknikleri."
+        path="/programlar/hipnoterapi"
+      />
+      <SubPageLayout
       title="Hipnoterapi"
       description="Bilinçaltı kalıplarını dönüştürme, hipnotik dil ve telkin teknikleriyle derin gelişim uzmanlığı."
     >
-      <CourseDetailTemplate {...data} />
+      <CourseDetailTemplate {...data} programSlug="hipnoterapi" />
     </SubPageLayout>
+    </>
   );
 }

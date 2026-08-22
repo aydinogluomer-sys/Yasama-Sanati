@@ -9,7 +9,7 @@ export const MERIDIANS: Meridian[] = [
     element: "Metal",
     time: "03:00 - 05:00",
     emotion: "Hüzün & Bırakabilme",
-    physical: "Solunum sistemi, cilt, bağışıklık gücü",
+    physical: "Solunum sistemi, cilt, direnç teması",
     desc: "Yaşam enerjisinin (Qi) dış dünyadan bedenimize ana giriş kapısıdır. Solunum kalitesi ve direnç seviyemizi yönetir.",
     points: [
       [0.06, 0.60, 0.08],
@@ -91,7 +91,7 @@ export const MERIDIANS: Meridian[] = [
     element: "Ağaç",
     time: "01:00 - 03:00",
     emotion: "Öfke & Vizyonerlik",
-    physical: "Karaciğer, tendonlar, göz sağlığı, detoks",
+    physical: "Karaciğer, tendonlar, göz çevresi, arınma teması",
     desc: "Bedenin genel enerji akışının serbest olmasını yönetir. Planlama, yaratıcılık ve vizyon gücümüzü uyarır.",
     points: [
       [0.10, -0.97, 0.06], // LR1 (Big Toe)

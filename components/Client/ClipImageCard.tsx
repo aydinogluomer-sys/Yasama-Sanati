@@ -35,13 +35,13 @@ export default function ClipImageCard({
       description: {
         mobile: [
           <>Doğru nefes alarak zihinsel berraklık, duygusal</>,
-          <>denge ve hücresel düzeyde detoks sağlayın.</>,
-          <>Uluslararası sertifikalı eğitmenlik programı.</>,
+          <>denge ve daha derin bir nefes kapasitesi.</>,
+          <>Yaşama Sanatı Akademisi eğitmenlik programı.</>,
         ],
         desktop: [
           <>Doğru nefes alarak zihinsel berraklık, duygusal</>,
-          <>denge ve hücresel düzeyde detoks sağlayın.</>,
-          <>Uluslararası sertifikalı eğitmenlik programı.</>,
+          <>denge ve daha derin bir nefes kapasitesi.</>,
+          <>Yaşama Sanatı Akademisi eğitmenlik programı.</>,
         ],
       },
     },
@@ -51,12 +51,12 @@ export default function ClipImageCard({
         mobile: [
           <>Vücudun enerji kanallarını bloke eden</>,
           <>engelleri kaldırın. Bütünsel kinesiyoloji</>,
-          <>teknikleriyle derin hücresel şifa.</>,
+          <>teknikleriyle bütünsel bir çalışma.</>,
         ],
         desktop: [
           <>Vücudun enerji kanallarını bloke eden</>,
           <>engelleri kaldırın. Bütünsel kinesiyoloji</>,
-          <>teknikleriyle derin hücresel şifa.</>,
+          <>teknikleriyle bütünsel bir çalışma.</>,
         ],
       },
     },
@@ -80,12 +80,12 @@ export default function ClipImageCard({
       description: {
         mobile: [
           <>Evrensel yaşam enerjisini yönlendirerek</>,
-          <>çakraları dengeleyin ve şifa kanallarınızı açın.</>,
+          <>enerji çalışmasının geleneksel yolunu öğrenin.</>,
           <>Birinci aşamadan master seviyesine uzanan yol.</>,
         ],
         desktop: [
           <>Evrensel yaşam enerjisini yönlendirerek</>,
-          <>çakraları dengeleyin ve şifa kanallarınızı açın.</>,
+          <>enerji çalışmasının geleneksel yolunu öğrenin.</>,
           <>Birinci aşamadan master seviyesine uzanan yol.</>,
         ],
       },
@@ -94,13 +94,13 @@ export default function ClipImageCard({
       title: [<>Hipnoterapi &</>, <>Yaşam Koçluğu</>],
       description: {
         mobile: [
-          <>Bilinçaltının gücünü keşfederek köklü</>,
-          <>davranış değişiklikleri sağlayın ve bireysel</>,
+          <>Bilinçaltı kalıplarını fark ederek</>,
+          <>kendi ritminizde ilerleyin ve bireysel</>,
           <>potansiyelinizi gerçeğe dönüştürün.</>,
         ],
         desktop: [
-          <>Bilinçaltının gücünü keşfederek köklü</>,
-          <>davranış değişiklikleri sağlayın ve bireysel</>,
+          <>Bilinçaltı kalıplarını fark ederek</>,
+          <>kendi ritminizde ilerleyin ve bireysel</>,
           <>potansiyelinizi gerçeğe dönüştürün.</>,
         ],
       },
@@ -158,10 +158,10 @@ export default function ClipImageCard({
             state={currentState}
             delay={0}
             lines={[<>{prependZero(currentState)}</>]}
-            className="font-mono text-[0.95rem] tracking-[0.06em] tabular-nums text-[#A85F33] [line-height:1]"
+            className="font-mono text-[0.95rem] tracking-[0.06em] tabular-nums text-[var(--accent-copper-on-light)] [line-height:1]"
           />
           <span aria-hidden className="h-px w-10 bg-current opacity-30" />
-          <span className="font-mono text-[0.7rem] tracking-[0.14em] text-[#2B3530]/55 tabular-nums">
+          <span className="font-mono text-[0.7rem] tracking-[0.14em] text-[#2B3530]/85 tabular-nums">
             {prependZero(images.length)}
           </span>
         </div>
@@ -188,7 +188,9 @@ export default function ClipImageCard({
             >
               <Image
                 src={eachImage}
-                alt={"card-image-" + (index + 1)}
+                alt=""
+                aria-hidden="true"
+                sizes="(min-width: 768px) 472px, 90vw"
                 className="size-full object-cover"
               />
             </motion.div>
@@ -204,7 +206,7 @@ export default function ClipImageCard({
 
         <Link
           href="/programlar"
-          className="group mt-1 inline-flex w-fit items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#A85F33] transition-colors hover:text-[#8a4c28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A85F33]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#D1CCBF] motion-reduce:transition-none"
+          className="group mt-1 inline-flex w-fit items-center gap-2 text-3xs font-medium uppercase tracking-[0.18em] text-[var(--accent-copper-on-light)] transition-colors hover:text-[#8a4c28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A85F33]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#D1CCBF] motion-reduce:transition-none"
         >
           Programı İncele
           <span
@@ -215,7 +217,7 @@ export default function ClipImageCard({
           </span>
         </Link>
       </motion.div>
-      <span className="text-base [line-height:1] md:text-xl">
+      <span className="text-base [line-height:1] motion-reduce:hidden md:text-xl">
         ( Kaydırmaya Devam Edin ){" "}
       </span>
     </motion.div>

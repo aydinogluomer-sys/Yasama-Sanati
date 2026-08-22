@@ -1,7 +1,22 @@
+import type { Metadata } from "next";
+import { CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
 import MeridianParallaxContainer from "@/components/meridian-3d/MeridianParallaxContainer";
+
+export const metadata: Metadata = {
+  title: "Meridyen Terapi Eğitimi | Yaşama Sanatı",
+  description:
+    "IECCERT onaylı meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı; 8 hafta karma format.",
+  alternates: { canonical: "/programlar/meridyen-terapi" },
+  openGraph: {
+    title: "Meridyen Terapi Eğitimi | Yaşama Sanatı",
+    description:
+      "IECCERT onaylı meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı; 8 hafta karma format.",
+    url: "/programlar/meridyen-terapi",
+  },
+};
 
 export default function MeridyenTerapiPage() {
   const data = {
@@ -9,10 +24,8 @@ export default function MeridyenTerapiPage() {
     format: "Karma (Online Teorik + Yüz yüze Uygulama)",
     prerequisites: "Yok",
     certification: "IECCERT Onaylı Meridyen Terapi Uzmanlık Sertifikası",
-    price: "18.500 TL",
-    startDate: "10 Ekim 2026",
     introTitle: "Bedenin Enerji Ağlarını Keşfedin",
-    introText: "Meridyen Terapisi, vücudun yaşam energisinin aktığı gizli kanalları uyararak enerjisel tıkanıklıkları çözer. Bütünsel kinesiyoloji pratikleriyle zenginleştirilen bu programda, enerji dengesizliklerini teşhis etmeyi ve beden zihnine hücresel düzeyde şifa vermeyi öğreneceksiniz.",
+    introText: "Meridyen Terapisi, vücudun yaşam enerjisinin aktığı gizli kanalları uyararak enerjisel tıkanıklıkları çözer. Bütünsel kinesiyoloji pratikleriyle zenginleştirilen bu programda, enerji dengesizliklerini teşhis etmeyi ve beden zihnine hücresel düzeyde şifa vermeyi öğreneceksiniz.",
     curriculum: [
       {
         title: "Modül 1: Geleneksel Çin Tıbbı ve Meridyen Teorisi",
@@ -53,7 +66,7 @@ export default function MeridyenTerapiPage() {
       },
       {
         question: "Meridyen Terapi Cihazı Nedir?",
-        answer: "Enerji (meridyen) kanalları ve iç organlar hakkında geleneksel Çin tıbbı teorisi temelinde geliştirilen üst teknoloji cihazıdır. Bu cihaz bioinformatik, enerji, nöroloji ve diğer alanlarda son başarıları kendinde toplamıştır. Akupunktur, guasha masajı, tuina masajı, dağlama ve vakum terapisine benzer kapsamlı bir fizyoterapi etkisi göstermektedir. Enerji kanallarına ve biyolojik olarak aktif noktalara özel fizyoterapi etkisi sayesinde, hızla enerji kanallarının temizliği sağlanmaktadır. Bu da chi enerjisi ve kan dolaşımının iyileşmesine, yin-yang dengesinin yenilenmesine ve organizmanın biyolojik enerji seviyesinin yükselmesine yardımcı olmaktadır. Cihazın düzenli kullanımı genel profilaktik ve iyileştirici etkinin elde edilmesini sağlamaktadır.",
+        answer: "Enerji (meridyen) kanalları ve iç organlar hakkında geleneksel Çin tıbbı teorisi temelinde geliştirilen üst teknoloji cihazıdır. Bu cihaz bioinformatik, enerji, nöroloji ve diğer alanlarda son başarıları kendinde toplamıştır. Akupunktur, guasha masajı, tuina masajı, dağlama ve vakum terapisine benzer kapsamlı bir fizyoterapi etkisi göstermektedir. Enerji kanallarına ve biyolojik olarak aktif noktalara özel fizyoterapi etkisi sayesinde, hızla enerji kanallarının temizliği sağlanmaktadır. Geleneksel öğreti bu etkiyi chi'nin serbest dolaşımı ve yin-yang dengesi kavramlarıyla açıklar. Bunlar geleneksel Çin tıbbının kendi terminolojisine ait kavramlardır; tıbbi bir tedavi ya da iyileşme vaadi taşımaz.",
       },
       {
         question: "Meridyen Terapi Cihazı Sertifikalı Bir Fizyoterapi Cihazı Mıdır?",
@@ -61,19 +74,19 @@ export default function MeridyenTerapiPage() {
       },
       {
         question: "Cihaz Güvenli Midir? Yan Etkisi Mevcut Mudur?",
-        answer: "Meridyen Terapi Cihazı tamamen güvenli bir üründür. Bu da kalite uygunluk belgesi ile tasdiklidir. Cihazın çıkış voltajı 8 volt olup, organizmanın hücre biyoakımıyla uyumludur. Cihaz, onu kullanan danışan ve uzman için son derece güvenlidir. Elektrik darbelerini insan hücresinin elektrik yükü ile uyumlu biyoakımlara dönüştürmektedir. Cihaz, hücrelerin enerjisini yenilemekte ve enerji kanallarını serbest bırakmaktadır.",
+        answer: "Meridyen Terapi Cihazı tamamen güvenli bir üründür. Bu da kalite uygunluk belgesi ile tasdiklidir. Cihazın çıkış voltajı 8 volt olup, organizmanın hücre biyoakımıyla uyumludur. Cihaz, onu kullanan danışan ve uzman için son derece güvenlidir. Elektrik darbelerini insan hücresinin elektrik yükü ile uyumlu biyoakımlara dönüştürmektedir. Geleneksel öğretide bu uygulama, enerji kanallarının serbestleşmesi olarak tanımlanır.",
       },
       {
         question: "Cihazın Çalışma Prensibi Nasıldır?",
-        answer: "Cihaz temel bir ünite ve özel eldivenlerden oluşmaktadır. Enerji kanallarına ve biyolojik olarak aktif noktalara özel fizyoterapi etkisi sayesinde bunların aktif temizliği yapılmakta ve içlerinde bulunan birincil chi enerjisi yenilenmektedir. Serbest chi sirkülasyonu kan dolaşımını iyileştirmekte ve organizmanın biyoenerji seviyesini artırmaktadır. Böylece yin-yang enerji dengesi oluşmakta ve genel profilaktik iyileştirici etki elde edilmektedir.",
+        answer: "Cihaz temel bir ünite ve özel eldivenlerden oluşmaktadır. Enerji kanallarına ve biyolojik olarak aktif noktalara özel fizyoterapi etkisi sayesinde bunların aktif temizliği yapılmakta ve içlerinde bulunan birincil chi enerjisi yenilenmektedir. Geleneksel öğreti bu süreci, serbest chi sirkülasyonu ve yin-yang dengesinin kurulması olarak tanımlar. Bu tanım geleneksel bir çerçeveye aittir; tıbbi bir etki iddiası değildir.",
       },
       {
         question: "Hangi Amaçlarla Cihazın Kullanımı Tavsiye Edilmektedir?",
-        answer: "Cihaz çok geniş bir yelpazeye hitap eder. Geleneksel Çin tıbbının 'Durgunluğun olmadığı yerde ağrı olmaz, durgunluk olan yerde ağrı ortaya çıkar' temel teorisine dayanır. Enerji kanallarındaki durgunluklar chi sirkülasyonuna engel olur ve birçok rahatsızlığın ortaya çıkma nedenidir. Enerji kanalları, insan yaşamının, vücudun iç organları ve tüm bölümleriyle bağlantılı olan hayati hatlarıdır. Geleneksel Çin tıbbında meridyenlerdeki problemler rahatsızlıkların temel kaynağı olarak ele alınır. Buna uygun olarak iyileşmenin ve sağlığı sürdürmenin anahtarı, enerji kanallarının serbest olmasıdır.",
+        answer: "Cihaz çok geniş bir yelpazeye hitap eder. Geleneksel Çin tıbbının 'Durgunluğun olmadığı yerde ağrı olmaz, durgunluk olan yerde ağrı ortaya çıkar' temel teorisine dayanır. Geleneksel öğretide enerji kanallarındaki durgunluklar chi sirkülasyonuna engel sayılır. Enerji kanalları, insan yaşamının, vücudun iç organları ve tüm bölümleriyle bağlantılı olan hayati hatlarıdır. Geleneksel Çin tıbbında meridyenlerdeki problemler rahatsızlıkların temel kaynağı olarak ele alınır. Buna uygun olarak geleneksel öğreti, enerji kanallarının serbest olmasını temel ilke kabul eder.",
       },
       {
-        question: "Meridyen Terapi Kimlere Tavsiye Edilmektedir?",
-        answer: "Uykusuzluk problemi olan, mide-bağırsak sisteminde işlev bozukluğu yaşayan, romatizma, hipertansiyon, hiperglisemi, şeker hastalığı, iskemik rahatsızlıkları bulunan ve kronik yorgunluğu olan kişilere özellikle tavsiye edilmektedir. Ayrıca cihazın, yoğun iş veya spor temposuna sahip genç ve yaşlı insanlarda uygulanması önerilir.",
+        question: "Meridyen Terapi Kimler İçin Uygundur?",
+        answer: "Meridyen terapi; yoğun iş temposu, uzun süre ayakta ya da masa başında çalışma, düzensiz uyku veya yoğun spor temposu nedeniyle bedensel gerginlik biriktiren yetişkinlere yönelik bir gevşeme ve farkındalık uygulamasıdır. Belirli bir rahatsızlığın tedavisi amacıyla önerilmez. Tanı konmuş bir sağlık sorununuz varsa uygulamadan önce hekiminize danışın; meridyen terapi tıbbi tedavinin yerine geçmez ve onun alternatifi değildir.",
       },
       {
         question: "Cihazın Kullanımında Kontrendikasyonlar ve İhtiyati Durumlar Var Mı?",
@@ -84,14 +97,19 @@ export default function MeridyenTerapiPage() {
         answer: "Hayır. Metal ve elektronik cihazlar cihazın biyoakım dalgalarını etkileyebilir. Bu nedenle işlem sırasında tüm metal süs eşyalarının çıkarılması ve yakında cep telefonu bulundurulmaması gerekmektedir.",
       },
       {
-        question: "İyileşme Olması İçin İşleme Ne Kadar Süreyle Devam Edilmesi Gerekmektedir?",
-        answer: "Meridyen Terapi cihazı önleyici ve sağlığı destekleyicidir. Kullanım sürecinde organizma toksinlerden temizlenir, kan dolaşımı ve metabolizma iyileşir, enerji kanalları serbest kalır, iç organların yin-yang enerjileri düzenlenir, hücreler aktive olur ve bağışıklık güçlenir. Bu sayede organizmanın kendi kendini yenileme yeteneği gelişir. Kısa kür 10 gün sürerken, uzun kür kişinin yaşı kadar gün sürebilir. Şüphesiz ki kür süresi kişinin genel sağlık durumuna göre belirlenmektedir. Cihazın düzenli kullanımı sağlığı ve güzelliği destekler.",
+        question: "Uygulamaya Ne Kadar Süreyle Devam Edilir?",
+        answer: "Meridyen terapi kür mantığıyla uygulanır: kısa kür 10 gün sürerken, uzun kür kişinin yaşı kadar gün sürebilir. Süre kişinin genel durumuna ve uygulayıcının değerlendirmesine göre belirlenir. Geleneksel öğretide bu süreç, enerji kanallarının serbestleşmesi ve yin-yang dengesinin düzenlenmesi olarak tanımlanır. Uygulama bir rahatsızlığın tedavisi değildir ve tıbbi tedavinin yerine geçmez.",
       },
     ],
   };
-
   return (
-    <SubPageLayout
+    <>
+      <CourseSchema
+        name="Meridyen Terapi Eğitimi"
+        description="IECCERT onaylı meridyen terapi ve bütünsel kinesiyoloji uzmanlık programı."
+        path="/programlar/meridyen-terapi"
+      />
+      <SubPageLayout
       title="Meridyen Terapi"
       description="Vücudun enerji kanallarını (meridyenler) dengeleme, blokajları kaldırma ve bütünsel şifa metodolojisi."
       noPadding={true}
@@ -100,10 +118,10 @@ export default function MeridyenTerapiPage() {
       <div className="space-y-0">
         <MeridianParallaxContainer />
         <div className="px-6 py-16 md:px-16 md:py-28">
-          <CourseDetailTemplate {...data} />
+          <CourseDetailTemplate {...data} programSlug="meridyen-terapi" />
         </div>
       </div>
     </SubPageLayout>
+    </>
   );
 }
-

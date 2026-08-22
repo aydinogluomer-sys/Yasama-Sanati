@@ -11,13 +11,13 @@ export const ACUPOINTS: Acupoint[] = [
     side: "center",
     position: [0.0, 0.82, 0.08],
     labelOffset: [0.25, 0.05, 0.05],
-    description: "Zihni sakinleştirir, stresi azaltır ve içsel sezgiyi güçlendirir. Uykusuzluk, baş ağrısı ve yoğun endişe hallerinde çok etkilidir.",
+    description: "Geleneksel Çin tıbbında zihinsel dinginlik ve iç odak temalarıyla ilişkilendirilen, alnın merkezindeki klasik noktadır.",
     location: "İki kaşın tam ortasında, alnın merkez noktasındadır.",
     benefits: [
-      "Zihinsel berraklık kazandırır",
-      "Kaygıyı ve derin stresi yatıştırır",
-      "Uykusuzluğu gidermeye yardımcı olur",
-      "Göz yorgunluğunu hafifletir"
+      "Zihinsel berraklık temasıyla ilişkilendirilir",
+      "Sakinleşme pratiklerinde kullanılır",
+      "Uyku öncesi dinginlik rutinlerinde tercih edilir",
+      "Göz çevresini dinlendirme amaçlı kullanılır"
     ],
     caution: "Çok yumuşak basınç uygulayın. Hamilelikte ve cilt lezyonlarında sert baskıdan kaçının."
   },
@@ -31,12 +31,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "right",
     position: [0.22, 0.55, 0.03],
     labelOffset: [0.28, 0.0, 0.0],
-    description: "Akciğer enerjisini (Qi) temizler ve aşağıya yönlendirir. Solunum güçlüğü, astım belirtileri ve göğüsteki sıkışma hissini rahatlatır.",
+    description: "Geleneksel öğretide akciğer Qi'sinin akışıyla ve göğüs alanının açıklığıyla ilişkilendirilen noktadır.",
     location: "Kolun ön kısmında, koltuk altı kıvrımının 3 cun (yaklaşık 4 parmak) altında, biceps kasının radial kenarındadır.",
     benefits: [
-      "Nefesi derinleştirir ve rahatlatır",
-      "Göğüs kafesindeki tıkanıklığı açar",
-      "Hafif öksürük ve hırıltıyı yatıştırır"
+      "Derin nefes çalışmalarında kullanılır",
+      "Göğüs alanını açma pratiklerinde kullanılır",
+      "Solunum temasıyla ilişkilendirilir"
     ],
     caution: "Derin ve sivri basılmamalı, sadece hafif dairesel masaj yapılmalıdır."
   },
@@ -50,12 +50,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "left",
     position: [-0.26, 0.15, 0.04],
     labelOffset: [-0.28, 0.0, 0.0],
-    description: "Bulantı, kusma ve mide rahatsızlıklarını gidermede dünya çapında bilinen en etkili akupresür noktasıdır. Kalbi ve zihni yatıştırır.",
+    description: "Geleneksel akupresür pratiğinde en çok bilinen noktalardan biridir; mide bölgesi ve zihinsel sükunet temalarıyla ilişkilendirilir.",
     location: "El bilek çizgisine yaklaşık 2 cun (3 parmak) mesafede, iki tendon (flexor carpi radialis ve palmaris longus) arasındadır.",
     benefits: [
-      "Bulantıyı (seyahat, gebelik veya stres kaynaklı) hızla keser",
-      "Çarpıntıyı ve ani kaygı krizlerini yatıştırır",
-      "Uykusuzluğa ve iç gerginliğe iyi gelir"
+      "Mide bölgesi temasıyla ilişkilendirilir",
+      "Sakinleşme pratiklerinde kullanılır",
+      "İç gerginliği gevşetme rutinlerinde kullanılır"
     ],
     caution: "Tendonların arasına dik ve çok sert baskı yapmayın; parmak ucuyla dairesel bastırın."
   },
@@ -69,12 +69,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "center",
     position: [0.0, 0.22, 0.09],
     labelOffset: [0.25, 0.0, 0.0],
-    description: "Bedendeki birincil yaşam enerjisi (Yuan Qi) deposudur. Kronik yorgunluk, bağışıklık zayıflığı ve yaşamsal çöküş durumlarında temel şifa kapısıdır.",
+    description: "Geleneksel öğretide birincil yaşam enerjisinin (Yuan Qi) deposu sayılan, alt karın bölgesindeki merkez noktadır.",
     location: "Karın ön orta hattında, göbeğin yaklaşık 1.5 cun (iki parmak eninde) altındadır.",
     benefits: [
-      "Genel bedensel enerjiyi ve vitaliteyi artırır",
-      "Bağışıklık sistemini destekler ve güçlendirir",
-      "Sindirim gücünü artırır ve gazı azaltır"
+      "Genel canlılık temasıyla ilişkilendirilir",
+      "Geleneksel öğretide direnç temasıyla anılır",
+      "Sindirim ritmi temasıyla ilişkilendirilir"
     ],
     caution: "Hamilelik döneminde karın bölgesindeki bu noktaya kesinlikle baskı uygulanmamalıdır."
   },
@@ -88,13 +88,13 @@ export const ACUPOINTS: Acupoint[] = [
     side: "right",
     position: [0.12, -0.65, 0.05],
     labelOffset: [0.25, 0.0, 0.0],
-    description: "Çin tıbbında 'Tüm Hastalıkların Şifa Noktası' olarak bilinir. Sindirimi düzenler, kas yorgunluğunu anında giderir ve genel gücü artırır.",
+    description: "Geleneksel Çin tıbbının en çok anılan noktalarından biridir; sindirim ritmi ve genel canlılık temalarıyla ilişkilendirilir.",
     location: "Diz kapağının alt kenarından 3 cun (4 parmak) aşağıda, kaval kemiğinin (tibia) dış kenarından bir parmak lateralde.",
     benefits: [
-      "Sindirim sistemini uyarır, şişkinliği ve hazımsızlığı çözer",
-      "Bağışıklık hücresi üretimini artırır",
-      "Bacak kaslarındaki yorgunluğu ve ağrıları giderir",
-      "Zihinsel yorgunluğa karşı zindelik verir"
+      "Sindirim ritmi temasıyla ilişkilendirilir",
+      "Geleneksel öğretide direnç temasıyla anılır",
+      "Bacak bölgesini gevşetme pratiklerinde kullanılır",
+      "Zindelik temasıyla ilişkilendirilir"
     ],
     caution: "Akut ateşli hastalıklarda uyarılmamalıdır."
   },
@@ -108,12 +108,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "left",
     position: [-0.32, 0.06, 0.03],
     labelOffset: [-0.28, -0.05, 0.0],
-    description: "Tüm bedendeki ağrıları giderme özelliğiyle tanınan en güçlü ağrı kesici noktadır. Baş ağrısı, diş ağrısı ve stres için birincil odak noktasıdır.",
+    description: "Geleneksel öğretide el sırtındaki en bilinen noktadır; baş ve yüz bölgesi temalarıyla ilişkilendirilir.",
     location: "Başparmak ile işaret parmağı arasındaki birinci dorsal interosseus kasının en yüksek olduğu tümsekte yer alır.",
     benefits: [
-      "Şiddetli baş, diş ve boyun ağrılarını hafifletir",
-      "Vücuttaki toksinlerin atılmasını ve bağırsak hareketini uyarır",
-      "Sinüs yollarını açar, grip semptomlarını azaltır"
+      "Baş ve boyun bölgesi temasıyla ilişkilendirilir",
+      "Geleneksel öğretide arınma temasıyla anılır",
+      "Yüz ve sinüs bölgesi temasıyla ilişkilendirilir"
     ],
     caution: "UYARI: Rahim kasılmalarını tetikleyebileceğinden, hamile kadınlarda bu noktaya BASILMAMALIDIR."
   },
@@ -127,12 +127,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "left",
     position: [-0.08, -0.82, 0.04],
     labelOffset: [-0.25, 0.0, 0.0],
-    description: "Karaciğer, Böbrek ve Dalak Yin meridyenlerinin kesiştiği çok önemli bir kadın sağlığı ve hormon dengeleme noktasıdır. Sinir sistemini yatıştırır.",
+    description: "Geleneksel öğretide Karaciğer, Böbrek ve Dalak Yin meridyenlerinin kesişimi olarak tarif edilen noktadır.",
     location: "İci ayak bileği kemiğinin (medial malleolus) en yüksek noktasından 3 cun (4 parmak) yukarıda, kaval kemiğinin hemen arkasındadır.",
     benefits: [
-      "Hormonal sistemi dengeler, regl sancılarını hafifletir",
-      "Uykusuzluğu, stres kaynaklı çarpıntıyı azaltır",
-      "Ödem atılımına ve sıvı dengesine yardımcı olur"
+      "Geleneksel öğretide döngüsel denge temasıyla anılır",
+      "Dinginlik rutinlerinde kullanılır",
+      "Geleneksel öğretide sıvı dengesi temasıyla anılır"
     ],
     caution: "UYARI: Hegu gibi rahim kasılmalarını uyarabilir; hamilelik süresince bu noktaya baskı yapılmamalıdır."
   },
@@ -146,12 +146,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "right",
     position: [0.09, -0.96, 0.06],
     labelOffset: [0.22, 0.05, 0.0],
-    description: "Öfke, kızgınlık, hayal kırıklığı ve stres kaynaklı enerji sıkışmalarını çözmede en etkili arınma noktalarından biridir. Karaciğer Qi'sini serbest bırakır.",
+    description: "Geleneksel öğretide Karaciğer Qi'sinin akışı ve öfke temasıyla ilişkilendirilen noktadır.",
     location: "Ayak sırtında, birinci ve ikinci ayak parmak kemiklerinin birleştiği çöküntü alandadır.",
     benefits: [
-      "Öfkeyi, sinirliliği ve kas spazmlarını yatıştırır",
-      "Baş ağrısını, migreni ve göz kuruluğunu azaltır",
-      "Kan dolaşımını ve karaciğer detoksunu uyarır"
+      "Öfke temasıyla ilişkilendirilir",
+      "Baş bölgesi ve göz çevresi temasıyla anılır",
+      "Geleneksel öğretide Karaciğer Qi akışıyla anılır"
     ],
     caution: "Çok hassas bir nokta olabilir; parmağı bastırıp hafifçe geri çekerek dairesel uyarın."
   },
@@ -165,12 +165,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "left",
     position: [-0.27, 0.12, 0.03],
     labelOffset: [-0.28, 0.05, 0.0],
-    description: "Doğrudan ruhsal dinginliği (Shen) besler. Anksiyete, panik hissi, heyecan ve uykuya dalamama durumlarında zihni saniyeler içinde yatıştırır.",
+    description: "Geleneksel öğretide ruhsal dinginlik (Shen) temasıyla ilişkilendirilen, bilek içindeki noktadır.",
     location: "El bileği kıvrımının en ulnar (serçe parmak tarafı) ucunda, tendonun (flexor carpi ulnaris) hemen radial tarafındaki çöküntüdedir.",
     benefits: [
-      "Çarpıntı, aşırı heyecan ve panik halini yatıştırır",
-      "Zihni sakinleştirerek derin bir uykuya hazırlar",
-      "Duygusal çalkantıları dengeler"
+      "Yoğun duygusal anlarda sakinleşme amaçlı kullanılır",
+      "Uyku öncesi dinginlik rutinlerinde kullanılır",
+      "Duygusal denge temasıyla ilişkilendirilir"
     ],
     caution: "Derin tendonların olduğu bir bölgedir; parmak ucuyla nazikçe basınç uygulayın."
   },
@@ -184,12 +184,12 @@ export const ACUPOINTS: Acupoint[] = [
     side: "center",
     position: [0.0, 0.95, 0.0],
     labelOffset: [-0.22, 0.15, -0.05],
-    description: "Bütün enerjiyi başa çeken ve yukarı kaldıran 'Tepe Çakrası' eşdeğeridir. Hafızayı güçlendirir, kronik baş dönmesini giderir ve depresif hisleri azaltır.",
+    description: "Geleneksel öğretide başın tepesindeki buluşma noktasıdır; yukarı yönlü enerji ve zihinsel açıklık temalarıyla ilişkilendirilir.",
     location: "Başın en üst tepe noktasında, iki kulak kepçesinin en yüksek noktalarını birleştiren çizginin tam ortasındadır.",
     benefits: [
-      "Zihni yukarı kaldırır, odaklanmayı ve hafızayı uyarır",
-      "Depresif veya yorgun ruh hallerine canlılık getirir",
-      "Baş ağrısı ve vertigo hissini azaltır"
+      "Odaklanma temasıyla ilişkilendirilir",
+      "Canlılık temasıyla ilişkilendirilir",
+      "Baş bölgesi temasıyla ilişkilendirilir"
     ],
     caution: "Bebeklerde (bıngıldak açıkken) ve kafatası travması geçirmiş kişilerde bu noktaya basılmamalıdır."
   }

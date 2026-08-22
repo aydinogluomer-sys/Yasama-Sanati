@@ -54,7 +54,7 @@ export default function MeridianParallaxContainer() {
           style={{ opacity: indicatorOpacity }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-none flex flex-col items-center gap-2 select-none"
         >
-          <span className="text-[10px] md:text-xs font-medium tracking-[0.25em] text-[#e0a96d] uppercase font-sans drop-shadow-md">
+          <span className="text-4xs md:text-xs font-medium tracking-[0.25em] text-[#e0a96d] uppercase font-sans drop-shadow-md">
             Müfredat ve Detaylar İçin Aşağı Kaydırın
           </span>
           <div className="flex flex-col items-center justify-center gap-1.5 mt-1">

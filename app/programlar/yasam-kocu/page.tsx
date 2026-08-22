@@ -1,15 +1,28 @@
+import type { Metadata } from "next";
+import { CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
+
+export const metadata: Metadata = {
+  title: "Yaşam Koçluğu Eğitimi | Yaşama Sanatı",
+  description:
+    "Etkin dinleme, güçlü soru sorma ve hedef yönetimi; profesyonel koçluk uygulaması.",
+  alternates: { canonical: "/programlar/yasam-kocu" },
+  openGraph: {
+    title: "Yaşam Koçluğu Eğitimi | Yaşama Sanatı",
+    description:
+      "Etkin dinleme, güçlü soru sorma ve hedef yönetimi; profesyonel koçluk uygulaması.",
+    url: "/programlar/yasam-kocu",
+  },
+};
 
 export default function YasamKocuPage() {
   const data = {
     duration: "10 Hafta",
     format: "Çevrimiçi / Canlı (Zoom)",
     prerequisites: "Yok",
-    certification: "Uluslararası Standartlarda Profesyonel Yaşam Koçluğu Sertifikası",
-    price: "16.000 TL",
-    startDate: "05 Ekim 2026",
+    certification: "Yaşama Sanatı Akademisi Profesyonel Yaşam Koçluğu Sertifikası",
     introTitle: "Potansiyeli Performansa Dönüştürün",
     introText: "Yaşam Koçluğu, bireylerin kişisel ve profesyonel hayatlarında arzuladıkları hedeflere ulaşmalarına rehberlik etme sanatıdır. Bu eğitimle profesyonel koçluk becerilerini en üst seviyede kazanacak, etkin dinleme ve güçlü soru sorma tekniklerini öğrenecek ve kendi koçluk uygulamanızı güvenle başlatacaksınız.",
     curriculum: [
@@ -96,13 +109,19 @@ export default function YasamKocuPage() {
       },
     ],
   };
-
   return (
-    <SubPageLayout
+    <>
+      <CourseSchema
+        name="Yaşam Koçluğu Eğitimi"
+        description="Etkin dinleme, güçlü soru sorma ve hedef yönetimi üzerine profesyonel koçluk eğitimi."
+        path="/programlar/yasam-kocu"
+      />
+      <SubPageLayout
       title="Yaşam Koçluğu"
       description="Bireysel potansiyeli keşfetme, etkin iletişim, hedef yönetimi ve uluslararası standartlarda koçluk sertifikasyonu."
     >
-      <CourseDetailTemplate {...data} />
+      <CourseDetailTemplate {...data} programSlug="yasam-kocu" />
     </SubPageLayout>
+    </>
   );
 }

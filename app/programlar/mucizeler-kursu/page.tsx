@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
+import { CourseSchema } from "@/components/Server/StructuredData";
 import React from "react";
 import SubPageLayout from "@/components/Server/SubPageLayout";
 import CourseDetailTemplate from "@/components/Server/CourseDetailTemplate";
+
+export const metadata: Metadata = {
+  title: "Mucizeler Kursu (ACIM) | Yaşama Sanatı",
+  description:
+    "Bir yıllık zihinsel arınma çalışması; haftalık canlı dersler ve günlük bireysel pratik.",
+  alternates: { canonical: "/programlar/mucizeler-kursu" },
+  openGraph: {
+    title: "Mucizeler Kursu (ACIM) | Yaşama Sanatı",
+    description:
+      "Bir yıllık zihinsel arınma çalışması; haftalık canlı dersler ve günlük bireysel pratik.",
+    url: "/programlar/mucizeler-kursu",
+  },
+};
 
 export default function MucizelerKursuPage() {
   const data = {
@@ -8,8 +23,6 @@ export default function MucizelerKursuPage() {
     format: "Online (Haftalık Zoom Dersleri + Günlük Pratik Takibi)",
     prerequisites: "Yok",
     certification: "Yaşama Sanatı Akademisi Mucizeler Kursu Katılım Belgesi",
-    price: "12.000 TL",
-    startDate: "20 Eylül 2026",
     introTitle: "Zihninizi Sevgiye Hizalayın",
     introText: "Mucizeler Kursu (A Course in Miracles), köklü bir zihinsel arınma sürecidir. Korku temelli düşünce kalıplarını geride bırakarak, bağışlama ve koşulsuz sevgi bilincini hayatınızın merkezine yerleştirmenizi hedefler. Yıllık program, haftalık canlı dersler ve günlük bireysel pratiklerle desteklenir.",
     curriculum: [
@@ -54,13 +67,19 @@ export default function MucizelerKursuPage() {
       },
     ],
   };
-
   return (
-    <SubPageLayout
+    <>
+      <CourseSchema
+        name="Mucizeler Kursu (ACIM)"
+        description="Bir yıllık zihinsel arınma çalışması; haftalık canlı dersler ve günlük pratik."
+        path="/programlar/mucizeler-kursu"
+      />
+      <SubPageLayout
       title="Mucizeler Kursu"
       description="Korkudan sevgiye geçişi, zihinsel arınmayı ve evrensel spiritüel uyanışı hedefleyen yıllık çalışma grubu."
     >
-      <CourseDetailTemplate {...data} />
+      <CourseDetailTemplate {...data} programSlug="mucizeler-kursu" />
     </SubPageLayout>
+    </>
   );
 }
