@@ -14,6 +14,8 @@ const eslintConfig = [
     ignores: [
       ".chrome-*/**",
       ".next/**",
+      // Next'in ürettiği dosya; `next lint` bunu hariç tutuyordu, `eslint .` tutmuyor.
+      "next-env.d.ts",
       ".testsprite/**",
       "agent-reports/**",
       "dump/**",
