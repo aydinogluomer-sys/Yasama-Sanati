@@ -43,7 +43,7 @@ export default function Select({ options, name }: SelectProps) {
   if (options === "cities") {
     return (
       <SelectClient
-        defaultSelection="İstanbul"
+        defaultSelection="İzmir"
         options={CITIES}
         name={name}
       />

@@ -13,7 +13,7 @@ const Label = ({ label, children, className }: LabelProps) => (
       className,
     )}
   >
-    <span className="opacity-60">{label}</span> {children}
+    <span className="opacity-80">{label}</span> {children}
   </label>
 );
 export default Label;

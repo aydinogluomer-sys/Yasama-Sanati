@@ -1,3 +1,4 @@
+import "server-only";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
@@ -6,8 +7,10 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
  * `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Values are read from the environment only —
  * never hardcoded.
  */
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl =
+  process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey =
+  process.env.SUPABASE_PUBLISHABLE_KEY ||
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -26,6 +29,12 @@ export function isSupabaseConfigured(): boolean {
 export function getSupabase(): SupabaseClient | null {
   if (cachedClient) return cachedClient;
   if (!supabaseUrl || !supabaseKey) return null;
-  cachedClient = createClient(supabaseUrl, supabaseKey);
+  cachedClient = createClient(supabaseUrl, supabaseKey, {
+    auth: {
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+      persistSession: false,
+    },
+  });
   return cachedClient;
 }

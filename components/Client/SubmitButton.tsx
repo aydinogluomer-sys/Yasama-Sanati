@@ -15,7 +15,7 @@ export default function SubmitButton() {
       whileHover={pending ? {} : { backgroundColor: "#304d3d" }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <span>{pending ? "Ön Kayıt Oluşturuluyor..." : "Ön Kayıt Oluştur"}</span>
+      <span>{pending ? "Talep gönderiliyor…" : "Görüşme talebini gönder"}</span>
       <NavigateSVG fill="#D1CCBF" />
     </motion.button>
   );
