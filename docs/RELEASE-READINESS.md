@@ -46,8 +46,11 @@ görseline sahip.
 - Hero giriş koreografisi: gerçek içerik Slow 4G'de ~10,5 sn'ye kadar boyanmıyor;
   dekoratif "ŞİFA" konturu bunu örtüyor (ölçüm: konturu kaldırınca LCP 4296 →
   10536 ms). Kontur korunmalı; çözüm koreografiyi öne çekmek.
-- `next@16` yükseltmesi: kalan 4 high uyarı (`sharp`/libvips, `postcss`) bunu
-  gerektiriyor. Breaking major olduğu için ayrı bir karar.
+- `next@16` yükseltmesi: `npm audit fix` ile 12 açık 4'e indirildi (transitive
+  paketler, kırıcı değişiklik yok). Kalan 4'ün üçü — `next`, `postcss`, `sharp` —
+  `next@16.3.2` gerektiriyor. Breaking major olduğu için bilerek uygulanmadı;
+  ayrı bir karar. Dördüncüsü (`brace-expansion`) başka bir bağımlılığın
+  sabitlediği iç sürümde.
 - Görsel regresyon baseline'ları yalnız yerel (font rasterleştirmesi makineye özgü).
 - Repo klasörü hâlâ `Elementis-SOTD` (GitHub reposu `Yasama-Sanati`). Kodda ve
   varlık adlarında şablon izi yok; yalnız klasör adı.
