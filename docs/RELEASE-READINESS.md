@@ -16,14 +16,36 @@ otomatik duraklama. Bu haliyle ön kayıt ve bülten formları canlıda veri yaz
 Ayrıca duraklamış proje RLS denetimine de kapalı (bağlantı zaman aşımı).
 → **Kullanıcı işlemi:** projeyi geri yükle, sonra RLS denetimi yapılabilir.
 
-### 2. Mobil LCP hedefi karşılanmıyor
-Slow 4G + 4× CPU, soğuk önbellek, prod build:
-**LCP 3920 ms** (hedef < 2500 ms) · **TBT ~3323 ms** · CLS 0.
-Ağ kısıtı olmadan bile TBT 2890 ms — darboğaz hidrasyon yükü (687 KB
-ayrıştırılmış JS; React ~169 KB, Motion'a dokunan yığınlar ~274 KB).
-Font ve görsel tarafı temiz; three.js mobil bundle'da yok.
-→ **Kod işi.** Çözüm yolu: hero metninin giriş koreografisini öne çekmek ve
-ana sayfadaki Motion bileşen sayısını azaltmak. Bu turda yapılmadı.
+### 2. Mobil LCP hedefi yalnız AĞ KISITLIYKEN karşılanmıyor
+Temiz makinede 5'er koşu, medyan (yayılım), soğuk önbellek, prod build, 390×844:
+
+| Koşul | FCP | LCP | yayılım |
+|---|---|---|---|
+| kısıtsız | 816 ms | **816 ms** | 584–2740 |
+| 4× CPU | 728 ms | **2328 ms** | 1496–4412 |
+| 4× CPU + Slow 4G | 3864 ms | **3864 ms** | 3396–4340 |
+
+**Bu tablo daha önceki teşhisi düzeltiyor.** Bu dosyanın ilk sürümü darboğazı
+"hidrasyon yükü" diye yazmıştı. Yanlış: 4× CPU tek başınayken LCP 2328 ms, yani
+hedefin ALTINDA. Hedef yalnız ağ kısıtı eklenince kırılıyor.
+
+Darboğaz kritik yoldaki **bayt toplamı**: ana sayfa ~1294 KB (JS 687 KB
+ayrıştırılmış, görsel 180 KB, font 172 KB, CSS 92 KB). 1.6 Mbps'te bu ~6,5 sn'lik
+bir boru demek ve ilk boya (FCP = LCP = 3864 ms) tam da bu rekabetin içinde
+gerçekleşiyor.
+
+Kaynak zaman çizelgesi (Slow 4G): HTML 303 ms · CSS 888 ms · tüm JS 2058 ms.
+SSR içerik gizli DEĞİL — JS kapalıyken hero, başlık ve "ŞİFA" görünüyor;
+ekranın üstünde yalnız destek paragrafı ve CTA satırı hidrasyona kadar saklı.
+
+→ **Kod işi, ama teşhis edildiği kadar dar değil.** Çözüm hero koreografisi
+değil, kritik yol bayt azaltma: JS bölme/erteleme, hero görselinin `priority`
+ile diğer kaynaklarla yarışması, font alt kümeleme. Kapsamlı bir performans
+çalışması; bu turda YAPILMADI ve aceleye getirilmedi.
+
+**Ölçüm uyarısı:** ilk denemelerde FCP 5228 ve 6544 ms okundu. Bunlar makine
+yüklüyken (önceki testlerden kalan onlarca node süreci) alınmıştı ve gürültüydü.
+Tek koşuya güvenilmemeli; medyan + yayılım verilmeli.
 
 ### 3. Görünür sanat yönetimi çatlağı — 5 kare, hepsi ana sayfada
 `ImageContainer/image-1,3,5` ve `group/mucizeler-kursu, yasam-koclugu` hâlâ
