@@ -5,6 +5,7 @@ import "./globals.css";
 import { WindowSizeProvider } from "./providers";
 import { MotionConfig } from "motion/react";
 import AccessibleLenis from "@/components/Client/AccessibleLenis";
+import { OrganizationSchema } from "@/components/Server/StructuredData";
 
 const basisGrotesque = localFont({
   src: [
@@ -28,23 +29,20 @@ const spaceMono = Space_Mono({
 
 const ogg = localFont({
   src: [
-    { path: "./fonts/Ogg-Roman.otf", weight: "400", style: "normal" },
-    { path: "./fonts/Ogg-Italic.otf", weight: "400", style: "italic" },
+    { path: "./fonts/Ogg-Roman.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Ogg-Italic.woff2", weight: "400", style: "italic" },
   ],
   variable: "--font-serif",
   display: "swap",
 });
 
 const siteDescription =
-  "Nefes Koçluğu, Reiki, Meridyen Terapi, Mucizeler Kursu, Hipnoterapi ve Yaşam Koçluğu uluslararası akredite sertifika programları.";
+  "Nefes Koçluğu, Reiki, Meridyen Terapi, Mucizeler Kursu, Hipnoterapi ve Yaşam Koçluğu sertifika programları.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://yasamasanati.com"),
   title: "Yaşama Sanatı — Bütünsel Şifa ve Eğitim Akademisi",
   description: siteDescription,
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "tr_TR",
@@ -69,13 +67,14 @@ export default function RootLayout({
       <body
         className={`${basisGrotesque.variable} ${spaceMono.variable} ${ogg.variable} overflow-x-clip antialiased selection:bg-[#ced1bf] selection:text-[#2b3530]`}
       >
+        <OrganizationSchema />
         <a className="skip-link" href="#main-content">
           Ana içeriğe geç
         </a>
         <AccessibleLenis>
           <WindowSizeProvider>
             <MotionConfig reducedMotion="user">
-              <div id="main-content">{children}</div>
+              <div>{children}</div>
             </MotionConfig>
           </WindowSizeProvider>
         </AccessibleLenis>
