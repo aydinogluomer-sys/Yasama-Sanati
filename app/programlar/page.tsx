@@ -59,7 +59,7 @@ export default function ProgramlarPage() {
     },
     {
       title: "Reiki",
-      desc: "Evrensel yaşam enerjisi (Ki) kanallarını açma, çakra dengeleme ve ellerle şifa aktarma dereceleri.",
+      desc: "Usui geleneğinde enerji çalışmasının aşamaları; uyumlanma, el pozisyonları ve uygulama pratiği.",
       href: "/programlar/reiki",
       duration: "4 Hafta",
       format: "Karma",

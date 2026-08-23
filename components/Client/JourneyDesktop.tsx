@@ -12,11 +12,6 @@
  */
 import React, { useRef, useState } from "react";
 import Image, { StaticImageData } from "next/image";
-import Image1 from "@/public/ImageContainer/image-1.jpg";
-import Image2 from "@/public/ImageContainer/image-2.jpg";
-import Image3 from "@/public/ImageContainer/image-3.jpg";
-import Image4 from "@/public/ImageContainer/image-4.jpg";
-import Image5 from "@/public/ImageContainer/image-5.jpg";
 import {
   motion,
   MotionValue,
@@ -25,6 +20,7 @@ import {
   useTransform,
 } from "motion/react";
 import ClipImageCard from "./ClipImageCard";
+import { JOURNEY_CHAPTERS } from "@/data/journey-chapters";
 import useMaskImage from "@/hooks/useMaskImage";
 import CustomCursor from "./Cursor";
 import { useCursor } from "@/hooks/useCursor";
@@ -44,18 +40,19 @@ function JourneyDesktop() {
     target: ref,
     offset: ["15vh 0", "485vh end"],
   });
+  // Görseller bölüm verisinden geliyor — ayrı import listesi tutulmuyor.
+  // Böylece bölüm eklenip çıkarıldığında tek yer güncelleniyor ve sıra
+  // metinle görselin eşleşmesi garanti oluyor.
+  const imgs = JOURNEY_CHAPTERS.map((c) => c.image);
+
+  // Kart penceresi de bölüm sayısından türetilir (bkz. ClipImageCard).
+  // `state` ve `state + 1` render edildiği için üst sınır N-2'dir.
   useMotionValueEvent(parentProgress, "change", (latest) => {
-    if (latest <= 0.25) {
-      setState(0);
-    } else if (latest <= 0.5) {
-      setState(1);
-    } else if (latest <= 0.75) {
-      setState(2);
-    } else if (latest <= 1) {
-      setState(3);
-    }
+    const total = imgs.length;
+    if (total < 2) return;
+    const next = Math.floor(latest * (total - 1));
+    setState(Math.min(total - 2, Math.max(0, next)));
   });
-  const imgs = [Image1, Image2, Image3, Image4, Image5];
   return (
     <div
       className="relative h-[360vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"

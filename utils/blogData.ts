@@ -167,7 +167,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Reiki ile Kendi Kendini Şifalandırma ve Çakra Dengeleme",
     category: "Reiki",
     date: "02 Nisan 2026",
-    excerpt: "Evrensel yaşam enerjisini ellerimiz aracılığıyla bedene aktarma sanatı olan Reiki'nin birinci derece prensipleri ve günlük çakra dengeleme meditasyonu rehberi.",
+    excerpt: "Geleneksel Usui öğretisinde el pozisyonlarıyla yürütülen bir enerji çalışması olan Reiki'nin birinci derece prensipleri ve günlük çakra dengeleme meditasyonu rehberi.",
     readTime: "5 Dk",
     coverImage: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
     author: {
@@ -176,7 +176,7 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Reiki", "Çakra", "Enerji Şifası", "Meditasyon"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Evrensel yaşam enerjisini ellerimiz aracılığıyla bedene aktarma sanatı olan Reiki'nin birinci derece prensipleri ve günlük çakra dengeleme meditasyonu rehberi.</p>
+      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Geleneksel Usui öğretisinde el pozisyonlarıyla yürütülen bir enerji çalışması olan Reiki'nin birinci derece prensipleri ve günlük çakra dengeleme meditasyonu rehberi.</p>
       
       <p class="mb-6">Japonca bir kelime olan Reiki; "Rei" (Evrensel, heryerde var olan) ve "Ki" (Ruhsal yaşam enerjisi) sözcüklerinin birleşiminden oluşur. Bu yöntem, evrende serbestçe dolaşan saf ve yüksek frekanslı şifa enerjisini ellerimiz aracılığıyla kendimize veya bir başkasına aktarma sanatıdır.</p>
 

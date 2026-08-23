@@ -99,7 +99,6 @@ async function measureOnce(c) {
     }).observe({ type: "layout-shift", buffered: true });
   });
 
-  const t0 = Date.now();
   await page.goto(BASE + ROUTE, { waitUntil: "load" });
   // CLS ve LCP'nin oturması için bekle — KAYDIRMA YOK. Kaydırırsak scroll'a bağlı
   // hareketler layout shift olarak sayılır ve CLS yapay biçimde şişer (daha önce

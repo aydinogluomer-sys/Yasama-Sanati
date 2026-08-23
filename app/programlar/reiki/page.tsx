@@ -85,7 +85,7 @@ export default function ReikiPage() {
       <SubPageLayout
       heroImage={heroImage}
       title="Reiki"
-      description="Evrensel yaşam enerjisi (Ki) kanallarını açma, çakra dengeleme ve ellerle şifa aktarma dereceleri."
+      description="Usui geleneğinde enerji çalışmasının aşamaları; uyumlanma, el pozisyonları ve uygulama pratiği."
     >
       <CourseDetailTemplate {...data} programSlug="reiki" />
     </SubPageLayout>

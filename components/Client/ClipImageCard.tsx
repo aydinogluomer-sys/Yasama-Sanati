@@ -41,18 +41,19 @@ export default function ClipImageCard({
     },
   }));
 
+  // Sayaç eşikleri BÖLÜM SAYISINDAN türetilir; elle yazılı değil.
+  //
+  // Eskiden 0.125 / 0.375 / 0.625 / 0.875 diye sabitlenmişti ve beş bölüme
+  // göreydi. Altıncı bölüm eklendiğinde sayaç 05'te takılı kalırdı — bu tür
+  // sabitler bölüm sayısı değişince sessizce yanlışa döner.
+  //
+  // Formül: N bölüm için sınırlar (i - 0.5) / (N - 1). N=5'te eski değerleri
+  // birebir üretir, N=6'da 0.1 / 0.3 / 0.5 / 0.7 / 0.9 verir.
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest < 0.125) {
-      setCurrentState(1);
-    } else if (latest <= 0.375) {
-      setCurrentState(2);
-    } else if (latest <= 0.625) {
-      setCurrentState(3);
-    } else if (latest <= 0.875) {
-      setCurrentState(4);
-    } else {
-      setCurrentState(5);
-    }
+    const total = images.length;
+    if (total < 2) return;
+    const next = 1 + Math.round(latest * (total - 1));
+    setCurrentState(Math.min(total, Math.max(1, next)));
   });
   const prependZero = (num: number) => (num < 10 ? `0${num}` : `${num}`);
 
