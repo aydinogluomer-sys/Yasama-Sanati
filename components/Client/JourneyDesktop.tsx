@@ -45,12 +45,13 @@ function JourneyDesktop() {
   // metinle görselin eşleşmesi garanti oluyor.
   const imgs = JOURNEY_CHAPTERS.map((c) => c.image);
 
-  // Kart penceresi de bölüm sayısından türetilir (bkz. ClipImageCard).
+  // Kart penceresi ClipImageCard'ın sayacıyla AYNI eşit bant mantığını izler,
+  // böylece arka katman ile öndeki sayaç aynı bölümde kalır.
   // `state` ve `state + 1` render edildiği için üst sınır N-2'dir.
   useMotionValueEvent(parentProgress, "change", (latest) => {
     const total = imgs.length;
     if (total < 2) return;
-    const next = Math.floor(latest * (total - 1));
+    const next = Math.floor(latest * total);
     setState(Math.min(total - 2, Math.max(0, next)));
   });
   return (

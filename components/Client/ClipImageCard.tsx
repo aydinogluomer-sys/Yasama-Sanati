@@ -47,12 +47,17 @@ export default function ClipImageCard({
   // göreydi. Altıncı bölüm eklendiğinde sayaç 05'te takılı kalırdı — bu tür
   // sabitler bölüm sayısı değişince sessizce yanlışa döner.
   //
-  // Formül: N bölüm için sınırlar (i - 0.5) / (N - 1). N=5'te eski değerleri
-  // birebir üretir, N=6'da 0.1 / 0.3 / 0.5 / 0.7 / 0.9 verir.
+  // EŞİT BANT: her bölüm ilerlemenin 1/N'ini alır.
+  //
+  // Önceki formül (i - 0.5) / (N - 1) idi ve ilk ile son bölüme YARIM bant
+  // veriyordu. Altı bölüme geçince bu, Reiki'yi (06) ilerlemenin son %10'una
+  // sıkıştırıyordu: ölçüldü, 40 adımlık taramada yalnız 5 adım kalıyordu ve
+  // gözden kaçabiliyordu. Eşit bantta altı bölüm de aynı süreyi alır ve bölüm
+  // yüksekliğini (360vh) artırmak gerekmez — ek kaydırma yorgunluğu yok.
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const total = images.length;
-    if (total < 2) return;
-    const next = 1 + Math.round(latest * (total - 1));
+    if (total < 1) return;
+    const next = Math.floor(latest * total) + 1;
     setCurrentState(Math.min(total, Math.max(1, next)));
   });
   const prependZero = (num: number) => (num < 10 ? `0${num}` : `${num}`);
