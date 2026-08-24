@@ -155,10 +155,17 @@ for (const [name, launcher, opts] of ENGINES) {
   say(webgl, `WebGL baglami olusturulabiliyor`);
 
   // ---------- 3) Scroll-linked motion: gerçek tekerlek, konuma göre sınırlı ----------
+  // Masaüstü journey `next/dynamic` ile yükleniyor; mount olana kadar sayfada
+  // yalnız `desktop-placeholder` var. Firefox/WebKit'te bu pencere Chromium'dan
+  // uzun sürüyor ve doğrudan ölçmeye kalkınca "bölüm bulunamadı" çıkıyordu.
+  // Gerçek bileşenin belirmesini bekliyoruz.
+  try {
+    await page.waitForSelector('[data-journey="desktop"]', { timeout: 15000 });
+  } catch {
+    /* aşağıdaki kontrol raporlar */
+  }
   const bounds = await page.evaluate(() => {
-    const h = [...document.querySelectorAll("div")].find(
-      (d) => typeof d.className === "string" && d.className.includes("h-[360vh]"),
-    );
+    const h = document.querySelector('[data-journey="desktop"]');
     if (!h) return null;
     const r = h.getBoundingClientRect();
     return { top: r.top + window.scrollY, height: r.height };
@@ -183,9 +190,7 @@ for (const [name, launcher, opts] of ENGINES) {
       ticks++;
       if (ticks % 2 === 0) {
         const v = await page.evaluate(() => {
-          const h = [...document.querySelectorAll("div")].find(
-            (d) => typeof d.className === "string" && d.className.includes("h-[360vh]"),
-          );
+          const h = document.querySelector('[data-journey="desktop"]');
           const i = h?.querySelector(".z-20")?.querySelector(".font-mono.tabular-nums");
           return (i?.textContent || "").trim();
         });

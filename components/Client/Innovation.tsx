@@ -32,7 +32,12 @@ import JourneyMobile from "@/components/Client/JourneyMobile";
 
 const JourneyDesktop = dynamic(() => import("@/components/Client/JourneyDesktop"), {
   ssr: false,
-  loading: () => <div aria-hidden className="h-[360vh] bg-[#2b3530]" />,
+  loading: () => (
+    // Yer tutucu da `data-journey` taşır: QA ve ölçüm scriptleri bölümü bu
+    // kararlı seçiciyle buluyor ve dinamik bileşen mount olmadan önceki
+    // pencerede "bölüm bulunamadı" diye boşa düşmüyorlar.
+    <div aria-hidden data-journey="desktop-placeholder" className="h-[432vh] bg-[#2b3530]" />
+  ),
 });
 
 const DESKTOP_QUERY = "(min-width: 768px)";
@@ -62,7 +67,7 @@ function Innovation() {
         {isDesktop ? (
           <JourneyDesktop />
         ) : (
-          <div aria-hidden className="h-[360vh] bg-[#2b3530]" />
+          <div aria-hidden data-journey="desktop-placeholder" className="h-[432vh] bg-[#2b3530]" />
         )}
       </div>
     </>

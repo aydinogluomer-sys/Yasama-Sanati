@@ -56,7 +56,12 @@ function JourneyDesktop() {
   });
   return (
     <div
-      className="relative h-[360vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"
+      data-journey="desktop"
+      // 432vh = 6 bölüm × 72vh. Beş bölümde bölüm başına 72vh düşüyordu; altıyı
+      // aynı 360vh'ye sıkıştırınca 60vh'ye indi ve ÖLÇÜLDÜ ki doğal hızda
+      // kaydıran biri 6 bölümden yalnız 4-5'ini görüyordu (hızlı kaydırmada 2).
+      // Bölüm başına düşen mesafe eski tempoya döndürüldü.
+      className="relative h-[432vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"
       ref={ref}
     >
       {/* Pinned bir bölümü 3,6 ekran boyunca kaydırmak zorunda kalmak bir çıkmazdır.

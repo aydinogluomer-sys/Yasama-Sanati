@@ -98,6 +98,25 @@ görseline sahip.
 
 ---
 
+## ÖLÇÜM HİJYENİ — yanlış alarm kaynağı
+
+Kapılar arka arkaya koşturulduğunda makinede **node ve chrome süreçleri birikiyor**
+(gözlenen: 14 node + 20 chrome). Bu birikim iki kez SAHTE başarısızlık üretti:
+
+| Belirti | Görünen | Gerçek sebep |
+|---|---|---|
+| `ERR_INSUFFICIENT_RESOURCES` | viewport kapısı 1 hata | tarayıcı kaynak tükenmesi |
+| `THREE.WebGLProgram: Shader Error — VALIDATE_STATUS false` (`/the-story`, 1366×768) | viewport kapısı 1 hata | ~20 eşzamanlı Chrome GPU bağlamını tüketiyor |
+
+İkisi de süreçler temizlenip tekrar koşulduğunda **sıfır** verdi; `/the-story`
+izole edildiğinde 3 turda da canvas yükleniyor ve konsol hatası yok.
+
+**Kural:** bir kapı beklenmedik biçimde düşerse, kusur bildirmeden önce
+`taskkill //IM chrome.exe //F` + `taskkill //IM node.exe //F` yapıp sunucuyu
+yeniden başlat ve tekrar koş. Tek koşuya dayanarak regresyon raporlama.
+
+---
+
 ## MANUAL CHECKS REQUIRED — otomatikleştirilemedi
 
 Bunlar **yapılmadı** ve otomatik testmiş gibi işaretlenmemeli:
