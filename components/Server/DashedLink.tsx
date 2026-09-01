@@ -2,6 +2,7 @@ import cn from "@/utils/cn";
 import * as motion from "motion/react-client";
 import { MotionProps, MotionStyle } from "motion/react";
 import React, { PropsWithChildren } from "react";
+import { easing, duration } from "@/utils/motion/tokens";
 
 type DashedLinkProps = PropsWithChildren &
   MotionProps & {
@@ -38,8 +39,8 @@ export default function DashedLink({
               duration: 0,
             },
             default: {
-              ease: [0.24, 0.43, 0.15, 0.97],
-              duration: 0.8,
+              ease: easing.editorial,
+              duration: duration.section,
             },
           }}
         />

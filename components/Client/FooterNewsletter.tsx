@@ -35,7 +35,7 @@ export default function FooterNewsletter() {
 
   return (
     <div className="w-full">
-      <p className="max-w-[24rem] text-sm leading-6 text-[#F3EFE6]/85">
+      <p className="max-w-[24rem] text-sm leading-6 text-paper/85">
         Yeni içeriklerden ve etkinliklerden ilk siz haberdar olun.
       </p>
 
@@ -47,7 +47,7 @@ export default function FooterNewsletter() {
             aria-live="polite"
             initial={reduceMotion ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-5 flex min-h-12 items-center gap-2 rounded-[0.35rem] border border-[#D58D5D]/35 bg-[#D58D5D]/10 px-4 text-sm text-[#E6A47A]"
+            className="mt-5 flex min-h-12 items-center gap-2 rounded-[0.35rem] border border-copper-text/35 bg-copper-text/10 px-4 text-sm text-[#E6A47A]"
           >
             <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4 shrink-0" fill="none">
               <path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -77,13 +77,13 @@ export default function FooterNewsletter() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="E-posta adresiniz"
-                className="h-12 w-full rounded-lg border border-[#F3EFE6]/10 bg-[#1C2C25] px-4 text-sm text-[#F3EFE6] outline-none placeholder:text-[#F3EFE6]/85 focus:border-[#D58D5D]/50 focus:ring-1 focus:ring-[#D58D5D]/30 transition-all disabled:cursor-wait disabled:opacity-60"
+                className="h-12 w-full rounded-lg border border-paper/10 bg-[#1C2C25] px-4 text-sm text-paper outline-none placeholder:text-paper/85 focus:border-copper-text/50 focus:ring-1 focus:ring-copper-text/30 transition-all disabled:cursor-wait disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={status === "loading"}
                 aria-busy={status === "loading"}
-                className="group flex h-12 w-full mt-3 items-center justify-center gap-2 rounded-lg bg-[#D58D5D] px-5 text-xs font-semibold uppercase tracking-[0.1em] text-[#17251F] transition-colors hover:bg-[#E09A6C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3EFE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] disabled:cursor-wait disabled:opacity-65 motion-reduce:transition-none"
+                className="group flex h-12 w-full mt-3 items-center justify-center gap-2 rounded-lg bg-copper-text px-5 text-xs font-semibold uppercase tracking-[0.1em] text-[#17251F] transition-colors hover:bg-copper-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-paper focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] disabled:cursor-wait disabled:opacity-65 motion-reduce:transition-none"
               >
                 <span>{status === "loading" ? "KAYDEDİLİYOR" : "ABONE OL"}</span>
                 <svg
@@ -100,8 +100,8 @@ export default function FooterNewsletter() {
         )}
       </AnimatePresence>
 
-      <p className="mt-4 flex items-start gap-2 text-3xs leading-[1.55] text-[#F3EFE6]/85">
-        <svg aria-hidden="true" viewBox="0 0 24 24" className="mt-0.5 size-3.5 shrink-0 text-[#D58D5D]" fill="none">
+      <p className="mt-4 flex items-start gap-2 text-3xs leading-[1.55] text-paper/85">
+        <svg aria-hidden="true" viewBox="0 0 24 24" className="mt-0.5 size-3.5 shrink-0 text-copper-text" fill="none">
           <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" />
           <path d="M8 11V7a4 4 0 1 1 8 0v4" stroke="currentColor" strokeWidth="1.5" />
         </svg>

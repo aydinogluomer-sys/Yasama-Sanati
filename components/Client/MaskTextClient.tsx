@@ -2,7 +2,7 @@
 import cn from "@/utils/cn";
 import { AnimatePresence, motion } from "motion/react";
 import { CSSProperties, ReactNode, useEffect, useRef } from "react";
-import { easing } from "@/utils/motion/tokens";
+import { easing, duration } from "@/utils/motion/tokens";
 
 interface MaskTextClientProps {
   lines: ReactNode[];
@@ -47,7 +47,7 @@ export default function MaskTextClient({
       clipPath: "inset(0% 0% 0% 0%)",
       transition: {
         ease: easing.editorial,
-        duration: 0.55,
+        duration: duration.buttonStroke,
       },
     },
     exit: (custom: boolean) => ({
@@ -55,7 +55,7 @@ export default function MaskTextClient({
       clipPath: custom ? "inset(100% 0% 0% 0%)" : "inset(0% 0% 100% 0%)",
       transition: {
         ease: easing.editorial,
-        duration: 0.32,
+        duration: duration.quick,
       },
     }),
   };

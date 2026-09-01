@@ -2,6 +2,7 @@
 
 import { useIsMobile } from "@/app/providers";
 import { motion, AnimatePresence } from "motion/react";
+import { duration } from "@/utils/motion/tokens";
 export default function Loader() {
   const isMobile = useIsMobile();
   return (
@@ -10,7 +11,7 @@ export default function Loader() {
         <motion.div
           initial={{ backgroundColor: "#ced1bf" }}
           exit={{ backgroundColor: "#2b3530" }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: duration.quick }}
           className="fixed inset-0 top-0 grid h-screen w-full place-items-center"
         >
           <CustomLoader />

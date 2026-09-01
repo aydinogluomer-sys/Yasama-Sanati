@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
-import { easing } from "@/utils/motion/tokens";
+import { easing, duration } from "@/utils/motion/tokens";
 import cn from "@/utils/cn";
 
 interface HandwritingMarkProps {
@@ -62,7 +62,7 @@ export default function HandwritingMark({
         strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
         {...motionProps}
-        transition={reduce ? { duration: 0 } : { duration: 0.95, delay, ease: easing.editorial }}
+        transition={reduce ? { duration: 0 } : { duration: duration.section, delay, ease: easing.editorial }}
       />
     </svg>
   );

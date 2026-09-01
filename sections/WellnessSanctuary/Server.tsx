@@ -25,7 +25,7 @@ export default function WellnessSanctuary() {
   };
 
   return (
-    <section aria-label="Yaklaşımımız" className="flex flex-col bg-[#30493D] text-[#D1CCBF] md:grid md:grid-cols-2" id="yaklasimimiz">
+    <section aria-label="Yaklaşımımız" className="flex flex-col bg-warm text-cream md:grid md:grid-cols-2" id="yaklasimimiz">
       <ResponsiveImage parallaxAmount={20}>
         <Image
           src={WellnessSanctuaryImage}

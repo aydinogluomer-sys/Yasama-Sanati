@@ -22,6 +22,7 @@ import {
   type ConsultationChoice,
 } from "@/data/consultation-programs";
 import styles from "@/app/on-gorusme/on-gorusme.module.css";
+import { easing, duration } from "@/utils/motion/tokens";
 
 type Step = 1 | 2 | 3;
 
@@ -282,7 +283,7 @@ export default function ConsultationExperience({
           transition={
             reduceMotion
               ? { duration: 0 }
-              : { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+              : { duration: duration.textLine, ease: easing.softOut }
           }
         />
       </svg>
@@ -413,7 +414,7 @@ export default function ConsultationExperience({
                 initial={reduceMotion ? false : { opacity: 0.72, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -8 }}
-                transition={{ duration: reduceMotion ? 0 : 0.36, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: reduceMotion ? 0 : 0.36, ease: easing.softOut }}
               >
                 <div className={styles.stepHeadingRow}>
                   <h2

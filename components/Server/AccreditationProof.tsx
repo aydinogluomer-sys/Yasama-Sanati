@@ -64,7 +64,7 @@ export default function AccreditationProof({
   return (
     <section
       aria-labelledby="akreditasyon-basligi"
-      className="border-t border-[#ced1bf]/15 pt-8"
+      className="border-t border-cream/15 pt-8"
     >
       <h2
         id="akreditasyon-basligi"
@@ -76,8 +76,8 @@ export default function AccreditationProof({
       <dl className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-[minmax(9rem,auto)_1fr]">
         {rows.map((row) => (
           <div key={row.label} className="contents">
-            <dt className="text-body-sm text-[#ced1bf]/70">{row.label}</dt>
-            <dd className="text-body-sm text-[#f3efe6]">{row.value}</dd>
+            <dt className="text-body-sm text-cream/70">{row.label}</dt>
+            <dd className="text-body-sm text-paper">{row.value}</dd>
           </div>
         ))}
       </dl>
@@ -110,7 +110,7 @@ export default function AccreditationProof({
       {/* Opaklık /75: tasarım sisteminin koyu yüzey tabanı 70, ama bu metin 11px
           (text-3xs) olduğu için büyük-metin muafiyeti yok ve 4.5:1 gerekiyor.
           Ölçüldü: /60 -> 4.01:1 (düşüyor), /75 -> taban üstü. */}
-      <p className="mt-6 max-w-prose text-3xs leading-relaxed text-[#ced1bf]/75">
+      <p className="mt-6 max-w-prose text-3xs leading-relaxed text-cream/75">
         Bu program tamamlayıcı bir eğitim programıdır; tıbbi tanı veya tedavi
         yetkisi vermez. Tanı ve tedavi yalnızca hekimler tarafından yapılır.
       </p>

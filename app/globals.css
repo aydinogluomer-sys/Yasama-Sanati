@@ -121,6 +121,62 @@ body:has([data-consultation-route])::after {
   }
 }
 @theme {
+  /* ───────────────────────────────────────────────────────────────────────
+     RENK ÖLÇEĞİ — tek kaynak.
+
+     Öncesinde .tsx dosyalarında 764 ham hex ve 72 farklı renk vardı; buna
+     karşılık yalnız 99 var() kullanımı (benimseme ~%11). Bakır ailesinde
+     birbirine çok yakın YEDİ ton aynı anda yaşıyordu. Sonuç: aynı vurgu
+     rengi iki bölümde farklı çıkıyordu ve tek yerden ayar yapmak imkânsızdı.
+
+     Burada tanımlananlar Tailwind yardımcı sınıflarına dönüşür
+     (bg-deep, text-cream, border-copper/20 …), böylece opaklık değiştirici
+     de çalışır ve arbitrary değer yazmaya gerek kalmaz.
+
+     BİRLEŞTİRME ÖLÇÜMLE YAPILDI (zemin #2b3530 üzerinde kontrast):
+       #c9875b 4.29:1 · #ca7d57 3.98:1  → küçük metin için YETERSİZ.
+       Bu ikisi yalnız dolgu/çizgi/ikon olarak kullanılıyor (tarandı,
+       tek bir text- kullanımı yok) → --color-copper altında birleşti.
+
+       #e0a878 6.07 · #e0a96d 6.08 · #e09a6c 5.44 · #d58d5d 4.71
+       → hepsi METİN. En yükseğinde birleştiler (--color-copper-text).
+       Bu bir düşürme değil YÜKSELTME: #d58d5d sıcak yeşil yüzeyde
+       3.63:1'e düşüyordu, artık 4.68:1.
+
+       #ced1bf 8.16 · #d1ccbf 7.92 → --color-cream
+       #f3efe6 11.06 · #f4efe4 11.07 → --color-paper
+     ─────────────────────────────────────────────────────────────────────── */
+  /* Yüzeyler */
+  --color-deep: #2b3530;
+  --color-warm: #30493d;
+  --color-ink: #222b27;
+  /* Metin ve kâğıt */
+  --color-cream: #ced1bf;
+  --color-paper: #f3efe6;
+  --color-sage: #a7c0b0;
+  /* Vurgu — bakır.
+     copper      : dolgu, çizgi, ikon (küçük metinde KULLANILMAZ)
+     copper-text : koyu zeminde metin için ölçülmüş erişilebilir ton
+     copper-hover: etkileşim durumu */
+  --color-copper: #c9875b;
+  --color-copper-hover: #d79a70;
+  --color-copper-text: #e0a878;
+
+  /* ───────────────────────────────────────────────────────────────────────
+     ÖLÇÜ (grid) — tek eksen.
+
+     Hero `px-16` ile x=64'ten başlıyordu; gövde ise `max-w-5xl mx-auto` ile
+     1440px'de x=208'den. Aynı ekranda 144px arayla İKİ RAKİP SOL KENAR
+     oluşuyordu (docs/AWWWARDS-90-BLOCKERS.md A3). Üstelik sayfa başına ölçü
+     değişiyordu: 2xl/3xl/4xl/5xl/6xl ve altı sayfada hiç konteyner yok.
+
+     Artık üç ölçü var ve hepsi `mx-auto` KULLANMADAN, sayfanın sol kenarına
+     hizalı akar. Böylece h1 ile gövde aynı eksende durur.
+     ─────────────────────────────────────────────────────────────────────── */
+  --container-editorial: 48rem; /* düz okuma metni — hukuki sayfalar, blog gövdesi */
+  --container-measure: 64rem; /* bölüm gövdesi — varsayılan */
+  --container-wide: 90rem; /* ızgara ve galeri blokları */
+
   --font-serif: var(--font-serif);
   /* Micro-label voice (Phase 2) — Space Mono, micro use only. */
   --font-mono: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;

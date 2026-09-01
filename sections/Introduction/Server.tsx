@@ -8,7 +8,7 @@ import SectionTransition from "@/components/Client/SectionTransition";
 
 export default function IntroductionServer() {
   return (
-    <section id="tanisma" aria-label="Akademiyle tanış" className="grid grid-rows-[auto_auto_auto] gap-y-12 bg-[#2B3530] px-5 pt-35 pb-35 text-[#D1CCBF] md:grid-cols-[1fr_1.9fr] md:grid-rows-[auto_auto] md:gap-y-28 md:px-16 md:pt-42-5 md:pb-50">
+    <section id="tanisma" aria-label="Akademiyle tanış" className="grid grid-rows-[auto_auto_auto] gap-y-12 bg-deep px-5 pt-35 pb-35 text-cream md:grid-cols-[1fr_1.9fr] md:grid-rows-[auto_auto] md:gap-y-28 md:px-16 md:pt-42-5 md:pb-50">
       {/* Clip-reveal entrance: the first scroll after the hero's breath cue is rewarded
           immediately — the image opens as the Merak chapter's curtain. */}
       <SectionTransition variant="clip" className="mb-2 md:col-start-2 md:mb-0">
@@ -45,7 +45,7 @@ export default function IntroductionServer() {
 
         <ScrollRevealText
           text="Bütünsel yaklaşımımız; zihinsel, bedensel ve enerjetik düzeyleri birbirinden ayırmadan, tek bir akışın parçaları olarak ele alır. Bizim için şifa bir teknik değil; kişinin kendi ritmini ve dengesini tanımasına alan açan bir çalışma biçimidir. Bu yolculukta kadim öğretileri çağdaş yöntemlerle harmanlayarak, her bir seviyede derin bir uyanış, dönüşüm ve bütünleşme hedefliyoruz."
-          className="max-w-[86vw] text-lg md:text-24 font-light [line-height:1.8] text-[#D1CCBF] md:max-w-[56rem] md:ml-auto gap-y-[0.3em]"
+          className="max-w-[86vw] text-lg md:text-24 font-light [line-height:1.8] text-cream md:max-w-[56rem] md:ml-auto gap-y-[0.3em]"
         />
       </div>
     </section>

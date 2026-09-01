@@ -56,11 +56,11 @@ export default function SubPageHeroMedia({
              ayarlandı — önceki (92/55/25) dağılımında açıklama metni dört
              sayfada 3.99–4.34:1'e düşüyordu (gereken 4.5:1). axe bunu
              yakalayamaz: fotoğraf üzerindeki metnin kontrastını hesaplamaz. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2B3530] from-[18%] via-[#2B3530]/72 via-[48%] to-[#2B3530]/18" />
+      <div className="absolute inset-0 bg-gradient-to-t from-deep from-[18%] via-deep/72 via-[48%] to-deep/18" />
       {/* 2 — NavBar şeridi */}
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#2B3530]/85 via-[#2B3530]/45 to-transparent md:h-52" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-deep/85 via-deep/45 to-transparent md:h-52" />
       {/* 3 — alt geçiş */}
-      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#2B3530]" />
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-deep" />
     </div>
   );
 }

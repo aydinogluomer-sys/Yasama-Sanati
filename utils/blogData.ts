@@ -41,11 +41,11 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Bütünsel Sağlık", "Kadim Öğretiler", "Farkındalık", "Enerji Bedeni"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Bütünsel yaklaşımlar insanı fiziksel, zihinsel ve duygusal katmanlarıyla birlikte ele almayı önerir. Bu yazı, o bakışın ne anlama geldiğini ve altı disiplinin hangi ortak zeminde buluştuğunu anlatıyor.</p>
+      <p class="lead text-lg text-cream/90 mb-8 font-light">Bütünsel yaklaşımlar insanı fiziksel, zihinsel ve duygusal katmanlarıyla birlikte ele almayı önerir. Bu yazı, o bakışın ne anlama geldiğini ve altı disiplinin hangi ortak zeminde buluştuğunu anlatıyor.</p>
       
       <p class="mb-6">Hepimiz hayatımızın bir döneminde kendimizi fiziksel veya duygusal olarak tıkanmış hissetmişizdir. Genellikle bu durumlarda hemen en yakın semptom gidericiye koşarız: Bir ağrı kesici, geçici bir rahatlama seansı ya da zihnimizi dağıtacak bir meşguliyet. Ancak gerçek şifa, sadece belirtileri yok etmekle değil, bu belirtilerin altındaki derin mesajları okumakla başlar.</p>
       
-      <blockquote class="border-l-2 border-[#ca7d57] pl-6 my-8 italic text-lg text-white/90 font-light">
+      <blockquote class="border-l-2 border-copper pl-6 my-8 italic text-lg text-white/90 font-light">
         "Şifa bir teknik değil, bir yaşama sanatıdır. Bedeni, zihni ve ruhu aynı anda besleyen bir uyum sürecidir."
       </blockquote>
 
@@ -54,7 +54,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Altı Şifa Disiplininin Ortak Rolü</h3>
       <p class="mb-6">Nefes Koçluğu, Meridyen Terapisi, Hipnoterapi ve Reiki gibi kadim ve modern yaklaşımlar ortak bir zeminde buluşur: kişinin kendi bedenine ve zihnine dikkatini yöneltmesi.</p>
-      <ul class="list-disc list-inside space-y-3 mb-8 text-[#ced1bf]/80 font-light">
+      <ul class="list-disc list-inside space-y-3 mb-8 text-cream/80 font-light">
         <li><strong>Nefes:</strong> Yavaş ve bilinçli nefes çalışmaları, gevşeme ve dikkat üzerine en çok araştırılan uygulamalardan biridir.</li>
         <li><strong>Meridyenler:</strong> Geleneksel Çin tıbbı, akupunktur noktaları ve Qi kavramı üzerinden bedeni bütünsel bir harita olarak okur.</li>
         <li><strong>Zihinsel Dönüşüm:</strong> Bilinçaltı seviyesinde çalışan hipnoterapi gibi yöntemlerle bizi sınırlayan eski inanç kalıplarını serbest bırakır.</li>
@@ -78,7 +78,7 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Nefes", "Stres Yönetimi", "Pranayama", "Zindelik"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Nefesimiz, fiziksel ve zihinsel durumumuzun anlık aynasıdır. Gün içinde farkında olmadan tuttuğumuz veya sığlaştırdığımız nefesleri serbest bırakarak stresi azaltmanın ve yaşam enerjisini (Qi) dengelemenin pratik yolları.</p>
+      <p class="lead text-lg text-cream/90 mb-8 font-light">Nefesimiz, fiziksel ve zihinsel durumumuzun anlık aynasıdır. Gün içinde farkında olmadan tuttuğumuz veya sığlaştırdığımız nefesleri serbest bırakarak stresi azaltmanın ve yaşam enerjisini (Qi) dengelemenin pratik yolları.</p>
       
       <p class="mb-6">Doğduğumuz ilk an aldığımız derin ve doğal nefes, büyüdükçe yerini stres, endişe ve toplumsal kalıplarla sınırlandırılmış sığ göğüs nefeslerine bırakır. Doğal nefes, diyaframın aktif olarak kullanıldığı, çaba sarf etmeden akan ve tüm bedeni besleyen nefestir. İşte günün her anında bu doğal akışa dönmenizi sağlayacak 3 altın kural:</p>
 
@@ -88,7 +88,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <h3 class="text-24 font-light text-white mt-10 mb-4">2. Diyafram Kasını Hissedin (Karın Nefesi)</h3>
       <p class="mb-6">Elinizi karnınızın üzerine koyun. Nefes alırken karnınızın bir balon gibi şiştiğini, nefes verirken ise indiğini hissedin. Göğsünüzün ve omuzlarınızın yukarı kalkmadığından emin olun. Günde birkaç dakika diyafram hareketini izlemek, pek çok kişinin fark edilir bir sakinleşme olarak tarif ettiği basit bir alışkanlıktır.</p>
 
-      <blockquote class="border-l-2 border-[#ca7d57] pl-6 my-8 italic text-lg text-white/90 font-light">
+      <blockquote class="border-l-2 border-copper pl-6 my-8 italic text-lg text-white/90 font-light">
         "Nefesinizi kontrol ettiğinizde zihninizi kontrol edersiniz. Nefesinizi serbest bıraktığınızda ise kendinizi serbest bırakırsınız."
       </blockquote>
 
@@ -110,20 +110,20 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Meridyen", "Akupresür", "Çin Tıbbı", "Yaşam Enerjisi"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Geleneksel Çin Tıbbı'nın temelini oluşturan 14 ana enerji kanalını ve geleneksel öğretinin bu hatlarla ilişkilendirdiği fiziksel / duygusal temaları detaylıca inceliyoruz.</p>
+      <p class="lead text-lg text-cream/90 mb-8 font-light">Geleneksel Çin Tıbbı'nın temelini oluşturan 14 ana enerji kanalını ve geleneksel öğretinin bu hatlarla ilişkilendirdiği fiziksel / duygusal temaları detaylıca inceliyoruz.</p>
       
       <p class="mb-6">Modern anatomi bize kan damarlarını ve sinir yollarını öğretir. Ancak kadim doğu bilgeliği, fiziksel bedenimizin hemen altında, gözle görülmeyen muazzam bir enerji haritası olduğunu söyler. Meridyenler, yaşam enerjimiz olan "Qi"nin tüm bedeni dolaşmasını sağlayan nehirler gibidir.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Enerji Tıkanıklıkları Nasıl Oluşur?</h3>
       <p class="mb-6">Geleneksel öğreti, yoğun duygusal yaşantıları, hareketsizliği ve düzensiz beslenmeyi meridyen kanallarındaki akışla ilişkilendirir. Bu, bedeni bir akarsu gibi düşünen kadim bir benzetmedir; modern anatomik bir mekanizma tarifi değildir.</p>
 
-      <blockquote class="border-l-2 border-[#ca7d57] pl-6 my-8 italic text-lg text-white/90 font-light">
+      <blockquote class="border-l-2 border-copper pl-6 my-8 italic text-lg text-white/90 font-light">
         "Geleneksel öğreti bedeni bir bütün olarak okur; duygusal yaşantıyla bedensel duyum arasında bir bağ kurar."
       </blockquote>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Duygular ve Meridyenlerin Bağlantısı</h3>
       <p class="mb-6">Her ana meridyen kanalı, belirli bir organ ve duygu grubu ile ilişkilidir. Örneğin:</p>
-      <ul class="list-disc list-inside space-y-3 mb-8 text-[#ced1bf]/80 font-light">
+      <ul class="list-disc list-inside space-y-3 mb-8 text-cream/80 font-light">
         <li><strong>Karaciğer Meridyeni:</strong> Öfke ve hayal kırıklığı duygularını taşır.</li>
         <li><strong>Akciğer Meridyeni:</strong> Keder, hüzün ve bırakamama durumları ile ilgilidir.</li>
         <li><strong>Böbrek Meridyeni:</strong> Korku ve güvensizlik duygularıyla bağlantılıdır.</li>
@@ -147,14 +147,14 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Bilinçaltı", "Hipnoz", "Zihinsel Dönüşüm", "Telkin"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Alışkanlıklarımızı, korkularımızı ve tekrarlayan yaşam döngülerimizi yöneten bilinçaltı düzeyine nasıl ulaşırız? Trans ve telkin yöntemlerinin derin zihinsel dönüşümlerdeki etkisi.</p>
+      <p class="lead text-lg text-cream/90 mb-8 font-light">Alışkanlıklarımızı, korkularımızı ve tekrarlayan yaşam döngülerimizi yöneten bilinçaltı düzeyine nasıl ulaşırız? Trans ve telkin yöntemlerinin derin zihinsel dönüşümlerdeki etkisi.</p>
       
       <p class="mb-6">Zihnimizin sadece %5'lik kısmını bilinçli olarak kullanırız. Kararlarımız, alışkanlıklarımız, korkularımız ve aşamadığımız engeller aslında kalan %95'lik devasa bir arşivde, yani bilinçaltımızda saklanır. Hipnoterapi, zihnin eleştirel filtresini hafifçe gevşeterek bu arşive güvenli bir şekilde erişme yöntemidir.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Trans Hali Nedir?</h3>
       <p class="mb-6">Medya ve filmlerin aksine, hipnotik trans hali bilincinizi kaybetmek ya da kontrolü başkasına vermek demek değildir. Trans, aslında gün içinde televizyon izlerken ya da araba sürerken kendiliğinden girdiğimiz derin odaklanma haline benzer. Son derece güvenli, huzurlu ve kişinin her an kontrol sahibi olduğu bir zihinsel gevşemedir.</p>
 
-      <blockquote class="border-l-2 border-[#ca7d57] pl-6 my-8 italic text-lg text-white/90 font-light">
+      <blockquote class="border-l-2 border-copper pl-6 my-8 italic text-lg text-white/90 font-light">
         "Bilinçaltı, ekilen her tohumu büyüten verimli bir toprak gibidir. Negatif inanç tohumlarını söküp yerine yenilerini ekmek sizin elinizde."
       </blockquote>
 
@@ -176,13 +176,13 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     tags: ["Reiki", "Çakra", "Enerji Şifası", "Meditasyon"],
     content: `
-      <p class="lead text-lg text-[#ced1bf]/90 mb-8 font-light">Geleneksel Usui öğretisinde el pozisyonlarıyla yürütülen bir enerji çalışması olan Reiki'nin birinci derece prensipleri ve günlük çakra dengeleme meditasyonu rehberi.</p>
+      <p class="lead text-lg text-cream/90 mb-8 font-light">Geleneksel Usui öğretisinde el pozisyonlarıyla yürütülen bir enerji çalışması olan Reiki'nin birinci derece prensipleri ve günlük çakra dengeleme meditasyonu rehberi.</p>
       
       <p class="mb-6">Japonca bir kelime olan Reiki; "Rei" (Evrensel, heryerde var olan) ve "Ki" (Ruhsal yaşam enerjisi) sözcüklerinin birleşiminden oluşur. Bu yöntem, evrende serbestçe dolaşan saf ve yüksek frekanslı şifa enerjisini ellerimiz aracılığıyla kendimize veya bir başkasına aktarma sanatıdır.</p>
 
       <h3 class="text-24 font-light text-white mt-10 mb-4">Reiki'nin 5 Temel Prensibi</h3>
       <p class="mb-6">Reiki sadece seanslarda ellerimizi koymak değildir; o bir zihinsel yaşam disiplinidir. Mikao Usui tarafından ortaya konan geleneksel Reiki öğretisinde bu 5 ilke günlük bir pratik olarak önerilir:</p>
-      <ol class="list-decimal list-inside space-y-2 mb-8 text-[#ced1bf]/80 font-light">
+      <ol class="list-decimal list-inside space-y-2 mb-8 text-cream/80 font-light">
         <li>Sırf bugün, öfkelenme.</li>
         <li>Sırf bugün, endişelenme.</li>
         <li>Sırf bugün, şükret ve minnettar ol.</li>
@@ -190,7 +190,7 @@ export const BLOG_POSTS: BlogPost[] = [
         <li>Sırf bugün, tüm canlılara karşı nazik ol.</li>
       </ol>
 
-      <blockquote class="border-l-2 border-[#ca7d57] pl-6 my-8 italic text-lg text-white/90 font-light">
+      <blockquote class="border-l-2 border-copper pl-6 my-8 italic text-lg text-white/90 font-light">
         "Enerji nereye odaklanırsanız oraya akar. Ellerinizi kalbinize koyun ve evrenin sonsuz sevgisinin içinize akmasına izin verin."
       </blockquote>
 

@@ -742,7 +742,7 @@ export default function Meridian3D() {
   }, [isClient, selectedId]);
 
   return (
-    <section className="space-y-12 border-b border-[#ced1bf]/15 pb-16 md:pb-24">
+    <section className="space-y-12 border-b border-cream/15 pb-16 md:pb-24">
       <div className="space-y-4 max-w-3xl">
         <span className="text-xs text-[var(--accent-copper-on-dark)] font-semibold tracking-widest uppercase">
           Anatomik Deneyim
@@ -750,7 +750,7 @@ export default function Meridian3D() {
         <h2 className="text-28 md:text-40 font-light text-white leading-tight">
           İnteraktif 3D Meridyen & Organ Bağlantıları
         </h2>
-        <p className="text-sm md:text-base font-light text-[#ced1bf]/85 leading-relaxed">
+        <p className="text-sm md:text-base font-light text-cream/85 leading-relaxed">
           Geleneksel Çin Tıbbı (TCM) doğrultusunda vücuttaki enerji akışını ve meridyen hatlarını 3D hologram üzerinde inceleyin. 
           Soldaki menüden bir kanal seçtiğinizde, **ilgili iç organ (Zang-Fu)** beden içinde aydınlanacak, canlanacak ve onunla bağlantılı enerji akışı akmaya başlayacaktır. 
           🔘 Glowing noktalara tıklayarak akupresür noktalarının detaylarını öğrenebilirsiniz.
@@ -759,7 +759,7 @@ export default function Meridian3D() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 items-stretch">
         {/* Interactive Viewport (WebGL Canvas) */}
-        <div className="relative min-h-[450px] md:min-h-[500px] bg-[#2B3530]/50 rounded border border-[#ced1bf]/10 overflow-hidden flex items-center justify-center select-none">
+        <div className="relative min-h-[450px] md:min-h-[500px] bg-deep/50 rounded border border-cream/10 overflow-hidden flex items-center justify-center select-none">
           {/* 3D WebGL Canvas container */}
           <div
             ref={containerRef}
@@ -769,19 +769,19 @@ export default function Meridian3D() {
           {/* HTML Overlay Tooltip for 3D coordinates projection */}
           <div
             ref={tooltipRef}
-            className="absolute pointer-events-none bg-[#30493D]/95 backdrop-blur-md p-4 rounded border border-[#ced1bf]/20 text-xs text-[#ced1bf] shadow-xl w-60 z-[30] transition-opacity duration-300 opacity-0 space-y-2"
+            className="absolute pointer-events-none bg-warm/95 backdrop-blur-md p-4 rounded border border-cream/20 text-xs text-cream shadow-xl w-60 z-[30] transition-opacity duration-300 opacity-0 space-y-2"
             style={{ transform: "translate(-50%, -120%)", top: 0, left: 0 }}
           >
-            <div className="flex justify-between items-center border-b border-[#ced1bf]/10 pb-1">
+            <div className="flex justify-between items-center border-b border-cream/10 pb-1">
               <span className="font-bold text-[var(--accent-copper-on-dark)]" id="tooltip-code">LU9</span>
               <span className="font-medium text-white" id="tooltip-name">Taiyuan</span>
             </div>
             <p className="text-white/90 font-semibold" id="tooltip-trname">Büyük Derinlik</p>
-            <p className="text-[#ced1bf]/85 font-light leading-relaxed" id="tooltip-desc">Detaylar...</p>
+            <p className="text-cream/85 font-light leading-relaxed" id="tooltip-desc">Detaylar...</p>
           </div>
 
           {/* Floating UI Helper (Desktop only) */}
-          <div className="absolute bottom-4 left-4 bg-[#2B3530]/80 backdrop-blur-sm px-3 py-1.5 rounded border border-[#ced1bf]/10 text-3xs text-[#ced1bf]/85 space-y-0.5 pointer-events-none">
+          <div className="absolute bottom-4 left-4 bg-deep/80 backdrop-blur-sm px-3 py-1.5 rounded border border-cream/10 text-3xs text-cream/85 space-y-0.5 pointer-events-none">
             <div>🖱️ Sürükleyerek 3D modeli döndürün</div>
             <div>🔘 Glowing noktalara tıklayarak detayları açın</div>
           </div>
@@ -797,8 +797,8 @@ export default function Meridian3D() {
                 onClick={() => setSelectedId(m.id)}
                 className={`px-4 py-3 text-left rounded text-xs transition-all duration-300 border cursor-pointer ${
                   selectedId === m.id
-                    ? "bg-[#ca7d57] border-[#ca7d57] text-white font-medium shadow-md shadow-[#ca7d57]/20"
-                    : "bg-[#30493D]/30 border-[#ced1bf]/10 text-[#ced1bf]/85 hover:bg-[#30493D]/60 hover:text-[#ced1bf]"
+                    ? "bg-copper border-copper text-white font-medium shadow-md shadow-copper/20"
+                    : "bg-warm/30 border-cream/10 text-cream/85 hover:bg-warm/60 hover:text-cream"
                 }`}
               >
                 {m.name.split(" ")[0]} {m.name.split(" ")[1]}
@@ -807,9 +807,9 @@ export default function Meridian3D() {
           </div>
 
           {/* Details Panel */}
-          <div className="flex-1 bg-[#30493D] p-6 md:p-8 rounded border border-[#ced1bf]/15 flex flex-col justify-between space-y-6">
+          <div className="flex-1 bg-warm p-6 md:p-8 rounded border border-cream/15 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#ced1bf]/15 pb-4">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-cream/15 pb-4">
                 <h3 className="text-lg md:text-xl font-medium text-white">
                   {selectedInfo.name}
                 </h3>
@@ -827,42 +827,42 @@ export default function Meridian3D() {
 
               <div className="grid grid-cols-2 gap-4 text-xs md:text-sm">
                 <div>
-                  <span className="text-[#ced1bf]/85 block">İlişkili Organ</span>
+                  <span className="text-cream/85 block">İlişkili Organ</span>
                   <span className="text-white font-medium">{selectedInfo.organName}</span>
                 </div>
                 <div>
-                  <span className="text-[#ced1bf]/85 block">Aktif Saat Dilimi</span>
+                  <span className="text-cream/85 block">Aktif Saat Dilimi</span>
                   <span className="text-white font-medium">{selectedInfo.time}</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4 text-xs md:text-sm">
                 <div>
-                  <span className="text-[#ced1bf]/85 block">İlişkili Duygu</span>
+                  <span className="text-cream/85 block">İlişkili Duygu</span>
                   <span className="text-white font-medium">{selectedInfo.emotion}</span>
                 </div>
                 <div>
-                  <span className="text-[#ced1bf]/85 block">Fiziksel Etki Alanı</span>
+                  <span className="text-cream/85 block">Fiziksel Etki Alanı</span>
                   <p className="text-white/90 font-medium">{selectedInfo.physical}</p>
                 </div>
               </div>
 
               <div className="space-y-1 pt-2">
-                <span className="text-xs text-[#ced1bf]/85 block">Açıklama & Önemi</span>
-                <p className="text-sm text-[#ced1bf]/80 font-light leading-relaxed">
+                <span className="text-xs text-cream/85 block">Açıklama & Önemi</span>
+                <p className="text-sm text-cream/80 font-light leading-relaxed">
                   {selectedInfo.desc}
                 </p>
               </div>
             </div>
 
             {/* List of Acupoints on this meridian as inline indicators */}
-            <div className="border-t border-[#ced1bf]/10 pt-4 space-y-2">
-              <span className="text-3xs text-[#ced1bf]/85 block">Bu Kanal Üzerindeki Temel Noktalar:</span>
+            <div className="border-t border-cream/10 pt-4 space-y-2">
+              <span className="text-3xs text-cream/85 block">Bu Kanal Üzerindeki Temel Noktalar:</span>
               <div className="flex flex-wrap gap-2">
                 {selectedInfo.acupoints.map((pt) => (
                   <span
                     key={pt.code}
-                    className="bg-[#2B3530] text-[#ced1bf] px-2 py-0.5 rounded text-2xs border border-[#ced1bf]/10 font-mono"
+                    className="bg-deep text-cream px-2 py-0.5 rounded text-2xs border border-cream/10 font-mono"
                   >
                     {pt.code} ({pt.name})
                   </span>
@@ -872,7 +872,7 @@ export default function Meridian3D() {
 
             {/* Bu sahnedeki her açıklama geleneksel Çin tıbbı öğretisinin tarifidir; tedavi
                 vaadi değildir. Sağlık iddiası temizliğinin (RELEASE-PLAN §9.1) görünür yüzü. */}
-            <p className="border-t border-[#ced1bf]/10 pt-4 text-3xs leading-relaxed text-[#ced1bf]/85">
+            <p className="border-t border-cream/10 pt-4 text-3xs leading-relaxed text-cream/85">
               Buradaki açıklamalar geleneksel Çin tıbbı öğretisini tanıtır; tıbbi teşhis, tedavi
               veya sonuç vaadi içermez. Sağlık sorunlarınız için hekiminize başvurun.
             </p>

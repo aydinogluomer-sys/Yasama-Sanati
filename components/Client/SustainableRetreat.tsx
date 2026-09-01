@@ -22,26 +22,26 @@ export default function SustainableRetreat() {
   const x = useTransform(scrollYProgress, [0, 1], ["-28%", "2%"]);
 
   return (
-    <div className="text-[#D1CCBF]">
+    <div className="text-cream">
       {/* 1. Full-screen Sticky Scroll-locked Section for the "Çalışma Alanları" Marquee */}
-      <div ref={containerRef} className="relative h-[220vh] bg-[#222B27] motion-reduce:h-auto motion-reduce:min-h-[100svh]">
+      <div ref={containerRef} className="relative h-[220vh] bg-ink motion-reduce:h-auto motion-reduce:min-h-[100svh]">
         <section
           aria-label="Çalışma alanları"
-          className="sticky top-0 flex h-screen w-full flex-col justify-center gap-10 overflow-hidden bg-[#222B27] motion-reduce:relative motion-reduce:top-auto motion-reduce:min-h-[100svh]"
+          className="sticky top-0 flex h-screen w-full flex-col justify-center gap-10 overflow-hidden bg-ink motion-reduce:relative motion-reduce:top-auto motion-reduce:min-h-[100svh]"
         >
           <div className="flex flex-col gap-3 px-5 md:flex-row md:items-center md:gap-4 md:px-12">
-            <div className="flex items-center gap-3 text-[#D1CCBF]">
+            <div className="flex items-center gap-3 text-cream">
               <TypographyLabel className="text-[var(--accent-copper-on-dark)]">Çalışma Alanları</TypographyLabel>
-              <span aria-hidden className="h-px w-10 shrink-0 bg-[#D1CCBF] opacity-40 md:w-16" />
+              <span aria-hidden className="h-px w-10 shrink-0 bg-cream opacity-40 md:w-16" />
             </div>
-            <h2 className="font-serif text-display-s font-normal tracking-[-0.01em] text-[#F4EFE4]">
+            <h2 className="font-serif text-display-s font-normal tracking-[-0.01em] text-paper">
               Üç farklı katılım yolu.
             </h2>
           </div>
 
           <motion.div
             style={{ x: reduce ? "0%" : x }}
-            className="flex w-max items-center gap-[0.35em] whitespace-nowrap font-serif text-[clamp(4rem,18vw,15rem)] font-normal leading-[0.82] tracking-[-0.03em] text-[#F4EFE4]"
+            className="flex w-max items-center gap-[0.35em] whitespace-nowrap font-serif text-[clamp(4rem,18vw,15rem)] font-normal leading-[0.82] tracking-[-0.03em] text-paper"
           >
             {Array.from({ length: 4 }).map((_, i) => (
               <Fragment key={i}>
@@ -64,7 +64,7 @@ export default function SustainableRetreat() {
             ))}
           </motion.div>
 
-          <p className="max-w-[40rem] px-5 text-body-lg font-light text-[#D1CCBF]/85 md:px-12">
+          <p className="max-w-[40rem] px-5 text-body-lg font-light text-cream/85 md:px-12">
             Akademide üç formatta çalışıyoruz: Birebir seanslar, küçük grup programları ve sertifikalı
             eğitimler ile ihtiyacınıza en uygun derinleşme yollarını sunuyoruz.
           </p>
@@ -75,7 +75,7 @@ export default function SustainableRetreat() {
       <SectionSeam from="#222B27" to="#30493D" className="h-20 md:h-28" />
 
       {/* 2. Original content below, scrolling normally, wrapped in entrance transition */}
-      <div className="bg-[#30493D] pb-36 pt-10 md:pb-60">
+      <div className="bg-warm pb-36 pt-10 md:pb-60">
         <SectionTransition variant="rise">
           <div className="mt-18 flex flex-col gap-y-14 px-8-25 md:mt-26 md:grid md:grid-cols-3 md:grid-rows-[auto_auto] md:gap-y-24 md:px-16">
             <div className="flex flex-col gap-14 md:col-span-2 md:col-start-2 md:flex-row">

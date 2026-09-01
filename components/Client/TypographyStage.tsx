@@ -45,7 +45,7 @@ export default function TypographyStage({
       whileInView="show"
       viewport={{ once: true, margin: "0px 0px -12% 0px" }}
       className={cn(
-        "font-serif text-[28px] sm:text-[36px] md:text-[46px] lg:text-[54px] xl:text-[60px] font-normal leading-[1.1] tracking-[-0.02em] text-[#F4EFE4]",
+        "font-serif text-[28px] sm:text-[36px] md:text-[46px] lg:text-[54px] xl:text-[60px] font-normal leading-[1.1] tracking-[-0.02em] text-paper",
         className,
       )}
     >
@@ -55,7 +55,7 @@ export default function TypographyStage({
             <motion.span
               custom={i}
               variants={wordVariant}
-              className={cn("inline-block", t.accent && "font-kisthe italic text-[#E0A878]")}
+              className={cn("inline-block", t.accent && "font-kisthe italic text-copper-text")}
             >
               {t.w}
             </motion.span>

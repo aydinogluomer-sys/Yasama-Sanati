@@ -291,7 +291,7 @@ function AcupointLabel({
         {acupoint.code === "Yintang" ? "Extra Point" : acupoint.code.replace(/([A-Z]+)(\d+)/, "$1 $2")}
       </div>
       {acupoint.trName && (
-        <div className="text-[7.5px] text-[#a7c0b0]/85 font-light italic leading-normal max-md:hidden">
+        <div className="text-[7.5px] text-sage/85 font-light italic leading-normal max-md:hidden">
           {acupoint.trName}
         </div>
       )}

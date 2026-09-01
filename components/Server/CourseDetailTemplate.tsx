@@ -15,8 +15,8 @@ const stripModulePrefix = (t: string) => t.replace(/^\s*(Modül|Bölüm)\s*\d+\s
 function ChapterHeading({ index, children }: { index: string; children: React.ReactNode }) {
 
   return (
-    <div className="flex items-baseline gap-4 border-b border-[#ced1bf]/15 pb-4">
-      <TypographyLabel className="shrink-0 text-[#E09A6C]">{index}</TypographyLabel>
+    <div className="flex items-baseline gap-4 border-b border-cream/15 pb-4">
+      <TypographyLabel className="shrink-0 text-copper-text">{index}</TypographyLabel>
       <h3 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white">
         {children}
       </h3>
@@ -100,11 +100,11 @@ export default function CourseDetailTemplate({
       <div className="space-y-16 md:space-y-24">
         {/* Giriş Bloğu — serif lead */}
         <section className="space-y-6">
-          <TypographyLabel className="text-[#E09A6C]">Program · Genel Bakış</TypographyLabel>
+          <TypographyLabel className="text-copper-text">Program · Genel Bakış</TypographyLabel>
           <h2 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white">
             {introTitle}
           </h2>
-          <p className="max-w-[42rem] text-base md:text-lg font-light leading-relaxed text-[#ced1bf]/80 whitespace-pre-line">
+          <p className="max-w-[42rem] text-base md:text-lg font-light leading-relaxed text-cream/80 whitespace-pre-line">
             {introText}
           </p>
         </section>
@@ -113,20 +113,20 @@ export default function CourseDetailTemplate({
         {curriculum && curriculum.length > 0 && (
           <section className="space-y-8">
             <ChapterHeading index="01">Eğitim Müfredatı</ChapterHeading>
-            <ol className="border-t border-[#ced1bf]/12">
+            <ol className="border-t border-cream/12">
               {curriculum.map((m, i) => (
                 <li
                   key={i}
-                  className="grid grid-cols-[2.5rem_1fr] gap-x-5 gap-y-2 border-b border-[#ced1bf]/12 py-7 md:grid-cols-[3rem_1fr] md:py-8"
+                  className="grid grid-cols-[2.5rem_1fr] gap-x-5 gap-y-2 border-b border-cream/12 py-7 md:grid-cols-[3rem_1fr] md:py-8"
                 >
-                  <TypographyLabel className="text-[#E09A6C] md:pt-1">
+                  <TypographyLabel className="text-copper-text md:pt-1">
                     {prependZero(i + 1)}
                   </TypographyLabel>
                   <div className="space-y-2">
                     <h4 className="text-lg font-normal text-white md:text-xl">
                       {stripModulePrefix(m.title)}
                     </h4>
-                    <p className="text-sm font-light leading-relaxed text-[#ced1bf]/85 md:text-base">
+                    <p className="text-sm font-light leading-relaxed text-cream/85 md:text-base">
                       {m.content}
                     </p>
                   </div>
@@ -143,10 +143,10 @@ export default function CourseDetailTemplate({
             <h4 className="text-lg md:text-xl font-medium text-white">
               {instructor.name}
             </h4>
-            <p className="text-xs md:text-sm text-[#E09A6C] uppercase tracking-wider font-medium">
+            <p className="text-xs md:text-sm text-copper-text uppercase tracking-wider font-medium">
               {instructor.role}
             </p>
-            <p className="max-w-[42rem] text-sm md:text-base font-light leading-relaxed text-[#ced1bf]/82">
+            <p className="max-w-[42rem] text-sm md:text-base font-light leading-relaxed text-cream/82">
               {instructor.bio}
             </p>
           </div>
@@ -161,12 +161,12 @@ export default function CourseDetailTemplate({
               {publishableTestimonials.map((t, i) => (
                 <blockquote
                   key={i}
-                  className="border-l-2 border-[#ca7d57] pl-6 py-2 space-y-2"
+                  className="border-l-2 border-copper pl-6 py-2 space-y-2"
                 >
-                  <p className="text-base md:text-lg font-light italic text-[#ced1bf]/80">
+                  <p className="text-base md:text-lg font-light italic text-cream/80">
                     &ldquo;{t.quote}&rdquo;
                   </p>
-                  <cite className="block text-xs md:text-sm text-[#ced1bf]/85 not-italic font-normal">
+                  <cite className="block text-xs md:text-sm text-cream/85 not-italic font-normal">
                     — {t.author}
                   </cite>
                 </blockquote>
@@ -195,44 +195,44 @@ export default function CourseDetailTemplate({
       </div>
 
       {/* Sağ Sütun: Program Kartı */}
-      <aside className="sticky top-32 p-6 md:p-8 bg-[#30493D] rounded border border-[#ced1bf]/10 space-y-8 text-[#ced1bf]">
-        <div className="space-y-2 border-b border-[#ced1bf]/15 pb-6">
-          <span className="text-xs text-[#ced1bf]/85 uppercase tracking-widest">Yatırım Bedeli</span>
+      <aside className="sticky top-32 p-6 md:p-8 bg-warm rounded border border-cream/10 space-y-8 text-cream">
+        <div className="space-y-2 border-b border-cream/15 pb-6">
+          <span className="text-xs text-cream/85 uppercase tracking-widest">Yatırım Bedeli</span>
           <div className="text-28 md:text-40 font-light text-white">Ön Görüşmede</div>
-          <p className="text-sm font-light leading-relaxed text-[#ced1bf]/85">
+          <p className="text-sm font-light leading-relaxed text-cream/85">
             Güncel eğitim ücreti, başlangıç tarihi ve ödeme seçenekleri ücretsiz ön görüşmede paylaşılır.
           </p>
         </div>
 
         <div className="space-y-6">
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
-            <div className="size-2 bg-[#ca7d57] rounded-full" />
+            <div className="size-2 bg-copper rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/85 font-light">Eğitim Süresi</div>
+              <div className="text-xs text-cream/85 font-light">Eğitim Süresi</div>
               <div className="text-base text-white font-light">{duration}</div>
             </div>
           </div>
 
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
-            <div className="size-2 bg-[#ca7d57] rounded-full" />
+            <div className="size-2 bg-copper rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/85 font-light">Eğitim Formatı</div>
+              <div className="text-xs text-cream/85 font-light">Eğitim Formatı</div>
               <div className="text-base text-white font-light">{format}</div>
             </div>
           </div>
 
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
-            <div className="size-2 bg-[#ca7d57] rounded-full" />
+            <div className="size-2 bg-copper rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/85 font-light">Gerekli Ön Koşul</div>
+              <div className="text-xs text-cream/85 font-light">Gerekli Ön Koşul</div>
               <div className="text-base text-white font-light">{prerequisites}</div>
             </div>
           </div>
 
           <div className="grid grid-cols-[auto_1fr] gap-x-4 items-center">
-            <div className="size-2 bg-[#ca7d57] rounded-full" />
+            <div className="size-2 bg-copper rounded-full" />
             <div>
-              <div className="text-xs text-[#ced1bf]/85 font-light">Sertifikasyon</div>
+              <div className="text-xs text-cream/85 font-light">Sertifikasyon</div>
               <div className="text-base text-white font-light">{certification}</div>
             </div>
           </div>
@@ -241,7 +241,7 @@ export default function CourseDetailTemplate({
         <div className="pt-4">
           <Link
             href={consultationUrl}
-            className="block min-h-12 w-full rounded bg-[#CED1BF] py-4 text-center font-medium text-[#2B3530] transition-colors duration-300 hover:bg-[#D1CCBF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530]"
+            className="block min-h-12 w-full rounded bg-cream py-4 text-center font-medium text-deep transition-colors duration-300 hover:bg-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-deep"
           >
             Görüşme Talebi
           </Link>

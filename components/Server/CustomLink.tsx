@@ -2,6 +2,7 @@ import * as motion from "motion/react-client";
 import NavigateSVG from "../SVGComponents/NavigateSVG";
 import { MotionConfig } from "motion/react";
 import Link from "next/link";
+import { easing } from "@/utils/motion/tokens";
 interface CustomLinkProps {
   children: string;
   href: string;
@@ -24,14 +25,14 @@ export default function CustomLink({
     <Link href={href}>
       <MotionConfig
         transition={{
-          ease: [0.24, 0.43, 0.15, 0.97],
+          ease: easing.editorial,
         }}
       >
         <motion.div
           initial="initial"
           whileHover="whileHover"
           animate="animate"
-          className="flex cursor-pointer py-2 text-3000svh font-light text-[#2b3530]"
+          className="flex cursor-pointer py-2 text-3000svh font-light text-deep"
           variants={{
             whileHover: { gap: "var(--spacing-5)" },
             initial: { gap: "0px", y: "60%", opacity: 0 },

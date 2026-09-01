@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import MeridianSceneWrapper from "./MeridianSceneWrapper";
+import { duration } from "@/utils/motion/tokens";
 
 export default function MeridianParallaxContainer() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -54,7 +55,7 @@ export default function MeridianParallaxContainer() {
           style={{ opacity: indicatorOpacity }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-none flex flex-col items-center gap-2 select-none"
         >
-          <span className="text-4xs md:text-xs font-medium tracking-[0.25em] text-[#e0a96d] uppercase font-sans drop-shadow-md">
+          <span className="text-4xs md:text-xs font-medium tracking-[0.25em] text-copper-text uppercase font-sans drop-shadow-md">
             Müfredat ve Detaylar İçin Aşağı Kaydırın
           </span>
           <div className="flex flex-col items-center justify-center gap-1.5 mt-1">
@@ -65,20 +66,20 @@ export default function MeridianParallaxContainer() {
               viewBox="0 0 24 24" 
               strokeWidth={2} 
               stroke="currentColor" 
-              className={`size-5 text-[#e0a96d] ${prefersReducedMotion ? "" : "animate-bounce"}`}
+              className={`size-5 text-copper-text ${prefersReducedMotion ? "" : "animate-bounce"}`}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
             {/* Mouse wheel animation */}
-            <div className="w-[16px] h-[26px] border border-[#e0a96d]/40 rounded-full flex justify-center p-1 opacity-70">
+            <div className="w-[16px] h-[26px] border border-copper-text/40 rounded-full flex justify-center p-1 opacity-70">
               <motion.div 
                 animate={prefersReducedMotion ? undefined : { y: [0, 8, 0] }}
                 transition={{ 
-                  duration: 1.5, 
+                  duration: duration.hero, 
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="w-1 h-1 bg-[#e0a96d] rounded-full"
+                className="w-1 h-1 bg-copper-text rounded-full"
               />
             </div>
           </div>

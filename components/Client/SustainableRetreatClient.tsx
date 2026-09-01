@@ -42,7 +42,7 @@ export default function SustainableRetreatClient() {
 
   return (
     <>
-      <div ref={imgContainerRef} aria-hidden="true" className="relative overflow-hidden bg-[#2b3530]/20 md:w-fit">
+      <div ref={imgContainerRef} aria-hidden="true" className="relative overflow-hidden bg-deep/20 md:w-fit">
         <Image
           src={links[links.length - 1].img}
           sizes="(min-width: 768px) 440px, 90vw"
@@ -66,7 +66,7 @@ export default function SustainableRetreatClient() {
           </motion.div>
         ))}
       </div>
-      <div className="-mx-8-25 grid auto-rows-fr divide-y divide-[#D1CCBF] border-y border-[#D1CCBF] md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
+      <div className="-mx-8-25 grid auto-rows-fr divide-y divide-cream border-y border-cream md:col-span-2 md:col-start-2 md:row-start-2 md:mx-0">
         {links.map((eachLink, index) => (
           <StyledLinkClient
             handleFocus={handleFocus}

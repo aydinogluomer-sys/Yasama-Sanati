@@ -1,5 +1,6 @@
 import * as motion from "motion/react-client";
 import cn from "@/utils/cn";
+import { easing } from "@/utils/motion/tokens";
 
 interface FullScreenIconProps {
   className?: string;
@@ -14,7 +15,7 @@ export default function FullScreenIcon({ className }: FullScreenIconProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       whileHover={{ scale: 1.2 }}
-      transition={{ ease: [0.24, 0.43, 0.15, 0.97] }}
+      transition={{ ease: easing.editorial }}
     >
       <path
         d="M8.57031 0.857178H9.48868C10.4034 0.857178 11.1417 1.59555 11.1417 2.51024V3.42861"

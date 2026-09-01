@@ -24,7 +24,7 @@ const fadeUp = (delay: number, reduce: boolean): Variants => ({
   show: {
     opacity: 1,
     y: 0,
-    transition: reduce ? { duration: 0 } : { ease: easing.softOut, duration: 0.7, delay },
+    transition: reduce ? { duration: 0 } : { ease: easing.softOut, duration: duration.textLine, delay },
   },
 });
 
@@ -53,8 +53,8 @@ export default function HeroOpeningMotion() {
             transition: reduce
               ? { duration: 0 }
               : {
-                  ease: [0.24, 0.43, 0.15, 0.97],
-                  duration: 1.2,
+                  ease: easing.editorial,
+                  duration: duration.hero,
                   delay: 0.35,
                 },
           },
@@ -77,7 +77,7 @@ export default function HeroOpeningMotion() {
           rescuing it would have meant darkening the photograph by roughly half. The headline
           carries the opening on its own. */}
       <div className="relative z-10 flex flex-col gap-7 md:gap-9">
-        <h1 className="font-serif text-display-l font-normal leading-[0.94] tracking-[-0.02em] text-[#F4EFE4]">
+        <h1 className="font-serif text-display-l font-normal leading-[0.94] tracking-[-0.02em] text-paper">
           <span className="block overflow-hidden">
             <motion.span variants={maskLine(0.3, reduce)} className="block">
               Beden, zihin{" "}
@@ -119,7 +119,7 @@ export default function HeroOpeningMotion() {
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href={consultationHref({ from: "/" })}
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#C9875B] px-5 text-3xs font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-[#d79a70] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] motion-reduce:transition-none sm:px-6"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-copper px-5 text-3xs font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-copper-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper/50 focus-visible:ring-offset-2 focus-visible:ring-offset-deep motion-reduce:transition-none sm:px-6"
             >
               Ön Görüşme
               <NavigateSVG
@@ -129,7 +129,7 @@ export default function HeroOpeningMotion() {
             </Link>
             <Link
               href="/programlar"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-3xs font-medium uppercase tracking-[0.14em] text-white/85 transition-colors duration-200 hover:border-white/45 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] motion-reduce:transition-none sm:px-6"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-3xs font-medium uppercase tracking-[0.14em] text-white/85 transition-colors duration-200 hover:border-white/45 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-deep motion-reduce:transition-none sm:px-6"
             >
               Programları İncele
             </Link>
@@ -151,18 +151,18 @@ export default function HeroOpeningMotion() {
           });
         }}
         aria-label="Tanışma bölümüne geç"
-        className="group pointer-events-auto absolute bottom-7 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9875B]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:flex"
+        className="group pointer-events-auto absolute bottom-7 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:flex"
       >
         <span className="relative flex size-11 items-center justify-center">
           <span
             aria-hidden
-            className="absolute inset-0 rounded-full border border-[#C9875B]/50 motion-safe:animate-[breath_4.8s_ease-in-out_infinite]"
+            className="absolute inset-0 rounded-full border border-copper/50 motion-safe:animate-[breath_4.8s_ease-in-out_infinite]"
           />
           <span
             aria-hidden
-            className="absolute inset-1 rounded-full border border-[#C9875B]/25 motion-safe:animate-[breath_4.8s_ease-in-out_infinite_-2.4s]"
+            className="absolute inset-1 rounded-full border border-copper/25 motion-safe:animate-[breath_4.8s_ease-in-out_infinite_-2.4s]"
           />
-          <span aria-hidden className="size-1.5 rounded-full bg-[#E0A878] transition-transform duration-500 group-hover:scale-125" />
+          <span aria-hidden className="size-1.5 rounded-full bg-copper-text transition-transform duration-500 group-hover:scale-125" />
         </span>
         <span className="text-5xs font-medium uppercase tracking-[0.3em] text-white/70 transition-colors duration-300 group-hover:text-white">
           Bir nefes al

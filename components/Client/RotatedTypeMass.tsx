@@ -40,7 +40,7 @@ export default function RotatedTypeMass({
     >
       <motion.div
         style={{ x: reduce ? "0%" : x }}
-        className="flex w-max items-center gap-[0.35em] whitespace-nowrap font-serif text-[clamp(4rem,18vw,15rem)] font-normal leading-[0.82] tracking-[-0.03em] text-[#F4EFE4]"
+        className="flex w-max items-center gap-[0.35em] whitespace-nowrap font-serif text-[clamp(4rem,18vw,15rem)] font-normal leading-[0.82] tracking-[-0.03em] text-paper"
       >
         {words.map((w, i) => (
           <span key={i} className="inline-flex items-baseline">

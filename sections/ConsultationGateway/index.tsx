@@ -41,13 +41,13 @@ export default function ConsultationGateway() {
           Nereden başlayacağını <span className="italic">birlikte</span> netleştirelim.
         </h2>
 
-        <div className="border-t border-[#2b3530]/28 pt-7">
-          <p className="max-w-[38ch] text-body-lg font-light leading-relaxed text-[#2b3530]/85">
+        <div className="border-t border-deep/28 pt-7">
+          <p className="max-w-[38ch] text-body-lg font-light leading-relaxed text-deep/85">
             İhtiyacını ve temponu paylaş; sana uygun başlangıç yolunu ücretsiz ön görüşmede birlikte belirleyelim.
           </p>
           <Link
             href={consultationHref({ from: "/" })}
-            className="group mt-9 inline-flex min-h-14 min-w-[15rem] items-center justify-between gap-8 bg-[var(--surface-deep)] px-6 py-4 text-base font-medium text-[#f3efe6] outline-none transition-colors duration-200 hover:bg-[var(--surface-warm)] focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-3 focus-visible:ring-offset-[var(--surface-card)] motion-reduce:transition-none"
+            className="group mt-9 inline-flex min-h-14 min-w-[15rem] items-center justify-between gap-8 bg-[var(--surface-deep)] px-6 py-4 text-base font-medium text-paper outline-none transition-colors duration-200 hover:bg-[var(--surface-warm)] focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-3 focus-visible:ring-offset-[var(--surface-card)] motion-reduce:transition-none"
           >
             <span>Ücretsiz ön görüşme</span>
             <span className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none">

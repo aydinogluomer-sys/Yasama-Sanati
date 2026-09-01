@@ -20,18 +20,18 @@ export default function SignatureTypeScene() {
   });
 
   return (
-    <div ref={containerRef} className="relative h-[220vh] bg-[#222B27] motion-reduce:h-auto motion-reduce:min-h-[100svh]">
+    <div ref={containerRef} className="relative h-[220vh] bg-ink motion-reduce:h-auto motion-reduce:min-h-[100svh]">
       <section
         id="alti-disiplin"
         aria-label="Altı disiplin, tek bütün"
-        className="sticky top-0 flex h-screen w-full flex-col justify-center gap-10 overflow-hidden bg-[#222B27] motion-reduce:relative motion-reduce:top-auto motion-reduce:min-h-[100svh]"
+        className="sticky top-0 flex h-screen w-full flex-col justify-center gap-10 overflow-hidden bg-ink motion-reduce:relative motion-reduce:top-auto motion-reduce:min-h-[100svh]"
       >
         <div className="flex flex-col gap-3 px-5 md:flex-row md:items-center md:gap-4 md:px-12">
-          <div className="flex items-center gap-3 text-[#D1CCBF]">
+          <div className="flex items-center gap-3 text-cream">
             <TypographyLabel className="text-[var(--accent-copper-on-dark)]">Altı Disiplin</TypographyLabel>
-            <span aria-hidden className="h-px w-10 shrink-0 bg-[#D1CCBF] opacity-40 md:w-16" />
+            <span aria-hidden className="h-px w-10 shrink-0 bg-cream opacity-40 md:w-16" />
           </div>
-          <h2 className="font-serif text-display-s font-normal tracking-[-0.01em] text-[#F4EFE4]">
+          <h2 className="font-serif text-display-s font-normal tracking-[-0.01em] text-paper">
             Tek bütün, altı yol.
           </h2>
         </div>
@@ -43,7 +43,7 @@ export default function SignatureTypeScene() {
           progress={scrollYProgress}
         />
 
-        <p className="max-w-[40rem] px-5 text-body-lg font-light text-[#D1CCBF]/85 md:px-12">
+        <p className="max-w-[40rem] px-5 text-body-lg font-light text-cream/85 md:px-12">
           Nefes, enerji, zihin ve beden ayrı teknikler değil; aynı bütünün birbirini tamamlayan
           yüzleridir.
         </p>

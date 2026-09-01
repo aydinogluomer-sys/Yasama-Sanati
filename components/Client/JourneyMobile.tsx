@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 
 import SectionTitle from "@/components/Server/SectionTitle";
 import { JOURNEY_CHAPTERS } from "@/data/journey-chapters";
-import { easing } from "@/utils/motion/tokens";
+import { easing, duration } from "@/utils/motion/tokens";
 
 /**
  * Şifa Yolculuğu — mobil akış.
@@ -32,7 +32,7 @@ export default function JourneyMobile() {
       // Metin rengi bölümde veriliyor: SectionTitle kendi rengini taşımıyor ve
       // renksiz bırakıldığında koyu zeminde siyah kalıyordu (ölçüldü: 1.65:1).
       // Masaüstü sürümde bu rengi ClipImageCard'ın sarmalayıcısı veriyor.
-      className="bg-[#2b3530] px-5 py-16 text-[#D1CCBF]"
+      className="bg-deep px-5 py-16 text-cream"
     >
       <SectionTitle className="mb-8">Şifa Yolculuğu</SectionTitle>
 
@@ -47,18 +47,18 @@ export default function JourneyMobile() {
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.55, ease: easing.editorial }}
+            transition={{ duration: duration.buttonStroke, ease: easing.editorial }}
           >
             <Link
               href={chapter.href}
-              className="group block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2b3530]"
+              className="group block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-deep"
             >
               <div className="flex items-center gap-3">
                 <span className="font-mono text-[0.95rem] tabular-nums text-[var(--accent-copper-on-dark)] [line-height:1]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span aria-hidden className="h-px w-8 bg-[#D1CCBF]/30" />
-                <span className="font-mono text-[0.7rem] tabular-nums tracking-[0.14em] text-[#D1CCBF]/70">
+                <span aria-hidden className="h-px w-8 bg-cream/30" />
+                <span className="font-mono text-[0.7rem] tabular-nums tracking-[0.14em] text-cream/70">
                   {String(JOURNEY_CHAPTERS.length).padStart(2, "0")}
                 </span>
               </div>
@@ -72,11 +72,11 @@ export default function JourneyMobile() {
                 />
               </div>
 
-              <h3 className="mt-5 font-serif text-[1.55rem] leading-[1.08] font-normal tracking-[-0.01em] text-[#f3efe6]">
+              <h3 className="mt-5 font-serif text-[1.55rem] leading-[1.08] font-normal tracking-[-0.01em] text-paper">
                 {chapter.title.join(" ")}
               </h3>
 
-              <p className="mt-3 text-body-sm leading-relaxed text-[#D1CCBF]/85">
+              <p className="mt-3 text-body-sm leading-relaxed text-cream/85">
                 {chapter.lines.join(" ")}
               </p>
 
@@ -97,7 +97,7 @@ export default function JourneyMobile() {
 
       <Link
         href="/programlar"
-        className="mt-12 inline-flex w-full items-center justify-center rounded-full border border-[#D1CCBF]/30 px-6 py-3 font-mono text-3xs tracking-[0.16em] text-[#D1CCBF] uppercase transition-colors hover:bg-[#D1CCBF]/10 focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:outline-none"
+        className="mt-12 inline-flex w-full items-center justify-center rounded-full border border-cream/30 px-6 py-3 font-mono text-3xs tracking-[0.16em] text-cream uppercase transition-colors hover:bg-cream/10 focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:outline-none"
       >
         Tüm programları gör
       </Link>

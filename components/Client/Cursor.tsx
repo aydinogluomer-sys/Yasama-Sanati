@@ -2,6 +2,7 @@
 import cn from "@/utils/cn";
 import { AnimatePresence, motion, MotionStyle } from "motion/react";
 import { PropsWithChildren } from "react";
+import { duration } from "@/utils/motion/tokens";
 interface CursorProps extends PropsWithChildren {
   renderCursor: boolean;
   style?: MotionStyle;
@@ -21,12 +22,12 @@ export default function Cursor({
       scale: 1,
       transition: {
         delay: custom ? 1 : 0,
-        duration: 0.25,
+        duration: duration.hover,
       },
     }),
     exit: {
       scale: 0,
-      duration: 0.25,
+      duration: duration.hover,
     },
   };
   return (

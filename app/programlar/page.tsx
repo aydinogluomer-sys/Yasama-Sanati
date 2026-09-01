@@ -73,40 +73,40 @@ export default function ProgramlarPage() {
       description="Sertifika programları ve uzmanlık eğitimleri ile dönüşüm yolculuğunuzu başlatın."
     >
       {/* Intercom-style academy index: numbered chapters, fine rules, structured hierarchy. */}
-      <div className="mx-auto max-w-6xl">
+      <div className="max-w-wide">
         <div className="flex items-center justify-between pb-5">
-          <TypographyLabel className="text-[#E09A6C]">Program Dizini</TypographyLabel>
-          <TypographyLabel className="text-[#ced1bf]/85">
+          <TypographyLabel className="text-copper-text">Program Dizini</TypographyLabel>
+          <TypographyLabel className="text-cream/85">
             {prependZero(programs.length)} Disiplin
           </TypographyLabel>
         </div>
 
-        <ul className="border-t border-[#ced1bf]/15">
+        <ul className="border-t border-cream/15">
           {programs.map((prog, i) => (
             <li key={i}>
               <Link
                 href={prog.href}
-                className="group grid grid-cols-1 gap-x-8 gap-y-5 border-b border-[#ced1bf]/15 py-9 transition-colors duration-300 hover:bg-[#ced1bf]/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] md:grid-cols-[3.5rem_1fr_auto] md:items-baseline md:px-3 md:py-11"
+                className="group grid grid-cols-1 gap-x-8 gap-y-5 border-b border-cream/15 py-9 transition-colors duration-300 hover:bg-cream/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] md:grid-cols-[3.5rem_1fr_auto] md:items-baseline md:px-3 md:py-11"
               >
-                <TypographyLabel className="text-[#E09A6C] md:pt-2">
+                <TypographyLabel className="text-copper-text md:pt-2">
                   {prependZero(i + 1)}
                 </TypographyLabel>
 
                 <div className="space-y-3 md:max-w-2xl">
-                  <h2 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white transition-colors duration-300 group-hover:text-[#E0A878]">
+                  <h2 className="font-serif text-display-s font-normal leading-[1.05] tracking-[-0.01em] text-white transition-colors duration-300 group-hover:text-copper-text">
                     {prog.title}
                   </h2>
-                  <p className="text-sm font-light leading-relaxed text-[#ced1bf]/85 md:text-base">
+                  <p className="text-sm font-light leading-relaxed text-cream/85 md:text-base">
                     {prog.desc}
                   </p>
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1">
-                    <TypographyLabel className="text-[#ced1bf]/85">{prog.duration}</TypographyLabel>
-                    <span aria-hidden className="size-1 rounded-full bg-[#ca7d57]/60" />
-                    <TypographyLabel className="text-[#ced1bf]/85">{prog.format}</TypographyLabel>
+                    <TypographyLabel className="text-cream/85">{prog.duration}</TypographyLabel>
+                    <span aria-hidden className="size-1 rounded-full bg-copper/60" />
+                    <TypographyLabel className="text-cream/85">{prog.format}</TypographyLabel>
                   </div>
                 </div>
 
-                <span className="flex items-center gap-2 self-center text-[#ced1bf]/85 transition-colors duration-300 group-hover:text-white">
+                <span className="flex items-center gap-2 self-center text-cream/85 transition-colors duration-300 group-hover:text-white">
                   <TypographyLabel className="hidden md:inline">İncele</TypographyLabel>
                   <span
                     aria-hidden

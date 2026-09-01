@@ -1,6 +1,6 @@
 "use client";
 import { motion, useReducedMotion, type MotionValue } from "motion/react";
-import { easing } from "@/utils/motion/tokens";
+import { easing, duration } from "@/utils/motion/tokens";
 import cn from "@/utils/cn";
 
 interface MeridianDrawPathProps {
@@ -120,7 +120,7 @@ export default function MeridianDrawPath({
                       repeatType: "mirror",
                       ease: "easeInOut",
                     }
-                  : { delay: delay + 1.1 + i * 0.25, duration: 0.5, ease: easing.softOut }
+                  : { delay: delay + 1.1 + i * 0.25, duration: duration.buttonStroke, ease: easing.softOut }
             }
           />
         );

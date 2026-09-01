@@ -9,14 +9,14 @@ export default function HeroServer() {
           Aegean frame keeps its light. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-[#2b3530]/88 via-[#2b3530]/30 to-[#2b3530]/10"
+        className="absolute inset-0 bg-gradient-to-t from-deep/88 via-deep/30 to-deep/10"
       />
       {/* The fixed header lands on pale sky in this frame, so it gets its own short wash.
           Scoped to the top strip: the wordmark and nav CTA keep their contrast and the rest
           of the photograph is untouched. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#2b3530]/86 via-[#2b3530]/46 to-transparent md:h-56"
+        className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-deep/86 via-deep/46 to-transparent md:h-56"
       />
       {/* the persistent signature meridian is rendered site-wide by <ScrollMeridian /> */}
       <HeroOpeningMotion />

@@ -33,7 +33,7 @@ export default function AkademiHikayesiServer() {
       <EditorialSectionTitle index="03" as="h2" tone="dark" className="md:col-span-3">
         Yaşama Sanatı Hikayesi
       </EditorialSectionTitle>
-      <div className="text-[#2B3530] max-md:mt-12 md:col-span-6 md:col-start-6">
+      <div className="text-deep max-md:mt-12 md:col-span-6 md:col-start-6">
         <div className="relative inline-block">
           <ResponsiveMaskText
             {...textLines}

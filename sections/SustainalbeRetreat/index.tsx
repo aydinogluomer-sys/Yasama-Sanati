@@ -5,7 +5,7 @@ import SustainableRetreatClient from "@/components/Client/SustainableRetreatClie
 
 export default function SustainableRetreat() {
   return (
-    <div className="bg-[#30493D] py-36 text-[#D1CCBF] md:py-60">
+    <div className="bg-warm py-36 text-cream md:py-60">
       <ResponsiveMarquee
         animationConfig={{
           mobile: {

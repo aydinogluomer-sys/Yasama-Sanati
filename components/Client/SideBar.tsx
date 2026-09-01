@@ -27,6 +27,7 @@ import StayConnected from "@/components//Server/StayConnected";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { consultationHref } from "@/utils/consultation-context";
+import { easing, duration } from "@/utils/motion/tokens";
 
 interface LinkItem {
   href: string;
@@ -60,7 +61,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
   const temp = {
     initialDelay: 0.8 * 0.4,
     delay: 0.05,
-    duration: 0.5,
+    duration: duration.buttonStroke,
   };
 
   const variants = {
@@ -109,16 +110,16 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
       animate={{
         backgroundColor: "rgba(0,0,0,0.35)",
         transition: {
-          duration: 0.8,
-          ease: [0.24, 0.43, 0.15, 0.97],
+          duration: duration.section,
+          ease: easing.editorial,
         },
       }}
       exit={{
         clipPath: "inset(0% 0% 100% 0%)",
         transition: {
           delay: 0.1,
-          duration: 0.8,
-          ease: [0.24, 0.43, 0.15, 0.97],
+          duration: duration.section,
+          ease: easing.editorial,
         },
       }}
       className="fixed top-0 z-[200] w-full"
@@ -127,12 +128,12 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
       }}
     >
       <motion.div
-        className="flex h-screen overflow-y-auto bg-[#CED1BF]"
+        className="flex h-screen overflow-y-auto bg-cream"
         initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
         animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
         transition={{
-          duration: 0.8,
-          ease: [0.24, 0.43, 0.15, 0.97],
+          duration: duration.section,
+          ease: easing.editorial,
         }}
       >
         <motion.div
@@ -143,15 +144,15 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
             clipPath: "inset(0% 0% 0% 0%)",
             transition: {
               delay: 0.1,
-              ease: [0.24, 0.43, 0.15, 0.97],
-              duration: 0.8,
+              ease: easing.editorial,
+              duration: duration.section,
             },
           }}
           exit={{
             clipPath: "inset(0% 0% 100% 0%)",
             transition: {
-              ease: [0.24, 0.43, 0.15, 0.97],
-              duration: 0.8,
+              ease: easing.editorial,
+              duration: duration.section,
             },
           }}
           className="relative flex-[0.9]"
@@ -169,7 +170,7 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
           ))}
         </motion.div>
         <div className="flex-1 pt-7000svh pr-16 pb-3500svh pl-48">
-          <span className="text-1800svh text-[#2b3530]/80">Sayfaları keşfedin</span>
+          <span className="text-1800svh text-deep/80">Sayfaları keşfedin</span>
           <nav
             aria-label="Sayfalar"
             className="mt-6400svh mb-8000svh grid grid-flow-col-dense grid-cols-2 grid-rows-6"
@@ -204,13 +205,13 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
               variants={variants}
               transition={{
                 duration: temp.duration,
-                ease: [0.24, 0.43, 0.15, 0.97],
+                ease: easing.editorial,
               }}
               id="contact-us"
-              className="space-y-2400svh text-1800svh text-[#2b3530]"
+              className="space-y-2400svh text-1800svh text-deep"
             >
-              <div className="text-[#2b3530]/80">Bize Ulaşın</div>
-              <div className="flex items-center [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
+              <div className="text-deep/80">Bize Ulaşın</div>
+              <div className="flex items-center [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-deep">
                 <a href="mailto:info@yasamasanati.com">
                   <DashedLink>info@yasamasanati.com</DashedLink>
                 </a>
@@ -224,26 +225,26 @@ export default function SideBar({ setOpenSideBar }: SideBarProps) {
               variants={variants}
               transition={{
                 duration: temp.duration,
-                ease: [0.24, 0.43, 0.15, 0.97],
+                ease: easing.editorial,
               }}
             >
               <StayConnected
                 style={{
                   fontSize: "var(--text-1800svh)",
                 }}
-                className="gap-y-2400svh text-1800svh text-[#2b3530]/80 [&_div]:gap-x-10 [&_svg]:h-2400svh [&_svg]:w-auto [&>:first-child]:text-[#2b3530]/80"
+                className="gap-y-2400svh text-1800svh text-deep/80 [&_div]:gap-x-10 [&_svg]:h-2400svh [&_svg]:w-auto [&>:first-child]:text-deep/80"
               />
             </motion.div>
             <motion.div
               variants={variants}
               transition={{
                 duration: temp.duration,
-                ease: [0.24, 0.43, 0.15, 0.97],
+                ease: easing.editorial,
               }}
               className="text-1600svh"
             >
               <Link href="/privacy-terms">
-                <DashedLink className="w-fit text-[#2b3530] [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-[#2b3530]">
+                <DashedLink className="w-fit text-deep [&_.animated-underline]:h-[2px] [&_.animated-underline]:bg-deep">
                   Politikalar ve Şartlar
                 </DashedLink>
               </Link>

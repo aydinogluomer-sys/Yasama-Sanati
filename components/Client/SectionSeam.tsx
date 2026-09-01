@@ -127,12 +127,12 @@ export default function SectionSeam({
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <span className="relative flex size-10 items-center justify-center md:size-12">
               <span
-                className="absolute inset-0 rounded-full border border-[#C9875B]/45 motion-safe:animate-[breath_4.8s_ease-in-out_infinite]"
+                className="absolute inset-0 rounded-full border border-copper/45 motion-safe:animate-[breath_4.8s_ease-in-out_infinite]"
               />
               <span
-                className="absolute inset-[5px] rounded-full border border-[#C9875B]/20 motion-safe:animate-[breath_4.8s_ease-in-out_infinite_-2.4s]"
+                className="absolute inset-[5px] rounded-full border border-copper/20 motion-safe:animate-[breath_4.8s_ease-in-out_infinite_-2.4s]"
               />
-              <span className="size-1 rounded-full bg-[#E0A878]" />
+              <span className="size-1 rounded-full bg-copper-text" />
             </span>
           </div>
 

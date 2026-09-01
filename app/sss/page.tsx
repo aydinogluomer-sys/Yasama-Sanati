@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { consultationHref } from "@/utils/consultation-context";
 
 import { FAQS } from "./faqs";
+import { easing, duration } from "@/utils/motion/tokens";
 
 export default function SSSPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -26,9 +27,9 @@ export default function SSSPage() {
       title="Sıkça Sorulan Sorular"
       description="Yaşama Sanatı Akademisi eğitimleri, seanslar ve kayıt süreçleri hakkında merak edilenler"
     >
-      <div className="max-w-4xl mx-auto space-y-16">
+      <div className="max-w-wide space-y-16">
         {/* Accordion Container */}
-        <div className="border-t border-[#ced1bf]/15 divide-y divide-[#ced1bf]/15">
+        <div className="border-t border-cream/15 divide-y divide-cream/15">
           {FAQS.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -44,15 +45,15 @@ export default function SSSPage() {
                       {padZero(idx)}
                     </span>
                     {/* Question Title in Serif */}
-                    <span className="font-serif font-light text-lg md:text-24 text-[#d1ccbf] group-hover:text-white transition-colors duration-300 tracking-wide">
+                    <span className="font-serif font-light text-lg md:text-24 text-cream group-hover:text-white transition-colors duration-300 tracking-wide">
                       {faq.q}
                     </span>
                   </div>
 
                   {/* Rotating Action Circle */}
-                  <span className="flex-shrink-0 flex items-center justify-center size-8 border border-[#ced1bf]/20 rounded-full group-hover:border-[#ca7d57] group-hover:bg-[#ca7d57]/10 transition-all duration-300">
+                  <span className="flex-shrink-0 flex items-center justify-center size-8 border border-cream/20 rounded-full group-hover:border-copper group-hover:bg-copper/10 transition-all duration-300">
                     <span
-                      className={`text-base font-light text-[#ced1bf] group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${
+                      className={`text-base font-light text-cream group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${
                         isOpen ? "rotate-45" : ""
                       }`}
                     >
@@ -68,10 +69,10 @@ export default function SSSPage() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ duration: duration.quick, ease: easing.accordion }}
                       className="overflow-hidden"
                     >
-                      <div className="pl-8 md:pl-12 pt-4 pb-2 text-sm md:text-base leading-relaxed text-[#ced1bf]/85 font-light whitespace-pre-line max-w-3xl">
+                      <div className="pl-8 md:pl-12 pt-4 pb-2 text-sm md:text-base leading-relaxed text-cream/85 font-light whitespace-pre-line max-w-3xl">
                         {faq.a}
                       </div>
                     </motion.div>
@@ -83,11 +84,11 @@ export default function SSSPage() {
         </div>
 
         {/* Call to action card */}
-        <div className="p-8 bg-[#ced1bf]/5 rounded border border-[#ced1bf]/10 text-center space-y-6 max-w-2xl mx-auto">
-          <h3 className="text-xl md:text-24 font-light text-white">
+        <div className="max-w-editorial space-y-6 border-t border-cream/15 pt-10">
+          <h3 className="font-serif text-display-s font-normal leading-[1.08] text-white">
             Başka bir sorunuz mu var?
           </h3>
-          <p className="text-sm md:text-base font-light text-[#ced1bf]/85 leading-relaxed">
+          <p className="text-sm md:text-base font-light text-cream/85 leading-relaxed">
             Eğitim programlarımız hakkında daha detaylı bilgi almak için ücretsiz ön görüşme talebi gönderebilirsiniz.
           </p>
           <div className="pt-4">

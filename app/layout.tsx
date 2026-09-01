@@ -65,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body
-        className={`${basisGrotesque.variable} ${spaceMono.variable} ${ogg.variable} overflow-x-clip antialiased selection:bg-[#ced1bf] selection:text-[#2b3530]`}
+        className={`${basisGrotesque.variable} ${spaceMono.variable} ${ogg.variable} overflow-x-clip antialiased selection:bg-cream selection:text-deep`}
       >
         <OrganizationSchema />
         <a className="skip-link" href="#main-content">

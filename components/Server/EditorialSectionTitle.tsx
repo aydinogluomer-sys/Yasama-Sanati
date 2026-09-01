@@ -31,7 +31,7 @@ export default function EditorialSectionTitle({
 }: EditorialSectionTitleProps) {
   const containerClassName = cn(
     "flex select-none items-center gap-4",
-    tone === "light" ? "text-[#D1CCBF]" : "text-[#2B3530]",
+    tone === "light" ? "text-cream" : "text-deep",
     className,
   );
   const inner: ReactNode = (

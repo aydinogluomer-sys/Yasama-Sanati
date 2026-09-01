@@ -1,5 +1,6 @@
 import React from "react";
 import * as motion from "motion/react-client";
+import { easing, duration } from "@/utils/motion/tokens";
 const Br = () => (
   <svg
     className="absolute inset-x-0 top-0"
@@ -12,9 +13,9 @@ const Br = () => (
       initial={{ pathLength: 0 }}
       animate={{ pathLength: 1 }}
       transition={{
-        duration: 0.4,
+        duration: duration.ui,
         delay: 0.2,
-        ease: [0.24, 0.43, 0.15, 0.97],
+        ease: easing.editorial,
       }}
       d="M0 0H100"
       stroke="#ffffff75"

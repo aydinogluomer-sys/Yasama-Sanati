@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CSSProperties, ReactNode, useState } from "react";
 import AnimatedMaskText from "@/components/Client/MaskTextClient";
 import SectionTitle from "../Server/SectionTitle";
-import { easing } from "@/utils/motion/tokens";
+import { easing, duration } from "@/utils/motion/tokens";
 import cn from "@/utils/cn";
 import { JOURNEY_CHAPTERS } from "@/data/journey-chapters";
 interface ClipImageCardProps {
@@ -75,7 +75,7 @@ export default function ClipImageCard({
       viewport={{ amount: 0.5, once: true }}
       style={{ ...style }}
       className={cn(
-        "relative z-10 flex h-full flex-col items-center justify-between py-[8vh] text-[#d1ccbf] backdrop-brightness-[60%] md:flex-row md:px-16 md:py-[15vh]",
+        "relative z-10 flex h-full flex-col items-center justify-between py-[8vh] text-cream backdrop-brightness-[60%] md:flex-row md:px-16 md:py-[15vh]",
         className,
       )}
     >
@@ -86,11 +86,11 @@ export default function ClipImageCard({
           inView: { y: "0%" },
         }}
         transition={{
-          ease: [0.24, 0.43, 0.15, 0.97],
-          duration: 0.8,
+          ease: easing.editorial,
+          duration: duration.section,
         }}
         style={{ scale: cardScale, y: cardY, opacity: cardOpacity }}
-        className="relative z-20 my-[5vh] flex w-[90%] flex-col gap-5 bg-[#D1CCBF] p-6 text-[#2B3530] md:my-0 md:w-full md:max-w-118 md:gap-6 md:p-8"
+        className="relative z-20 my-[5vh] flex w-[90%] flex-col gap-5 bg-cream p-6 text-deep md:my-0 md:w-full md:max-w-118 md:gap-6 md:p-8"
       >
         {/* Editorial chapter marker — mono index, hairline, running count */}
         <div className="flex select-none items-center gap-3">
@@ -101,7 +101,7 @@ export default function ClipImageCard({
             className="font-mono text-[0.95rem] tracking-[0.06em] tabular-nums text-[var(--accent-copper-on-light)] [line-height:1]"
           />
           <span aria-hidden className="h-px w-10 bg-current opacity-30" />
-          <span className="font-mono text-[0.7rem] tracking-[0.14em] text-[#2B3530]/85 tabular-nums">
+          <span className="font-mono text-[0.7rem] tracking-[0.14em] text-deep/85 tabular-nums">
             {prependZero(images.length)}
           </span>
         </div>
@@ -124,7 +124,7 @@ export default function ClipImageCard({
                 opacity: currentState - 1 === index ? 1 : 0,
                 scale: currentState - 1 === index ? 1 : 1.045,
               }}
-              transition={{ duration: 0.55, ease: easing.editorial }}
+              transition={{ duration: duration.buttonStroke, ease: easing.editorial }}
             >
               <Image
                 src={eachImage}
@@ -141,12 +141,12 @@ export default function ClipImageCard({
           state={currentState}
           delay={0.12}
           lines={data[currentState - 1].description["desktop"]}
-          className="text-sm [line-height:1.45] text-[#2B3530]/85 md:text-[0.95rem]"
+          className="text-sm [line-height:1.45] text-deep/85 md:text-[0.95rem]"
         />
 
         <Link
           href="/programlar"
-          className="group mt-1 inline-flex w-fit items-center gap-2 text-3xs font-medium uppercase tracking-[0.18em] text-[var(--accent-copper-on-light)] transition-colors hover:text-[#8a4c28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A85F33]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#D1CCBF] motion-reduce:transition-none"
+          className="group mt-1 inline-flex w-fit items-center gap-2 text-3xs font-medium uppercase tracking-[0.18em] text-[var(--accent-copper-on-light)] transition-colors hover:text-[#8a4c28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A85F33]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-cream motion-reduce:transition-none"
         >
           Programı İncele
           <span

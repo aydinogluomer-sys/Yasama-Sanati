@@ -329,7 +329,7 @@ export default function MeridianScene() {
               </div>
               <button
                 onClick={() => setCalibrationMode(false)}
-                className="text-[#a7c0b0]/85 hover:text-white transition-colors cursor-pointer"
+                className="text-sage/85 hover:text-white transition-colors cursor-pointer"
               >
                 ✕
               </button>
@@ -372,7 +372,7 @@ export default function MeridianScene() {
                     <div className="space-y-1.5">
                       {["X (Sağ/Sol)", "Y (Yukarı/Aşağı)", "Z (Ön/Arka)"].map((axis, i) => (
                         <div key={axis} className="flex items-center justify-between gap-2">
-                          <label className="text-4xs text-[#a7c0b0]/85 font-mono">{axis}</label>
+                          <label className="text-4xs text-sage/85 font-mono">{axis}</label>
                           <input
                             type="number"
                             value={activeAcupoint.position[i]}
@@ -391,7 +391,7 @@ export default function MeridianScene() {
                     <div className="space-y-1.5">
                       {["X Ofset", "Y Ofset", "Z Ofset"].map((axis, i) => (
                         <div key={axis} className="flex items-center justify-between gap-2">
-                          <label className="text-4xs text-[#a7c0b0]/85 font-mono">{axis}</label>
+                          <label className="text-4xs text-sage/85 font-mono">{axis}</label>
                           <input
                             type="number"
                             value={(activeAcupoint.labelOffset || [0.2, 0, 0])[i]}
@@ -406,8 +406,8 @@ export default function MeridianScene() {
                 </div>
 
                 {/* Keyboard controls instructions */}
-                <div className="bg-black/30 border border-white/[0.03] rounded p-2.5 space-y-1 font-mono text-5xs text-[#a7c0b0]/85">
-                  <span className="text-4xs font-bold text-[#a7c0b0]/85 uppercase block font-sans">KLAVYE KONTROLLERİ</span>
+                <div className="bg-black/30 border border-white/[0.03] rounded p-2.5 space-y-1 font-mono text-5xs text-sage/85">
+                  <span className="text-4xs font-bold text-sage/85 uppercase block font-sans">KLAVYE KONTROLLERİ</span>
                   <div>⬆️ / ⬇️ : Y Ekseni (Yükseklik)</div>
                   <div>⬅️ / ➡️ : X Ekseni (Genişlik)</div>
                   <div>Shift + ⬆️/⬇️ : Z Ekseni (Derinlik)</div>
@@ -415,7 +415,7 @@ export default function MeridianScene() {
                 </div>
               </div>
             ) : (
-              <div className="text-center py-6 text-[#a7c0b0]/85 leading-relaxed font-light">
+              <div className="text-center py-6 text-sage/85 leading-relaxed font-light">
                 Kalibre etmek istediğiniz akupresür noktasını listeden veya model üzerinden seçin.
               </div>
             )}
@@ -424,7 +424,7 @@ export default function MeridianScene() {
       )}
 
       {/* Tech Overlay lines */}
-      <div className="absolute bottom-4 left-4 pointer-events-none text-5xs text-[#a7c0b0]/85 font-mono space-y-0.5 max-md:hidden">
+      <div className="absolute bottom-4 left-4 pointer-events-none text-5xs text-sage/85 font-mono space-y-0.5 max-md:hidden">
         <div>SYS.RENDER: WebGL2 / ReactThreeFiber</div>
         <div>SYS.MODEL: Holographic Human Mesh v1.0</div>
       </div>

@@ -11,6 +11,7 @@ import SectionSeam from "@/components/Client/SectionSeam";
 import ScrollMeridian from "@/components/Client/ScrollMeridian";
 import SignatureTypeScene from "@/components/Client/SignatureTypeScene";
 import type { Metadata } from "next";
+import { palette } from "@/utils/palette";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -24,17 +25,17 @@ export default function Home() {
         <ScrollMeridian />
         <Hero />
         <Introduction />
-        <SectionSeam from="#2b3530" to="#30493D" label="Yaklaşımımız" />
+        <SectionSeam from={palette.deep} to={palette.warm} label="Yaklaşımımız" />
         <WellnessSanctuary />
-        <SectionSeam from="#30493D" to="#2b3530" label="Şifa Yolculuğu" />
+        <SectionSeam from={palette.warm} to={palette.deep} label="Şifa Yolculuğu" />
         <Innovation />
-        <SectionSeam from="#2b3530" to="#222B27" label="Altı Disiplin" />
+        <SectionSeam from={palette.deep} to={palette.ink} label="Altı Disiplin" />
         <SignatureTypeScene />
-        <SectionSeam from="#222B27" to="#F3EFE6" label="Yaşama Sanatı Hikayesi" />
+        <SectionSeam from={palette.ink} to={palette.paper} label="Yaşama Sanatı Hikayesi" />
         <AkademiHikayesi />
-        <SectionSeam from="#F3EFE6" to="#222B27" label="Çalışma Alanları" />
+        <SectionSeam from={palette.paper} to={palette.ink} label="Çalışma Alanları" />
         <SustainableRetreat />
-        <SectionSeam from="#30493D" to="#CED1BF" label="Ön Görüşme" />
+        <SectionSeam from={palette.warm} to={palette.cream} label="Ön Görüşme" />
         <Form />
       </main>
       <Footer />

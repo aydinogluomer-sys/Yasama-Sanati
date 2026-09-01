@@ -1,4 +1,5 @@
 import * as motion from "motion/react-client";
+import { easing, duration } from "@/utils/motion/tokens";
 export default function CloseIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -23,8 +24,8 @@ export default function CloseIcon({ className }: { className?: string }) {
           },
         }}
         transition={{
-          ease: [0.24, 0.43, 0.15, 0.97],
-          duration: 0.8,
+          ease: easing.editorial,
+          duration: duration.section,
         }}
         d="M13 1L1 13"
         stroke="#2b3530"
@@ -43,8 +44,8 @@ export default function CloseIcon({ className }: { className?: string }) {
           },
         }}
         transition={{
-          ease: [0.24, 0.43, 0.15, 0.97],
-          duration: 0.8,
+          ease: easing.editorial,
+          duration: duration.section,
           delay: 0.15,
         }}
         d="M1 1L13 13"

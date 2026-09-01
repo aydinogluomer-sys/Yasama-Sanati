@@ -11,6 +11,7 @@ import NewsletterForm from "./NewsletterForm";
 import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import Image from "next/image";
+import { duration } from "@/utils/motion/tokens";
 
 interface BlogPageContentProps {
   posts: BlogPost[];
@@ -67,7 +68,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
   const showFeaturedCard = activeCategory === "TÜMÜ" && searchQuery === "";
 
   return (
-    <div className="max-w-5xl mx-auto space-y-16">
+    <div className="max-w-wide space-y-16">
       {/* Featured Post Card - Hide when filtering or searching */}
       <AnimatePresence>
         {showFeaturedCard && featuredPost && (
@@ -75,8 +76,8 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, height: 0, marginBottom: 0, overflow: "hidden" }}
-            transition={{ duration: 0.5 }}
-            className="p-8 md:p-12 bg-[#30493D] rounded border border-[#ced1bf]/15 space-y-6 relative overflow-hidden group"
+            transition={{ duration: duration.buttonStroke }}
+            className="p-8 md:p-12 bg-warm rounded border border-cream/15 space-y-6 relative overflow-hidden group"
           >
             {/* Background Image Overlay */}
             <div className="absolute inset-0 opacity-10 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none">
@@ -93,13 +94,13 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
               <span className="text-xs text-[#E8A87C] font-semibold tracking-widest uppercase">
                 Öne Çıkan Makale
               </span>
-              <h2 className="text-28 md:text-40 font-light text-white leading-tight">
+              <h2 className="font-serif text-display-m font-normal leading-[1.02] tracking-[-0.01em] text-white">
                 {featuredPost.title}
               </h2>
-              <p className="text-sm md:text-base font-light text-[#ced1bf]/80 leading-relaxed max-w-3xl">
+              <p className="text-sm md:text-base font-light text-cream/80 leading-relaxed max-w-3xl">
                 {featuredPost.excerpt}
               </p>
-              <div className="flex items-center text-xs text-[#ced1bf]/85 space-x-4">
+              <div className="flex items-center text-xs text-cream/85 space-x-4">
                 <span>{featuredPost.date}</span>
                 <span>•</span>
                 <span>{featuredPost.readTime} Okuma Süresi</span>
@@ -118,7 +119,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
       </AnimatePresence>
 
       {/* Filter and Search controls */}
-      <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-6 border-b border-[#ced1bf]/10 pb-4">
+      <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-6 border-b border-cream/10 pb-4">
         <CategoryFilter
           categories={categories}
           activeCategory={activeCategory}
@@ -141,7 +142,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: duration.quick }}
             >
               <BlogCard post={post} />
             </motion.div>
@@ -157,7 +158,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
           className="text-center py-16 space-y-4"
         >
           <svg
-            className="mx-auto h-12 w-12 text-[#ced1bf]/85"
+            className="mx-auto h-12 w-12 text-cream/85"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -169,8 +170,8 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
               d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
             />
           </svg>
-          <h3 className="text-lg text-white font-light">Aramanızla eşleşen makale bulunamadı</h3>
-          <p className="text-xs text-[#ced1bf]/85">
+          <h3 className="font-serif text-24 font-normal text-white">Aramanızla eşleşen makale bulunamadı</h3>
+          <p className="text-xs text-cream/85">
             Lütfen farklı kelimelerle arama yapmayı veya filtreyi sıfırlamayı deneyin.
           </p>
           <button
@@ -179,7 +180,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
               setActiveCategory("TÜMÜ");
               setSearchQuery("");
             }}
-            className="min-h-11 rounded px-3 text-xs text-[#E09A6C] underline underline-offset-4 hover:text-[#E09A6C]/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
+            className="min-h-11 rounded px-3 text-xs text-copper-text underline underline-offset-4 hover:text-copper-text/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text"
           >
             Filtreleri Sıfırla
           </button>

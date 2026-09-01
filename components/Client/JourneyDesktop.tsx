@@ -86,14 +86,14 @@ function JourneyDesktop() {
       // aynı 360vh'ye sıkıştırınca 60vh'ye indi ve ÖLÇÜLDÜ ki doğal hızda
       // kaydıran biri 6 bölümden yalnız 4-5'ini görüyordu (hızlı kaydırmada 2).
       // Bölüm başına düşen mesafe eski tempoya döndürüldü.
-      className="relative h-[500vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"
+      className="relative h-[500vh] cursor-pointer overflow-clip bg-deep motion-reduce:h-auto motion-reduce:min-h-[100svh]"
       ref={ref}
     >
       {/* Pinned bir bölümü 3,6 ekran boyunca kaydırmak zorunda kalmak bir çıkmazdır.
           Klavye ve fare için görünür bir çıkış: bölümü atlayıp bir sonrakine geç. */}
       <a
         href="#alti-disiplin"
-        className="absolute top-4 right-4 z-30 rounded-full border border-[#D1CCBF]/30 bg-[#2b3530]/70 px-4 py-2 text-3xs uppercase tracking-[0.16em] text-[#D1CCBF]/80 opacity-0 backdrop-blur-sm transition-opacity focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] hover:opacity-100 motion-reduce:hidden"
+        className="absolute top-4 right-4 z-30 rounded-full border border-cream/30 bg-deep/70 px-4 py-2 text-3xs uppercase tracking-[0.16em] text-cream/80 opacity-0 backdrop-blur-sm transition-opacity focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] hover:opacity-100 motion-reduce:hidden"
       >
         Bölümü geç
       </a>

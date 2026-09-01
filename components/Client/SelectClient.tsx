@@ -20,7 +20,7 @@ export default function SelectClient({
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
         name={name}
-        className="min-h-12 w-full cursor-pointer bg-[var(--field-surface)] text-base text-[#2b3530] outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+        className="min-h-12 w-full cursor-pointer bg-[var(--field-surface)] text-base text-deep outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
       >
         {options.map((option, i) => (
           <option key={option + i} value={option}>

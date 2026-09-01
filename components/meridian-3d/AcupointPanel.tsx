@@ -48,13 +48,13 @@ export default function AcupointPanel({
                 {acupoint.name}
               </span>
             </div>
-            <p className="text-xs text-[#a7c0b0]/85 italic pl-0.5 mt-0.5">{acupoint.trName}</p>
+            <p className="text-xs text-sage/85 italic pl-0.5 mt-0.5">{acupoint.trName}</p>
           </div>
           
           <button
             onClick={onClose}
             aria-label="Nokta ayrıntılarını kapat"
-            className="flex size-11 cursor-pointer items-center justify-center rounded-full text-white/70 transition-all duration-200 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e0a96d]"
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full text-white/70 transition-all duration-200 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text"
             title="Kapat"
           >
             ✕
@@ -66,7 +66,7 @@ export default function AcupointPanel({
           
           {/* Meridian Relation */}
           <div className="space-y-1.5">
-            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/85">Bağlı Enerji Kanalı</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-sage/85">Bağlı Enerji Kanalı</span>
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-full" style={{ backgroundColor: meridianColor }} />
               <span className="text-sm text-white font-light">{meridianName}</span>
@@ -75,27 +75,27 @@ export default function AcupointPanel({
 
           {/* Description */}
           <div className="space-y-1.5">
-            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/85">Terapötik Etki</span>
-            <p className="text-xs text-[#a7c0b0]/80 leading-relaxed font-light">
+            <span className="text-xs font-medium uppercase tracking-wider text-sage/85">Terapötik Etki</span>
+            <p className="text-xs text-sage/80 leading-relaxed font-light">
               {acupoint.description}
             </p>
           </div>
 
           {/* Location */}
           <div className="space-y-1.5">
-            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/85">Nokta Konumu</span>
-            <p className="text-xs text-[#a7c0b0]/85 leading-relaxed font-light italic">
+            <span className="text-xs font-medium uppercase tracking-wider text-sage/85">Nokta Konumu</span>
+            <p className="text-xs text-sage/85 leading-relaxed font-light italic">
               {acupoint.location}
             </p>
           </div>
 
           {/* Benefits List */}
           <div className="space-y-2.5">
-            <span className="text-xs font-medium uppercase tracking-wider text-[#a7c0b0]/85">Temel Yararları</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-sage/85">Temel Yararları</span>
             <ul className="space-y-2">
               {acupoint.benefits.map((benefit, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-[#a7c0b0]/80 font-light">
-                  <span className="text-[#e0a96d] text-4xs mt-0.5">✦</span>
+                <li key={i} className="flex items-start gap-2 text-xs text-sage/80 font-light">
+                  <span className="text-copper-text text-4xs mt-0.5">✦</span>
                   <span>{benefit}</span>
                 </li>
               ))}
@@ -113,7 +113,7 @@ export default function AcupointPanel({
 
         {/* Footer Medical Disclaimer */}
         <div className="p-4 bg-black/30 border-t border-white/[0.04]">
-          <p className="text-center text-xs font-light leading-relaxed text-[#a7c0b0]/85">
+          <p className="text-center text-xs font-light leading-relaxed text-sage/85">
             Bu platformdaki bilgiler bilgilendirme amaçlıdır; tıbbi teşhis, tedavi veya profesyonel sağlık önerisi yerine geçmez. Sağlık sorunlarınız için her zaman bir uzmana başvurun.
           </p>
         </div>

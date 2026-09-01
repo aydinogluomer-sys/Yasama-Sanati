@@ -12,6 +12,7 @@ import cn from "@/utils/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { consultationHref } from "@/utils/consultation-context";
+import { easing, duration } from "@/utils/motion/tokens";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -77,12 +78,12 @@ export default function NavBar() {
         animate={state ? "animate" : "initial"}
         transition={{
           default: {
-            ease: [0.24, 0.43, 0.15, 0.97],
-            duration: 0.6,
+            ease: easing.editorial,
+            duration: duration.textLine,
           },
           y: {
-            ease: [0.24, 0.43, 0.15, 0.97],
-            duration: 0.8,
+            ease: easing.editorial,
+            duration: duration.section,
           },
         }}
         variants={{
@@ -119,7 +120,7 @@ export default function NavBar() {
               className={cn(
                 "relative hidden w-fit cursor-pointer items-center gap-4 px-5 py-4.5 text-base [line-height:0.8] font-normal lg:flex",
                 state
-                  ? "text-[#2b3530] [&_svg]:[stroke:#2b3530]"
+                  ? "text-deep [&_svg]:[stroke:#2b3530]"
                   : "text-white [&_svg]:[stroke:white]"
               )}
             >

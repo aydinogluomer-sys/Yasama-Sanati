@@ -16,7 +16,7 @@ export default function BlogSearch({ searchQuery, onSearchChange }: BlogSearchPr
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg
           aria-hidden="true"
-          className="size-4 text-[#ced1bf]/85"
+          className="size-4 text-cream/85"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -37,14 +37,14 @@ export default function BlogSearch({ searchQuery, onSearchChange }: BlogSearchPr
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Makale ara..."
-        className="min-h-11 w-full rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 py-2 pr-11 pl-9 text-xs text-[#d1ccbf] transition-colors duration-300 placeholder:text-[#ced1bf]/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B3530] [&::-webkit-search-cancel-button]:hidden"
+        className="min-h-11 w-full rounded border border-cream/15 bg-cream/5 py-2 pr-11 pl-9 text-xs text-cream transition-colors duration-300 placeholder:text-cream/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text focus-visible:ring-offset-2 focus-visible:ring-offset-deep [&::-webkit-search-cancel-button]:hidden"
       />
       {searchQuery && (
         <button
           type="button"
           aria-label="Aramayı temizle"
           onClick={() => onSearchChange("")}
-          className="absolute inset-y-0 right-0 flex min-h-11 min-w-11 cursor-pointer items-center justify-center text-[#ced1bf]/85 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#E09A6C]"
+          className="absolute inset-y-0 right-0 flex min-h-11 min-w-11 cursor-pointer items-center justify-center text-cream/85 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-copper-text"
         >
           <svg
             aria-hidden="true"

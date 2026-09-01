@@ -20,7 +20,7 @@ export default function FormServer() {
   ];
 
   return (
-    <section aria-labelledby="form-title" className="flex flex-col bg-[#CED1BF] md:grid md:grid-cols-2" id="on-kayit">
+    <section aria-labelledby="form-title" className="flex flex-col bg-cream md:grid md:grid-cols-2" id="on-kayit">
       <ParallaxContainer parallaxAmount={20} className="md:h-full">
         <Image src={FormImage}
           sizes="(min-width: 768px) 50vw, 100vw" alt="Yaşama Sanatı'nda birebir görüşme için hazırlanmış huzurlu alan" className="h-auto w-full md:h-full md:object-cover" />
@@ -30,7 +30,7 @@ export default function FormServer() {
           <h2 id="form-title" className="w-full text-24 font-light leading-tight md:text-30">
             Ücretsiz Ön Görüşme
           </h2>
-          <div className="mt-8 mb-14 max-w-[42ch] text-base leading-relaxed text-[#2b3530]/80 md:text-lg">
+          <div className="mt-8 mb-14 max-w-[42ch] text-base leading-relaxed text-deep/80 md:text-lg">
             İhtiyacını ve temponu kısaca paylaş; nereden başlayacağını ön görüşmede birlikte belirleyelim.
           </div>
           <div className="flex flex-col gap-6">
@@ -55,7 +55,7 @@ export default function FormServer() {
               <Select options="cities" name="sehir" />
             </Label>
           </div>
-          <div className="mt-14 space-y-6 text-sm text-[#2b3530] md:text-base">
+          <div className="mt-14 space-y-6 text-sm text-deep md:text-base">
             <p>Hangi alanlar ilgini çekiyor?</p>
             <div className="flex flex-wrap gap-4">
               {categories.map((category) => (
@@ -67,12 +67,12 @@ export default function FormServer() {
           </div>
           <Checkbox className="mt-12" required={true} name="kvkk_onay" value="true">
             Kişisel verilerimin{" "}
-            <Link href="/kvkk" className="underline-[#2b3530] underline">
+            <Link href="/kvkk" className="underline-deep underline">
               KVKK Aydınlatma Metni
             </Link>{" "}
             kapsamında işlenmesini kabul ediyorum.
           </Checkbox>
-          <div className="mt-8 text-xs text-[#2b3530]/85">
+          <div className="mt-8 text-xs text-deep/85">
             Ayrıntılar KVKK Aydınlatma Metni’nde yer alır.
           </div>
           <SubmitButton />

@@ -8,6 +8,7 @@ import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { consultationHref } from "@/utils/consultation-context";
 import { motion, AnimatePresence } from "motion/react";
+import { easing, duration } from "@/utils/motion/tokens";
 
 interface Instructor {
   name: string;
@@ -86,9 +87,9 @@ export default function EgitmenlerPage() {
       title="Eğitmenlerimiz"
       description="Yolculuğunuza eşlik eden, alanında derinleşmiş rehber kadromuz."
     >
-      <div className="max-w-6xl mx-auto space-y-16">
+      <div className="max-w-wide space-y-16">
         {/* Category Filters */}
-        <div className="flex flex-wrap gap-4 pb-6 border-b border-[#ced1bf]/15 relative">
+        <div className="flex flex-wrap gap-4 pb-6 border-b border-cream/15 relative">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
@@ -99,14 +100,14 @@ export default function EgitmenlerPage() {
               className={`relative pb-3 text-xs md:text-sm uppercase tracking-widest font-mono transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat
                   ? "text-[var(--accent-copper-on-dark)] font-medium"
-                  : "text-[#ced1bf]/85 hover:text-white"
+                  : "text-cream/85 hover:text-white"
               }`}
             >
               {cat}
               {selectedCategory === cat && (
                 <motion.div
                   layoutId="activeCategory"
-                  className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#ca7d57]"
+                  className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-copper"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
@@ -115,7 +116,7 @@ export default function EgitmenlerPage() {
         </div>
 
         {/* Instructors Directory */}
-        <div className="border-t border-[#ced1bf]/15 divide-y divide-[#ced1bf]/15">
+        <div className="border-t border-cream/15 divide-y divide-cream/15">
           {filteredInstructors.map((ins, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -130,14 +131,14 @@ export default function EgitmenlerPage() {
                     <span className="font-mono text-xs md:text-sm text-[var(--accent-copper-on-dark)]/90 group-hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300 select-none">
                       {padZero(idx)}
                     </span>
-                    <span className="font-mono text-2xs uppercase tracking-wider text-[#ced1bf]/85 group-hover:text-[#ced1bf]/85 transition-colors duration-300">
+                    <span className="font-mono text-2xs uppercase tracking-wider text-cream/85 group-hover:text-cream/85 transition-colors duration-300">
                       {ins.disciplines.join(" · ")}
                     </span>
                   </div>
 
                   {/* Middle Col: Name in Serif */}
                   <div className="flex-1 mb-2 md:mb-0">
-                    <span className="font-serif font-light text-24 md:text-36 text-[#d1ccbf] group-hover:text-white transition-colors duration-300 tracking-wide block">
+                    <span className="font-serif font-light text-24 md:text-36 text-cream group-hover:text-white transition-colors duration-300 tracking-wide block">
                       {ins.name}
                     </span>
                   </div>
@@ -148,9 +149,9 @@ export default function EgitmenlerPage() {
                       {ins.role}
                     </span>
 
-                    <span className="flex-shrink-0 flex items-center justify-center size-8 border border-[#ced1bf]/20 rounded-full group-hover:border-[#ca7d57] group-hover:bg-[#ca7d57]/10 transition-all duration-300">
+                    <span className="flex-shrink-0 flex items-center justify-center size-8 border border-cream/20 rounded-full group-hover:border-copper group-hover:bg-copper/10 transition-all duration-300">
                       <span
-                        className={`text-base font-light text-[#ced1bf] group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${
+                        className={`text-base font-light text-cream group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${
                           isOpen ? "rotate-45" : ""
                         }`}
                       >
@@ -167,7 +168,7 @@ export default function EgitmenlerPage() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ duration: duration.ui, ease: easing.accordion }}
                       className="overflow-hidden"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-8 pb-4">
@@ -180,18 +181,18 @@ export default function EgitmenlerPage() {
 
                         {/* Right panel: bio details and CTA */}
                         <div className="col-span-1 md:col-span-9 space-y-6">
-                          <p className="text-sm md:text-base leading-relaxed text-[#ced1bf]/80 font-light max-w-2xl">
+                          <p className="text-sm md:text-base leading-relaxed text-cream/80 font-light max-w-2xl">
                             {ins.bio}
                           </p>
 
                           <div className="flex flex-wrap gap-2 pt-2">
-                            <span className="text-2xs font-mono text-[#ced1bf]/85 uppercase tracking-widest block self-center mr-2">
+                            <span className="text-2xs font-mono text-cream/85 uppercase tracking-widest block self-center mr-2">
                               Uzmanlık Alanları:
                             </span>
                             {ins.disciplines.map((d, i) => (
                               <span
                                 key={i}
-                                className="bg-[#ced1bf]/8 text-[#ced1bf]/85 text-xs px-2.5 py-1 rounded border border-[#ced1bf]/5"
+                                className="bg-cream/8 text-cream/85 text-xs px-2.5 py-1 rounded border border-cream/5"
                               >
                                 {d}
                               </span>
@@ -217,8 +218,8 @@ export default function EgitmenlerPage() {
         </div>
 
         {/* Quality Handoff Statement */}
-        <div className="p-8 bg-[#ced1bf]/5 rounded border border-[#ced1bf]/10 text-center max-w-3xl mx-auto">
-          <p className="text-sm md:text-base font-light text-[#ced1bf]/85 leading-relaxed">
+        <div className="max-w-editorial border-t border-cream/15 pt-10">
+          <p className="text-sm md:text-base font-light text-cream/85 leading-relaxed">
             Tüm seanslarımız ve eğitim programlarımız, katılımcılarımızın fiziksel ve zihinsel durumuna göre kişiselleştirilir. İhtiyacınıza en uygun uzmanla ön görüşme yapmak için formu doldurabilirsiniz.
           </p>
         </div>

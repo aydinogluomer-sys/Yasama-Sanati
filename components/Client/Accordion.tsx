@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { duration } from "@/utils/motion/tokens";
 
 interface AccordionItem {
   title: string;
@@ -17,11 +18,11 @@ export default function Accordion({ items }: { items: AccordionItem[] }) {
         return (
           <div
             key={index}
-            className="border-b border-[#ced1bf]/15 pb-2 transition-all duration-300"
+            className="border-b border-cream/15 pb-2 transition-all duration-300"
           >
             <button
               onClick={() => setActiveIndex(isOpen ? null : index)}
-              className="flex w-full items-center justify-between py-3 text-left font-light text-lg md:text-24 text-[#d1ccbf] hover:text-white cursor-pointer"
+              className="flex w-full items-center justify-between py-3 text-left font-light text-lg md:text-24 text-cream hover:text-white cursor-pointer"
             >
               <span>{item.title}</span>
               <span className="text-xl font-light">
@@ -34,10 +35,10 @@ export default function Accordion({ items }: { items: AccordionItem[] }) {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  transition={{ duration: duration.quick, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
-                  <div className="py-3 text-sm md:text-base leading-relaxed text-[#ced1bf]/85 font-light whitespace-pre-line">
+                  <div className="py-3 text-sm md:text-base leading-relaxed text-cream/85 font-light whitespace-pre-line">
                     {item.content}
                   </div>
                 </motion.div>

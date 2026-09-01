@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { CSSProperties } from "react";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import cn from "@/utils/cn";
+import { easing, duration } from "@/utils/motion/tokens";
 
 interface StyledLinkClientProps {
   className?: string;
@@ -37,8 +38,8 @@ export default function StyledLinkClient({
         { height: "100%", inset: "0px 0px auto 0px" },
         {
           height: {
-            ease: [0.24, 0.43, 0.15, 0.97],
-            duration: 0.4,
+            ease: easing.editorial,
+            duration: duration.ui,
             times: [0, 1],
             delay: 0.05,
           },
@@ -54,8 +55,8 @@ export default function StyledLinkClient({
         { height: "100%", inset: "auto 0px 0px 0px" },
         {
           height: {
-            ease: [0.24, 0.43, 0.15, 0.97],
-            duration: 0.4,
+            ease: easing.editorial,
+            duration: duration.ui,
             times: [0, 1],
             delay: 0.05,
           },
@@ -74,13 +75,13 @@ export default function StyledLinkClient({
       animate(
         scope.current,
         { inset: "0px 0px auto 0px", height: "0%" },
-        { ease: [0.24, 0.43, 0.15, 0.97], duration: 0.6, delay: 0.05 },
+        { ease: easing.editorial, duration: duration.textLine, delay: 0.05 },
       );
     } else {
       animate(
         scope.current,
         { inset: "auto 0px 0px 0px", height: "0%" },
-        { ease: [0.24, 0.43, 0.15, 0.97], duration: 0.6, delay: 0.05 },
+        { ease: easing.editorial, duration: duration.textLine, delay: 0.05 },
       );
     }
   };
@@ -107,12 +108,12 @@ export default function StyledLinkClient({
         )}
       >
         <MotionConfig
-          transition={{ ease: [0.24, 0.43, 0.15, 0.97], duration: 0.6 }}
+          transition={{ ease: easing.editorial, duration: duration.textLine }}
         >
           <motion.div
             variants={{ initial: { height: "0%" } }}
             ref={scope}
-            className="absolute inset-x-0 z-10 bg-[#D1CCBF]"
+            className="absolute inset-x-0 z-10 bg-cream"
           />
           <motion.div
             className="z-20 flex gap-6 md:gap-28"

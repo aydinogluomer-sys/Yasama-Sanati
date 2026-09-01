@@ -38,10 +38,10 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
   const shareText = encodeURIComponent(post.title);
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-editorial">
       {/* Top Floating Reading Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-[#ca7d57] origin-left z-[9999]"
+        className="fixed top-0 left-0 right-0 h-1 bg-copper origin-left z-[9999]"
         style={{ scaleX }}
       />
 
@@ -50,7 +50,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
         <div className="flex items-center justify-between">
           <Link
             href="/blog"
-            className="group inline-flex items-center text-xs md:text-sm font-medium text-[#ced1bf] hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300"
+            className="group inline-flex items-center text-xs md:text-sm font-medium text-cream hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300"
           >
             <span className="mr-2 transform group-hover:-translate-x-1 transition-transform duration-300">
               &larr;
@@ -58,7 +58,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
             Bloga Geri Dön
           </Link>
           
-          <span className="bg-[#ca7d57]/10 text-[var(--accent-copper-on-dark)] px-3 py-1 rounded text-2xs font-semibold uppercase tracking-widest border border-[#ca7d57]/20">
+          <span className="bg-copper/10 text-[var(--accent-copper-on-dark)] px-3 py-1 rounded text-2xs font-semibold uppercase tracking-widest border border-copper/20">
             {post.category}
           </span>
         </div>
@@ -69,20 +69,20 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
             {post.title}
           </h1>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-b border-[#ced1bf]/10 pb-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-b border-cream/10 pb-6">
             <div className="flex items-center space-x-3">
               {/* Stok portre kaldırıldı: yazar atfı kurumsal (bkz. utils/blogData.ts). */}
               <span
                 aria-hidden
-                className="size-10 shrink-0 rounded-full border border-[#ced1bf]/25 bg-[#ced1bf]/10"
+                className="size-10 shrink-0 rounded-full border border-cream/25 bg-cream/10"
               />
               <div>
                 <p className="text-xs md:text-sm font-medium text-white">{post.author.name}</p>
-                <p className="text-2xs text-[#ced1bf]/85">{post.author.role}</p>
+                <p className="text-2xs text-cream/85">{post.author.role}</p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4 text-2xs text-[#ced1bf]/85">
+            <div className="flex items-center space-x-4 text-2xs text-cream/85">
               <span>Yayınlanma: {post.date}</span>
               <span>•</span>
               <span>{post.readTime} Okuma</span>
@@ -91,7 +91,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
         </div>
 
         {/* Cover Image */}
-        <div className="relative h-64 md:h-[450px] w-full overflow-hidden rounded bg-[#ced1bf]/5">
+        <div className="relative h-64 md:h-[450px] w-full overflow-hidden rounded bg-cream/5">
           <Image
             src={post.coverImage}
             alt={post.title}
@@ -106,7 +106,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Social Share Toolbar (Desktop) */}
           <div className="lg:col-span-1 space-y-4 lg:sticky lg:top-32 h-fit">
-            <p className="text-2xs font-semibold uppercase tracking-widest text-[#ced1bf]/85 hidden lg:block">
+            <p className="text-2xs font-semibold uppercase tracking-widest text-cream/85 hidden lg:block">
               Paylaş
             </p>
             <div className="flex lg:flex-col gap-3">
@@ -115,14 +115,14 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
                 type="button"
                 onClick={handleCopyLink}
                 aria-label="Makale bağlantısını kopyala"
-                className="relative flex size-11 cursor-pointer items-center justify-center rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 text-[#ced1bf] transition-colors hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
+                className="relative flex size-11 cursor-pointer items-center justify-center rounded border border-cream/15 bg-cream/5 text-cream transition-colors hover:border-copper hover:bg-copper/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text"
                 title="Linki Kopyala"
               >
                 <svg aria-hidden="true" className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 10.742s-1.077 1.341-1.077 2.99c0 1.647 1.372 2.99 3.064 2.99 1.69 0 3.063-1.343 3.063-2.99M15.316 13.258s1.078-1.342 1.078-2.99c0-1.647-1.372-2.99-3.064-2.99-1.69 0-3.063 1.343-3.063 2.99" />
                 </svg>
                 {copied && (
-                  <span role="status" className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#30493D] border border-[#ced1bf]/10 text-2xs text-[#ced1bf] px-2 py-0.5 rounded shadow whitespace-nowrap">
+                  <span role="status" className="absolute -top-8 left-1/2 -translate-x-1/2 bg-warm border border-cream/10 text-2xs text-cream px-2 py-0.5 rounded shadow whitespace-nowrap">
                     Kopyalandı!
                   </span>
                 )}
@@ -134,7 +134,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Makaleyi X'te paylaş"
-                className="flex size-11 items-center justify-center rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 text-[#ced1bf] transition-colors hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
+                className="flex size-11 items-center justify-center rounded border border-cream/15 bg-cream/5 text-cream transition-colors hover:border-copper hover:bg-copper/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text"
                 title="X'te Paylaş"
               >
                 <svg aria-hidden="true" className="size-3.5 fill-current" viewBox="0 0 24 24">
@@ -148,7 +148,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Makaleyi WhatsApp'ta paylaş"
-                className="flex size-11 items-center justify-center rounded border border-[#ced1bf]/15 bg-[#ced1bf]/5 text-[#ced1bf] transition-colors hover:border-[#ca7d57] hover:bg-[#ca7d57]/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E09A6C]"
+                className="flex size-11 items-center justify-center rounded border border-cream/15 bg-cream/5 text-cream transition-colors hover:border-copper hover:bg-copper/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text"
                 title="WhatsApp'ta Paylaş"
               >
                 <svg aria-hidden="true" className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -161,16 +161,16 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
           {/* Main Body text */}
           <div className="lg:col-span-3">
             <div 
-              className="prose prose-invert prose-headings:font-light prose-headings:text-white prose-p:text-[#ced1bf]/80 prose-p:font-light prose-p:leading-relaxed prose-a:text-[var(--accent-copper-on-dark)] prose-a:no-underline hover:prose-a:underline font-light text-sm md:text-base leading-relaxed text-[#ced1bf]/80 space-y-6"
+              className="prose prose-invert prose-headings:font-light prose-headings:text-white prose-p:text-cream/80 prose-p:font-light prose-p:leading-relaxed prose-a:text-[var(--accent-copper-on-dark)] prose-a:no-underline hover:prose-a:underline font-light text-sm md:text-base leading-relaxed text-cream/80 space-y-6"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 pt-10 border-t border-[#ced1bf]/10 mt-10">
+            <div className="flex flex-wrap gap-2 pt-10 border-t border-cream/10 mt-10">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-1 bg-[#ced1bf]/5 hover:bg-[#ced1bf]/10 text-2xs text-[#ced1bf]/85 hover:text-white rounded border border-[#ced1bf]/10 transition-colors"
+                  className="px-2.5 py-1 bg-cream/5 hover:bg-cream/10 text-2xs text-cream/85 hover:text-white rounded border border-cream/10 transition-colors"
                 >
                   #{tag}
                 </span>
@@ -182,8 +182,8 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
 
       {/* Related Articles Footer */}
       {relatedPosts.length > 0 && (
-        <section className="pt-16 mt-16 border-t border-[#ced1bf]/10 space-y-8">
-          <h3 className="text-xl md:text-26 font-light text-white">İlginizi Çekebilecek Diğer Makaleler</h3>
+        <section className="pt-16 mt-16 border-t border-cream/10 space-y-8">
+          <h3 className="font-serif text-display-s font-normal leading-[1.08] text-white">İlginizi Çekebilecek Diğer Makaleler</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {relatedPosts.map((relatedPost) => (
               <BlogCard key={relatedPost.slug} post={relatedPost} />

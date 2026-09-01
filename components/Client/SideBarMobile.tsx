@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import CloseIcon from "@/components/SVGComponents/CloseIcon";
 import { usePathname } from "next/navigation";
 import { consultationHref } from "@/utils/consultation-context";
+import { easing, duration } from "@/utils/motion/tokens";
 interface LinkItem {
   href: string;
   link: string;
@@ -78,21 +79,21 @@ export default function SideBarMobile({
           initial="initial"
           animate="animate"
           transition={{
-            ease: [0.24, 0.43, 0.15, 0.97],
-            duration: 0.8,
+            ease: easing.editorial,
+            duration: duration.section,
           }}
-          className="relative h-screen overflow-y-scroll bg-[#CED1BF] px-3-75 pt-12000svh"
+          className="relative h-screen overflow-y-scroll bg-cream px-3-75 pt-12000svh"
         >
           <button
             type="button"
             aria-label="Menüyü kapat"
             onClick={() => setOpenSideBar(false)}
-            className="absolute top-7 right-4 grid min-h-11 min-w-11 place-items-center rounded-sm text-[#2B3530] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+            className="absolute top-7 right-4 grid min-h-11 min-w-11 place-items-center rounded-sm text-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
           >
             <CloseIcon className="size-7 [&_path]:[stroke-width:1px]" />
           </button>
           <span className="text-sm text-[#2b353080]">Sayfaları Keşfedin</span>
-          <nav aria-label="Mobil navigasyon" className="my-3200svh text-[#2b3530]">
+          <nav aria-label="Mobil navigasyon" className="my-3200svh text-deep">
             {links.map(({ link, href }, i) => (
               <StyledLink
                 className="mb-750svh text-lg font-light"
@@ -107,14 +108,14 @@ export default function SideBarMobile({
             ))}
             <Link
               href={consultationUrl}
-              className="mt-14 flex min-h-14 w-full items-center justify-between bg-[#2b3530] px-6 py-5 text-lg font-light text-[#d1ccbf] transition-colors duration-300 hover:bg-[#304d3d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] motion-reduce:transition-none"
+              className="mt-14 flex min-h-14 w-full items-center justify-between bg-deep px-6 py-5 text-lg font-light text-cream transition-colors duration-300 hover:bg-[#304d3d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] motion-reduce:transition-none"
             >
               <span>Ön Görüşme</span>
               <NavigateSVG fill="#D1CCBF" />
             </Link>
           </nav>
-          <ContactUs className="gap-y-8 text-base text-[#2b3530] max-md:mt-16 md:hidden [&>:first-child]:text-sm [&>:first-child]:text-[#2b3530]/80 [&>div]:gap-x-5" />
-          <StayConnected className="mt-4800svh gap-y-6 text-sm [line-height:1] text-[#2b3530]/80 [&_div]:gap-x-8 [&_svg]:h-2400svh [&_svg]:w-auto" />
+          <ContactUs className="gap-y-8 text-base text-deep max-md:mt-16 md:hidden [&>:first-child]:text-sm [&>:first-child]:text-deep/80 [&>div]:gap-x-5" />
+          <StayConnected className="mt-4800svh gap-y-6 text-sm [line-height:1] text-deep/80 [&_div]:gap-x-8 [&_svg]:h-2400svh [&_svg]:w-auto" />
         </motion.div>
       </AnimatePresence>
     </div>

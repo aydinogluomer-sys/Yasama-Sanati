@@ -2,6 +2,7 @@
 import cn from "@/utils/cn";
 import { MotionProps } from "motion/react";
 import * as motion from "motion/react-client";
+import { duration } from "@/utils/motion/tokens";
 
 export default function AnimatedBurger(
   props: MotionProps & { className?: string },
@@ -31,7 +32,7 @@ export default function AnimatedBurger(
           <motion.path
             d="M0 0H100"
             variants={childVariants}
-            transition={{ duration: 0.5, delay: 0 }}
+            transition={{ duration: duration.buttonStroke, delay: 0 }}
             className="bg-white"
             strokeWidth="4px"
             strokeDasharray="100 75"
@@ -42,7 +43,7 @@ export default function AnimatedBurger(
           <motion.path
             d="M0 0H100"
             variants={childVariants}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: duration.buttonStroke, delay: 0.1 }}
             className="bg-white"
             strokeWidth="4px"
             strokeDasharray="100 75"
@@ -53,7 +54,7 @@ export default function AnimatedBurger(
           <motion.path
             d="M0 0H100"
             variants={childVariants}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: duration.buttonStroke, delay: 0.2 }}
             className="bg-white"
             strokeWidth="4px"
             strokeDasharray="100 75"

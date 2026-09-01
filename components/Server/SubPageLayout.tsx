@@ -32,23 +32,23 @@ export default function SubPageLayout({
   heroImageAlt = "",
 }: SubPageLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#2B3530] text-[#d1ccbf] font-sans selection:bg-[#ced1bf] selection:text-[#2B3530]">
+    <div className="min-h-screen bg-deep text-cream font-sans selection:bg-cream selection:text-deep">
       <NavBar />
       {/* Hero section for sub-page */}
       {!hideHero &&
         (heroFullScreen ? (
-        <div className="relative flex flex-col justify-center px-6 md:px-16 h-screen w-full bg-[#2B3530]">
+        <div className="relative flex flex-col justify-center px-6 md:px-16 h-screen w-full bg-deep">
           <h1 className="font-serif text-display-l font-normal tracking-[-0.02em] text-white animate-hero-title">
             {title}
           </h1>
           {description && (
-            <p className="mt-8 text-lg md:text-30 font-light text-[#ced1bf]/90 max-w-3xl [line-height:1.2] animate-hero-desc">
+            <p className="mt-8 text-lg md:text-30 font-light text-cream/90 max-w-3xl [line-height:1.2] animate-hero-desc">
               {description}
             </p>
           )}
           
           {/* Subtle scroll down indicator for the green hero */}
-          <div className="absolute bottom-12 left-6 md:left-16 flex items-center gap-3 text-[#ced1bf]/85 animate-pulse">
+          <div className="absolute bottom-12 left-6 md:left-16 flex items-center gap-3 text-cream/85 animate-pulse">
             <span className="text-4xs tracking-widest uppercase font-mono">Keşfetmek İçin Kaydırın</span>
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -70,7 +70,7 @@ export default function SubPageLayout({
                 // başlık görselin üstünde duruyor. Yükseklik svh — mobil tarayıcı
                 // adres çubuğu daralınca zıplamasın.
                 "relative flex min-h-[68svh] flex-col justify-end px-6 pt-40 pb-14 md:min-h-[72svh] md:px-16 md:pb-20"
-              : "relative flex flex-col justify-center border-b border-[#ced1bf]/15 px-6 pt-40 pb-20 md:px-16 md:pt-48 md:pb-28"
+              : "relative flex flex-col justify-center border-b border-cream/15 px-6 pt-40 pb-20 md:px-16 md:pt-48 md:pb-28"
           }
         >
           {heroImage && <SubPageHeroMedia image={heroImage} alt={heroImageAlt} />}
@@ -88,7 +88,7 @@ export default function SubPageLayout({
               {title}
             </h1>
             {description && (
-              <p className="animate-hero-desc mt-8 max-w-3xl text-lg font-light [line-height:1.2] text-[#ced1bf]/90 md:text-30">
+              <p className="animate-hero-desc mt-8 max-w-3xl text-lg font-light [line-height:1.2] text-cream/90 md:text-30">
                 {description}
               </p>
             )}
