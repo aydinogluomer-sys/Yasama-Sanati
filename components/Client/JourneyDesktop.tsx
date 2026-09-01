@@ -38,6 +38,31 @@ function JourneyDesktop() {
 
   const { scrollYProgress: parentProgress } = useScroll({
     target: ref,
+    // GEOMETRİ — bu sayı elle seçilmedi, hesaplandı.
+    //
+    // Sticky iç katman `md:-top-[15vh] md:h-[130vh]`, kapsayıcı `h-[500vh]`.
+    // Pin, kapsayıcıya 15vh girildiğinde başlar ve (500 − 130) = 370vh sürer.
+    // Altı bölüme bölününce bölüm başına 61.7vh düşer.
+    //
+    // Motion'da "X vh end" ifadesi, elemanın başından X kadar ilerideki noktanın
+    // viewport ALTINA denk geldiği an demektir; bu da scroll olarak X − 100vh'dir.
+    // İlerlemenin tam PIN BİTİMİNDE 1.0 olması için:
+    //     X − 100 = 15 + 370   →   X = 485
+    //
+    // TARİHÇE — iki ayrı hata bu satırda buluştu:
+    //  • Kapsayıcı 500vh'den 360vh'ye, sonra 432vh'ye indirilirken bu offset
+    //    485vh'de bırakıldı. Sonuç: pin bittiğinde ilerleme yalnız 0.816'ya
+    //    ulaşıyor, sayaç 05'te kalıyor ve 06 bölüm zaten yukarı kayarken
+    //    geçiyordu. (Ölçüldü: pin ~%11 → ~%70, son pinli sayaç 05.)
+    //  • Offset'i 432vh'ye göre 417vh yapmak hizalamayı düzeltti ama ilerleme
+    //    aralığını 302vh'ye sıkıştırdı; bölüm başına 50.3vh kalınca Firefox ve
+    //    WebKit bölümleri atlamaya başladı (ölçüldü: yalnız 01, 02 görülüyor).
+    //    Bu iki motor scroll'a bağlı state'i Chromium'dan yavaş yayıyor.
+    // Çözüm ikisini birden sağlıyor: kapsayıcı 500vh, offset 485vh — hem pin ile
+    // hizalı hem bölüm başına 61.7vh, ki Firefox'un 01–06 gördüğü mesafe budur.
+    //
+    // Kapsayıcı yüksekliği veya sticky ölçüleri değişirse bu sayı da yeniden
+    // hesaplanmalıdır: X = stickyTop + (kapsayıcı − stickyYükseklik) + 100.
     offset: ["15vh 0", "485vh end"],
   });
   // Görseller bölüm verisinden geliyor — ayrı import listesi tutulmuyor.
@@ -61,7 +86,7 @@ function JourneyDesktop() {
       // aynı 360vh'ye sıkıştırınca 60vh'ye indi ve ÖLÇÜLDÜ ki doğal hızda
       // kaydıran biri 6 bölümden yalnız 4-5'ini görüyordu (hızlı kaydırmada 2).
       // Bölüm başına düşen mesafe eski tempoya döndürüldü.
-      className="relative h-[432vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"
+      className="relative h-[500vh] cursor-pointer overflow-clip bg-[#2b3530] motion-reduce:h-auto motion-reduce:min-h-[100svh]"
       ref={ref}
     >
       {/* Pinned bir bölümü 3,6 ekran boyunca kaydırmak zorunda kalmak bir çıkmazdır.

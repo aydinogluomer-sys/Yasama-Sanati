@@ -36,7 +36,7 @@ const JourneyDesktop = dynamic(() => import("@/components/Client/JourneyDesktop"
     // Yer tutucu da `data-journey` taşır: QA ve ölçüm scriptleri bölümü bu
     // kararlı seçiciyle buluyor ve dinamik bileşen mount olmadan önceki
     // pencerede "bölüm bulunamadı" diye boşa düşmüyorlar.
-    <div aria-hidden data-journey="desktop-placeholder" className="h-[432vh] bg-[#2b3530]" />
+    <div aria-hidden data-journey="desktop-placeholder" className="h-[500vh] bg-[#2b3530]" />
   ),
 });
 
@@ -67,7 +67,7 @@ function Innovation() {
         {isDesktop ? (
           <JourneyDesktop />
         ) : (
-          <div aria-hidden data-journey="desktop-placeholder" className="h-[432vh] bg-[#2b3530]" />
+          <div aria-hidden data-journey="desktop-placeholder" className="h-[500vh] bg-[#2b3530]" />
         )}
       </div>
     </>

@@ -117,6 +117,27 @@ yeniden başlat ve tekrar koş. Tek koşuya dayanarak regresyon raporlama.
 
 ---
 
+## BİLİNEN MOTOR FARKI — Firefox, scroll'a bağlı state yayılımı
+
+Şifa Yolculuğu bölüm sayacı Firefox'ta Chromium/WebKit'ten yavaş güncelleniyor.
+Ölçüm (6 bölüm, 500vh kapsayıcı, gerçek tekerlek girdisi):
+
+| Tempo | Chromium | WebKit | Firefox |
+|---|---|---|---|
+| 150px/150ms (~1000 px/sn) | 6/6 | 6/6 | **5/6** |
+| 150px/250ms | 6/6 | 6/6 | 6/6 |
+| 100px/200ms | 6/6 | 6/6 | 6/6 |
+
+Doğrudan konum atlanarak ölçüldüğünde Firefox da 06'ya ulaşıyor ve bölüm o anda
+hâlâ sabit (pinli) — yani mantık doğru, fark yalnız yayılma hızında.
+
+**Kullanıcıya etkisi:** Firefox'ta hızlı kaydıran biri son bölümü kaçırabilir.
+Orta tempoda altısı da görünüyor. Çözüm bölüm başına mesafeyi daha da artırmak
+olurdu ama bu, bölümü 5 ekrandan daha uzun yapardı; tempo/uzunluk dengesi
+bilinçli olarak burada bırakıldı.
+
+---
+
 ## MANUAL CHECKS REQUIRED — otomatikleştirilemedi
 
 Bunlar **yapılmadı** ve otomatik testmiş gibi işaretlenmemeli:

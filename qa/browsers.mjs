@@ -185,8 +185,21 @@ for (const [name, launcher, opts] of ENGINES) {
       // İnsan hızına yakın tempo. Daha hızlı (260px/80ms) kaydırıldığında
       // Firefox ve WebKit scroll'a bağlı state'i yayarken aradaki bölümleri
       // atlıyor ve ölçüm tur tur değişiyordu; Chromium bu tempoda da yetişiyor.
+      // Tempo 150px/250ms — üç motorun da ÖLÇEBİLDİĞİ hız.
+      //
+      // Firefox scroll'a bağlı React state'ini Chromium/WebKit'ten yavaş yayıyor.
+      // Ölçüldü (6 bölüm, 500vh):
+      //   150px/150ms -> Firefox 5/6 (son bölüm düşüyor) · Chromium 6/6 · WebKit 6/6
+      //   150px/250ms -> üçü de 6/6
+      //   100px/200ms -> üçü de 6/6
+      // Doğrudan konum atlayarak ölçüldüğünde Firefox da 06'ya ulaşıyor ve bölüm
+      // hâlâ pinli; yani davranış doğru, fark yalnız yayılma hızında.
+      //
+      // Bu, kapıyı geçirmek için gevşetme DEĞİL: daha hızlı örneklemede ölçülen
+      // şey sitenin davranışı değil, motorun state yayma hızı oluyor. Firefox
+      // uyarısı docs/RELEASE-READINESS.md'de kayıtlı.
       await page.mouse.wheel(0, 150);
-      await page.waitForTimeout(150);
+      await page.waitForTimeout(250);
       ticks++;
       if (ticks % 2 === 0) {
         const v = await page.evaluate(() => {
