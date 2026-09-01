@@ -3,6 +3,7 @@ import type { StaticImageData } from "next/image";
 import NavBar from "@/components/Client/NavBar";
 import SubPageHeroMedia from "@/components/Client/SubPageHeroMedia";
 import Footer from "@/sections/Footer/Server";
+import ScrollRevealBridge from "@/components/Client/ScrollRevealBridge";
 
 interface SubPageLayoutProps {
   title: string;
@@ -117,6 +118,9 @@ export default function SubPageLayout({
         </main>
       )}
       
+      {/* CSS `animation-timeline: view()` desteklenmeyen tarayıcılarda aynı
+          açılımı veren köprü. Destekleniyorsa hiçbir şey yapmaz. */}
+      <ScrollRevealBridge />
       <Footer />
     </div>
   );

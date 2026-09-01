@@ -417,9 +417,39 @@ body:has([data-consultation-route])::after {
    Sadece hareket animasyonu yapılıyor: aynı "yükselme" hissi, sıfır
    okunabilirlik riski.
    --------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------
+   Sayfa geçişi — app/template.tsx tarafından kullanılır.
+
+   Saf CSS: stil yüklendiği anda JavaScript'ten bağımsız çalışır ve `both` ile
+   son durumda kalır. Motion `initial` kullanılsaydı `opacity:0` sunucu HTML'ine
+   gömülür, hidrasyon bozulduğunda sayfa boş kalırdı. Gerekçe template.tsx'te.
+   --------------------------------------------------------------------------- */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: pageEnter 520ms cubic-bezier(0.24, 0.43, 0.15, 0.97) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+}
+
 @keyframes sectionRise {
   from {
-    transform: translateY(14px);
+    /* 14px'ti. Ölçek küçüktü: jüri ekranında hareket fark edilmiyordu bile.
+       22px hâlâ sakin ama artık bir "açılım" olarak okunuyor. */
+    transform: translateY(22px);
   }
   to {
     transform: translateY(0);
@@ -427,11 +457,31 @@ body:has([data-consultation-route])::after {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Birincil yol — Chromium. Sıfır JS, sıfır bayt. */
   @supports (animation-timeline: view()) {
     .reveal-sections > * > * {
       animation: sectionRise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 30%;
     }
+  }
+
+  /* Yedek yol — Safari / Firefox.
+     `ScrollRevealBridge` yalnız yukarıdaki @supports başarısız olduğunda
+     `.reveal-js` sınıfını ekler ve her öğeye `data-reveal` yazar. Böylece
+     iki yol ASLA aynı anda çalışmaz.
+
+     `data-reveal` yokken hiçbir kural uygulanmaz: JS gelmezse içerik olduğu
+     gibi, tam görünür ve yerinde durur. Opaklık animasyonu YOK — bkz.
+     ScrollRevealBridge içindeki gerekçe. */
+  .reveal-sections.reveal-js > * > *[data-reveal="hidden"] {
+    transform: translateY(22px);
+  }
+  .reveal-sections.reveal-js > * > *[data-reveal] {
+    transition: transform var(--motion-reveal, 600ms)
+      cubic-bezier(0.24, 0.43, 0.15, 0.97);
+  }
+  .reveal-sections.reveal-js > * > *[data-reveal="shown"] {
+    transform: translateY(0);
   }
 }

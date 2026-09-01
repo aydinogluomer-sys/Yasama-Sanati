@@ -7,6 +7,7 @@ import AnimatedBurger from "../SVGComponents/AnimatedBurger";
 import { useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/app/providers";
 import ResponsiveSideBar from "./ResponsiveSideBar";
+import Magnetic from "./Magnetic";
 import CloseIcon from "../SVGComponents/CloseIcon";
 import cn from "@/utils/cn";
 import Link from "next/link";
@@ -115,6 +116,9 @@ export default function NavBar() {
         <div className="flex items-center gap-8">
           {/* Buton yalnız lg+ görünür; bağlantıyı da aynı kırılımda tutuyoruz, yoksa mobilde
               içeriği gizli boş bir <a> kalıyor ve erişilebilirlik ağacında adsız link oluyor. */}
+          {/* Mıknatıs etkisi yalnız birincil CTA'da: sitenin imza mikro
+              etkileşimi. Dokunmatikte ve reduced-motion'da kendini kapatır. */}
+          <Magnetic range={70} strength={0.22}>
           <Link href={consultationUrl} className="hidden lg:block">
             <BorderedButton
               className={cn(
@@ -131,6 +135,7 @@ export default function NavBar() {
               />
             </BorderedButton>
           </Link>
+          </Magnetic>
           <motion.button
             ref={menuButtonRef}
             initial="initial"
