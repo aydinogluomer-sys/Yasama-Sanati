@@ -92,44 +92,76 @@ for (const [vpLabel, width, height, mobile] of VIEWPORTS) {
     });
     await page.waitForTimeout(1200);
 
-    const name = `${route === "/" ? "home" : route.replace(/\//g, "_").replace(/^_/, "")}__${vpLabel}.png`;
-    const basePath = path.join(BASELINE, name);
-    // NavBar maskelenir. Hareketi Motion ile JS üzerinden sürülüyor; yukarıdaki
-    // CSS enjeksiyonu onu durdurmuyor ve bekleme süresini uzatmak da deterministik
-    // hale getirmedi (ölçüldü: turlar arası %0.308 fark, tamamı logo/CTA/hamburger).
-    // Kararsız bölgeyi maskelemek görsel regresyonda standart yaklaşımdır; nav'ın
-    // kendisi qa/e2e.mjs (varlık) ve qa/keyboard.mjs (odak/trap) kapılarında
-    // zaten doğrulanıyor.
-    const shot = await page.screenshot({
-      fullPage: false,
-      mask: [page.locator("header").first()],
-      maskColor: "#000000",
-    });
+    const taban = `${route === "/" ? "home" : route.replace(/\//g, "_").replace(/^_/, "")}__${vpLabel}`;
 
-    if (!fs.existsSync(basePath) || UPDATE) {
-      fs.writeFileSync(basePath, shot);
-      created++;
-      console.log(`YENI  ${name}`);
-      continue;
-    }
+    /* İKİ KARE: sayfa BAŞI ve sayfa SONU.
+       Kapı önce yalnız ilk ekranı çekiyordu (`fullPage: false`, scroll başa
+       alınmış). Bu, EKRAN ALTINDAKİ HER DEĞİŞİKLİĞİ görmüyordu — ölçülerek
+       görüldü: her alt sayfanın en altına parşömen bir kapanış bandı eklendiği
+       hâlde kapı 32/32 %0,000 dedi. Yani o güne kadarki "piksel özdeş"
+       iddiaları yalnız ilk ekran içindi.
+       Tam sayfa çekmek yerine iki sabit kare alınıyor: tam sayfa, uzun
+       sayfalarda tembel yükleme ve sticky öğeler yüzünden kararsız olurdu. */
+    const kareler = [
+      [`${taban}.png`, 0],
+      [`${taban}__alt.png`, 1],
+    ];
 
-    const a = PNG.sync.read(fs.readFileSync(basePath));
-    const b = PNG.sync.read(shot);
-    if (a.width !== b.width || a.height !== b.height) {
-      failures++;
-      console.log(`HATA  ${name} boyut degisti ${a.width}x${a.height} -> ${b.width}x${b.height}`);
-      continue;
-    }
-    const diff = new PNG({ width: a.width, height: a.height });
-    const changed = pixelmatch(a.data, b.data, diff.data, a.width, a.height, { threshold: 0.12 });
-    const ratio = changed / (a.width * a.height);
-    const ok = ratio <= THRESHOLD_RATIO;
-    if (!ok) {
-      failures++;
-      fs.writeFileSync(path.join(DIFF, name), PNG.sync.write(diff));
-      console.log(`HATA  ${name} degisen piksel %${(ratio * 100).toFixed(3)} (esik %${(THRESHOLD_RATIO * 100).toFixed(3)}) -> qa/visual/diff/${name}`);
-    } else {
-      console.log(`OK    ${name} degisen piksel %${(ratio * 100).toFixed(3)}`);
+    for (const [name, dip] of kareler) {
+      if (dip) {
+        /* DİBE İKİ KEZ İNİLİYOR. `scrollTo(scrollHeight)` en fazla kaydırma
+           noktasına kırpılır ve o nokta sayfanın SON yüksekliğine bağlıdır;
+           yükseklik geç oturursa (font/görsel yerleşmesi) kare koşular arasında
+           kayar. Ölçüldü: ana sayfanın mobil alt karesi bu yüzden %2,5 fark
+           veriyordu — üründe hiçbir değişiklik yokken. İkinci iniş, oturmuş
+           yükseklikle yapılır. */
+        await page.evaluate(() =>
+          window.scrollTo(0, document.body.scrollHeight),
+        );
+        await page.waitForTimeout(500);
+        await page.evaluate(() =>
+          window.scrollTo(0, document.body.scrollHeight),
+        );
+        await page.waitForTimeout(900);
+      }
+      const basePath = path.join(BASELINE, name);
+      // NavBar maskelenir. Hareketi Motion ile JS üzerinden sürülüyor; yukarıdaki
+      // CSS enjeksiyonu onu durdurmuyor ve bekleme süresini uzatmak da deterministik
+      // hale getirmedi (ölçüldü: turlar arası %0.308 fark, tamamı logo/CTA/hamburger).
+      // Kararsız bölgeyi maskelemek görsel regresyonda standart yaklaşımdır; nav'ın
+      // kendisi qa/e2e.mjs (varlık) ve qa/keyboard.mjs (odak/trap) kapılarında
+      // zaten doğrulanıyor.
+      const shot = await page.screenshot({
+        fullPage: false,
+        mask: [page.locator("header").first()],
+        maskColor: "#000000",
+      });
+
+      if (!fs.existsSync(basePath) || UPDATE) {
+        fs.writeFileSync(basePath, shot);
+        created++;
+        console.log(`YENI  ${name}`);
+        continue;
+      }
+
+      const a = PNG.sync.read(fs.readFileSync(basePath));
+      const b = PNG.sync.read(shot);
+      if (a.width !== b.width || a.height !== b.height) {
+        failures++;
+        console.log(`HATA  ${name} boyut degisti ${a.width}x${a.height} -> ${b.width}x${b.height}`);
+        continue;
+      }
+      const diff = new PNG({ width: a.width, height: a.height });
+      const changed = pixelmatch(a.data, b.data, diff.data, a.width, a.height, { threshold: 0.12 });
+      const ratio = changed / (a.width * a.height);
+      const ok = ratio <= THRESHOLD_RATIO;
+      if (!ok) {
+        failures++;
+        fs.writeFileSync(path.join(DIFF, name), PNG.sync.write(diff));
+        console.log(`HATA  ${name} degisen piksel %${(ratio * 100).toFixed(3)} (esik %${(THRESHOLD_RATIO * 100).toFixed(3)}) -> qa/visual/diff/${name}`);
+      } else {
+        console.log(`OK    ${name} degisen piksel %${(ratio * 100).toFixed(3)}`);
+      }
     }
   }
   await ctx.close();
@@ -137,7 +169,12 @@ for (const [vpLabel, width, height, mobile] of VIEWPORTS) {
 
 await browser.close();
 if (created) console.log(`\n${created} baseline olusturuldu (ilk calistirma veya --update).`);
-console.log(`\n${VIEWPORTS.length} viewport x ${ROUTES.length} rota — gorsel regresyon sorunu: ${failures}`);
+// Kapsam açıkça yazılıyor: kapı artık rota başına İKİ kare karşılaştırıyor
+// (sayfa başı + sayfa sonu). Önce yalnız ilk ekran çekiliyordu ve bu, ekran
+// altındaki değişiklikleri hiç görmüyordu.
+console.log(
+  `\n${VIEWPORTS.length} viewport x ${ROUTES.length} rota x 2 kare (bas + alt) — gorsel regresyon sorunu: ${failures}`,
+);
 // Baseline yoksa bu bir KARŞILAŞTIRMA değildir; "PASS" demek yanıltıcı olur.
 // Daha önce baseline'ı olmayan kareler sessizce üretilip kapı yeşil görünüyordu.
 if (created > 0 && !UPDATE) {

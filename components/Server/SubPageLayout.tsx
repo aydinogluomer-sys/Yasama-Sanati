@@ -5,6 +5,7 @@ import SubPageHeroMedia from "@/components/Client/SubPageHeroMedia";
 import Footer from "@/sections/Footer/Server";
 import ScrollRevealBridge from "@/components/Client/ScrollRevealBridge";
 import SectionSeam from "@/components/Client/SectionSeam";
+import ClosingBand from "@/components/Server/ClosingBand";
 import palette from "@/utils/palette";
 import cn from "@/utils/cn";
 
@@ -168,8 +169,20 @@ export default function SubPageLayout({
       {/* CSS `animation-timeline: view()` desteklenmeyen tarayıcılarda aynı
           açılımı veren köprü. Destekleniyorsa hiçbir şey yapmaz. */}
       <ScrollRevealBridge />
-      {/* Açık gövde -> koyu footer geçişi. */}
-      {acik && <SectionSeam from={palette.parchment} to={palette.footer} />}
+
+      {/* KAPANIŞ BANDI — footer'dan önceki açık nefes.
+          Ana sayfada footer'dan hemen önce açık zeminli "Ücretsiz Ön Görüşme"
+          bölümü var; alt sayfalarda o nefes yoktu, koyu gövde doğrudan koyu
+          footer'a bağlanıyordu. Ölçüm: alt sayfaların dokuzu sayfa boyunca tek
+          renk (`deep %100`). Gerekçe ClosingBand.tsx'te.
+
+          Gövdesi zaten açık olan sayfalarda (surface="parchment") bant
+          gereksiz — orada geçiş SectionSeam ile yapılıyor. */}
+      {acik ? (
+        <SectionSeam from={palette.parchment} to={palette.footer} />
+      ) : (
+        <ClosingBand />
+      )}
       <Footer />
     </div>
   );

@@ -211,3 +211,62 @@ cream (YANLIS kullanim)  1,31:1   <- eşleme olmasaydı metin görünmezdi
 
 Faz B (`/kvkk`, `/privacy-terms`, blog gövdesi) ayrı onay bekliyor. Tesisat
 hazır: o sayfalara `surface="parchment"` vermek yeterli.
+
+
+---
+
+# KAPANIŞ BANDI UYGULANDI (2026-09-03)
+
+Kullanıcı kararı: **footer'dan önce kapanış bandı** (gövdenin tamamı değil),
+renk **#f0ebe2**.
+
+## Kapsam
+
+`SubPageLayout` kullanan **15 rota** — yani ana sayfa ve `/on-gorusme` doğal
+olarak dışarıda kalıyor (ikisi de bu bileşeni kullanmıyor). Kullanıcının
+"landing dışındaki tüm sayfalar" tarifiyle birebir örtüşüyor.
+
+## Bant ne İÇERMİYOR, neden
+
+Bant bir CTA **değil**. Footer'ın kendisi zaten kapanış çağrısı ("Başlamak için
+bir nefes yeter." + Ön Görüşme düğmesi); hemen üstüne ikinci bir çağrı koymak
+ikisini de zayıflatırdı. Bant bir DURAK: bakır saç teli, marka imzası ve
+markanın kendi cümlesi. **Yeni metin yazılmadı** — cümle ana sayfanın h1'inden
+geliyor, sayfa kendi sözüyle kapanıyor.
+
+## Geçişler: iki deneme çöpe gitti, üçüncüsü markanın kendi dili
+
+1. `bg-gradient-to-b from-deep to-parchment` → **çamurlu**. Koyu yeşilden
+   neredeyse beyaza doğrusal sRGB geçişi ortada gri bir şerit bırakıyor.
+2. `linear-gradient(in oklab, …)` → **hâlâ çamurlu**. Ekran görüntüsüyle
+   doğrulandı; sorun renk uzayı değil, geçişin bant olarak okunması.
+3. Ana sayfaya bakıldı ve markanın bu soruya zaten cevabı olduğu görüldü:
+   * koyu → açık : `SectionSeam` (bakır yıkama + meridyen ipliği)
+   * açık → footer : **SERT KENAR** — `<Form />` (krem) doğrudan footer'a
+     bağlanıyor, arada hiçbir şey yok.
+   Aynısı uygulandı. Rota başına iki değil **bir** Motion bileşeni eklendi.
+
+## Görsel kapıda bulunan GERÇEK boşluk
+
+Bant eklendikten sonra `test:visual` **32/32 %0,000** dedi — oysa her alt
+sayfanın en altı değişmişti. Sebep: kapı `fullPage: false` ile yalnız **ilk
+ekranı** çekiyordu.
+
+> Bu, oturum boyunca verilen "görsel 32/32 %0,000" güvencelerinin aslında
+> **yalnız ilk ekran için** geçerli olduğu anlamına geliyor. Ekran altındaki
+> hiçbir değişiklik bu kapıdan geçmiyordu.
+
+Kapı rota başına **iki kare**ye çıkarıldı (sayfa başı + sayfa sonu), 32 → 64
+karşılaştırma. Alt kare ilk hâlinde kararsızdı: ana sayfanın mobil alt karesi
+üründe hiçbir değişiklik yokken %2,5 fark verdi, çünkü
+`scrollTo(scrollHeight)` sayfa yüksekliği geç oturduğunda farklı noktaya denk
+geliyor. Dibe iki kez inilerek düzeltildi; iki ardışık koşu 0.
+
+## Doğrulama
+
+16 kapı geçti (a11y 0 · e2e 21/21 · viewports 8×21 · zoom · keyboard ·
+hero-contrast · reveal · cursor · selection · transition · fonts · links ·
+images · seo · browsers) + görsel **64/64 %0,000** + typecheck + lint + build.
+
+Bant beş rotada ölçüldü: zemin `rgb(240,235,226)`, yükseklik 297px, footer'a
+bitişik (aralık 0).
