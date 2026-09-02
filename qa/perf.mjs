@@ -17,6 +17,7 @@
  * dağılımı (p75) DEĞİLDİR. Alan verisi olmadan "p75" denmemelidir.
  */
 import { chromium } from "playwright";
+import os from "node:os";
 
 const BASE = process.argv[2] || "http://127.0.0.1:3400";
 const CHANNEL = process.env.PW_CHANNEL ?? "chrome";
@@ -35,6 +36,43 @@ const CONDITIONS = [
   { label: "mobil 4x CPU (ag kisitsiz)", w: 390, h: 844, mobile: true, cpu: 4, net: null },
   { label: "mobil 4x CPU + Slow 4G (soguk cache)", w: 390, h: 844, mobile: true, cpu: 4, net: SLOW_4G },
 ];
+
+/* ÖN KOŞUL 1 — sunucu ayakta mı?
+   Ayakta değilken script ham bir yığın iziyle patlıyordu
+   ("page.goto: net::ERR_CONNECTION_REFUSED ... Node.js v26.3.0") ve okuyan
+   kişiye ne yapması gerektiğini söylemiyordu. */
+try {
+  const r = await fetch(BASE, { method: "GET" });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+} catch {
+  console.error(`\nSUNUCU YOK: ${BASE} yanıt vermiyor.\n`);
+  console.error("Bu kapı ÇALIŞAN BİR PRODUCTION SUNUCUSU ister. Ayrı bir terminalde:");
+  console.error("  npm run build");
+  console.error("  npx next start -p 3400\n");
+  console.error("Sonra tekrar: npm run test:perf\n");
+  process.exit(1);
+}
+
+/* ÖN KOŞUL 2 — makine ölçüm yapacak durumda mı?
+   Bu sayılar makine yüküne AŞIRI duyarlı. Bir turda boş RAM 1 GB'a inmişken
+   ölçüm yapıldı ve aynı derlemede masaüstü TBT'si 34 ms ile 489 ms arasında
+   salındı; tek bir kod değişikliğinin üretemeyeceği bir fark. Sayıların yanına
+   koşulları da basıyoruz ki rapor edilirken bağlamı kaybolmasın. */
+const bosGB = os.freemem() / 1024 ** 3;
+const toplamGB = os.totalmem() / 1024 ** 3;
+console.log(
+  `\nÖLÇÜM KOŞULLARI: bos RAM ${bosGB.toFixed(1)} GB / ${toplamGB.toFixed(1)} GB · ${os.cpus().length} cekirdek`,
+);
+if (bosGB < 1.5) {
+  console.log(
+    [
+      "UYARI: bos RAM 1,5 GB'in altinda. Bu kosulda cikan sayilar baska bir",
+      "       turla KARSILASTIRILAMAZ. Tarayici / Docker / Spotify gibi",
+      "       uygulamalari kapatip tekrar calistirmak gerekir. Olcum yine de",
+      "       yapiliyor, ama rapor edilirken bu satir da yazilmali.",
+    ].join("\n"),
+  );
+}
 
 const browser = await chromium.launch(CHANNEL === "chromium" ? {} : { channel: CHANNEL });
 
