@@ -148,3 +148,66 @@ bozmamalı) + `test:browsers`.
    kırar ve en düşük risklidir. Faz C sayfa sayısını artırır.
 3. Faz A'nın `surface` prop'u varsayılanı `"dark"` — yani onay vermediğiniz
    hiçbir sayfa değişmez. Faz B/C ayrı ayrı onaylanabilir.
+
+
+---
+
+# FAZ A UYGULANDI (2026-09-02)
+
+Seçilen ton: **#f0ebe2** (kullanıcı kararı) — markanın `DESIGN.md`'de
+`warm-parchment`, `/on-gorusme` modülünde `--consultation-paper` adıyla zaten
+taşıdığı değer.
+
+## Ne yapıldı
+
+* `--color-parchment: #f0ebe2` token'ı ve `palette.parchment`.
+  `--color-paper` (#f3efe6) İLE KARIŞTIRILMADI: ikisi 6,4 birim uzakta ama
+  işleri farklı — `paper` açık MÜREKKEP (29 `text-paper`, yalnız 1 `bg-paper`),
+  `parchment` açık YÜZEY. Gerekçe token'ın yanına yazıldı ki ileride biri
+  "yakın tonlar" diye birleştirmeye kalkmasın.
+* `palette.footer` eklendi (`SectionSeam` rengi prop olarak alıyor).
+* `.surface-parchment` sözleşmesi — açık dünyanın metin eşlemesi tek yerde.
+* `SubPageLayout`e `surface?: "dark" | "parchment"` prop'u, **varsayılan
+  `"dark"`**. Açık seçildiğinde hero→gövde ve gövde→footer geçişleri
+  `SectionSeam` ile yapılıyor.
+
+## İki hata çıktı ve ikisi de ölçümle yakalandı
+
+**1. Operatör önceliği — gövde kaydı.** Sınıf birleştirmesi
+`(acik ? "…" : "") + hideHero ? A : B` yazılmıştı; JavaScript bunu
+`("" + hideHero) ? A : B` olarak ayrıştırıyor, yani `hideHero` daima truthy bir
+dizgeye dönüşüp YANLIŞ dolgu seçiliyordu. Sonuç: bütün alt sayfaların gövdesi
+kaydı — görsel regresyon 24 kare, `/kvkk` %2,27. `cn()` ile düzeltildi.
+Faz A'nın "hiçbir şey değişmemeli" kuralı olmasa bu sessizce geçerdi.
+
+**2. Sınıf adı kovalamak çalışmıyor.** Sözleşme önce
+`.surface-parchment :where(.text-cream, …)` gibi seçicilerle yazıldı ve
+ÖLÇÜLDÜĞÜNDE ÇALIŞMADI: opaklık değiştiricili utility'ler ayrı sınıf adları
+üretiyor (`text-cream/80`, `/85`, `/70` …). Yerine değişkenin kapsam içinde
+yeniden tanımlanması geldi; Tailwind v4 bu utility'leri
+`color-mix(… var(--color-cream) …)` olarak derlediği için opaklıklı varyantlar
+dâhil hepsi tek hamlede çevriliyor.
+
+## Ölçülen kontrast (parşömen #f0ebe2 zemininde)
+
+```
+deep #2b3530            10,69:1
+deep %72                 4,80:1
+on-light #7A3F1C         6,92:1
+cream (YANLIS kullanim)  1,31:1   <- eşleme olmasaydı metin görünmezdi
+```
+
+## Doğrulama
+
+* Görsel regresyon **32/32 %0,000** — Faz A gerçekten atıl, hiçbir sayfa
+  değişmedi (amaç buydu).
+* Sözleşmenin çalıştığı ayrıca ölçüldü: sınıf canlı sayfaya enjekte edilip
+  zemin `rgb(240,235,226)`, gövde `rgb(43,53,48)`, bakır `rgb(122,63,28)`,
+  `text-cream/80` ise oklab lightness 0,853 → 0,318 olarak doğrulandı.
+* Kapılar: a11y 0 · e2e 21/21 · viewports 8×21 · cursor 0 · selection 0 ·
+  fonts 0 · typecheck · lint · build 27/27.
+
+## Sırada
+
+Faz B (`/kvkk`, `/privacy-terms`, blog gövdesi) ayrı onay bekliyor. Tesisat
+hazır: o sayfalara `surface="parchment"` vermek yeterli.

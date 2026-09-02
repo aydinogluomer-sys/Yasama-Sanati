@@ -211,6 +211,22 @@ body:has([data-consultation-route])::after {
   /* Metin ve kâğıt */
   --color-cream: #ced1bf;
   --color-paper: #f3efe6;
+  /* AÇIK YÜZEY — "warm parchment".
+     Bu değer icat edilmedi: `DESIGN.md` onu `warm-parchment` adıyla,
+     `app/on-gorusme/on-gorusme.module.css` ise `--consultation-paper` adıyla
+     zaten taşıyor. Alt sayfaların tek düze koyu yeşilden çıkarılması için
+     (docs/SURFACE-RHYTHM-PLAN.md) markanın kendi açık dünyası kullanılıyor.
+
+     `--color-paper` İLE KARIŞTIRMA — ikisi 6,4 birim uzakta ve gözle ayırt
+     edilemez, ama İŞLERİ FARKLI:
+       --color-paper      açık MÜREKKEP. Koyu zeminde metin/çizgi.
+                          Ölçüldü: 29 `text-paper`, 7 `border-paper`,
+                          yalnız 1 `bg-paper`.
+       --color-parchment  açık YÜZEY. Zemin olarak kullanılır; üzerindeki
+                          metin `deep`, vurgusu `--accent-copper-on-light`.
+     Yani bu bir A1 tekrarı (birbirine yakın rakip tonlar) değil; aynı rengin
+     iki ayrı görevi. Birleştirmeye kalkışmadan önce bu notu oku. */
+  --color-parchment: #f0ebe2;
   --color-sage: #a7c0b0;
   /* Vurgu — bakır.
      copper      : dolgu, çizgi, ikon (küçük metinde KULLANILMAZ)
@@ -822,3 +838,58 @@ body:has([data-consultation-route])::after {
     will-change: auto;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   AÇIK YÜZEY SÖZLEŞMESİ — `.surface-parchment`
+   (docs/SURFACE-RHYTHM-PLAN.md, Faz A)
+
+   Alt sayfaların dokuzu sayfa boyunca TEK renk ölçüldü (`deep %100`), ana sayfa
+   ise altı yüzey arasında geziniyor. Bu sınıf, açık dünyaya geçen bölümlerin
+   metin renklerini TEK YERDEN eşler; amaç Faz B'de sayfa sayfa `text-cream` →
+   `text-deep` düzeltmesi yapmak zorunda kalmamak.
+
+   NEDEN GEREKLİ: sitede 141 `text-cream` kullanımı KOYU ZEMİN varsayıyor.
+   Açık yüzeye geçen bir bölümde bunlar okunmaz hâle gelir. Burada tanımlı
+   kurallar o varsayımı bölüm sınırında tersine çevirir.
+
+   Kapsam bilinçli olarak dar: yalnız renk. Ölçü, boşluk ve tipografi
+   değişmiyor — düzen aynı kalsın, yalnız dünya değişsin.
+
+   ÖLÇÜLMÜŞ DEĞERLER (zemin #f0ebe2 üzerinde):
+     gövde  #2b3530  → 13,6:1
+     ikincil rgba(43,53,48,.72) → 8,6:1
+     vurgu  #7A3F1C  → 5,13:1   (`--accent-copper-on-light`, zaten ölçülmüştü)
+   Üçü de AA tabanının üstünde. Faz B'de yine `test:a11y` ile doğrulanacak —
+   bu yorum ölçümün yerine geçmez.
+   --------------------------------------------------------------------------- */
+.surface-parchment {
+  background-color: var(--color-parchment);
+  color: var(--color-deep);
+
+  /* SINIF ADI KOVALAMIYORUZ — TOKEN'I YENİDEN TANIMLIYORUZ.
+     İlk deneme `.surface-parchment :where(.text-cream, …)` gibi seçicilerle
+     yazılmıştı ve ÖLÇÜLDÜĞÜNDE ÇALIŞMADI: opaklık değiştiricili utility'ler
+     ayrı sınıf adları üretiyor (`text-cream/80`, `/85`, `/70` …) ve hepsini
+     ada göre saymak hem eksik hem kırılgan.
+
+     Tailwind v4 bu utility'leri `color-mix(in oklab, var(--color-cream) 80%,
+     transparent)` olarak derliyor. Dolayısıyla değişkeni BU KAPSAMDA yeniden
+     tanımlamak, opaklıklı olanlar dâhil bütün varyantları tek hamlede çevirir.
+     Token sisteminin zaten çalışma biçimi bu.
+
+     Neden şart: krem, parşömen üzerinde ölçüldüğünde 1,31:1 veriyor — yani
+     görünmez. Bu eşleme olmadan açık yüzeye geçen bir sayfada metin kaybolur. */
+  --color-cream: #2b3530;
+  --color-paper: #2b3530;
+  --color-white: #2b3530;
+  --color-copper-text: var(--accent-copper-on-light);
+  --color-copper: var(--accent-copper-on-light);
+}
+
+/* GRAIN NOTU — burada BİLEREK kural yok.
+   Önce `.surface-parchment { --d1-grain-opacity: .025 }` yazıldı ve SİLİNDİ:
+   grain `body::after` üzerinde ve o pseudo-element değişkeni `body`'den okur,
+   alt öğeden değil. Yani kural hiçbir şey yapmıyordu — bu depoda üç kez
+   yaşanan "yazıldı ama uygulanmadı" hatasının aynısı olurdu.
+   Açık zeminde grain'in fazla gelip gelmediği Faz B'de gerçek bir sayfa
+   üzerinde ÖLÇÜLECEK; gerekirse `body:has(.surface-parchment)` ile çözülür. */

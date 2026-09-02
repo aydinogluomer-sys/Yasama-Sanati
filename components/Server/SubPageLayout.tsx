@@ -4,6 +4,9 @@ import NavBar from "@/components/Client/NavBar";
 import SubPageHeroMedia from "@/components/Client/SubPageHeroMedia";
 import Footer from "@/sections/Footer/Server";
 import ScrollRevealBridge from "@/components/Client/ScrollRevealBridge";
+import SectionSeam from "@/components/Client/SectionSeam";
+import palette from "@/utils/palette";
+import cn from "@/utils/cn";
 
 interface SubPageLayoutProps {
   title: string;
@@ -20,6 +23,27 @@ interface SubPageLayoutProps {
   heroImage?: StaticImageData;
   /** Görsel sayfanın konusunu anlatıyorsa alt metni; salt dekoratifse "" bırak. */
   heroImageAlt?: string;
+  /**
+   * Gövdenin yüzeyi (docs/SURFACE-RHYTHM-PLAN.md, Faz A).
+   *
+   * VARSAYILAN `"dark"` — yani bu prop eklenmiş olması hiçbir sayfayı
+   * değiştirmez. Ölçüm: alt sayfaların dokuzu sayfa boyunca tek renk
+   * (`deep %100`), ana sayfa altı yüzey arasında geziniyor. Bu prop o
+   * tek düzeliği kırmak için gereken tesisattır; hangi rotanın açık dünyaya
+   * geçeceği Faz B/C kararıdır ve ayrı onaylanır.
+   *
+   * `"parchment"` seçildiğinde:
+   *   • gövde `--color-parchment` (#f0ebe2) zeminine oturur,
+   *   • metin renkleri `.surface-parchment` sözleşmesiyle tersine çevrilir
+   *     (tek yerden — sayfa sayfa sınıf düzeltmek gerekmesin diye),
+   *   • hero→gövde ve gövde→footer geçişleri `SectionSeam` ile yapılır,
+   *     çünkü hero'nun alt geçişi `deep`e eriyor ve açık gövdeye doğrudan
+   *     bağlanırsa kesik kenar oluşur.
+   *
+   * HERO HER DURUMDA KOYU KALIR: scrim dengesi ölçülerek kuruldu
+   * (`qa/hero-contrast.mjs`, 8 hero 5,50–5,61:1).
+   */
+  surface?: "dark" | "parchment";
 }
 
 export default function SubPageLayout({
@@ -31,7 +55,9 @@ export default function SubPageLayout({
   hideHero = false,
   heroImage,
   heroImageAlt = "",
+  surface = "dark",
 }: SubPageLayoutProps) {
+  const acik = surface === "parchment";
   return (
     <div className="min-h-screen bg-deep text-cream font-sans selection:bg-cream selection:text-deep">
       <NavBar />
@@ -97,15 +123,29 @@ export default function SubPageLayout({
         </div>
         ))}
 
+      {/* Hero (koyu) -> açık gövde geçişi. Sert kesme olmasın diye dikiş.
+          Yalnız açık yüzeyde; koyu sayfalarda hiçbir şey eklenmiyor. */}
+      {acik && !hideHero && (
+        <SectionSeam from={palette.deep} to={palette.parchment} />
+      )}
+
       {/* Main content */}
       {noPadding ? (
-        <main id="main-content" className="w-full overflow-hidden">
+        <main
+          id="main-content"
+          className={
+            acik
+              ? "surface-parchment w-full overflow-hidden"
+              : "w-full overflow-hidden"
+          }
+        >
           {children}
         </main>
       ) : (
         <main
           id="main-content"
-          className={
+          className={cn(
+            acik && "surface-parchment",
             // `reveal-sections`: bölümler görünürlüğe girerken yükselir.
             // Destekleyen tarayıcıda saf CSS (animation-timeline: view()),
             // desteklemeyende ScrollRevealBridge. İçerik hiçbir durumda
@@ -118,8 +158,8 @@ export default function SubPageLayout({
             // Alt boşluk aynı; kısılan yalnız hero ile içerik arası.
             hideHero
               ? "reveal-sections px-6 pt-32 pb-16 md:px-16 md:pt-44 md:pb-28"
-              : "reveal-sections px-6 pt-10 pb-16 md:px-16 md:pt-16 md:pb-28"
-          }
+              : "reveal-sections px-6 pt-10 pb-16 md:px-16 md:pt-16 md:pb-28",
+          )}
         >
           {children}
         </main>
@@ -128,6 +168,8 @@ export default function SubPageLayout({
       {/* CSS `animation-timeline: view()` desteklenmeyen tarayıcılarda aynı
           açılımı veren köprü. Destekleniyorsa hiçbir şey yapmaz. */}
       <ScrollRevealBridge />
+      {/* Açık gövde -> koyu footer geçişi. */}
+      {acik && <SectionSeam from={palette.parchment} to={palette.footer} />}
       <Footer />
     </div>
   );

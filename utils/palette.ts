@@ -25,10 +25,17 @@ export const palette = {
   warm: "#30493d",
   /** Koyu mürekkep — derinlik bandı. */
   ink: "#222b27",
+  /** Footer zemini. `deep`e çok yakın ama aynı değil; footer bilerek daha düz
+   *  ayarlanmıştı (bkz. app/globals.css `--color-footer`). `SectionSeam` gibi
+   *  rengi prop olarak alan bileşenler buradan okur. */
+  footer: "#293a32",
   /** Ana krem — gövde metni ve açık kart yüzeyi. */
   cream: "#ced1bf",
-  /** Açık kâğıt — ters kontrastlı bölümler. */
+  /** Açık kâğıt MÜREKKEBİ — koyu zeminde metin ve çizgi. */
   paper: "#f3efe6",
+  /** Açık YÜZEY — "warm parchment". Zemin olarak kullanılır; `paper` ile
+   *  karıştırma, gerekçe app/globals.css'teki token yorumunda. */
+  parchment: "#f0ebe2",
   /** Solgun adaçayı — ikincil metin. */
   sage: "#a7c0b0",
   /** Marka bakırı — dolgu, çizgi, ikon. Küçük metinde KULLANILMAZ (4.29:1). */
