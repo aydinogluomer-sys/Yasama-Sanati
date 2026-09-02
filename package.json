@@ -30,7 +30,8 @@
     "verify:all": "npm run verify:release && npm run verify:visual",
     "test:fonts": "node qa/fonts.mjs",
     "verify:gates": "bash qa/gates.sh",
-    "test:selection": "node qa/selection.mjs"
+    "test:selection": "node qa/selection.mjs",
+    "test:cursor": "node qa/cursor.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

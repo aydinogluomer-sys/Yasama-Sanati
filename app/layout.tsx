@@ -5,6 +5,7 @@ import "./globals.css";
 import { WindowSizeProvider } from "./providers";
 import { MotionConfig } from "motion/react";
 import AccessibleLenis from "@/components/Client/AccessibleLenis";
+import SiteCursor from "@/components/Client/SiteCursor";
 import { OrganizationSchema } from "@/components/Server/StructuredData";
 
 /*
@@ -111,6 +112,12 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Ana içeriğe geç
         </a>
+        {/* İmleç yoldaşı — plan maddesi 7 / A6. Sitenin imza etkileşimi
+            önceden yalnız JourneyDesktop içinde yaşıyordu; menüden bir sayfaya
+            geçince kayboluyordu. Artık her rotada. Motion KULLANMIYOR (her
+            sayfanın kritik yoluna girmesin diye); dokunmatik ve hareket azaltma
+            tercihinde hiç render edilmez ve yerli imleci gizlemez. */}
+        <SiteCursor />
         <AccessibleLenis>
           <WindowSizeProvider>
             <MotionConfig reducedMotion="user">

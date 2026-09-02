@@ -36,7 +36,7 @@
 LOG="${1:-qa-gates.log}"
 : > "$LOG"
 
-GATES="test:e2e test:links test:images test:seo test:fonts test:a11y test:hero-contrast test:viewports test:keyboard test:zoom test:browsers test:reveal test:transition test:selection"
+GATES="test:e2e test:links test:images test:seo test:fonts test:a11y test:hero-contrast test:viewports test:keyboard test:zoom test:browsers test:reveal test:transition test:selection test:cursor"
 FAIL=0
 
 for g in $GATES; do
