@@ -193,7 +193,11 @@ export default function EgitmenlerPage() {
                             {ins.disciplines.map((d, i) => (
                               <span
                                 key={i}
-                                className="bg-cream/8 text-cream/85 text-xs px-2.5 py-1 rounded border border-cream/5"
+                                /* Dolgu + yuvarlak köşe kaldırıldı: sitenin
+                                   düğme/etiket dili kare ve saç teli çerçeveli
+                                   (BorderedButton). Bu çipler sayfadaki son
+                                   jenerik kart kalıntısıydı. */
+                                className="border border-cream/25 px-3 py-1.5 font-mono text-3xs tracking-[0.18em] text-cream/85 uppercase"
                               >
                                 {d}
                               </span>

@@ -63,29 +63,39 @@ Bu alanlar geldiğinde blok tek yerden geri açılır.
 
 ---
 
-## EĞİTMENLER — `BLOCKED BY EXTERNAL DATA`
+## EĞİTMENLER — iş sahibi teyit etti (2026-09-02)
 
 `app/egitmenler/page.tsx` beş gerçek kamusal ismi "Eğitmenlerimiz" başlığı altında
-yayınlıyor. Akademiyle resmî ilişkileri **repodan doğrulanamıyor**.
+yayınlıyor. **İş sahibi 2026-09-02'de bu bilgilerin doğru olduğunu teyit etti**
+(akademiyle ilişki, roller ve biyografilerdeki iddialar dâhil). İçerik bu nedenle
+olduğu gibi bırakıldı.
 
 | Alan | Durum |
 |---|---|
 | Ad soyad | var (gerçek kamusal isimler) |
-| Rol / unvan | var — **doğrulanmamış** |
-| Akademiyle ilişki | **doğrulanmamış** |
+| Rol / unvan | var — **iş sahibi beyanı** |
+| Akademiyle ilişki | **iş sahibi beyanı** (2026-09-02) |
 | Sertifika / kimlik belgesi | yok |
-| Deneyim yılı | yok |
-| Gerçek portre | **yok — uydurma portre de yok** (baş harf kullanılıyor) |
+| Deneyim yılı | **yayınlanıyor** — "20 yılı aşkın" (N. F. Karamehmet), "otuz yılı aşkın" (C. Şen) |
+| Gerçek portre | **yok — uydurma portre de yok** (baş harf tipografik öğe olarak kullanılıyor) |
 | Dış doğrulama bağlantısı | yok |
-| `Person` schema | **eklenmedi** — doğrulanmadan eklenmeyecek |
+| `Person` schema | **hâlâ eklenmedi** — aşağıya bakın |
 
-**Bu turda ne yapıldı:** uydurma portre veya uydurma kimlik bilgisi **eklenmedi**;
-`Person` şeması yayınlanmadı. **Ne yapılmadı:** kartlar production'dan
-kaldırılmadı — bu, iş sahibinin kendi eğitmen kadrosu hakkındaki beyanı ve
-kaldırma kararı bilgi gelmeden verilemez.
+> **ÖNCEKİ KAYIT YANLIŞTI, DÜZELTİLDİ.** Bu tablo "Deneyim yılı: yok" diyordu.
+> Oysa sayfa iki kişi için deneyim yılı iddiası yayınlıyor; ayrıca "uluslararası
+> klinik tecrübeye sahip hekim", "uluslararası enstitü kurucusu ve yazar" gibi
+> unvan iddiaları da var. Kayıt, yayınlanan içerikten daha zayıf görünüyordu.
 
-→ **Kullanıcı işlemi:** her eğitmen için ilişki teyidi + (varsa) sertifika ve dış
-profil bağlantısı. Gelmezse kartların yayından kaldırılması değerlendirilmeli.
+**Kalan açıklar (iş sahibinin teyidi bunları kapatmaz):**
+
+* **Dış doğrulama bağlantısı yok.** Ziyaretçi iddiaları bağımsız olarak
+  doğrulayamıyor. Her eğitmen için resmî profil/kurum bağlantısı eklenmesi
+  güveni ölçülebilir biçimde artırır.
+* **`Person` şeması hâlâ yayınlanmıyor.** Teyit sohbette alındı; yapılandırılmış
+  veri arama motorlarına yönelik daha güçlü ve kalıcı bir kamusal beyandır.
+  Eklenmesi ayrı bir karar olarak iş sahibine bırakıldı — istenirse tek yerden
+  açılabilir.
+* Sertifika/kimlik belgesi yok.
 
 ---
 

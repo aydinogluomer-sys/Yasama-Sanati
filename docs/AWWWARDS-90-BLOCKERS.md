@@ -303,7 +303,7 @@ listesine bakmaz. `verify:runtime` zincirine alındı.
 | `/programlar/yasam-kocu` | foto | sadece 14px CSS | **yok** | kicker+serif ✅ | aynı |
 | `/programlar/meridyen-terapi` | foto | 3D sahne ✅ | 3D | kicker+serif ✅ | 6 sayfanın tek farklısı — diğerlerinde karşılığı yok |
 | `/the-story` | foto | sadece 14px CSS | 3D sahne | **serif YOK** | marka sayfası markasız |
-| `/egitmenler` | foto | 3 hareket | baş harf kartları | kısmen serif | portre yok, kart dili jenerik |
+| `/egitmenler` | foto | 3 hareket | baş harf (tipografik) | serif ✅ | ✅ zaten editoryal dizin — aşağıya bakın |
 | `/community` | foto | sadece 14px CSS | **yok** | **serif YOK** | **sitenin en zayıf sayfası** |
 | `/sss` | foto | 2 hareket | **yok** | serif ✅ | ✅ kategori ayırıcıları + kapanış CTA |
 | `/blog` | foto | motion var (8 kullanım) ✅ | kart görselleri | **serif YOK** | kart ızgarası jenerik, başlıklar sans |
@@ -602,3 +602,21 @@ altı bileşenlerin ertelenmesi, 147 KB'lık SSR HTML'i). Bu üçü **tahmindir*
 uygulanmadan önce ölçülmeli. Bu fazın dersi tam olarak buydu: planın "hero
 görselleri" teşhisi ölçülmediği için yanlıştı ve neredeyse hiçbir şey
 kazandırmayacak bir işe yönlendiriyordu.
+
+
+## `/egitmenler` — denetim satırı bayatmış (2026-09-02)
+
+B tablosu bu sayfa için "baş harf kartları, kart dili jenerik" diyordu. Sayfa
+açılıp okundu: **öyle değil.** Zaten editoryal bir dizin — Space Mono indeks +
+disiplin etiketi, serif ad, bakır rol, akordeon açılımı; `/sss` ile aynı dil.
+Baş harf de kart değil, açılan panelde kontur çizgili tipografik bir öğe.
+
+Jenerik kalan tek şey uzmanlık **çipleriydi** (`bg-cream/8 rounded border`);
+onlar sitenin kare + saç teli diline çevrildi. Başka iş çıkmadı.
+
+**Asıl bulgu tasarımda değil içerikteydi.** Sayfa beş gerçek kamusal kişi
+hakkında unvan, "uluslararası klinik tecrübe" ve iki kişi için deneyim yılı
+iddiası yayınlıyor. `TRUST-PROOF-MATRIX.md` bunu "deneyim yılı: yok" diye
+kaydetmişti — yani kayıt, yayınlanan içerikten zayıftı. İş sahibine soruldu ve
+**2026-09-02'de bilgilerin doğru olduğu teyit edildi**; içeriğe dokunulmadı,
+kayıt düzeltildi. Dış doğrulama bağlantısı ve `Person` şeması hâlâ yok.

@@ -274,7 +274,7 @@ hazır; yalnız değer eksik.
 | Konu | Nerede bekliyor |
 |---|---|
 | IECCERT sicil no, doğrulama URL'i, eğitim saati, değerlendirme yöntemi, örnek sertifika | `AccreditationProof` propları — tanımlı, boş |
-| Eğitmenlerin akademiyle bağı, sertifikaları, deneyim yılı, gerçek portreler | `app/egitmenler/page.tsx` — şu an baş harf kullanılıyor, uydurma portre yok |
+| ~~Eğitmenlerin akademiyle bağı~~ | **iş sahibi 2026-09-02'de teyit etti** (bkz. TRUST-PROOF-MATRIX). Açık kalanlar: dış doğrulama bağlantısı ve `Person` şeması yok; uydurma portre de yok |
 | Blog yazar kimlikleri | `utils/blogData.ts` — "Elif Kozanoğlu / Ahmet Yılmaz" adları Unsplash stok portreleriyle eşleşmiş ve bu isimler eğitmen listesinde yok. `ArticleSchema`'da `author` bu yüzden yayınlanmıyor |
 | Testimonial kaynağı ve kullanım izni | 6 program dosyasındaki `testimonials` — "D. S., Mimar" gibi anonim; provenance kaydı yok. Silinmedi, uydurulmadı, "doğrulanmış" işaretlenmedi |
 | Tescilli ticaret unvanı, adres, vergi/sicil | `app/privacy-terms/page.tsx` (`TODO (hukuk)`) ve `StructuredData` Organization |
