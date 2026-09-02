@@ -369,7 +369,8 @@ Bu faz **yeni tasarım üretmez**, var olan sistemi devreye alır. En yüksek et
    `easing.editorial` ile yerleşme. Lenis ile çakışmaması için geçiş sırasında scroll
    pozisyonu sıfırlanacak. Süre `duration.section` (0.9s) üstünde olmayacak —
    navigasyonu yavaşlatmak Usability'den puan götürür.
-7. **İmleci siteye yay.** `Cursor.tsx`i `JourneyDesktop` dışına çıkar, layout
+7. ✅ **İmleci siteye yay.** YAPILDI — ama bir tur ATLANMIŞTI (aşağıya bakın).
+   `Cursor.tsx`i `JourneyDesktop` dışına çıkar, layout
    seviyesine taşı; link/buton/görsel üzerinde durum değiştirsin. Dokunmatik
    cihazlarda hiç mount edilmesin.
 8. `Magnetic`i CTA butonlarında kullan ya da sil. `Loader`, `DynamicLineReveal`,
@@ -620,3 +621,49 @@ iddiası yayınlıyor. `TRUST-PROOF-MATRIX.md` bunu "deneyim yılı: yok" diye
 kaydetmişti — yani kayıt, yayınlanan içerikten zayıftı. İş sahibine soruldu ve
 **2026-09-02'de bilgilerin doğru olduğu teyit edildi**; içeriğe dokunulmadı,
 kayıt düzeltildi. Dış doğrulama bağlantısı ve `Person` şeması hâlâ yok.
+
+
+---
+
+# G. PLANIN KAPANIŞI (2026-09-02)
+
+18 maddenin durumu, tek tek doğrulanarak:
+
+| durum | maddeler |
+|---|---|
+| ✅ kapandı | 1, 2, 3, 4, 5, 6, **7**, 8, 9, 10, 11, 12, 13, 14, 17, 18 (16 madde) |
+| ⛔ hedefe ulaşmadı | **16** — mobil LCP |
+| ✗ iptal (gerekçeli) | **15** — dayandığı A11 tespiti yanlıştı |
+
+## Madde 7 bir tur ATLANMIŞTI — kayda geçiyor
+
+Faz 2 "tamamlandı" diye raporlanmıştı ama 7. madde hiç yapılmamıştı:
+`Cursor.tsx` yalnız `JourneyDesktop` içinde kalmıştı, yani A6'nın şikâyeti
+(menüden bir sayfaya geçince imlecin OS varsayılanına dönmesi) aynen
+duruyordu. Kullanıcı "plan tamamlandı mı?" diye sorunca madde madde
+doğrulandı ve açık çıktı.
+
+**Ders:** faz sonunda "tamamlandı" demeden önce maddeler tek tek koda karşı
+doğrulanmalı; bu turda üç ayrı kez rapor ile gerçek ayrıştı (A11 yanlış tespit,
+madde 7 atlanmış, `ART-DIRECTION-GAPS.md` bayat). Bu yüzden madde 7 için
+davranışsal bir kapı yazıldı (`qa/cursor.mjs`) — bir daha sessizce kaybolamaz.
+
+## Madde 16 — neden kapanmadı
+
+Hedef: mobil Slow 4G LCP <2500 ms. Ulaşılan: 9764 → 9352 ms.
+
+Kapanmamasının nedeni eksik çaba değil, **ölçülmüş bir tavan**: uygulama
+JavaScript'i tamamen engellendiğinde bile LCP **3128 ms** (D080). Yani hedef,
+bundle çalışmasıyla tek başına ulaşılabilir değil; hidrasyonun yanında
+HTML/CSS/font kritik yolunun da kısalması gerekir.
+
+Bu yönde yapılanlar ve neden durulduğu D079/D080/D081'de kayıtlı — özellikle
+LazyMotion göçünün tavanı (~15 KB tel üzerinde, 58 dosya maliyetle) ölçülüp
+elendiği bölüm.
+
+## Kapı takımı
+
+Plan başladığında 13 kapı vardı, şimdi **16**. Bu turda eklenenler:
+`test:fonts` · `test:hero-contrast` · `test:selection` · `test:cursor`
+(+ `verify:gates` çalıştırıcısı). Dördü de bu turda gerçekten yakalanan,
+başka hiçbir kapının göremediği hatalar için yazıldı.

@@ -1147,3 +1147,48 @@ Değişiklik yine de doğrudur ve yapısal gerekçeye dayanır: 28 saniyelik bir
 JS animasyonu ana iş parçacığından kalkmıştır ve bir bileşenin Motion
 bağımlılığı tamamen kesilmiştir. Sayısal etki, makine boştayken yeniden
 ölçülmelidir.
+
+## D082 — Plan maddesi 7 atlanmış; imza imleci tüm siteye yayıldı
+
+Reason: Kullanıcı "plan tamamlandı mı?" diye sorunca 18 madde tek tek koda
+karşı doğrulandı. **Madde 7 hiç yapılmamıştı** ama Faz 2 tamamlandı diye
+raporlanmıştı: `Cursor.tsx` yalnız `JourneyDesktop` içinde kalmıştı, yani
+A6'nın şikâyeti — "kullanıcı menüden bir sayfaya gittiğinde imleç OS
+varsayılanına dönüyor" — aynen duruyordu.
+
+Bu, aynı turda rapor ile gerçeğin ayrıştığı ÜÇÜNCÜ durum (A11 yanlış tespit,
+`ART-DIRECTION-GAPS.md` bayat, madde 7 atlanmış). Ders: faz sonunda
+"tamamlandı" demeden önce maddeler tek tek koda karşı doğrulanmalı.
+
+**Yapılan.** `components/Client/SiteCursor.tsx` — bakır saç teli halka, fareye
+eşlik ediyor, etkileşimli ögelerde büyüyor (28px → 49px ölçüldü).
+`app/layout.tsx`e bağlı, yani her rotada.
+
+**Motion KULLANILMADI ve bu bir tercih değil.** Bileşen her sayfada olduğu için
+Motion'lı bir çözüm Motion'ı her rotanın kritik yoluna sokardı; bu turda tam
+tersi yapılmıştı (D079/D081). Yerine tek bir rAF döngüsü ve doğrudan
+`transform` yazımı var.
+
+**Bilerek yapılmayanlar:** yerli imleç gizlenmiyor (`cursor: none` yok — JS
+gelmezse kullanıcı işaretçisiz kalmamalı) · dokunmatikte hiç render edilmiyor ·
+hareket azaltmada hiç render edilmiyor · `pointer-events: none`.
+
+**Kapı: `qa/cursor.mjs` (`npm run test:cursor`).** Bileşenin varlığına değil
+davranışına bakıyor. Yazarken iki kusuru kendisi ortaya çıkardı:
+
+1. Seçici `[class*="z-[60]"]` idi; iç içe köşeli parantezler Playwright'ın
+   seçici ayrıştırıcısında `querySelector` ile aynı davranmıyor — aynı öge
+   `evaluate` içinde bulunurken `waitForSelector` bulamıyordu. Bileşene kararlı
+   bir `data-site-cursor` kancası eklendi.
+2. Sabit süre beklemek yanlıştı: halka `useEffect` içinde kurulduğu için
+   hidrasyondan sonra var oluyor ve ana sayfada bu 2 saniyeyi aşabiliyor. Kapı
+   artık ögenin DOM'a gelmesini bekliyor ve **bekleme süresini yazıyor**:
+   `/ 2101 ms · /the-story 1678 ms · /programlar 89 ms · /blog 162 ms`.
+   Süre gizlenmiyor ki patolojik bir yavaşlama sessizce geçmesin.
+
+**Ayrıca (madde 3 kalıntısı):** `max-w-3xl` = 48rem = `--container-editorial`
+birebir eşleştiği için üç yerde token'a çevrildi (görsel 32/32 %0,000).
+`max-w-2xl` (42rem) çevrilmedi — token setinde karşılığı yok ve çevirmek okuma
+ölçüsünü 96px genişletirdi; grep'i memnun etmek için görsel değiştirilmez.
+
+Kapılar: 16/16 + görsel 32/32 + typecheck + lint + build 27/27.
