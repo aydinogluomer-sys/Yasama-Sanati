@@ -42,6 +42,7 @@ Bu dosya, depoda çalışan yapay zekâ ajanları ve geliştiriciler içindir.
 | `docs/decisions.md` | Karar kayıtları (D0xx). Bir şeyin NEDEN öyle olduğunu buradan öğren. |
 | `docs/RELEASE-READINESS.md` | Gönderim engelleri ve güncel performans ölçümü. |
 | `docs/ART-DIRECTION-GAPS.md` | Görsel üretim şartnamesi; hangi karenin değişmesi gerektiği. |
+| `docs/SURFACE-RHYTHM-PLAN.md` | **Açık iş.** Alt sayfaların tek düze koyu yeşilden çıkarılması. Ölçüldü: 9 rota sayfa boyunca `deep %100`, ana sayfa 6 yüzey. Onay bekliyor. |
 | `design-system/` + `DESIGN.md` | Renk/tip/hareket ölçekleri ve `/on-gorusme` rotasının kendi sistemi ("Meridyen Eşiği"). |
 
 > **Açık karar (proje sahibine ait):** `docs/RELEASE-PLAN.md` hâlâ duruyor ve kapsamı
