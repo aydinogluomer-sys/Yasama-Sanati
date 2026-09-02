@@ -26,14 +26,16 @@ export default function HeroDesktopClient() {
         style={{ y: reduceMotion ? "0%" : y, maskImage: reduceMotion ? "none" : maskImage }}
         className="h-full"
       >
-        {/* The movement is authored here rather than shot: a single slow settle across the still
-            on arrival. One-shot, not a loop — it is an entrance gesture, and an endless drift
-            would keep a compositor layer alive for the whole visit. Held for reduced motion. */}
-        <motion.div
-          className="h-full"
-          animate={reduceMotion ? { scale: 1 } : { scale: [1.06, 1] }}
-          transition={reduceMotion ? { duration: 0 } : { duration: 28, ease: "easeOut" }}
-        >
+        {/* Hareket burada yazıldı, çekilmedi: gelişte kare boyunca tek ve yavaş
+            bir yerleşme. Tek seferlik, döngü değil — bu bir giriş jesti; sonsuz
+            bir sürüklenme ziyaret boyunca compositor katmanını canlı tutardı.
+
+            MOTION'DAN CSS'E ALINDI: 28 saniyelik bir Motion animasyonu, sayfa
+            yüklenirken o süre boyunca ana iş parçacığında iş üretiyordu.
+            Ölçüm ve gerekçe app/globals.css `heroSettle` yorumunda. Dıştaki
+            kaydırmaya bağlı maske Motion'da kaldı — o gerçekten scroll'a bağlı.
+            Hareket azaltma artık medya sorgusuyla. */}
+        <div className="hero-settle-desktop h-full">
           {/* Kalite 75 -> 60. ÖLÇÜLEREK seçildi, göz kararı değil: hero üç scrim
           katmanının altında ve tonal aralık zaten eziliyor. Sayfa üzerinde
           karşılaştırma (390x844, DPR 2, animasyonlar kapalı, pixelmatch):
@@ -50,7 +52,7 @@ export default function HeroDesktopClient() {
             placeholder="blur"
             className="size-full object-cover"
           />
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   );

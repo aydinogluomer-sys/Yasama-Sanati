@@ -1066,3 +1066,84 @@ istemci bileşeni. Seçenekler:
 **Ama beklenti gerçekçi tutulmalı:** tavan 3128 ms. Hedef <2500 ms'e ulaşmak
 için hidrasyonun yanında HTML/CSS/font kritik yolunun da kısalması gerekir.
 Bu iş yapılmadan önce yukarıdaki tavan ölçümü tekrarlanmalı.
+
+## D081 — Hidrasyon fazı: hero yerleşmesi CSS'e alındı; LazyMotion göçü ÖLÇÜMLE ELENDİ
+
+Reason: D080 darboğazın ana iş parçacığı olduğunu göstermişti (TBT ~2362 ms).
+Bu turda "istemci JS'ini azalt" yönü araştırıldı. Sonuç: bir değişiklik yapıldı,
+bir büyük göç ise **ölçüme dayanarak yapılmadı.**
+
+### Hidrasyon CPU'su nereye gidiyor (CDP örnekleme profili, 4× kısıt)
+
+```
+(program/GC — büyük ölçüde boşta)   7460 ms
+8962 (Motion)                       1164 ms   %9,9
+4bd1b696 (react-dom)                1121 ms   %9,5
+webpack runtime                      541 ms
+7097 (Motion)                        466 ms
+1255 (react/router)                  449 ms
+app/page                             324 ms
+```
+
+JS işinin toplamı ~4,3 sn; bunun **Motion'a düşeni ~1705 ms (%39)**, React/router
+~1570 ms (%36).
+
+### Ayırt edici test: bu CPU ayrıştırma mı, çalışan animasyon mu?
+
+Aynı profil `reducedMotion: "reduce"` ile tekrarlandı:
+
+```
+                       normal    reduced-motion
+Motion 8962            1545 ms      1030 ms
+Motion 7097             606 ms       111 ms
+react-dom              1700 ms      1226 ms
+Motion toplam          2151 ms      1141 ms
+```
+
+**Motion CPU'sunun ~%47'si çalışan animasyon, ~%53'ü ayrıştırma/kurulum.**
+
+### LazyMotion göçü NEDEN YAPILMADI
+
+Tavan ölçüldü. Framer'ın kendi boyut derlemeleri:
+
+```
+size-rollup-dom-max.js        83 KB   <- bugun gonderilen (tam paket)
+size-rollup-dom-animation.js  36 KB   <- LazyMotion + domAnimation
+```
+
+Yani göçün tavanı ~47 KB sıkıştırılmamış, tel üzerinde **~15 KB**. Buna karşılık
+maliyet: **58 dosya, 188 `motion.*` kullanımı**, üstelik 12 dosya
+`motion/react-client` kullanıyor ve o giriş noktası bileşenleri **tam özellik
+paketiyle** üretiyor (`framer-motion/client` → `createMotionComponentWithFeatures`),
+yani o 12 dosya dönüştürülmeden LazyMotion hiçbir şey kazandırmaz.
+
+D080'de 138 KB kesilmesine rağmen LCP'nin oynamadığı zaten ölçülmüştü. 15 KB
+için 58 dosyalık bir göç, ölçülen getirisiyle orantısız bir risktir. **Yapılmadı.**
+
+### Yapılan: hero yerleşmesi Motion'dan CSS'e
+
+Profildeki en uzun tek animasyon buydu: hero görselinin `scale 1.08 -> 1`
+hareketi **28 SANİYE** sürüyor ve sayfa yüklenirken tüm o süre boyunca Motion'ın
+her karede ana iş parçacığında çalışmasını gerektiriyordu. `app/globals.css`
+içine `heroSettle` / `heroSettleDesktop` keyframe'leri eklendi; koreografi aynı
+(1.08→1 mobil, 1.06→1 masaüstü, 28s, easeOut).
+
+* `HeroMobileClient` artık **Motion'a hiç bağımlı değil**.
+* `HeroDesktopClient`te yalnız kaydırmaya bağlı maske Motion'da kaldı — o
+  gerçekten scroll'a bağlı, CSS karşılığı üç motorda güvenilir değil.
+* Hareket azaltma JS hook'u yerine `prefers-reduced-motion` medya sorgusuyla.
+
+**Doğrulama:** görsel regresyon 32/32 %0,000; 14 kapının tamamı geçti.
+
+### PERF DELTASI ÖLÇÜLEMEDİ — dürüst kayıt
+
+Bu değişikliğin LCP/TBT etkisi **bu makinede güvenilir biçimde ölçülemedi.**
+Ölçüm sırasında boş RAM 7,9 GB'ın 1,0–1,2 GB'ına inmişti (kullanıcının kendi
+Chrome'u 16 süreç, Spotify, Docker Desktop). Aynı derlemede masaüstü TBT'si
+34 ms ile 489 ms arasında salındı — tek bir animasyonu CSS'e almanın
+üretemeyeceği bir fark. Bu koşulda bir iyileşme İDDİA EDİLMİYOR.
+
+Değişiklik yine de doğrudur ve yapısal gerekçeye dayanır: 28 saniyelik bir
+JS animasyonu ana iş parçacığından kalkmıştır ve bir bileşenin Motion
+bağımlılığı tamamen kesilmiştir. Sayısal etki, makine boştayken yeniden
+ölçülmelidir.

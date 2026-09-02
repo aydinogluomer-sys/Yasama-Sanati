@@ -149,6 +149,13 @@ npm run test:perf     # LCP / CLS / TBT — LAB ölçümü, p75 değil
 7. **Font alt kümelerken `--layout-features='*'` kullan.** Elle özellik listesi
    vermek Ogg'un şekillendirmesini bozdu ve `/the-story` başlığı kaydı
    (görsel regresyon %0,85–1,57). Alt kümeleme sonrası `test:visual` şart (D080).
+8. **Performans ölçmeden önce boş RAM'e bak.** Bu depoda bir tur, boş RAM
+   1 GB'a inmişken alınan sayılarla çalışıldı: aynı derlemede masaüstü TBT'si
+   34 ms ile 489 ms arasında salındı. Makine yüklüyken perf iddiası yazma;
+   `Get-CimInstance Win32_OperatingSystem` ile serbest belleği not et (D081).
+9. **`motion/react-client` LazyMotion'ı etkisiz kılar.** O giriş noktası
+   bileşenleri TAM özellik paketiyle üretir; 12 dosya onu kullandığı sürece
+   `m` + `LazyMotion` göçü hiçbir bayt kazandırmaz (D081).
 
 ---
 
@@ -156,7 +163,7 @@ npm run test:perf     # LCP / CLS / TBT — LAB ölçümü, p75 değil
 
 | konu | durum |
 |---|---|
-| Mobil Slow 4G LCP | **hedef karşılanmadı** (<2500 ms). 9764 → 9352 ms. Bundle işi yapıldı: tel üzerinde 812 → 674 KB. Ama **LCP oynamadı** — darboğaz bant genişliği değil ana iş parçacığı (TBT ~2362 ms). Tavan ölçüldü: tüm uygulama JS'i sıfırlansa bile LCP 3128 ms. Ayrıntı D080. |
+| Mobil Slow 4G LCP | **hedef karşılanmadı** (<2500 ms). 9764 → 9352 ms. Darboğaz bant genişliği değil ana iş parçacığı; tavan ölçüldü: tüm uygulama JS'i sıfırlansa bile LCP 3128 ms (D080). Hidrasyon fazında hero yerleşmesi CSS'e alındı; **LazyMotion göçü ölçümle elendi** (tavan ~15 KB, maliyet 58 dosya) — D081. Sayısal delta makine boştayken yeniden ölçülmeli. |
 | `group/mucizeler-kursu.jpg`, `group/yasam-koclugu.jpg` | renk sıcaklığı düzeltildi, konu hâlâ ılıman iklim penceresi. Prompt hazır. |
 | `/egitmenler` | denetimde "portre yok, kart dili jenerik" — plan maddesi değildi, kapsam dışı bırakıldı. |
 | Footer'ın iki CTA düğmesi | `rounded-full` hap; sitenin geri kalanı kare (`BorderedButton`). 404'te aynı gerekçeyle kaldırılmıştı. Footer bir referans görsele göre ayarlandığı için dokunulmadı — **karar sahibinin.** |

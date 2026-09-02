@@ -767,3 +767,58 @@ body:has([data-consultation-route])::after {
     opacity: 0;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   HERO GÖRSELİNİN YERLEŞMESİ — saf CSS.
+
+   Motion'dan alındı çünkü ÖLÇÜLDÜ: bu animasyon 28 SANİYE sürüyor ve sayfa
+   yüklenirken tüm o süre boyunca Motion'ın her karede ana iş parçacığında
+   çalışmasını gerektiriyordu. Yükleme anındaki CPU profilinde (4x kısıt):
+
+     normal          Motion yığınları 2151 ms
+     reduced-motion  Motion yığınları 1141 ms   ← animasyonlar kapaliyken
+                                                  yaklasik yarisi kayboluyor
+
+   Yani Motion CPU'sunun ~%47'si ÇALIŞAN animasyon; en uzunu da buydu.
+   CSS `transform` animasyonu compositor'a devredilebiliyor ve JS'in her
+   karede iş yapmasını gerektirmiyor.
+
+   Koreografi aynı: 1.08 -> 1, 28s, easeOut (cubic-bezier(0, 0, 0.58, 1)).
+   Tek seferlik — döngü değil; sonsuz bir sürüklenme ziyaret boyunca bir
+   compositor katmanını canlı tutardı.
+   --------------------------------------------------------------------------- */
+@keyframes heroSettle {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-settle {
+  animation: heroSettle 28s cubic-bezier(0, 0, 0.58, 1) both;
+  will-change: transform;
+}
+
+/* Masaüstü karesi biraz daha dar başlıyor (kadraj geniş, 1.06 yetiyor). */
+.hero-settle-desktop {
+  animation-name: heroSettleDesktop;
+}
+
+@keyframes heroSettleDesktop {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-settle,
+  .hero-settle-desktop {
+    animation: none;
+    will-change: auto;
+  }
+}
