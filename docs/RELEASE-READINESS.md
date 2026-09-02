@@ -3,8 +3,13 @@
 > Yalnız **güncel gerçeklik**. Geçmiş plan, kapanmış madde ve tarihçe burada yok;
 > onlar `docs/FINAL-VERIFICATION.md` ve `docs/decisions.md` içinde.
 >
-> Son güncelleme: **2026-08-22** · Doğrulanan HEAD: bu dosyayı taşıyan commit
-> Kapılar: `npm run verify:all` + `npm run test:browsers`
+> Son güncelleme: **2026-09-02** · Doğrulanan HEAD: bu dosyayı taşıyan commit
+> Kapılar: `npm run verify` + `npm run verify:gates` + `npm run test:visual`
+>
+> `verify:gates` (yeni) 13 kapıyı TEK TEK, aralarında tarayıcı temizliğiyle
+> koşar. Zincirlenmiş `verify:runtime` bu turda iki kez **yanlış hata** üretti
+> (`viewports`, `keyboard`, `reveal`, `transition`); dördü de temiz koşuda geçti.
+> Kapılar koşarken sunucuya başka hiçbir şey dokunmamalı.
 
 ---
 
@@ -58,6 +63,45 @@ sahibinin talebi olmadan içeriğe dokunulmadı.
 > Uyarı: iki ölçüm farklı HEAD'lerde ve aralarında içerik değişiklikleri de var.
 > Bu, journey split'inin tek başına etkisinin kontrollü bir A/B'si **değildir**.
 
+#### 2026-09-02 ölçümü — ve neden yukarıdaki tabloyla KARŞILAŞTIRILAMAZ
+
+```
+masaüstü kısıtsız      LCP 876 ms    (604–1624)    TBT ~81 ms
+mobil 4× CPU           LCP 6936 ms   (6720–7740)   TBT ~2398 ms
+mobil 4× CPU + Slow 4G LCP 9764 ms   (8832–10692)  TBT ~2824 ms
+LCP ögesi: IMG.size-full.object-cover  ·  transfer 1332 KB
+```
+
+Bu sayılar yukarıdaki 3244 ms ile **yan yana konulamaz**, iki nedenle:
+
+1. **Makine yükü farklı.** Ölçüm sırasında kullanıcının kendi Chrome'u (15
+   süreç), Spotify ve Docker Desktop çalışıyordu. Yayılımlar bunu gösteriyor
+   (mobil 4× CPU'da 2016–7144 ms bandı görüldü). Bu koşulda mutlak bir sayı
+   iddia etmek dürüst olmaz.
+2. **LCP ÖGESİ DEĞİŞTİ.** 3244 ms ölçümünde LCP ögesi dekoratif "ŞİFA"
+   konturuydu; bu dosya zaten "gerçek içerik Slow 4G'de ~10,5 sn'ye kadar
+   boyanmıyor, kontur bunu örtüyor" diye kaydetmişti. Bugünkü ölçümde LCP
+   ögesi hero **görselinin kendisi** ve ~9,8 sn — yani rakam kötüleşmedi,
+   **örtü kalktı**. 3244 ms hiçbir zaman gerçek içeriğin boyanma anı değildi.
+
+**Kontrollü A/B — bu turun tipografi düzeltmesi LCP'yi kötüleştirdi mi?**
+Aynı makinede, aynı dakikada, yalnız `--font-sans`/`--font-mono` bağlaması
+açık/kapalı olacak şekilde ölçüldü:
+
+| | mobil 4× CPU | Slow 4G |
+|---|---|---|
+| bağlama AÇIK (gönderilen) | 6936 ms | **9764 ms** |
+| bağlama KAPALI | 2704 ms* | **11964 ms** |
+
+\* kapalı koşunun yayılımı 2016–7144 ms; medyan güvenilir değil.
+
+Yani tipografi düzeltmesi Slow 4G'de LCP'yi **kötüleştirmiyor** (aksine daha
+iyi ölçüldü). Darboğaz bu dosyanın zaten söylediği yerde: kritik yoldaki
+~1,3 MB ve React+Motion hidrasyonu.
+
+**Hedef <2500 ms KARŞILANMADI.** Gerçek bir ilerleme için gereken şey ölçüm
+değil bundle çalışması; bu ayrı bir iş kalemi.
+
 Journey runtime'ı mobil/masaüstü olarak gerçekten ayrıldı (CSS gizleme JS'i
 bundle'dan çıkarmıyordu). Mobil artık masaüstü journey chunk'ını indirmiyor —
 ama **bayt kazancı yok** (212 KB → 212 KB): modül küçük ve ağır bağımlılıkları
@@ -66,11 +110,19 @@ zaten paylaşımlı. Kazanç hidrasyon işinde.
 Kalan darboğaz: kritik yoldaki toplam bayt (~1301 KB mobil) ve React+Motion
 hidrasyon maliyeti. <2500 ms için daha derin bir bundle çalışması gerekir.
 
-### 3. Görünür sanat yönetimi çatlağı — 5 kare, hepsi ana sayfada
-`ImageContainer/image-1,3,5` ve `group/mucizeler-kursu, yasam-koclugu` hâlâ
-İskandinav/orman/yağmur dilinde. Marka dili Ege/Anadolu.
-→ **Kullanıcı işlemi:** `docs/ART-DIRECTION-GAPS.md` içinde her kare için dosya
-hedefi, oran ve prompt hazır.
+### 3. Görünür sanat yönetimi çatlağı — 5 değil, **2 kare** (2026-09-02 düzeltmesi)
+
+> Bu madde bayattı ve bir tur boyunca yanlış iş listesi üretti.
+
+`ImageContainer/image-1, -3, -5` **artık doğru dilde.** Üçü de 2026-08-23'te
+(`fb5fa1e`) yeniden üretilmiş; commit mesajına güvenilmeyip bugün tek tek
+açılarak gözle denetlendi: kireç badanalı taş, zeytin, kuru ot, kil kupa,
+terracotta. Orman/yağmur/Nordic yok.
+
+Kalan **2 kare**: `group/mucizeler-kursu.jpg` ve `group/yasam-koclugu.jpg`.
+İkisi de sıcak derecelendirmeden geçti (renk sıcaklığı düzeldi) ama konu hâlâ
+ılıman iklim penceresi.
+→ **Kullanıcı işlemi:** `docs/ART-DIRECTION-GAPS.md` §4 ve §5'te prompt hazır.
 
 ### 4. `SideBar/on-gorusme.jpg` placeholder
 `FormImage.jpg`'nin geçici kırpması. Menüdeki diğer 11 karenin hepsi kendi
@@ -81,9 +133,10 @@ görseline sahip.
 
 ## NON-BLOCKING POLISH — gönderimi durdurmaz
 
-- `group/reiki.jpg`, `group/nefes-koclugu.jpg`, `group/hipnoterapi.jpg` hiçbir
-  bileşenden referans almıyor. Ya kullanılmalı ya silinmeli (reiki karesi ayrıca
-  yanlış dilde: god-ray çam ormanı).
+- ~~`group/reiki.jpg`, `group/nefes-koclugu.jpg`, `group/hipnoterapi.jpg`
+  referanssız.~~ **KAPANDI (2026-09-02):** o üç dosya artık depoda yok.
+  `public/group/` içinde üç dosya kaldı (`meridyen-terapi`, `mucizeler-kursu`,
+  `yasam-koclugu`) ve üçü de kullanılıyor.
 - Hero giriş koreografisi: gerçek içerik Slow 4G'de ~10,5 sn'ye kadar boyanmıyor;
   dekoratif "ŞİFA" konturu bunu örtüyor (ölçüm: konturu kaldırınca LCP 4296 →
   10536 ms). Kontur korunmalı; çözüm koreografiyi öne çekmek.

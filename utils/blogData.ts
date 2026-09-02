@@ -1,3 +1,11 @@
+import type { StaticImageData } from "next/image";
+
+import CoverButunsel from "@/public/ImageContainer/image-1.jpg";
+import CoverNefes from "@/public/ImageContainer/image-2.jpg";
+import CoverMeridyen from "@/public/ImageContainer/image-5.jpg";
+import CoverHipnoterapi from "@/public/ImageContainer/image-4.jpg";
+import CoverReiki from "@/public/ImageContainer/image-6.jpg";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -5,7 +13,22 @@ export interface BlogPost {
   date: string;
   excerpt: string;
   readTime: string;
-  coverImage: string;
+  /**
+   * Kapak görseli — YEREL.
+   *
+   * Beşi de `images.unsplash.com` üzerinden hot-link edilen STOK fotoğraflardı.
+   * Üç ayrı sorun vardı:
+   *   1. Sanat yönetimi: öne çıkan yazının kapağı yoğun yeşil bir ormandı —
+   *      docs/ART-DIRECTION-GAPS.md'nin "yanlış dil" dediği tam olarak bu.
+   *      Sorun %10 opaklıkta gizlendiği için görünmüyordu; kart editoryal
+   *      düzene çevrilince ortaya çıktı.
+   *   2. Dayanıklılık: gönderim yapılacak bir sitede kapak görselleri üçüncü
+   *      taraf bir CDN'e bağlıydı.
+   *   3. Performans: LCP yoluna ayrı bir origin bağlantısı ekliyordu.
+   *
+   * Artık her yazı, konusunun kendi programına ait Ege karesini kullanıyor.
+   */
+  coverImage: StaticImageData;
   /**
    * Yazar atfı KURUMSAL.
    *
@@ -34,7 +57,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "24 Mayıs 2026",
     excerpt: "Bütünsel yaklaşımlar insanı fiziksel, zihinsel ve duygusal katmanlarıyla birlikte ele almayı önerir. Bu yazı, o bakışın ne anlama geldiğini ve altı disiplinin hangi ortak zeminde buluştuğunu anlatıyor.",
     readTime: "7 Dk",
-    coverImage: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80",
+    coverImage: CoverButunsel,
     author: {
       name: "Yaşama Sanatı Editoryal Ekibi",
       role: "Akademi editörü",
@@ -71,7 +94,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "12 Mayıs 2026",
     excerpt: "Nefesimiz, fiziksel ve zihinsel durumumuzun anlık aynasıdır. Gün içinde farkında olmadan tuttuğumuz veya sığlaştırdığımız nefesleri serbest bırakarak stresi azaltmanın ve yaşam enerjisini (Qi) dengelemenin pratik yolları.",
     readTime: "5 Dk",
-    coverImage: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
+    coverImage: CoverNefes,
     author: {
       name: "Yaşama Sanatı Editoryal Ekibi",
       role: "Akademi editörü",
@@ -103,7 +126,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28 Nisan 2026",
     excerpt: "Geleneksel Çin Tıbbı'nın temelini oluşturan 14 ana enerji kanalını ve geleneksel öğretinin bu hatlarla ilişkilendirdiği fiziksel / duygusal temaları detaylıca inceliyoruz.",
     readTime: "6 Dk",
-    coverImage: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80",
+    coverImage: CoverMeridyen,
     author: {
       name: "Yaşama Sanatı Editoryal Ekibi",
       role: "Akademi editörü",
@@ -140,7 +163,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "15 Nisan 2026",
     excerpt: "Alışkanlıklarımızı, korkularımızı ve tekrarlayan yaşam döngülerimizi yöneten bilinçaltı düzeyine nasıl ulaşırız? Trans ve telkin yöntemlerinin derin zihinsel dönüşümlerdeki etkisi.",
     readTime: "5 Dk",
-    coverImage: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=800&q=80",
+    coverImage: CoverHipnoterapi,
     author: {
       name: "Yaşama Sanatı Editoryal Ekibi",
       role: "Akademi editörü",
@@ -169,7 +192,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "02 Nisan 2026",
     excerpt: "Geleneksel Usui öğretisinde el pozisyonlarıyla yürütülen bir enerji çalışması olan Reiki'nin birinci derece prensipleri ve günlük çakra dengeleme meditasyonu rehberi.",
     readTime: "5 Dk",
-    coverImage: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+    coverImage: CoverReiki,
     author: {
       name: "Yaşama Sanatı Editoryal Ekibi",
       role: "Akademi editörü",

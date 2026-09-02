@@ -41,7 +41,7 @@ export default function EditorialSectionTitle({
           aria-hidden
           className={cn(
             "font-mono text-[0.95rem] leading-none tracking-[0.06em] tabular-nums md:text-[1.05rem]",
-            tone === "dark" ? "text-[var(--accent-copper-on-light)]" : "text-[var(--accent-copper-on-dark)]",
+            tone === "dark" ? "text-[var(--accent-copper-on-light)]" : "text-copper-text",
           )}
         >
           {index}

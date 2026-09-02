@@ -5,19 +5,20 @@ import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { MotionConfig } from "motion/react";
 import cn from "@/utils/cn";
 import { easing, duration } from "@/utils/motion/tokens";
+import { ink, type Ink } from "@/utils/palette";
 interface StyledLinkProps extends LinkProps {
   children: string;
   className?: string;
   style?: CSSProperties;
   underlineColor?: string;
-  arrowFill?: "#2B3530" | "#D1CCBF" | "#FFFFFF";
+  arrowFill?: Ink;
   active?: boolean;
   href: string;
 }
 export default function StyledLink({
   children,
-  arrowFill = "#D1CCBF",
-  underlineColor = "#d0cbbe",
+  arrowFill = ink.cream,
+  underlineColor = ink.cream,
   active = false,
   href,
   className,

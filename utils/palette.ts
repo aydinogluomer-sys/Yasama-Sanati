@@ -41,4 +41,29 @@ export const palette = {
 
 export type PaletteKey = keyof typeof palette;
 
+/**
+ * SVG prop mürekkepleri.
+ *
+ * NEDEN AYRICA GEREKLİ
+ * `NavigateSVG`, `StyledLink`, `BurgerSVG` gibi bileşenler rengi CSS sınıfıyla
+ * değil **prop olarak** alıyor. Faz 1'in renk birleştirmesi sınıfları taradığı
+ * için bu katmanı hiç görmedi ve şunlar hayatta kaldı:
+ *
+ *   #D1CCBF  11 kullanım  — `--color-cream` altında birleştiği İLAN EDİLEN,
+ *                           ama JS prop'larında yaşamaya devam eden eski krem
+ *   #d0cbbe   1 kullanım  — denetim listesinde bile olmayan üçüncü krem
+ *
+ * Üçü de aynı rengin farklı yazımıydı. Kanonik değere taşındılar; bu aynı
+ * zamanda kontrast YÜKSELTMESİ (#d1ccbf 7.92:1 → #ced1bf 8.16:1) ve gözle
+ * ayırt edilemez bir kayma (255 üzerinden −3/+5/0).
+ */
+export const ink = {
+  deep: palette.deep,
+  cream: palette.cream,
+  white: "#ffffff",
+} as const;
+
+/** `fill` / `stroke` / `arrowFill` prop'larının kabul ettiği değerler. */
+export type Ink = (typeof ink)[keyof typeof ink];
+
 export default palette;

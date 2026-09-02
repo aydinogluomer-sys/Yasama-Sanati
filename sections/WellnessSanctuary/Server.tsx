@@ -10,14 +10,14 @@ export default function WellnessSanctuary() {
   const textLines = {
     desktop: [
       <Fragment key="desktop-1">
-        <span className="text-[var(--accent-copper-on-dark)]">Kadim bilgelik</span>, çağdaş
+        <span className="text-copper-text">Kadim bilgelik</span>, çağdaş
       </Fragment>,
       <Fragment key="desktop-2">yöntem ve sen; hepsi</Fragment>,
       <Fragment key="desktop-3">aynı seansta buluşur</Fragment>,
     ],
     mobile: [
       <Fragment key="mobile-1">
-        <span className="text-[var(--accent-copper-on-dark)]">Kadim bilgelik</span>, çağdaş
+        <span className="text-copper-text">Kadim bilgelik</span>, çağdaş
       </Fragment>,
       <Fragment key="mobile-2">yöntem ve sen; hepsi</Fragment>,
       <Fragment key="mobile-3">aynı seansta buluşur</Fragment>,

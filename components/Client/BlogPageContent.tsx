@@ -12,12 +12,17 @@ import BorderedButton from "@/components/Server/BorderedButton";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import Image from "next/image";
 import { duration } from "@/utils/motion/tokens";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
+import { ink } from "@/utils/palette";
 
 interface BlogPageContentProps {
   posts: BlogPost[];
 }
 
 export default function BlogPageContent({ posts }: BlogPageContentProps) {
+  /* Hareket azaltma: `MotionConfig reducedMotion="user"` opaklığı kapatmaz,
+     bu yüzden burada açıkça ele alınıyor. Aynı gerekçe BlogCard'da da yazılı. */
+  const reduce = useMountedReducedMotion();
   const [activeCategory, setActiveCategory] = useState("TÜMÜ");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -73,43 +78,54 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
       <AnimatePresence>
         {showFeaturedCard && featuredPost && (
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={reduce ? false : { opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, height: 0, marginBottom: 0, overflow: "hidden" }}
             transition={{ duration: duration.buttonStroke }}
-            className="p-8 md:p-12 bg-warm rounded border border-cream/15 space-y-6 relative overflow-hidden group"
+            /* ÖNE ÇIKAN YAZI — kutu değil, editoryal açılış.
+               Öncesi: `rounded border` bir kart ve arkasında %10 opaklıkta,
+               yani fiilen görünmeyen bir kapak görseli. Hem jenerik kart
+               dilinin (AWWWARDS-90-BLOCKERS A9) örneğiydi hem de elde bir
+               fotoğraf varken onu ziyan ediyordu.
+               Şimdi: iki sütunlu bölünme, kapak görseli TAM opaklıkta ve
+               kendi alanında. Kart çerçevesi yok; ayrım ince bir kuralla. */
+            className="group grid grid-cols-1 gap-x-12 gap-y-8 border-t border-cream/20 pt-10 lg:grid-cols-12"
           >
-            {/* Background Image Overlay */}
-            <div className="absolute inset-0 opacity-10 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none">
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              aria-hidden
+              tabIndex={-1}
+              className="relative block aspect-[4/3] overflow-hidden lg:col-span-6 lg:aspect-[5/4]"
+            >
               <Image
                 src={featuredPost.coverImage}
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 1024px, 100vw"
-                className="object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                sizes="(min-width: 1024px) 46vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
               />
-            </div>
+            </Link>
 
-            <div className="relative z-10 space-y-4">
-              <span className="text-xs text-[#E8A87C] font-semibold tracking-widest uppercase">
+            <div className="flex flex-col justify-center gap-5 lg:col-span-6">
+              <span className="font-mono text-3xs font-medium tracking-[0.24em] text-copper-text uppercase">
                 Öne Çıkan Makale
               </span>
               <h2 className="font-serif text-display-m font-normal leading-[1.02] tracking-[-0.01em] text-white">
                 {featuredPost.title}
               </h2>
-              <p className="text-sm md:text-base font-light text-cream/80 leading-relaxed max-w-3xl">
+              <p className="max-w-editorial text-base font-light leading-relaxed text-cream/80">
                 {featuredPost.excerpt}
               </p>
-              <div className="flex items-center text-xs text-cream/85 space-x-4">
+              <div className="flex items-center gap-4 font-mono text-3xs tracking-[0.12em] text-cream/70 uppercase">
                 <span>{featuredPost.date}</span>
-                <span>•</span>
+                <span aria-hidden>·</span>
                 <span>{featuredPost.readTime} Okuma Süresi</span>
               </div>
               <div className="pt-2">
                 <Link href={`/blog/${featuredPost.slug}`}>
                   <BorderedButton className="inline-flex cursor-pointer items-center gap-4 px-6 py-4 text-sm text-white [&_path]:[stroke:white] [&_svg]:[stroke:white]">
                     Okumaya Başla
-                    <NavigateSVG fill="#FFFFFF" className="size-2.5 mr-2.5" />
+                    <NavigateSVG fill={ink.white} className="size-2.5 mr-2.5" />
                   </BorderedButton>
                 </Link>
               </div>
@@ -133,13 +149,13 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
       <p role="status" aria-live="polite" className="sr-only">
         {filteredPosts.length} makale gösteriliyor.
       </p>
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <motion.div layout className="grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {filteredPosts.map((post) => (
             <motion.div
               layout
               key={post.slug}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={reduce ? false : { opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: duration.quick }}
@@ -153,7 +169,7 @@ export default function BlogPageContent({ posts }: BlogPageContentProps) {
       {/* Empty State */}
       {filteredPosts.length === 0 && (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           className="text-center py-16 space-y-4"
         >

@@ -727,3 +727,180 @@ olcmeden degistirilmemeli.
 Reason: marka konumu "Online ve Izmir'de" olarak netlestirildikten sonra
 `components/Server/Select.tsx` hala `defaultSelection="Istanbul"` veriyordu. Izmir yapildi.
 Sehir listesinin kendisi degismedi.
+
+## D073 — Sitenin üç yazı tipinden ikisi hiç uygulanmıyormuş
+
+Reason: `getComputedStyle` ile ölçüldü. Kod okuyarak görülemeyecek bir kaskad
+hatasıydı; hiçbir kapı yakalamamıştı.
+
+next/font değişkenleri (`--font-grotesque`, `--font-space-mono`, `--font-serif`)
+`<body>`nin class'ıyla basılıyor. Tailwind v4'ün `@theme` bloğu ise `:root`
+üzerinde değerlendiriliyor. `@theme` içinde `var(--font-space-mono)` yazılınca o
+seviyede TANIMSIZ oluyor, tüm özellik "guaranteed-invalid" değere düşüyor ve
+`.font-mono { font-family: var(--font-mono) }` kuralı **sessizce hiç
+uygulanmıyor.** Hata yok, uyarı yok.
+
+`--font-sans` ise hiç tanımlanmamıştı, yani `font-sans` utility'si Tailwind'in
+varsayılan `ui-sans-serif, system-ui, …` yığınına düşüyordu. `SubPageLayout`in
+kök div'inde `font-sans` var.
+
+Ölçüm (production derlemesi, Chromium 1440×900), düzeltme öncesi:
+
+| rota | `.font-mono` | gövde paragrafları |
+|---|---|---|
+| `/` | 31 eleman → basisGrotesque (SANS) | basisGrotesque ✅ |
+| `/sss` | 9 eleman → ui-sans-serif | **ui-sans-serif** |
+| `/the-story` | 11 → ui-sans-serif | **ui-sans-serif** |
+| `/blog` | 3 → ui-sans-serif | **ui-sans-serif** |
+| `/programlar/reiki` | 9 → ui-sans-serif | **ui-sans-serif** |
+
+Yani: Space Mono indiriliyor ama HİÇBİR yerde render edilmiyordu; ve ana sayfa
+ile menüden gidilen on bir sayfa **iki farklı sans fontuyla** yazılıyordu. Marka
+yazı tipi yalnız ana sayfada görünüyordu.
+
+Çözüm: token'lar `@theme` içinde geçerli yedek zincirlerle tanımlanıyor (utility
+üretilsin diye), gerçek bağlama `body` seviyesinde — değişkenlerin tanımlı
+olduğu yerde — yapılıyor. Bkz. `app/globals.css`.
+
+Kapı: `qa/fonts.mjs` (`npm run test:fonts`) eklendi ve `verify:runtime` zincirine
+alındı. Sınıf listesine değil **computed `font-family`** değerine bakar; ayrıca
+sayfanın gerçek gövde paragraflarını örnekler, çünkü asıl hasar mirasta oluşuyordu.
+
+Neden mevcut kapılar kaçırdı: `build` yakalamaz (CSS geçerli), `lint`/`typecheck`
+yakalamaz (sorun kaskadda), `test:a11y` yakalamaz (yanlış font ihlal değil),
+`test:visual` yakalamaz — **ilk referans görüntüler zaten bozuk halde alınmıştı,
+yani bozukluk "doğru" kabul edilmişti.**
+
+## D074 — `prose` sınıfları ölüymüş; makale tipografisi `.article-body` oldu
+
+Reason: `BlogDetailContent` gövdeye `prose prose-invert prose-headings:font-light
+prose-a:…` yığınını veriyordu. `@tailwindcss/typography` bu projede **kurulu
+değil** (package.json'da yok, globals.css'te `@plugin` yok), yani o sınıfların
+tamamı hiçbir stil üretmiyordu. Yazılar `utils/blogData.ts` içindeki HTML'e gömülü
+utility sınıflarıyla ayakta duruyordu ve o sınıflarda başlıklar `font-light`
+**sans**'tı — sitenin serif başlık sesi makalelerin içinde düşüyordu.
+
+Ölü sınıflar kaldırıldı, yerine `app/globals.css` içinde eleman seçicili gerçek
+bir sistem geldi: `.article-body h2/h3` Ogg serif, `blockquote` Ogg italik ve
+gerçek bir pull-quote ölçeğinde (`clamp(1.375rem, …, 1.75rem)`; öncesi gövdeyle
+aynı 18px'ti). Seçici özgüllüğü (0,1,1) gömülü utility'leri (0,1,0) yendiği için
+beş makalenin metnine dokunulmadı.
+
+## D075 — Uzak görsel izni kaldırıldı (D072'nin doğru şekilde kapatılması)
+
+Reason: `images.remotePatterns` içindeki `images.unsplash.com` kaydı bir kez
+"uzak görsel kullanılmıyor" varsayımıyla silinmiş ve /blog'da 7 kırık görsel +
+7 kez HTTP 400 üretmişti (D072); optimizer izni istek anında doğruluyor, derlemede
+değil.
+
+Bu kez varsayım yok: beş blog kapağı `utils/blogData.ts` içinde yerel
+`StaticImageData` importlarına taşındı (`public/ImageContainer/*.jpg`), kod
+tabanında tek bir uzak görsel URL'i kalmadığı taranarak doğrulandı ve kaldırma
+sonrası **21 rotanın tamamı** `npm run test:images` ile ölçüldü: kırık görsel 0,
+optimizer ≥400 yanıtı 0. `remotePatterns: []` artık boş ve yorumu bunu doğru
+anlatıyor.
+
+Yan kazanç: kapaklar üçüncü taraf bir CDN'e bağlı olmaktan çıktı ve LCP yolundan
+ayrı bir origin bağlantısı kalktı. Ayrıca öne çıkan yazının kapağı yoğun yeşil bir
+orman fotoğrafıydı — `docs/ART-DIRECTION-GAPS.md`in "yanlış dil" dediği tam olarak
+bu; kart %10 opaklıkta gösterdiği için görünmüyordu.
+
+## D076 — `#D1CCBF` "birleştirildi" deniyordu, JS prop'larında yaşıyordu
+
+Reason: Faz 1'in renk birleştirmesi CSS sınıflarını taradı; rengi **prop olarak**
+alan bileşenleri (`NavigateSVG`, `StyledLink`, `BurgerSVG`, `CheckBoxIcon`, …)
+hiç görmedi. Sonuç: `--color-cream` altında birleştiği ilan edilen `#D1CCBF`
+11 yerde, denetim listesinde hiç olmayan üçüncü bir krem (`#d0cbbe`) 1 yerde
+yaşamaya devam ediyordu.
+
+`utils/palette.ts` içine `ink` (deep/cream/white) ve `Ink` tipi eklendi; prop
+tipleri sabit dizgi birleşiminden bu tipe çevrildi. TypeScript kalan yedi çağrı
+noktasını tek tek gösterdi. Değişim kontrast **yükseltmesi** (#d1ccbf 7.92:1 →
+#ced1bf 8.16:1) ve gözle ayırt edilemez (255 üzerinden −3/+5/0).
+
+Ölçüm: `.tsx` ham hex 764 → 119; 3D sahneler (chakra/meridyen renkleri, bunlar
+marka sapması değil semantik) dışarıda tutulunca **68** — planın <80 hedefinin
+altında. Not: planın ikinci ölçütü ("var(--…) > 600") YANLIŞ ölçüttü; Tailwind
+v4'te benimseme `var()` ile değil üretilen yardımcı sınıflarla oluyor. Gerçek
+benimseme: `.tsx` dosyalarında **609** token yardımcı sınıfı kullanımı.
+
+## D077 — Blog kart ızgarası editoryal oldu; `whileInView` opaklığı hareket azaltmaya uymuyormuş
+
+Reason: Plan 12'nin ilk yarısı (öne çıkan yazı) yapılmıştı, ikinci yarısı —
+"diğerleri küçük" kart ızgarası — jenerik kutu olarak kalmıştı: `p-6 bg-cream/5
+rounded border border-cream/10`, yani A9'un tarif ettiği kalıbın ta kendisi.
+Kartın içinde ayrıca fotoğrafın ÜSTÜNE mutlak konumlanmış bir kategori rozeti
+vardı (`bg-deep/90 backdrop-blur`).
+
+Çerçeve kaldırıldı: üstte ince bir kural, altında tam opaklıkta 4:3 fotoğraf,
+sonra mono kicker (kategori), serif başlık, özet ve mono meta satırı. Kategori
+artık fotoğrafın üstünde değil. Aynı dil makale sayfasındaki kategori rozetine de
+uygulandı. Izgara boşluğu `gap-8` yerine `gap-x-10 gap-y-14`: çerçeve kalkınca
+eşit boşluk satırları birbirine yapıştırıyordu.
+
+**Yan bulgu — ve asıl önemli olan bu.** `MotionConfig reducedMotion="user"`
+dönüşüm ve layout animasyonlarını kapatır ama **opaklığı kapatmaz**. Yani
+`initial={{ opacity: 0 }}` + `whileInView` kullanan kartlar, hareket azaltma
+tercihi olan kullanıcıda da beliriyordu. İki sonucu vardı:
+
+1. Erişilebilirlik tercihi fiilen uygulanmıyordu.
+2. Otomatik kontrast taraması kartı yarı saydamken yakalayabiliyordu.
+
+İkincisi ölçüldü: temiz bir koşuda `test:a11y`,
+`/blog/meridyen-terapisi-bedenin-enerji-aglari` üzerinde 2 düğümlük bir
+color-contrast ihlali bildirdi. **Aynı derleme üzerinde aynı rota 5 kez tek tek
+tarandı ve ihlal HİÇ tekrarlamadı** — yani bulgu aralıklı; kaynağı sayfa içeriği
+değil, tarama ile animasyonun yarışması. `qa/a11y.mjs` zaten `reducedMotion:
+"reduce"` ile tarıyor, ama Motion opaklığı yine de canlandırdığı için bu koruma
+işe yaramıyordu.
+
+Çözüm test kaçamağı değil, davranışın düzeltilmesi: `BlogCard` ve
+`BlogPageContent` artık `useMountedReducedMotion()` okuyup `initial={false}`
+veriyor. Hareket azaltma tercihi olan kullanıcı içeriği son durumunda görüyor;
+tarama da öyle.
+
+## D078 — `::selection` token'a çevrildi; arada yanlış bir sonuca varıp geri dönüldü
+
+Reason: `app/globals.css` içindeki `::selection` kuralı `--color-cream` ve
+`--color-deep`in birebir kopyası olan ham hex kullanıyordu (A1'in CSS
+tarafındaki hâli). Token'a çevrildi.
+
+**Ama arada iki yanlış sonuca varıldı ve ikisi de ölçümle düzeltildi. Yöntem
+dersi burada:**
+
+1. İlk doğrulama ölçütü "seçim zemini TAM krem (#ced1bf) olmalı" idi. WebKit'te
+   %0 okundu ve "WebKit `::selection` içinde `var()` çözmüyor" sonucuna varıldı.
+   Kural ham hex'e geri alındı.
+2. Ham hex'le de WebKit %0 verdi. Bu sefer "Safari'de marka seçim rengi hiç
+   çalışmıyormuş" denip `<body>`, `SubPageLayout` ve `/404` üzerindeki
+   `selection:bg-cream selection:text-deep` yardımcı sınıfları kaldırıldı.
+3. Seçili bölgenin GERÇEKTE hangi rengi boyadığı okununca ikisinin de yanlış
+   olduğu görüldü:
+
+   ```
+   webkit   seçimsiz 45,55,50  ->  seçili 122,129,109
+   chromium seçimsiz 45,55,50  ->  seçili 205,208,191
+   ```
+
+   WebKit kuralı UYGULUYOR; yalnız highlight'ı ~%48 alfayla harmanlıyor, o
+   yüzden tam renk hiç çıkmıyor. Ölçüt baştan yanlıştı.
+
+4. Doğru ölçütle (renk kayması) yeniden test edildi:
+
+   ```
+   sabit hex ile            45,55,50 -> 122,129,109   kayma 122
+   var(--color-cream) ile   45,55,50 -> 122,129,109   kayma 122
+   var(--tanimsiz) ile      45,55,50 ->  45, 55, 50   kayma   0   (kontrol)
+   ```
+
+   İlk iki satır birebir aynı: **WebKit `var()`'ı sorunsuz çözüyor.** Üçüncü
+   satır ölçümün gerçek başarısızlığı yakaladığını gösteriyor.
+
+Sonuç: kural token'a çevrildi, kaldırılan üç yardımcı sınıf geri kondu (kaldırma
+gerekçesi yanlıştı), kapı doğru ölçütle yazıldı. Üç motorda da geçiyor
+(kayma 262 · 262 · 122).
+
+**Ders:** bir tarayıcı farkı iddia etmeden önce, ölçümün o farkı gerçekten
+ölçebildiğini kanıtlayan bir KONTROL koşusu gerekir. Burada kontrol (tanımsız
+token) en sona bırakıldığı için iki tur yanlış iş yapıldı. Kapı:
+`npm run test:selection` (qa/selection.mjs).

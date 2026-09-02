@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [{ url: post.coverImage }],
+      images: [{ url: post.coverImage.src }],
     },
   };
 }
@@ -67,7 +67,7 @@ export default async function BlogPostPage({ params }: Props) {
         description={post.excerpt}
         path={`/blog/${post.slug}`}
         datePublished={isoDate}
-        image={post.coverImage}
+        image={post.coverImage.src}
       />
       <BreadcrumbSchema
         items={[

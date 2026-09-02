@@ -99,7 +99,7 @@ export default function NewsletterForm() {
             aria-live="polite"
             className="p-4 bg-warm rounded border border-cream/15 text-cream text-sm max-w-md mx-auto flex items-center justify-center gap-3"
           >
-            <svg className="size-5 text-[var(--accent-copper-on-dark)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="size-5 text-copper-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span>{message}</span>
@@ -113,7 +113,7 @@ export default function NewsletterForm() {
           role="alert"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-xs text-[var(--accent-copper-on-dark)] font-medium"
+          className="text-xs text-copper-text font-medium"
         >
           {message}
         </motion.p>

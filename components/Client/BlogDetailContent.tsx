@@ -50,7 +50,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
         <div className="flex items-center justify-between">
           <Link
             href="/blog"
-            className="group inline-flex items-center text-xs md:text-sm font-medium text-cream hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300"
+            className="group inline-flex items-center text-xs md:text-sm font-medium text-cream hover:text-copper-text transition-colors duration-300"
           >
             <span className="mr-2 transform group-hover:-translate-x-1 transition-transform duration-300">
               &larr;
@@ -58,7 +58,9 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
             Bloga Geri Dön
           </Link>
           
-          <span className="bg-copper/10 text-[var(--accent-copper-on-dark)] px-3 py-1 rounded text-2xs font-semibold uppercase tracking-widest border border-copper/20">
+          {/* Kategori: hap rozet değil, mono kicker. Kart dilinin geri kalanıyla
+              (BlogCard, öne çıkan kart) aynı ses. */}
+          <span className="font-mono text-3xs font-medium tracking-[0.24em] text-copper-text uppercase">
             {post.category}
           </span>
         </div>
@@ -160,8 +162,13 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
 
           {/* Main Body text */}
           <div className="lg:col-span-3">
-            <div 
-              className="prose prose-invert prose-headings:font-light prose-headings:text-white prose-p:text-cream/80 prose-p:font-light prose-p:leading-relaxed prose-a:text-[var(--accent-copper-on-dark)] prose-a:no-underline hover:prose-a:underline font-light text-sm md:text-base leading-relaxed text-cream/80 space-y-6"
+            {/* `prose prose-invert prose-headings:… prose-a:…` sınıfları
+                KALDIRILDI: `@tailwindcss/typography` bu projede kurulu değil,
+                yani o sınıfların hiçbiri stil üretmiyordu. Kodda makale
+                tipografisi çözülmüş gibi duruyordu ama başlıklar sans kalıyordu.
+                Yerine gerçek bir sistem geldi: `.article-body` (app/globals.css). */}
+            <div
+              className="article-body space-y-6 text-sm leading-relaxed font-light text-cream/80 md:text-base"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
@@ -184,7 +191,7 @@ export default function BlogDetailContent({ post, relatedPosts }: BlogDetailCont
       {relatedPosts.length > 0 && (
         <section className="pt-16 mt-16 border-t border-cream/10 space-y-8">
           <h3 className="font-serif text-display-s font-normal leading-[1.08] text-white">İlginizi Çekebilecek Diğer Makaleler</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2">
             {relatedPosts.map((relatedPost) => (
               <BlogCard key={relatedPost.slug} post={relatedPost} />
             ))}

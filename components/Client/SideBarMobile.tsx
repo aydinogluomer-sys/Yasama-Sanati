@@ -12,6 +12,7 @@ import CloseIcon from "@/components/SVGComponents/CloseIcon";
 import { usePathname } from "next/navigation";
 import { consultationHref } from "@/utils/consultation-context";
 import { easing, duration } from "@/utils/motion/tokens";
+import { ink } from "@/utils/palette";
 interface LinkItem {
   href: string;
   link: string;
@@ -99,8 +100,8 @@ export default function SideBarMobile({
                 className="mb-750svh text-lg font-light"
                 key={link}
                 href={href}
-                underlineColor="#2b3530"
-                arrowFill="#2B3530"
+                underlineColor={ink.deep}
+                arrowFill={ink.deep}
                 active={i == 0}
               >
                 {link}
@@ -111,7 +112,7 @@ export default function SideBarMobile({
               className="mt-14 flex min-h-14 w-full items-center justify-between bg-deep px-6 py-5 text-lg font-light text-cream transition-colors duration-300 hover:bg-[#304d3d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] motion-reduce:transition-none"
             >
               <span>Ön Görüşme</span>
-              <NavigateSVG fill="#D1CCBF" />
+              <NavigateSVG fill={ink.cream} />
             </Link>
           </nav>
           <ContactUs className="gap-y-8 text-base text-deep max-md:mt-16 md:hidden [&>:first-child]:text-sm [&>:first-child]:text-deep/80 [&>div]:gap-x-5" />

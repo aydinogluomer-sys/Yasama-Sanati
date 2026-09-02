@@ -47,7 +47,7 @@ export default function FooterNewsletter() {
             aria-live="polite"
             initial={reduceMotion ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-5 flex min-h-12 items-center gap-2 rounded-[0.35rem] border border-copper-text/35 bg-copper-text/10 px-4 text-sm text-[#E6A47A]"
+            className="mt-5 flex min-h-12 items-center gap-2 rounded-[0.35rem] border border-copper-text/35 bg-copper-text/10 px-4 text-sm text-copper-text"
           >
             <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4 shrink-0" fill="none">
               <path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

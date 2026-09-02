@@ -744,7 +744,7 @@ export default function Meridian3D() {
   return (
     <section className="space-y-12 border-b border-cream/15 pb-16 md:pb-24">
       <div className="space-y-4 max-w-3xl">
-        <span className="text-xs text-[var(--accent-copper-on-dark)] font-semibold tracking-widest uppercase">
+        <span className="text-xs text-copper-text font-semibold tracking-widest uppercase">
           Anatomik Deneyim
         </span>
         <h2 className="text-28 md:text-40 font-light text-white leading-tight">
@@ -773,7 +773,7 @@ export default function Meridian3D() {
             style={{ transform: "translate(-50%, -120%)", top: 0, left: 0 }}
           >
             <div className="flex justify-between items-center border-b border-cream/10 pb-1">
-              <span className="font-bold text-[var(--accent-copper-on-dark)]" id="tooltip-code">LU9</span>
+              <span className="font-bold text-copper-text" id="tooltip-code">LU9</span>
               <span className="font-medium text-white" id="tooltip-name">Taiyuan</span>
             </div>
             <p className="text-white/90 font-semibold" id="tooltip-trname">Büyük Derinlik</p>

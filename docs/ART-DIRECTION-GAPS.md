@@ -29,18 +29,33 @@ Bunlar başka bir markanın iklimidir; Yaşama Sanatı'nın konumu "Online ve İ
 | `public/ImageContainer/image-2.jpg` | Şifa Yolculuğu 02 | ✅ kabul — nötr sıcak iç mekân |
 | `public/ImageContainer/image-4.jpg` | Şifa Yolculuğu 04 | ✅ doğru — mum, terracotta duvar |
 | `public/group/meridyen-terapi.jpg` | Ana sayfa, 3 format | ✅ doğru — sıcak, keten |
-| **`public/ImageContainer/image-1.jpg`** | **Şifa Yolculuğu 01** | ❌ yoğun yeşil orman bokeh'i |
-| **`public/ImageContainer/image-3.jpg`** | **Şifa Yolculuğu 03** | ❌ yağmurlu pencere, arkada orman |
-| **`public/ImageContainer/image-5.jpg`** | **Şifa Yolculuğu 05** | ❌ Nordic retreat, sık yeşil orman |
-| **`public/group/mucizeler-kursu.jpg`** | **Ana sayfa, 3 format** | ❌ yeşil boyalı doğrama, yağmur |
-| **`public/group/yasam-koclugu.jpg`** | **Ana sayfa, 3 format** | ❌ yağmurlu ahşap pencere |
-| `public/group/reiki.jpg` | **hiçbir yerde** | ✅ doğru (sıcak keten, omuzda eller) ama render edilmiyor |
-| `public/group/nefes-koclugu.jpg` | **hiçbir yerde** | ❌ god-ray çam ormanı — ama render edilmiyor |
-| `public/group/hipnoterapi.jpg` | **hiçbir yerde** | ✅ doğru ama render edilmiyor |
+| `public/ImageContainer/image-1.jpg` | Şifa Yolculuğu 01 + `/blog` kapağı | ✅ **düzeldi** — kuru ot, zeytin, taş duvar, iki kişi söyleşi |
+| `public/ImageContainer/image-3.jpg` | Şifa Yolculuğu 03 | ✅ **düzeldi** — defter, kil kupa, keten, Ege köyü ve deniz |
+| `public/ImageContainer/image-5.jpg` | Şifa Yolculuğu 05 + `/blog` kapağı | ✅ **düzeldi** — meridyen dokunuşu, terracotta saksı, keten |
+| `public/ImageContainer/image-6.jpg` | Şifa Yolculuğu 06 + `/blog` kapağı | ✅ |
+| **`public/group/mucizeler-kursu.jpg`** | **Ana sayfa, 3 format** | ⚠️ sıcak derecelendirildi ama konu hâlâ ılıman iklim penceresi |
+| **`public/group/yasam-koclugu.jpg`** | **Ana sayfa, 3 format** | ⚠️ sıcak derecelendirildi ama konu hâlâ ılıman iklim penceresi |
 
-**Görünür sorun 5 karede** ve hepsi **ana sayfada** — yani markanın en çok görülen
-yüzeyinde. `group/` altındaki üç dosya hiçbir bileşenden referans almıyor
-(`grep` ile doğrulandı); ya kullanılmalı ya silinmeli.
+### 2026-09-02 düzeltmesi — bu tablo bayattı
+
+Yukarıdaki üç ❌ satırı (`image-1`, `-3`, `-5`) **artık geçerli değil** ve bir
+tur boyunca yanlış iş listesi üretti (`docs/AWWWARDS-90-BLOCKERS.md` A12).
+
+* O üç kare `fb5fa1e` ("feat(journey): altı bölüm, yeni sıra ve yeni görseller",
+  2026-08-23) ile **yeniden üretilmişti**. Commit mesajına güvenilmedi: üçü de
+  bugün tek tek açılıp gözle denetlendi. Orman / yağmur / Nordic yok; üçü de
+  kireç badanalı taş, zeytin, kuru ot, keten ve terracotta dilinde.
+* `public/group/reiki.jpg`, `group/nefes-koclugu.jpg`, `group/hipnoterapi.jpg`
+  satırları **silindi: o dosyalar artık depoda yok.** `public/group/` içinde üç
+  dosya kaldı (`meridyen-terapi`, `mucizeler-kursu`, `yasam-koclugu`) ve üçü de
+  kullanılıyor. "Ya kullanılmalı ya silinmeli" maddesi silinerek kapandı.
+* Yeni kullanım: `ImageContainer` kareleri artık **blog kapağı** olarak da
+  render ediliyor (`utils/blogData.ts`). Beş yazının kapağı `images.unsplash.com`
+  hot-link'iydi; yerel karelere taşındı, `next.config.ts` içindeki uzak görsel
+  izni kaldırıldı ve 21 rota `npm run test:images` ile doğrulandı.
+
+**Kalan görünür sorun 2 karede** (`group/mucizeler-kursu`, `group/yasam-koclugu`)
+ve ikisi de ana sayfada. Renk sıcaklığı düzeltildi, konu düzeltilmedi.
 
 ### 2026-08-22 güncellemesi — `SideBar/` ailesi artık sayfa hero'su
 
@@ -71,6 +86,10 @@ dünyası" sorununun baskın sinyali **renk sıcaklığıydı** ve o kapandı. K
 karesi üretilene kadar bu iki kare artık göze batmıyor.
 
 Orijinaller git geçmişinde duruyor (`git show HEAD~1:public/group/...`).
+
+> **Bu bölüm 2026-08-22 tarihli tarihsel kayıttır.** Aşağıda "yeniden üretim
+> istiyor" denen `image-1`, `-3`, `-5` ertesi gün gerçekten yeniden üretildi;
+> güncel durum için yukarıdaki 2026-09-02 düzeltmesine bakın.
 
 **Derecelendirme UYGULANMAYANLAR — ve nedeni.** `ImageContainer/image-1`, `-3`,
 `-5` denendi ve **vazgeçildi**: bu üçünde orman kadrajın kendisi. Isıtmak insanı
@@ -104,9 +123,10 @@ Ortak kuyruk (hepsinde aynı): `--ar 16:9 --v 7` (ImageContainer) veya
 
 Ortak negatif: `--no forest, pine trees, god rays, rain, snow, nordic cabin, teal grading, cold blue light, neon, text, watermark, logo`
 
-### 1 · `public/ImageContainer/image-1.jpg` — Nefes Koçluğu · 16:9
+### 1 · ~~`public/ImageContainer/image-1.jpg`~~ — **TAMAMLANDI**
 
-> Şu anki kare: yeşil orman bokeh'i. Değişmeli.
+> Kare 2026-08-23'te yeniden üretildi ve 2026-09-02'de gözle doğrulandı.
+> Prompt kayıt olarak bırakıldı; yeniden üretim gerekmiyor.
 
 ```
 A woman in her late thirties seated on a low limewashed stone ledge on a shaded
@@ -118,9 +138,9 @@ photography, 50mm, shallow depth of field, natural skin texture, muted terracott
 and sage palette, no styling gloss --ar 16:9 --v 7 --no forest, pine trees, god rays, rain, snow, nordic cabin, teal grading, cold blue light, neon, text, watermark, logo
 ```
 
-### 2 · `public/ImageContainer/image-3.jpg` — Mucizeler Kursu · 16:9
+### 2 · ~~`public/ImageContainer/image-3.jpg`~~ — **TAMAMLANDI**
 
-> Şu anki kare: yağmurlu pencere + orman. Değişmeli.
+> Kare 2026-08-23'te yeniden üretildi ve 2026-09-02'de gözle doğrulandı.
 
 ```
 Still life on a worn olive-wood table beside a deep-set whitewashed window:
@@ -131,9 +151,9 @@ the page, dust in the air, 5000K. Editorial still life, 50mm, natural texture
 of paper and clay, sand and sage palette --ar 16:9 --v 7 --no forest, pine trees, god rays, rain, snow, nordic cabin, teal grading, cold blue light, neon, text, watermark, logo
 ```
 
-### 3 · `public/ImageContainer/image-5.jpg` — Hipnoterapi & Yaşam Koçluğu · 16:9
+### 3 · ~~`public/ImageContainer/image-5.jpg`~~ — **TAMAMLANDI**
 
-> Şu anki kare: Nordic retreat, sık orman. Değişmeli.
+> Kare 2026-08-23'te yeniden üretildi ve 2026-09-02'de gözle doğrulandı.
 
 ```
 Two women in conversation on a shaded stone courtyard, seated on simple woven

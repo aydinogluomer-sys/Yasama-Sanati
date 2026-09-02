@@ -31,7 +31,7 @@ export default function SustainableRetreat() {
         >
           <div className="flex flex-col gap-3 px-5 md:flex-row md:items-center md:gap-4 md:px-12">
             <div className="flex items-center gap-3 text-cream">
-              <TypographyLabel className="text-[var(--accent-copper-on-dark)]">Çalışma Alanları</TypographyLabel>
+              <TypographyLabel className="text-copper-text">Çalışma Alanları</TypographyLabel>
               <span aria-hidden className="h-px w-10 shrink-0 bg-cream opacity-40 md:w-16" />
             </div>
             <h2 className="font-serif text-display-s font-normal tracking-[-0.01em] text-paper">
@@ -59,7 +59,7 @@ export default function SustainableRetreat() {
                 >
                   Çalışma Alanları
                 </span>
-                <span className="mx-[0.18em] text-[0.3em] text-[var(--accent-copper-on-dark)] align-middle">✦</span>
+                <span className="mx-[0.18em] text-[0.3em] text-copper-text align-middle">✦</span>
               </Fragment>
             ))}
           </motion.div>

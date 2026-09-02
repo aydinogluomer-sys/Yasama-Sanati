@@ -6,72 +6,81 @@ import { motion } from "motion/react";
 import { BlogPost } from "@/utils/blogData";
 import Image from "next/image";
 import { duration } from "@/utils/motion/tokens";
+import useMountedReducedMotion from "@/hooks/useMountedReducedMotion";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
+/**
+ * Blog kartı — kutu değil, editoryal giriş.
+ *
+ * ÖNCESİ (docs/AWWWARDS-90-BLOCKERS.md A9 + plan 12):
+ * `p-6 bg-cream/5 rounded border border-cream/10` — sitede 23 kez tekrarlanan
+ * jenerik kart kalıbının en görünür örneğiydi. İçinde ayrıca fotoğrafın ÜSTÜNE
+ * mutlak konumlanmış bir kategori rozeti vardı (`bg-deep/90 backdrop-blur`);
+ * fotoğraf üzerindeki metin hem sanat yönetimi hem kontrast açısından en kırılgan
+ * çözümdür ve otomatik tarayıcı bunu güvenilir ölçemez.
+ *
+ * ŞİMDİ: çerçeve yok. Fotoğraf kendi alanında tam opaklıkta duruyor; onun altında
+ * mono kicker (kategori), serif başlık, özet ve ince bir kural. Öne çıkan kartla
+ * (BlogPageContent) aynı dil, yalnız ölçek küçük. Kategori artık fotoğrafın
+ * üstünde değil, metin sütununda.
+ */
 export default function BlogCard({ post }: BlogCardProps) {
+  /* Hareket azaltma AÇIKÇA ele alınıyor.
+     `MotionConfig reducedMotion="user"` dönüşüm ve layout animasyonlarını kapatır
+     ama OPAKLIĞI kapatmaz — yani reduced-motion tercihi olan kullanıcı yine de
+     kartların belirmesini bekliyordu. Ayrıca kart görünüş alanına geç girdiğinde
+     `opacity: 0` durumu ölçülebilir bir duruma dönüşüyor ve otomatik kontrast
+     taraması yarı saydam metni ihlal olarak okuyabiliyor.
+     `initial={false}` ile bu tercih son duruma oturuyor. */
+  const reduce = useMountedReducedMotion();
   return (
-    <Link href={`/blog/${post.slug}`} className="group block">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
+    <Link href={`/blog/${post.slug}`} className="group block h-full">
+      <motion.article
+        initial={reduce ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: duration.buttonStroke, ease: "easeOut" }}
-        className="h-full flex flex-col justify-between p-6 bg-cream/5 rounded border border-cream/10 hover:border-cream/35 hover:bg-cream/8 transition-all duration-500 overflow-hidden relative"
+        className="flex h-full flex-col border-t border-cream/20 pt-6 transition-colors duration-500 group-hover:border-copper/60"
       >
-        <div className="space-y-4">
-          {/* Card Image Container */}
-          <div className="relative h-48 md:h-56 w-full overflow-hidden rounded bg-deep/40">
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-            {/* Category Tag Overlay */}
-            <span className="absolute top-4 left-4 bg-deep/90 backdrop-blur-md text-copper-text px-3 py-1 rounded-sm text-2xs font-medium border border-copper/20 uppercase tracking-widest">
-              {post.category}
-            </span>
-          </div>
-
-          {/* Text Content */}
-          <div className="space-y-3">
-            <div className="flex items-center text-2xs text-cream/85 space-x-2">
-              <span>{post.date}</span>
-              <span>•</span>
-              <span>{post.readTime} Okuma</span>
-            </div>
-            
-            <h3 className="font-serif text-24 font-normal leading-snug text-white transition-colors duration-300 group-hover:text-copper-text md:text-26">
-              {post.title}
-            </h3>
-            
-            <p className="text-xs md:text-sm font-light text-cream/85 leading-relaxed line-clamp-3">
-              {post.excerpt}
-            </p>
-          </div>
+        <div className="relative aspect-[4/3] w-full overflow-hidden bg-deep/40">
+          <Image
+            src={post.coverImage}
+            alt=""
+            fill
+            sizes="(min-width: 768px) 46vw, 100vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
+          />
         </div>
 
-        {/* Footer Area */}
-        <div className="pt-4 mt-6 border-t border-cream/10 flex items-center justify-between text-2xs">
-          <div className="flex items-center space-x-2">
-            {/* Stok portre kaldırıldı: yazar atfı kurumsal (bkz. utils/blogData.ts).
-                Yerine nötr bir marka işareti — uydurma kimlik taşımıyor. */}
+        <div className="mt-6 flex flex-1 flex-col gap-3">
+          <span className="font-mono text-3xs font-medium tracking-[0.24em] text-copper-text uppercase">
+            {post.category}
+          </span>
+
+          <h3 className="font-serif text-24 leading-snug font-normal text-white transition-colors duration-300 group-hover:text-copper-text md:text-26">
+            {post.title}
+          </h3>
+
+          <p className="line-clamp-3 text-xs leading-relaxed font-light text-cream/85 md:text-sm">
+            {post.excerpt}
+          </p>
+
+          <div className="mt-auto flex items-center gap-3 pt-5 font-mono text-3xs tracking-[0.12em] text-cream/70 uppercase">
+            <span>{post.date}</span>
+            <span aria-hidden>·</span>
+            <span>{post.readTime} Okuma</span>
             <span
               aria-hidden
-              className="size-6 shrink-0 rounded-full border border-cream/25 bg-cream/10"
-            />
-            <span className="text-cream/85 font-light">{post.author.name}</span>
+              className="ml-auto text-copper-text transition-transform duration-300 group-hover:translate-x-1"
+            >
+              &rarr;
+            </span>
           </div>
-          <span className="text-copper-text font-medium flex items-center group-hover:translate-x-1 transition-transform duration-300">
-            Devamını Oku 
-            <span className="ml-1 opacity-70 group-hover:opacity-100 transition-opacity">&rarr;</span>
-          </span>
         </div>
-      </motion.div>
+      </motion.article>
     </Link>
   );
 }

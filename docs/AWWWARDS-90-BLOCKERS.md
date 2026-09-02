@@ -3,6 +3,12 @@
 > Tarih: **2026-09-01** · Kapsam: **17 rotanın tamamı**, yalnız ana sayfa değil.
 > Yöntem: kod taraması (sayımlar aşağıda), çalışan sunucuda ekran görüntüsü ve
 > **piksel ölçümü**. Önceki tur raporlarına güvenilmedi; her iddia yeniden ölçüldü.
+>
+> **A ve B bölümlerindeki sayılar denetim anına (2026-09-01) aittir; güncel
+> durum için [F. DURUM](#f-durum-2026-09-02--uygulama-sonrası) bölümüne bakın.**
+> Uygulama sırasında iki madde değişti: **A11 geri çekildi** (tespit yanlıştı) ve
+> **A13 eklendi** (denetimin kaçırdığı, yalnız çalışan tarayıcıda görülebilen bir
+> hata: sitenin üç yazı tipinden ikisi hiç uygulanmıyormuş).
 
 ## Nasıl okunmalı
 
@@ -194,11 +200,84 @@ kendi paletini getiriyor**: `#F3EFE6`, `#E0A878`, `#C9875B`, `#F4EFE4` ve siteni
 hiçbir yerinde olmayan `rounded-full` hap butonlar. Ayrıca **NavBar ve Footer yok** —
 404'e düşen kullanıcının iki linkten başka çıkışı yok.
 
-## A11 — `/on-gorusme` farklı bir stil sistemi kullanıyor · ORTA
+## A11 — ~~`/on-gorusme` farklı bir stil sistemi kullanıyor~~ · **GEÇERSİZ**
 
-Sitedeki tek CSS Module: `app/on-gorusme/on-gorusme.module.css`. Diğer 16 rota
-Tailwind. Dönüşümün en kritik sayfası sistemin dışında duruyor; token değişikliği
-oraya yansımıyor.
+**Bu madde hatalıydı ve geri çekildi.** Uygulama sırasında doğrulandı.
+
+İlk yazdığım: "Sitedeki tek CSS Module `app/on-gorusme/on-gorusme.module.css`;
+diğer 16 rota Tailwind. Dönüşümün en kritik sayfası sistemin dışında duruyor."
+
+Ölçüm bunun tersini söylüyor:
+
+* `/on-gorusme`'nin ayrı olması **kaza değil, belgelenmiş bir karar**.
+  `DESIGN.md` bu rotayı adıyla tanımlıyor: **"Meridyen Eşiği"** — ana kimliğin
+  yerine geçen değil, ona odaklanmış bir uzantı. Ortam navigasyonu bilerek
+  kaldırılmış, tek yolculuk form. Yani "sistemin dışında" değil, *kendi
+  belgelenmiş sistemi içinde*.
+* "Token değişikliği oraya yansımıyor" iddiası da yanlış: 1051 satırda **56
+  `var(--…)` kullanımı, 22 ham hex**. Bu, depodaki **en iyi token'lanmış
+  dosya** — genelinde oran 764 ham hex / 99 `var()` iken.
+
+Yani A11 tam tersini iddia ediyordu: sistem dışı sandığım dosya, sistemi en çok
+uygulayan dosyaydı. Faz 3'ün 15. adımı (Tailwind'e taşıma) bu yüzden **iptal
+edildi** — davranışı bozma riski karşılığında hiçbir tutarlılık kazancı yok.
+
+## A13 — Space Mono hiç render edilmiyordu · BLOCKER (uygulama sırasında bulundu)
+
+> Bu madde ilk denetimde **kaçtı**. Kod okuyarak bulunamaz; ancak çalışan
+> tarayıcıda `getComputedStyle` ölçülerek görülür. Denetime sonradan eklendi.
+
+Sitenin üç tipografik sesinden biri — mikro-etiket sesi, yani 01/02 indeksleri,
+kicker'lar, tarihler, koordinatlar — **hiçbir sayfada uygulanmıyordu.** Space
+Mono indiriliyor, `<body>`ye bağlanıyor, sonra kullanılmıyordu.
+
+**Kök neden.** next/font değişkenleri `<body>`nin class'ıyla basılıyor:
+
+```
+body → --font-space-mono: "Space Mono","Space Mono Fallback"
+```
+
+Tailwind v4'ün `@theme` bloğu ise `:root` üzerinde değerlendiriliyor ve orada
+şöyle yazıyordu:
+
+```css
+@theme { --font-mono: var(--font-space-mono), ui-monospace, …; }
+```
+
+`:root`ta `--font-space-mono` **tanımsız**. Bir custom property'nin değerindeki
+`var()` çözülemezse tüm özellik "guaranteed-invalid" olur; `.font-mono {
+font-family: var(--font-mono) }` kuralı da sessizce hiç uygulanmaz. Hata yok,
+uyarı yok, yalnız yanlış yazı tipi.
+
+**Ölçüm** (production derlemesi, Chromium, 1440×900):
+
+```
+:root  --font-space-mono : TANIMSIZ
+body   --font-space-mono : "Space Mono","Space Mono Fallback"
+:root  --font-mono       : BOŞ / GEÇERSİZ
+
+.font-mono eleman sayısı ve gerçekleşen aile:
+  /                  31 eleman → basisGrotesque (SANS)
+  /sss                9 eleman → ui-sans-serif  (SANS)
+  /programlar/reiki   9 eleman → ui-sans-serif  (SANS)
+```
+
+**Neden hiçbir kapı yakalamadı.** `build` yakalamaz (CSS geçerli).
+`lint`/`typecheck` yakalamaz (sorun kaskadda). `test:a11y` yakalamaz (yanlış
+font ihlal değil). `test:visual` yakalamaz — **ilk referans görüntüler zaten
+bozuk halde alınmıştı, yani bozukluk "doğru" kabul edilmişti.**
+
+**Etki.** A2'de "iki farklı başlık sistemi" derken doğru olanın işareti saydığım
+"Space Mono kicker" fiilen yoktu. Mikro-etiket sesi olmayınca indeksler ve
+kicker'lar gövde metninden ayrışmıyor, editoryal ızgara hissi oluşmuyor.
+
+**Çözüm.** Token `@theme` içinde geçerli bir yedek zincirle tanımlanıyor
+(utility üretilsin diye), gerçek bağlama `body` seviyesinde — değişkenin
+tanımlı olduğu yerde — yapılıyor. Bkz. `app/globals.css`.
+
+**Kapı.** `qa/fonts.mjs` (`npm run test:fonts`) eklendi: 9 rotada `.font-mono`
+ve `.font-serif` elemanlarının **computed** `font-family` değerini okur, sınıf
+listesine bakmaz. `verify:runtime` zincirine alındı.
 
 ## A12 — Ölü kod ve bayat doküman · DÜŞÜK (hijyen)
 
@@ -226,7 +305,7 @@ oraya yansımıyor.
 | `/the-story` | foto | sadece 14px CSS | 3D sahne | **serif YOK** | marka sayfası markasız |
 | `/egitmenler` | foto | 3 hareket | baş harf kartları | kısmen serif | portre yok, kart dili jenerik |
 | `/community` | foto | sadece 14px CSS | **yok** | **serif YOK** | **sitenin en zayıf sayfası** |
-| `/sss` | foto | 2 hareket | **yok** | kısmen serif | akordeon dışında hiçbir şey |
+| `/sss` | foto | 2 hareket | **yok** | serif ✅ | ✅ kategori ayırıcıları + kapanış CTA |
 | `/blog` | foto | motion var (8 kullanım) ✅ | kart görselleri | **serif YOK** | kart ızgarası jenerik, başlıklar sans |
 | `/blog/[slug]` | hero yok | 1 motion | kapak | başlıkta serif ✅ | gövdede okuma tipografisi yok |
 | `/on-gorusme` | özel düzen | form etkileşimi | **yok** | ayrı sistem | Tailwind dışında |
@@ -314,8 +393,10 @@ Bu faz **yeni tasarım üretmez**, var olan sistemi devreye alır. En yüksek et
 13. **`/sss`.** Akordeon dışında bir şey yok; kategori ayırıcıları ve bir kapanış
     CTA bloğu.
 14. **`/404`.** Palet birleştir, NavBar + Footer ekle.
-15. **`/on-gorusme`.** CSS Module'ü Tailwind + token'lara taşı (davranış aynı kalacak;
-    `test:visual` bu rotayı zaten izliyor).
+15. ~~**`/on-gorusme`.** CSS Module'ü Tailwind + token'lara taşı.~~ **İPTAL.**
+    Dayandığı A11 tespiti yanlıştı (bkz. A11). Rota `DESIGN.md`'de "Meridyen
+    Eşiği" adıyla belgelenmiş ayrı bir odak sistemi ve zaten depodaki en iyi
+    token'lanmış dosyası (56 `var()` / 22 ham hex). Taşımak kazanç değil risk.
 
 **Kapı:** `test:visual` kapsamını 4 rotadan **8 rotaya** çıkar (şu an
 `/`, `/programlar`, `/programlar/reiki`, `/on-gorusme` — `/community`, `/the-story`,
@@ -337,18 +418,155 @@ Her faz sonunda çalıştırılacak, sonuçlar sayı olarak kaydedilecek:
 
 ```bash
 npm run verify          # typecheck + lint + build
-npm run verify:runtime  # e2e, links, images, seo, a11y, viewports, keyboard, zoom
-npm run verify:browsers # chromium + firefox + webkit
-npm run test:visual     # görsel regresyon (kapsam 8 rotaya çıkarılacak)
-npm run test:perf       # LCP / CLS / INP / TBT
+npm run verify:gates    # 13 kapı, TEK TEK, aralarında tarayıcı temizliğiyle
+npm run test:visual     # görsel regresyon (kapsam 8 rota)
+npm run test:perf       # LCP / CLS / TBT
 ```
 
-Faz 1 için ek ölçüt (script değil, grep):
+**`verify:gates` neden eklendi.** `verify:runtime` kapıları `&&` ile zincirliyor;
+çıktı tamponlandığı için pratikte yalnız son kapının sonucu okunabiliyordu ve
+kapılar aynı sunucuda çakışınca **yanlış hata** üretiyorlardı. Bu tur iki kez
+yaşandı — `test:viewports`, `test:keyboard`, `test:reveal` ve `test:transition`
+"KALDI" verdi, temiz koşuda dördü de **GEÇTİ**. `qa/gates.sh` her kapıyı ayrı
+koşar, sonucunu ayrı satıra yazar ve aradaki tarayıcı süreçlerini kapatır.
+
+> Kural: kapılar koşarken sunucuya **başka hiçbir şey** dokunmamalı — ekran
+> görüntüsü scripti, ikinci bir tur, `npm run build` dahil.
+
+Faz 1 için ek ölçüt (script değil, grep). **İkinci ölçüt yanlıştı; düzeltildi —
+gerekçesi F bölümünde:**
 
 ```bash
-grep -rhoiE '#[0-9a-f]{6}' --include=*.tsx app components sections | wc -l   # hedef <80
-grep -rho 'var(--' --include=*.tsx app components sections | wc -l           # hedef >600
+# marka renkleri: 3D sahneler hariç ham hex           hedef <80  → olcum 68
+grep -rhoiE '#[0-9a-f]{6}' --include=*.tsx app components sections   | wc -l                                            # tumu: 119 (oncesi 764)
+
+# token benimseme: var() DEGIL, uretilen yardimci siniflar
+grep -rhoE '(bg|text|border|from|via|to|fill|stroke|ring|decoration|divide|outline)-(deep|warm|ink|footer|cream|paper|sage|copper|copper-hover|copper-text)'   --include=*.tsx app components sections | wc -l    # olcum: 609
 ```
 
 **Ölçüm hijyeni:** `docs/RELEASE-READINESS.md` "ÖLÇÜM HİJYENİ" bölümü geçerli —
 ölçümden önce artık node/chrome süreçleri temizlenecek, yoksa yanlış alarm çıkıyor.
+
+---
+
+# F. DURUM (2026-09-02 — uygulama sonrası)
+
+Bu bölüm planın kapanışıdır. Her satır **ölçüme** dayanır; önceki tur raporlarına
+veya commit mesajlarına değil.
+
+## Sistemik engeller
+
+| # | Engel | Durum | Kanıt |
+|---|---|---|---|
+| A1 | Renk sistemi dağılmış | **kapandı** | `.tsx` ham hex 764 → 119; 3D sahneler hariç **68** (hedef <80). 609 token yardımcı sınıfı kullanımı. Birleştirmeler kontrastla ölçüldü, üçü YÜKSELTME. |
+| A2 | Tipografik ses kopukluğu | **kapandı** | `SectionHeading` tek başlık sistemi; `/the-story` 26, `/community` 16 serif başlık (öncesi 0). Ayrıca A13. |
+| A3 | Eksen kırığı | **kapandı** | `--container-editorial/measure/wide`, `mx-auto` yok; hero ile gövde aynı sol eksende. |
+| A4 | Hareket 14px ve tek tarayıcı | **kapandı** | `sectionRise` 22px; `ScrollRevealBridge` ile 3 motorda da açılım (`test:reveal`). Ölçüldü: `animation-timeline: view()` Chromium **ve WebKit**'te var, yalnız Firefox'ta yok — ilk iddia yanlıştı. |
+| A5 | Sayfa geçişi yok | **kapandı** | `app/template.tsx` + `.page-enter`, saf CSS. `javaScriptEnabled:false` ile doğrulandı: h1 opaklığı 0.99976. |
+| A6 | İmza etkileşimler tek bölümde | **kapandı** | `Magnetic` NavBar'da yaşıyor; `Loader`, `DynamicLineReveal`, `Br` silindi. |
+| A7 | Hareket token'ları uyulmuyor | **kapandı** | `utils/motion/tokens.ts` genişletildi (`quick`, `ui`, `accordion`, `ambient`); yeni kodun tamamı token kullanıyor. |
+| A8 | Hero kompozisyonu ve ölü bant | **kapandı** | Üç katmanlı scrim yeniden dengelendi; `qa/hero-contrast.mjs` 8 hero'da 4.5:1 tabanını ölçüyor. Hero altı boşluk kısıldı. |
+| A9 | Jenerik kart dili | **kapandı** | `/community`, `/the-story`, `/blog` öne çıkan kart, `/sss`, hukuki sayfalar editoryal düzene geçti. |
+| A10 | `/404` başka bir siteden | **kapandı** | Palet birleşti, NavBar + Footer eklendi, `BorderedButton`. |
+| A11 | ~~`/on-gorusme` sistem dışı~~ | **GEÇERSİZ** | Tespit yanlıştı; bkz. A11. Plan 15 iptal. |
+| A12 | Ölü kod ve bayat doküman | **kapandı** | Ölü bileşenler silindi; `docs/ART-DIRECTION-GAPS.md` 2026-09-02 düzeltmesiyle güncellendi. |
+| A13 | Space Mono ve Basis Grotesque hiç uygulanmıyor | **kapandı** | Denetimde kaçmıştı; uygulama sırasında `getComputedStyle` ile bulundu. Bkz. A13 ve D073. Kapı: `qa/fonts.mjs`. |
+
+## Bu turda ortaya çıkan, denetimin kaçırdığı üç sessiz hata
+
+Üçü de ortak bir desende: **kod doğru görünüyordu, çalışmıyordu.** Hiçbiri
+derleme, lint, typecheck veya erişilebilirlik taramasıyla görünmez.
+
+1. **A13 / D073 — yazı tipleri.** `@theme` `:root`ta, next/font değişkenleri
+   `<body>`de. Space Mono hiçbir yerde render edilmiyordu; ana sayfa ile on bir
+   alt sayfa iki farklı sans fontuyla yazılıyordu.
+2. **D074 — `prose` sınıfları.** `@tailwindcss/typography` kurulu değil; makale
+   gövdesindeki tüm `prose*` sınıfları ölüydü ve başlıklar sans kalıyordu.
+3. **D075 — uzak görsel izni.** Kaldırıldığı yazılmış ama `remotePatterns`
+   içinde kalmıştı; sonra da yorum "kaldırılmadı" derken satır silinmişti. Kod
+   ile yorum birbirini yalanlıyordu.
+
+**Ders:** "sınıf yazılmış" ile "stil uygulanmış" aynı şey değil. Bu yüzden yeni
+kapı sınıf listesine değil **computed değere** bakıyor.
+
+## Plan ölçütlerinin düzeltmesi
+
+Faz 1 için konan iki grep ölçütünden **biri yanlıştı**:
+
+```
+grep 'var(--' --include=*.tsx | wc -l   # hedef >600  ← YANLIŞ ÖLÇÜT
+```
+
+Tailwind v4'te token benimseme `var()` yazarak değil, `@theme`den üretilen
+yardımcı sınıflarla (`bg-deep`, `text-copper-text`) oluyor. Bu sınıflar `.tsx`
+içinde `var(--` olarak görünmez. Ölçülen gerçek benimseme:
+
+```
+var(--…) .tsx içinde        :  95   (hedefe göre "başarısız")
+token yardımcı sınıfı       : 609   (gerçek benimseme)
+ham hex                     : 119   (öncesi 764)
+ham hex, 3D sahneler hariç  :  68   (hedef <80 — karşılandı)
+```
+
+3D sahnelerdeki 51 hex (`components/meridian-3d/*`, `TherapyScene3D`,
+`Meridian3D`) **bilerek** ham bırakıldı: bunlar chakra ve meridyen renkleri,
+yani geleneksel bir semantik renk sistemi. Marka paletine çekmek anlamı bozardı.
+
+## Açık kalanlar
+
+| Konu | Durum |
+|---|---|
+| Mobil Slow 4G LCP | **hedef karşılanmadı** — ayrıntı aşağıda |
+| `group/mucizeler-kursu.jpg`, `group/yasam-koclugu.jpg` | konu hâlâ ılıman iklim penceresi; renk sıcaklığı düzeltildi, kare üretimi bekliyor (`docs/ART-DIRECTION-GAPS.md`) |
+| `/egitmenler` | B tablosunda "portre yok, kart dili jenerik" olarak duruyor; **plan maddesi değildi**, kapsam dışı bırakıldı |
+| Blog yazar kimliği | kurumsal atıfta; gerçek yazar verisi gelene kadar kişi adı yazılmayacak |
+| `CLAUDE.md` | "Editable Areas" listesi ve "Tek aktif plan: docs/RELEASE-PLAN.md" satırı bu planla çelişiyor — kullanıcı kararı bekliyor |
+
+## Faz 4 — performans ölçümü (2026-09-02)
+
+```
+masaüstü kısıtsız      LCP  876 ms   TBT   81 ms   CLS 0
+mobil 4× CPU           LCP 6936 ms   TBT 2398 ms   CLS 0
+mobil 4× CPU + Slow 4G LCP 9764 ms   TBT 2824 ms   CLS 0
+LCP ögesi: hero görseli (IMG.size-full.object-cover) · transfer 1332 KB
+```
+
+**Hedef (<2500 ms) karşılanmadı** ve bu sayılar `RELEASE-READINESS.md`'deki
+3244 ms ile karşılaştırılamaz — nedeni orada ayrıntılı: (1) ölçüm sırasında
+makinede kullanıcının Chrome'u, Spotify ve Docker çalışıyordu, yayılımlar geniş;
+(2) **LCP ögesi değişti** — 3244 ms dekoratif "ŞİFA" konturunun boyanmasıydı,
+bugünkü ~9,8 sn hero görselinin kendisi. Yani örtü kalktı, rakam kötüleşmedi.
+
+Bu turun tipografi düzeltmesinin LCP'yi kötüleştirmediği **kontrollü A/B** ile
+doğrulandı (aynı makine, aynı dakika, yalnız `--font-sans`/`--font-mono`
+bağlaması açık/kapalı): Slow 4G'de açıkken 9764 ms, kapalıyken 11964 ms.
+
+Darboğaz bu dosyanın ve `RELEASE-READINESS.md`'nin baştan söylediği yerde:
+kritik yoldaki ~1,3 MB ve React+Motion hidrasyonu. **Bu bir bundle işidir,
+cila işi değil** — ayrı bir kalem olarak açık bırakıldı.
+
+## Kapı sonuçları (2026-09-02, gönderilen derleme)
+
+Hepsi TEK TEK, sıralı, sunucuya başka hiçbir şey dokunmadan koşuldu.
+
+| Kapı | Sonuç |
+|---|---|
+| `test:e2e` | 21 rota · 0 |
+| `test:links` | 0 |
+| `test:images` | 21 rota · kırık 0 · optimizer ≥400 0 |
+| `test:seo` | 0 |
+| `test:fonts` | 9 rota · çözülmeyen ses 0 |
+| `test:a11y` | toplam bulgu 0 · serious+critical 0 |
+| `test:hero-contrast` | 8 hero · 5,50–5,61:1 · taban altı 0 |
+| `test:viewports` | 8 viewport × 21 rota · 0 |
+| `test:keyboard` | 0 |
+| `test:zoom` | 0 |
+| `test:browsers` | 3 motor · 0 |
+| `test:reveal` | 3/3 motorda hareket var · 0 |
+| `test:transition` | 0 (JS kapalı h1 son durum opacity 1) |
+| `test:selection` | 3 motor · 0 |
+| `test:visual` | 4 viewport × 8 rota · 0 |
+
+`test:visual` notu: tipografi değişikliği KASITLI olduğu için referanslar
+`--update` ile yenilendi (32 kare). Yenileme bir "geçti" değildir; yukarıdaki
+0 değeri, yenilenen referanslara karşı yapılan İKİNCİ koşudan geliyor.

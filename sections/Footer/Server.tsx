@@ -13,6 +13,7 @@ import SocialLogos from "@/components/SVGComponents/socials";
 import { usePathname } from "next/navigation";
 import { consultationHref } from "@/utils/consultation-context";
 import { duration } from "@/utils/motion/tokens";
+import palette from "@/utils/palette";
 
 const akademiLinks = [
   ["Programlar", "/programlar"],
@@ -58,7 +59,7 @@ export default function Footer() {
     <footer
       id="site-footer"
       ref={footerRef}
-      className="group relative isolate overflow-hidden bg-[#293A32] px-5 pb-6 pt-20 text-paper md:px-8 lg:px-12 xl:px-16 md:pb-7 md:pt-24"
+      className="group relative isolate overflow-hidden bg-footer px-5 pb-6 pt-20 text-paper md:px-8 lg:px-12 xl:px-16 md:pb-7 md:pt-24"
     >
       <div
         aria-hidden="true"
@@ -116,7 +117,7 @@ export default function Footer() {
           >
             <Link
               href={consultationUrl}
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-copper px-7 text-3xs font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-copper-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-copper px-7 text-3xs font-medium uppercase tracking-[0.14em] text-[#231c16] transition-[background-color,transform] duration-200 hover:bg-copper-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper/50 focus-visible:ring-offset-2 focus-visible:ring-offset-footer motion-reduce:transition-none"
             >
               Ön Görüşme
               <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
@@ -125,7 +126,7 @@ export default function Footer() {
             </Link>
             <Link
               href="/programlar"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-paper/25 px-7 text-3xs font-medium uppercase tracking-[0.14em] text-paper/85 transition-colors duration-200 hover:border-paper/55 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-paper/25 px-7 text-3xs font-medium uppercase tracking-[0.14em] text-paper/85 transition-colors duration-200 hover:border-paper/55 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-footer motion-reduce:transition-none"
             >
               Programları İncele
             </Link>
@@ -155,9 +156,9 @@ export default function Footer() {
             >
               <defs>
                 <linearGradient id="footer-lifeline" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#C9875B" stopOpacity="0.5" />
-                  <stop offset="0.55" stopColor="#C9875B" stopOpacity="0.22" />
-                  <stop offset="1" stopColor="#C9875B" stopOpacity="0" />
+                  <stop offset="0" stopColor={palette.copper} stopOpacity="0.5" />
+                  <stop offset="0.55" stopColor={palette.copper} stopOpacity="0.22" />
+                  <stop offset="1" stopColor={palette.copper} stopOpacity="0" />
                 </linearGradient>
               </defs>
               <path
@@ -172,7 +173,7 @@ export default function Footer() {
             </span>
             <Link
               href="/"
-              className="group block w-fit rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text focus-visible:ring-offset-4 focus-visible:ring-offset-[#293A32]"
+              className="group block w-fit rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper-text focus-visible:ring-offset-4 focus-visible:ring-offset-footer"
             >
               <h2
                 id="footer-brand-title"
@@ -189,7 +190,7 @@ export default function Footer() {
             </p>
             <Link
               href="/programlar"
-              className="group mt-8 flex h-12 w-full max-w-[13.75rem] items-center justify-between rounded-[0.65rem] border border-copper-text/85 px-5 text-xs font-medium tracking-[0.04em] text-copper-text transition-colors hover:bg-copper-text hover:text-[#203028] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-paper focus-visible:ring-offset-4 focus-visible:ring-offset-[#293A32] motion-reduce:transition-none"
+              className="group mt-8 flex h-12 w-full max-w-[13.75rem] items-center justify-between rounded-[0.65rem] border border-copper-text/85 px-5 text-xs font-medium tracking-[0.04em] text-copper-text transition-colors hover:bg-copper-text hover:text-[#203028] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-paper focus-visible:ring-offset-4 focus-visible:ring-offset-footer motion-reduce:transition-none"
             >
               <span>Programları Keşfet</span>
               <span aria-hidden="true" className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none">
@@ -265,7 +266,14 @@ export default function Footer() {
           <motion.section
             variants={reveal}
             transition={{ duration: duration.buttonStroke, delay: 0.08 }}
-            className="md:col-span-2 lg:col-span-3 rounded-[1.25rem] border border-paper/12 bg-[#1b2b23]/40 p-6 md:p-8 lg:ml-8 xl:ml-10"
+            /* `bg-[#1b2b23]/40` -> `bg-ink/40`. Bu bir renk DEĞİŞİKLİĞİDİR,
+               yeniden adlandırma değil; o yüzden ölçüldü. Footer zemini
+               (#293a32) üzerinde %40 opaklıkla harmanlanınca:
+                 #1b2b23 -> rgb(35, 52, 44)
+                 #222b27 -> rgb(38, 52, 46)
+               Fark 255 üzerinden (3, 0, 2) — algı eşiğinin çok altında. Tek
+               kullanımlık bir hex daha silinmiş oldu. */
+            className="md:col-span-2 lg:col-span-3 rounded-[1.25rem] border border-paper/12 bg-ink/40 p-6 md:p-8 lg:ml-8 xl:ml-10"
             aria-labelledby="footer-newsletter-title"
           >
             <Eyebrow>04</Eyebrow>

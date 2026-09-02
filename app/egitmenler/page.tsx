@@ -9,6 +9,7 @@ import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { consultationHref } from "@/utils/consultation-context";
 import { motion, AnimatePresence } from "motion/react";
 import { easing, duration } from "@/utils/motion/tokens";
+import { ink } from "@/utils/palette";
 
 interface Instructor {
   name: string;
@@ -99,7 +100,7 @@ export default function EgitmenlerPage() {
               }}
               className={`relative pb-3 text-xs md:text-sm uppercase tracking-widest font-mono transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat
-                  ? "text-[var(--accent-copper-on-dark)] font-medium"
+                  ? "text-copper-text font-medium"
                   : "text-cream/85 hover:text-white"
               }`}
             >
@@ -128,7 +129,7 @@ export default function EgitmenlerPage() {
                 >
                   {/* Left Col: Space Mono index and disciplines */}
                   <div className="flex items-center gap-4 md:gap-6 min-w-[200px] mb-2 md:mb-0">
-                    <span className="font-mono text-xs md:text-sm text-[var(--accent-copper-on-dark)]/90 group-hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300 select-none">
+                    <span className="font-mono text-xs md:text-sm text-copper-text/90 group-hover:text-copper-text transition-colors duration-300 select-none">
                       {padZero(idx)}
                     </span>
                     <span className="font-mono text-2xs uppercase tracking-wider text-cream/85 group-hover:text-cream/85 transition-colors duration-300">
@@ -145,13 +146,13 @@ export default function EgitmenlerPage() {
 
                   {/* Right Col: Role / Title & Plus Icon */}
                   <div className="flex items-center justify-between md:justify-end gap-6 min-w-[320px] w-full md:w-auto">
-                    <span className="text-2xs md:text-xs uppercase tracking-widest text-[var(--accent-copper-on-dark)] font-medium transition-colors duration-300">
+                    <span className="text-2xs md:text-xs uppercase tracking-widest text-copper-text font-medium transition-colors duration-300">
                       {ins.role}
                     </span>
 
                     <span className="flex-shrink-0 flex items-center justify-center size-8 border border-cream/20 rounded-full group-hover:border-copper group-hover:bg-copper/10 transition-all duration-300">
                       <span
-                        className={`text-base font-light text-cream group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${
+                        className={`text-base font-light text-cream group-hover:text-copper-text transform transition-transform duration-300 leading-none ${
                           isOpen ? "rotate-45" : ""
                         }`}
                       >
@@ -203,7 +204,7 @@ export default function EgitmenlerPage() {
                             <Link href={consultationHref({ from: "/egitmenler" })}>
                               <BorderedButton className="inline-flex cursor-pointer items-center gap-4 px-6 py-4 text-sm text-white [&_path]:[stroke:white] [&_svg]:[stroke:white]">
                                 Görüşme Talebi Gönder
-                                <NavigateSVG fill="#FFFFFF" className="size-2.5 mr-2.5" />
+                                <NavigateSVG fill={ink.white} className="size-2.5 mr-2.5" />
                               </BorderedButton>
                             </Link>
                           </div>

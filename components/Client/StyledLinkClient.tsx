@@ -5,6 +5,7 @@ import React, { CSSProperties } from "react";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import cn from "@/utils/cn";
 import { easing, duration } from "@/utils/motion/tokens";
+import { ink } from "@/utils/palette";
 
 interface StyledLinkClientProps {
   className?: string;
@@ -87,10 +88,10 @@ export default function StyledLinkClient({
   };
   const childVariants = {
     initial: {
-      color: "#D1CCBF",
+      color: ink.cream,
     },
     whileHover: {
-      color: "#2b3530",
+      color: ink.deep,
     },
   };
   return (

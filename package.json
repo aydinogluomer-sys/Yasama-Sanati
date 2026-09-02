@@ -13,6 +13,7 @@
     "test:images": "node qa/images.mjs",
     "test:seo": "node qa/seo.mjs",
     "test:a11y": "node qa/a11y.mjs",
+    "test:hero-contrast": "node qa/hero-contrast.mjs",
     "test:viewports": "node qa/viewports.mjs",
     "test:keyboard": "node qa/keyboard.mjs",
     "test:zoom": "node qa/zoom.mjs",
@@ -22,11 +23,14 @@
     "test:transition": "node qa/transition-check.mjs",
     "test:perf": "node qa/perf.mjs",
     "verify": "npm run typecheck && npm run lint && npm run build",
-    "verify:runtime": "npm run test:e2e && npm run test:links && npm run test:images && npm run test:seo && npm run test:a11y && npm run test:viewports && npm run test:keyboard && npm run test:zoom",
+    "verify:runtime": "npm run test:e2e && npm run test:links && npm run test:images && npm run test:seo && npm run test:fonts && npm run test:a11y && npm run test:hero-contrast && npm run test:viewports && npm run test:keyboard && npm run test:zoom",
     "verify:browsers": "npm run test:browsers && npm run test:reveal && npm run test:transition",
     "verify:visual": "npm run test:visual",
     "verify:release": "npm run verify && npm run verify:runtime && npm run verify:browsers",
-    "verify:all": "npm run verify:release && npm run verify:visual"
+    "verify:all": "npm run verify:release && npm run verify:visual",
+    "test:fonts": "node qa/fonts.mjs",
+    "verify:gates": "bash qa/gates.sh",
+    "test:selection": "node qa/selection.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

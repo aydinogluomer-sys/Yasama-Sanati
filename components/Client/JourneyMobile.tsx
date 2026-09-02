@@ -54,7 +54,7 @@ export default function JourneyMobile() {
               className="group block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-deep"
             >
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[0.95rem] tabular-nums text-[var(--accent-copper-on-dark)] [line-height:1]">
+                <span className="font-mono text-[0.95rem] tabular-nums text-copper-text [line-height:1]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span aria-hidden className="h-px w-8 bg-cream/30" />
@@ -80,7 +80,7 @@ export default function JourneyMobile() {
                 {chapter.lines.join(" ")}
               </p>
 
-              <span className="mt-4 inline-flex items-center gap-2 font-mono text-3xs tracking-[0.16em] text-[var(--accent-copper-on-dark)] uppercase">
+              <span className="mt-4 inline-flex items-center gap-2 font-mono text-3xs tracking-[0.16em] text-copper-text uppercase">
                 Programı incele
                 <svg
                   aria-hidden="true"

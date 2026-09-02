@@ -16,7 +16,7 @@ export default function ResponsiveMaskTextVariant({
   style,
 }: ResponsiveMaskTextVariantProps) {
   const textClassName = cn(
-    "font-light text-nowrap text-cream [&_span]:text-[var(--accent-copper-on-dark)]",
+    "font-light text-nowrap text-cream [&_span]:text-copper-text",
     className,
   );
   return (

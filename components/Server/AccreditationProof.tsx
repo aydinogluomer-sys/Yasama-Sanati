@@ -68,7 +68,7 @@ export default function AccreditationProof({
     >
       <h2
         id="akreditasyon-basligi"
-        className="font-mono text-3xs tracking-[0.16em] text-[var(--accent-copper-on-dark)] uppercase"
+        className="font-mono text-3xs tracking-[0.16em] text-copper-text uppercase"
       >
         Akreditasyon
       </h2>
@@ -89,7 +89,7 @@ export default function AccreditationProof({
               href={verificationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-3xs tracking-[0.16em] text-[var(--accent-copper-on-dark)] uppercase underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:outline-none"
+              className="inline-flex items-center gap-2 font-mono text-3xs tracking-[0.16em] text-copper-text uppercase underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:outline-none"
             >
               Kurumdan doğrula
             </a>
@@ -99,7 +99,7 @@ export default function AccreditationProof({
               href={certificateSampleUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-3xs tracking-[0.16em] text-[var(--accent-copper-on-dark)] uppercase underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:outline-none"
+              className="inline-flex items-center gap-2 font-mono text-3xs tracking-[0.16em] text-copper-text uppercase underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:outline-none"
             >
               Örnek sertifikayı gör
             </a>

@@ -28,7 +28,7 @@ export default function SignatureTypeScene() {
       >
         <div className="flex flex-col gap-3 px-5 md:flex-row md:items-center md:gap-4 md:px-12">
           <div className="flex items-center gap-3 text-cream">
-            <TypographyLabel className="text-[var(--accent-copper-on-dark)]">Altı Disiplin</TypographyLabel>
+            <TypographyLabel className="text-copper-text">Altı Disiplin</TypographyLabel>
             <span aria-hidden className="h-px w-10 shrink-0 bg-cream opacity-40 md:w-16" />
           </div>
           <h2 className="font-serif text-display-s font-normal tracking-[-0.01em] text-paper">

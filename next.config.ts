@@ -11,15 +11,23 @@ const nextConfig: NextConfig = {
     // elle AVIF'e çevirmeye gerek yok. AVIF önce denenir, desteklemeyen tarayıcı
     // WebP'ye, o da yoksa orijinale düşer.
     formats: ["image/avif", "image/webp"],
-    // Blog kapak görselleri ve yazar avatarları `utils/blogData.ts` içinde uzak
-    // Unsplash URL'leri olarak duruyor ve `next/image` ile render ediliyor.
-    // Bu izin kaldırıldığında optimizer istek anında 400 döner ve /blog ile
-    // /blog/[slug] üzerindeki tüm görseller kırılır (build bunu yakalamaz —
-    // doğrulama derleme değil istek anındadır). Regresyon kaydı: D072.
-    // Görseller yerel varlıklara taşındığında bu izin tekrar kaldırılabilir.
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
-    ],
+    // UZAK GÖRSEL İZNİ YOK — bilerek boş.
+    //
+    // Bir kez `images.unsplash.com` kalıbı "uzak görsel kullanılmıyor"
+    // gerekçesiyle silinmişti ve /blog'da 7 kırık görsel + 7 kez HTTP 400
+    // üretti: `utils/blogData.ts` hâlâ Unsplash'e hot-link ediyordu ve
+    // optimizer izni İSTEK ANINDA doğruluyor, derlemede değil — bu yüzden
+    // `npm run build` sorunu yakalamamıştı. Regresyon kaydı: D072.
+    //
+    // Bugün kalıbın kaldırılmasının nedeni farklı: blog kapakları artık
+    // gerçekten yerel (`utils/blogData.ts` -> `public/ImageContainer/*.jpg`,
+    // `StaticImageData`) ve kod tabanında tek bir uzak görsel URL'i kalmadı.
+    // Yani listenin boş olması "kullanılmıyor sanıyorum" varsayımına değil,
+    // 21 rotanın `npm run test:images` ile doğrulanmasına dayanıyor.
+    //
+    // Buraya yeniden uzak bir kaynak eklenecekse: önce kalıbı ekle, sonra
+    // görseli; ters sırada 400 alınır.
+    remotePatterns: [],
   },
 };
 

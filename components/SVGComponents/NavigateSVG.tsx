@@ -1,23 +1,24 @@
 import * as motion from "motion/react-client";
 import cn from "@/utils/cn";
 import { MotionProps, MotionStyle, Variants } from "motion/react";
+import { ink, type Ink } from "@/utils/palette";
 
 interface NavigateSVGProps extends MotionProps {
-  fill?: "#2B3530" | "#D1CCBF" | "#FFFFFF";
+  fill?: Ink;
   className?: string;
   style?: MotionStyle;
   animateOnHover?: boolean;
   variants?: Variants;
 }
 export default function NavigateSVG({
-  fill = "#D1CCBF",
+  fill = ink.cream,
   className,
   style,
   animateOnHover = false,
   variants = {
     initial: { fill },
     whileHover: {
-      fill: "#2b3530",
+      fill: ink.deep,
     },
   },
 }: NavigateSVGProps) {

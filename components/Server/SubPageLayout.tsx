@@ -43,7 +43,7 @@ export default function SubPageLayout({
             {title}
           </h1>
           {description && (
-            <p className="mt-8 text-lg md:text-30 font-light text-cream/90 max-w-3xl [line-height:1.2] animate-hero-desc">
+            <p className="mt-8 text-lg md:text-30 font-light text-cream max-w-3xl [line-height:1.2] animate-hero-desc">
               {description}
             </p>
           )}
@@ -89,7 +89,7 @@ export default function SubPageLayout({
               {title}
             </h1>
             {description && (
-              <p className="animate-hero-desc mt-8 max-w-3xl text-lg font-light [line-height:1.2] text-cream/90 md:text-30">
+              <p className="animate-hero-desc mt-8 max-w-3xl text-lg font-light [line-height:1.2] text-cream md:text-30">
                 {description}
               </p>
             )}
@@ -106,12 +106,19 @@ export default function SubPageLayout({
         <main
           id="main-content"
           className={
-            // `reveal-sections`: bölümler görünürlüğe girerken yükselir. Saf CSS
-            // (animation-timeline: view()) — desteklemeyen tarayıcıda içerik
-            // statik ve tam görünür kalır. Bkz. app/globals.css.
+            // `reveal-sections`: bölümler görünürlüğe girerken yükselir.
+            // Destekleyen tarayıcıda saf CSS (animation-timeline: view()),
+            // desteklemeyende ScrollRevealBridge. İçerik hiçbir durumda
+            // gizlenmez. Bkz. app/globals.css ve ScrollRevealBridge.tsx.
+            //
+            // ÜST BOŞLUK ÖLÇÜLEREK KISILDI (AWWWARDS-90-BLOCKERS A8):
+            // hero'nun `pb-20`si ile main'in `py-28`i toplanınca açıklama
+            // metniyle ilk bölüm başlığı arasında ~190px'lik (the-story) ve
+            // ~180px'lik (reiki) hiçbir şey olmayan bir bant kalıyordu.
+            // Alt boşluk aynı; kısılan yalnız hero ile içerik arası.
             hideHero
               ? "reveal-sections px-6 pt-32 pb-16 md:px-16 md:pt-44 md:pb-28"
-              : "reveal-sections px-6 py-16 md:px-16 md:py-28"
+              : "reveal-sections px-6 pt-10 pb-16 md:px-16 md:pt-16 md:pb-28"
           }
         >
           {children}

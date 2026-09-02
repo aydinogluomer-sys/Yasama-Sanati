@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { easing, duration } from "@/utils/motion/tokens";
+import { ink } from "@/utils/palette";
 
 interface FAQItem {
   question: string;
@@ -40,11 +41,11 @@ export default function FAQList({ items }: FAQListProps) {
                 className="w-full flex items-center justify-between text-left group cursor-pointer py-1"
                 aria-expanded={isOpen}
               >
-                <span className="text-base md:text-lg lg:text-xl font-light text-white group-hover:text-[var(--accent-copper-on-dark)] transition-colors duration-300 tracking-wide pr-6">
+                <span className="text-base md:text-lg lg:text-xl font-light text-white group-hover:text-copper-text transition-colors duration-300 tracking-wide pr-6">
                   {item.question}
                 </span>
                 <span className="flex-shrink-0 flex items-center justify-center size-7 border border-cream/20 rounded-full group-hover:border-copper group-hover:bg-copper/10 transition-all duration-300">
-                  <span className={`text-base text-cream group-hover:text-[var(--accent-copper-on-dark)] transform transition-transform duration-300 leading-none ${isOpen ? "rotate-45" : ""}`}>
+                  <span className={`text-base text-cream group-hover:text-copper-text transform transition-transform duration-300 leading-none ${isOpen ? "rotate-45" : ""}`}>
                     +
                   </span>
                 </span>
@@ -59,7 +60,7 @@ export default function FAQList({ items }: FAQListProps) {
                     transition={{ duration: duration.quick, ease: easing.accordion }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-4 pb-2 text-base md:text-lg font-normal leading-[1.75] text-[#F5F2EB] whitespace-pre-line max-w-3xl pr-6">
+                    <div className="mt-4 pb-2 text-base md:text-lg font-normal leading-[1.75] text-paper whitespace-pre-line max-w-3xl pr-6">
                       {item.answer}
                     </div>
                   </motion.div>
@@ -78,7 +79,7 @@ export default function FAQList({ items }: FAQListProps) {
           >
             {isExpanded ? "Daha Az Soru Göster" : `Diğer Soruları Gör (${items.length - 2})`}
             <span className={`transform transition-transform duration-300 ${isExpanded ? "-rotate-90" : "rotate-90"}`}>
-              <NavigateSVG fill="#FFFFFF" className="size-2.5" />
+              <NavigateSVG fill={ink.white} className="size-2.5" />
             </span>
           </button>
         </div>

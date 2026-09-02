@@ -6,6 +6,7 @@ import FAQList from "@/components/Client/FAQList";
 import TypographyLabel from "@/components/Server/TypographyLabel";
 import type { ConsultationProgramSlug } from "@/data/consultation-programs";
 import { consultationHref } from "@/utils/consultation-context";
+import { ink } from "@/utils/palette";
 
 const prependZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 /** Strip a leading "Modül N:" / "Bölüm N:" so the Space Mono index carries the number. */
@@ -188,7 +189,7 @@ export default function CourseDetailTemplate({
           <Link href={consultationUrl}>
             <BorderedButton className="inline-flex cursor-pointer items-center gap-4 px-8 py-5 text-base text-white [&_path]:[stroke:white] [&_svg]:[stroke:white]">
               Ücretsiz Ön Görüşme
-              <NavigateSVG fill="#FFFFFF" className="size-2.5 mr-2.5" />
+              <NavigateSVG fill={ink.white} className="size-2.5 mr-2.5" />
             </BorderedButton>
           </Link>
         </section>

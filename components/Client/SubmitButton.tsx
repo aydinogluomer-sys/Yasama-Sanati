@@ -3,6 +3,7 @@ import { useFormStatus } from "react-dom";
 import * as motion from "motion/react-client";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { duration } from "@/utils/motion/tokens";
+import { ink } from "@/utils/palette";
 
 export default function SubmitButton() {
   const { pending } = useFormStatus();
@@ -17,7 +18,7 @@ export default function SubmitButton() {
       transition={{ duration: duration.quick, ease: "easeInOut" }}
     >
       <span>{pending ? "Talep gönderiliyor…" : "Görüşme talebini gönder"}</span>
-      <NavigateSVG fill="#D1CCBF" />
+      <NavigateSVG fill={ink.cream} />
     </motion.button>
   );
 }

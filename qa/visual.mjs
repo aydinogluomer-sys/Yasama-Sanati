@@ -36,7 +36,20 @@ const VIEWPORTS = [
   ["1440x900", 1440, 900, false],
   ["1920x1080", 1920, 1080, false],
 ];
-const ROUTES = ["/", "/programlar", "/programlar/reiki", "/on-gorusme"];
+// Kapsam 4 -> 8 rota (docs/AWWWARDS-90-BLOCKERS.md Faz 3 kapısı).
+// Eklenenler tam da bu turda yeniden kurgulanan sayfalar: /community ve
+// /the-story (kutu ızgarasından editoryal akışa), /blog (öne çıkan kart),
+// /kvkk (yapışkan içindekiler). Değişen sayfa izlenmiyorsa kapı boş kapıdır.
+const ROUTES = [
+  "/",
+  "/programlar",
+  "/programlar/reiki",
+  "/on-gorusme",
+  "/community",
+  "/the-story",
+  "/blog",
+  "/kvkk",
+];
 
 // Farkın anlamlı sayılması için eşik: pikselin %0.15'i. Font hinting ve
 // görüntü kod çözme farkları bu bandın altında kalır.

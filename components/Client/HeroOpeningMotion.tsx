@@ -6,6 +6,7 @@ import OutlineTypographyLayer from "@/components/Client/OutlineTypographyLayer";
 import { easing, duration } from "@/utils/motion/tokens";
 import NavigateSVG from "@/components/SVGComponents/NavigateSVG";
 import { consultationHref } from "@/utils/consultation-context";
+import { ink } from "@/utils/palette";
 
 /** Masked line reveal (used inside an overflow-hidden wrapper). Reduced motion → instant. */
 const maskLine = (delay: number, reduce: boolean): Variants => ({
@@ -123,7 +124,7 @@ export default function HeroOpeningMotion() {
             >
               Ön Görüşme
               <NavigateSVG
-                fill="#2B3530"
+                fill={ink.deep}
                 className="size-2.5 transition-transform duration-200 group-hover:translate-x-0.5"
               />
             </Link>

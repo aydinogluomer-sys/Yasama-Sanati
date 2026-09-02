@@ -3,6 +3,7 @@ import EditorialSectionTitle from "@/components/Server/EditorialSectionTitle";
 import HandwritingMark from "@/components/Client/HandwritingMark";
 import StyledLink from "@/components/Server/StyledLink";
 import { Fragment } from "react";
+import { ink } from "@/utils/palette";
 
 export default function AkademiHikayesiServer() {
   const textLines = {
@@ -12,7 +13,7 @@ export default function AkademiHikayesiServer() {
       <Fragment key="m-3">ayrı ayrı öğrenilen</Fragment>,
       <Fragment key="m-4">disiplinlerin</Fragment>,
       <Fragment key="m-5">
-        <span className="text-[var(--accent-copper-on-dark)] font-serif italic">tek bir soruda</span>
+        <span className="text-copper-text font-serif italic">tek bir soruda</span>
       </Fragment>,
       <Fragment key="m-6">birleşmesiyle doğdu:</Fragment>,
       <Fragment key="m-7">insan kendine</Fragment>,
@@ -22,7 +23,7 @@ export default function AkademiHikayesiServer() {
       <Fragment key="d-1">Bu akademi, yıllar içinde</Fragment>,
       <Fragment key="d-2">ayrı ayrı öğrenilen disiplinlerin</Fragment>,
       <Fragment key="d-3">
-        <span className="text-[var(--accent-copper-on-dark)] font-serif italic">tek bir soruda</span> birleşmesiyle
+        <span className="text-copper-text font-serif italic">tek bir soruda</span> birleşmesiyle
       </Fragment>,
       <Fragment key="d-4">doğdu: insan kendine</Fragment>,
       <Fragment key="d-5">nasıl geri döner?</Fragment>,
@@ -46,10 +47,10 @@ export default function AkademiHikayesiServer() {
           />
         </div>
         <div className="mt-12 flex flex-col gap-1 max-md:mb-16 md:gap-4">
-          <StyledLink href="/the-story" arrowFill="#2B3530" underlineColor="#C9875B">
+          <StyledLink href="/the-story" arrowFill={ink.deep} underlineColor="#C9875B">
             Hikayenin Tamamı
           </StyledLink>
-          <StyledLink href="/egitmenler" arrowFill="#2B3530" underlineColor="#C9875B">
+          <StyledLink href="/egitmenler" arrowFill={ink.deep} underlineColor="#C9875B">
             Eğitmenlerle Tanış
           </StyledLink>
         </div>

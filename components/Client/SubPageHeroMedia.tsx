@@ -51,12 +51,35 @@ export default function SubPageHeroMedia({
         />
       </motion.div>
 
-      {/* 1 — dikey scrim. Alt banda ağırlık veriyor: başlık ve açıklama orada
-             oturuyor, fotoğrafın üst yarısı ise aydınlık kalıyor. Ölçümle
-             ayarlandı — önceki (92/55/25) dağılımında açıklama metni dört
-             sayfada 3.99–4.34:1'e düşüyordu (gereken 4.5:1). axe bunu
-             yakalayamaz: fotoğraf üzerindeki metnin kontrastını hesaplamaz. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-deep from-[18%] via-deep/72 via-[48%] to-deep/18" />
+      {/* 1 — genel scrim.
+             ÖNCEKİ DENGE ÖLÇÜLDÜ VE DEĞİŞTİRİLDİ (AWWWARDS-90-BLOCKERS A8).
+             `from-[18%] via-72/[48%] to-18` dağılımında fotoğraf hero'nun
+             ortasında tükeniyordu; /community'de piksel okuması:
+               y=120 (89,85,75) → y=400 (48,54,47) → y=550 (46,55,51)
+             y=550 saf zemin rengi. Yani 612px'lik hero'nun alt %40'ı ölü
+             alandı ve "fotoğraflı hero" fiilen düz bir bloktu.
+
+             Genel katman artık çok daha hafif: fotoğrafın yaşaması için.
+             Okunabilirliği 1b sağlıyor. */}
+      <div className="absolute inset-0 bg-gradient-to-t from-deep from-[8%] via-deep/42 via-[42%] to-deep/12" />
+      {/* 1b — metin şeridi. Başlık ve açıklama YALNIZ burada oturuyor, o yüzden
+             koyuluk tüm kareye değil sadece bu banda uygulanıyor. Kontrast
+             tabanı böyle korunuyor: metnin arkası eskisi kadar koyu, fotoğrafın
+             üst üçte ikisi ise açık kalıyor.
+             (axe bunu doğrulayamaz — fotoğraf üzerindeki metnin kontrastını
+             hesaplamaz; ölçüm piksel okumasıyla yapılıyor.) */}
+      <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-deep from-[12%] via-deep/74 via-[46%] to-transparent" />
+      {/* 1c — metin SÜTUNU scrim'i.
+             Dikey bant tek başına yetmiyor: bazı karelerde metnin tam arkasına
+             parlak bir bölge düşüyor. Ölçüldü — `/programlar`de fotoğrafın o
+             noktasında krem bir defter ve keten var ve açıklama 2.42:1'e
+             düşüyordu (diğer yedi rota 4.56–4.68 arasındaydı).
+
+             Çözüm tüm kareyi koyulaştırmak DEĞİL — o, 1 ve 1b ile kazanılan
+             fotoğrafı geri verirdi. Metin sola hizalı ve sınırlı genişlikte
+             olduğu için koyuluk yalnız sol sütuna uygulanıyor; sağ taraf açık
+             kalıyor. Ölçüm: qa/hero-contrast.mjs */}
+      <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-deep/78 via-deep/34 via-[38%] to-transparent to-[62%]" />
       {/* 2 — NavBar şeridi */}
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-deep/85 via-deep/45 to-transparent md:h-52" />
       {/* 3 — alt geçiş */}
