@@ -114,9 +114,32 @@ Yapılanlar: hero açılışı CSS'e · hero görselinin çift render'ı kaldır
 (görsel transferi 457 → 360 KB) · Space Mono 700 bırakıldı (font varlıkları
 217 → 194 KB). Ayrıntı ve ölçümler: `docs/decisions.md` D079.
 
-Kalan darboğaz ve sıradaki adaylar (**ölçülmedi, tahmin**): Motion'ın
-`LazyMotion` + `m` ayrımı, ekran altı istemci bileşenlerinin ertelenmesi,
-147 KB'lık SSR HTML'inin küçültülmesi.
+#### Bundle işi yapıldı (2026-09-02) — ve asıl darboğazı ortaya çıkardı
+
+**Önce bir ölçüm hatam düzeltildi:** yukarıdaki ve D079'daki transfer rakamları
+KOD ÇÖZÜLMÜŞ boyutlardı. Sunucu gzip gönderiyor (HTML 150 → 25 KB, JS yığını
+174 → 46 KB). Tel üzerindeki gerçek dağılım: **img 360 · js 213 · font 190 ·
+html 25 · css 19 KB**. Yani "ağırlık JS'te 690 KB" iddiam yanlıştı.
+
+Yapılanlar (ikisi de piksel bazında doğrulandı):
+
+* Yerel fontlar alt kümelendi: **172 → 128 KB**, görsel regresyon 32/32 %0,000.
+  (İlk deneme elle `--layout-features` listesi verdiği için Ogg şekillendirmesini
+  bozmuştu; `'*'` ile yeniden üretildi.)
+* Hero görseli kalite 75 → 60: **96 → 49 KB**, sayfa üzerinde **0 farklı piksel**
+  (hero üç scrim altında).
+* Net: tel üzerinde **812 → 674 KB (−138 KB, %17)**.
+
+**Sonuç: LCP 9424 → 9352 ms, yani neredeyse hiç oynamadı.** Darboğaz bant
+genişliği değil **ana iş parçacığı**: TBT ~2362 ms.
+
+**Tavan ölçüldü:** uygulama JS'i tamamen engellendiğinde LCP **3128 ms**
+(FCP 2852 ms). Yani <2500 ms hedefi bundle çalışmasıyla tek başına
+ulaşılabilir değil.
+
+Sıradaki yön bayt kesmek değil **çalışan istemci JS'ini azaltmak**: Motion'ın
+`LazyMotion` + `m` ayrımı (58 dosya, 188 kullanım, 12'si RSC tarafında) ve ekran
+altı bölümlerin istemci bileşeni olmaktan çıkarılması. Ayrıntı: D080.
 
 Journey runtime'ı mobil/masaüstü olarak gerçekten ayrıldı (CSS gizleme JS'i
 bundle'dan çıkarmıyordu). Mobil artık masaüstü journey chunk'ını indirmiyor —

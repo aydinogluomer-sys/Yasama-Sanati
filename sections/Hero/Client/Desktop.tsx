@@ -34,11 +34,18 @@ export default function HeroDesktopClient() {
           animate={reduceMotion ? { scale: 1 } : { scale: [1.06, 1] }}
           transition={reduceMotion ? { duration: 0 } : { duration: 28, ease: "easeOut" }}
         >
+          {/* Kalite 75 -> 60. ÖLÇÜLEREK seçildi, göz kararı değil: hero üç scrim
+          katmanının altında ve tonal aralık zaten eziliyor. Sayfa üzerinde
+          karşılaştırma (390x844, DPR 2, animasyonlar kapalı, pixelmatch):
+          q=68 -> 0 farklı piksel · q=60 -> 0 · q=52 -> 22 (%0.002)
+          Dosya 96 KB -> 49 KB; LCP ögesi bu görsel olduğu için doğrudan
+          LCP'ye yazıyor. */}
           <Image
             src={heroDesktop}
             alt=""
             aria-hidden
             priority
+            quality={60}
             sizes="100vw"
             placeholder="blur"
             className="size-full object-cover"

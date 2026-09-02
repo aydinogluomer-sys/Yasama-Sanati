@@ -140,6 +140,15 @@ npm run test:perf     # LCP / CLS / TBT — LAB ölçümü, p75 değil
    iki tur yanlış sonuca varıldı (D078).
 5. **`next/image` `remotePatterns` istek anında doğrulanır, derlemede değil.**
    `npm run build` kırık uzak görseli yakalamaz; `npm run test:images` yakalar (D072/D075).
+6. **Transfer ölçerken sıkıştırmayı doğrula.** `response.body().length` KOD
+   ÇÖZÜLMÜŞ boyutu verir; sunucu gzip gönderiyor (HTML 150 → 25 KB). Bu yüzden
+   bir tur boyunca "ağırlık JS'te 690 KB" diye yanlış bir sonuçla çalışıldı;
+   gerçekte tel üzerinde js 213 KB, fontlar 190 KB idi. Doğrusu
+   `request.sizes().responseBodySize`. `curl -I` de yanıltır — HEAD isteğinde
+   `Content-Encoding` görünmez, GET ile bak (D080).
+7. **Font alt kümelerken `--layout-features='*'` kullan.** Elle özellik listesi
+   vermek Ogg'un şekillendirmesini bozdu ve `/the-story` başlığı kaydı
+   (görsel regresyon %0,85–1,57). Alt kümeleme sonrası `test:visual` şart (D080).
 
 ---
 
@@ -147,7 +156,7 @@ npm run test:perf     # LCP / CLS / TBT — LAB ölçümü, p75 değil
 
 | konu | durum |
 |---|---|
-| Mobil Slow 4G LCP | **hedef karşılanmadı** (<2500 ms). Faz 4 uygulandı: 9764 → 9424 ms. Hero açılışı JS'ten alındı, çift görsel render'ı kaldırıldı. Kalan darboğaz 690 KB JS — bundle işi, ölçülmemiş adaylar D079'da. |
+| Mobil Slow 4G LCP | **hedef karşılanmadı** (<2500 ms). 9764 → 9352 ms. Bundle işi yapıldı: tel üzerinde 812 → 674 KB. Ama **LCP oynamadı** — darboğaz bant genişliği değil ana iş parçacığı (TBT ~2362 ms). Tavan ölçüldü: tüm uygulama JS'i sıfırlansa bile LCP 3128 ms. Ayrıntı D080. |
 | `group/mucizeler-kursu.jpg`, `group/yasam-koclugu.jpg` | renk sıcaklığı düzeltildi, konu hâlâ ılıman iklim penceresi. Prompt hazır. |
 | `/egitmenler` | denetimde "portre yok, kart dili jenerik" — plan maddesi değildi, kapsam dışı bırakıldı. |
 | Footer'ın iki CTA düğmesi | `rounded-full` hap; sitenin geri kalanı kare (`BorderedButton`). 404'te aynı gerekçeyle kaldırılmıştı. Footer bir referans görsele göre ayarlandığı için dokunulmadı — **karar sahibinin.** |

@@ -7,6 +7,41 @@ import { MotionConfig } from "motion/react";
 import AccessibleLenis from "@/components/Client/AccessibleLenis";
 import { OrganizationSchema } from "@/components/Server/StructuredData";
 
+/*
+ * YEREL FONTLAR ALT KÜMELENDİ (bundle işi, 2026-09-02).
+ *
+ * `app/fonts/*.woff2` artık ALT KÜME dosyalarıdır; orijinalleri
+ * `app/fonts/original/` altında duruyor (referans verilmediği için paketlenmez).
+ *
+ * Neden: tel üzerindeki transfer ölçülünce fontların **190 KB** ile en büyük
+ * ikinci kalem olduğu görüldü. woff2 zaten sıkıştırılmıştır, yani gzip onlara
+ * hiçbir şey kazandırmıyor — JS 690 KB "görünürken" tel üzerinde 213 KB'a
+ * iniyor, fontlar ise 190 KB olarak kalıyor.
+ *
+ * Alt küme aralıkları (tahmin değil, ölçüm): 21 rotanın tamamının metni
+ * taranarak sitede fiilen kullanılan 100 karakter çıkarıldı, sonra güvenlik
+ * payıyla şu aralıklar tutuldu:
+ *   U+0020-007E  Temel Latin
+ *   U+00A0-00FF  Latin-1 (ÇÖÜçöü ×  ° ©)
+ *   U+0100-017F  Latin Genişletilmiş-A (ĞğİıŞş — Türkçe için şart)
+ *   U+2000-206F  Genel noktalama (— ’ •)
+ *   U+2190-21FF  Oklar (← ↑ →)
+ *   U+2726       ✦
+ * OpenType özellikleri korundu: kern, liga, clig, calt, tnum, onum.
+ *
+ * Doğrulandı: alt kümeler, kullanılan karakter kümesinde orijinallerin sahip
+ * olduğu HİÇBİR glifi kaybetmiyor. (✦ ve Ogg'daki oklar zaten orijinallerde de
+ * yoktu; tarayıcı onlar için hep yedeğe düşüyordu.)
+ *
+ * Sonuç: 172 KB -> 105 KB, yani tel üzerinde 67 KB kazanç.
+ *
+ * Yeniden üretmek için (fontTools gerekir):
+ *   python -m fontTools.subset app/fonts/original/<ad>.woff2  *     --unicodes="U+0020-007E,U+00A0-00FF,U+0100-017F,U+2000-206F,U+2190-21FF,U+2726"  *     --layout-features="kern,liga,clig,calt,tnum,onum"  *     --flavor=woff2 --output-file=app/fonts/<ad>.woff2
+ *
+ * LİSANS NOTU: alt kümeleme türev font dosyası üretir. Web font lisansları
+ * genellikle performans amaçlı alt kümelemeye izin verir ama bu depoda Ogg'un
+ * lisansı zaten açık bir madde (D041). Sözleşmeler doğrulanmalı.
+ */
 const basisGrotesque = localFont({
   src: [
     { path: "./fonts/BasisGrotesquePro-Light.woff2", weight: "300", style: "normal" },

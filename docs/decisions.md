@@ -977,3 +977,92 @@ yapılmadı, ölçülmedi):
 
 Bu üçü tahmindir; uygulanmadan önce ölçülmeli. Bu turun dersi tam olarak buydu:
 planın "hero görselleri" teşhisi ölçülmediği için yanlıştı.
+
+## D080 — Bundle işi: 138 KB kesildi, LCP oynamadı; darboğaz bant genişliği değil CPU
+
+Reason: "Bundle işini de yap" talebiyle başlandı. Sonuç iki bölümde: ölçüm
+yöntemimde bir HATA bulundu ve düzeltildi; ardından yapılan gerçek kesintiler
+LCP'yi neredeyse hiç değiştirmedi — bu da asıl darboğazı gösterdi.
+
+### 1. Önceki transfer rakamlarım YANLIŞTI (D079'daki dahil)
+
+`response.body().length` **kod çözülmüş** boyutu verir. Sunucu gzip gönderiyor:
+
+```
+HTML     150.716 -> 25.715 bayt   (5,9x)
+JS yigini 174.198 -> 46.216 bayt   (3,8x)
+```
+
+Yani D079'da yazdığım "ağırlık JS'te: 690 KB" **hatalıydı**. `request.sizes()
+.responseBodySize` ile ölçülen gerçek (tel üzerindeki) dağılım:
+
+```
+img   360 KB   <- en buyuk kalem
+js    213 KB   <- 690 degil
+font  190 KB   <- woff2 zaten sikistirilmis, gzip kazandirmiyor
+html   25 KB · css 19 KB        TOPLAM 812 KB
+```
+
+Fontlar, küçümsediğim kalem, ikinci sıradaydı. Ders: sıkıştırmayı doğrulamadan
+transfer rakamı yazma. (`curl -I` de yanıltıyor — HEAD isteğinde
+`Content-Encoding` başlığı görünmüyor; GET ile doğrulanmalı.)
+
+### 2. Tavan ölçüldü — hedef bundle işiyle zaten ulaşılamaz
+
+Uygulama yığınları ağ katmanında engellenerek (JS kapatılmadı, yoksa ölçüm
+scripti de çalışmazdı) ulaşılabilecek en iyi sonuç bulundu:
+
+```
+JS acik  (bugunku)   FCP 5716 ms   LCP 11132 ms   1511 KB
+JS engelli (tavan)   FCP 2852 ms   LCP  3128 ms    617 KB
+```
+
+**Tüm uygulama JavaScript'i sıfırlansa bile LCP 3128 ms.** Hedef <2500 ms
+bundle çalışmasıyla tek başına ulaşılabilir değil.
+
+### 3. Yapılan kesintiler (ikisi de piksel bazında doğrulandı)
+
+**Yerel fontlar alt kümelendi: 172 -> 128 KB.** Aralıklar tahminle değil
+ölçümle seçildi: 21 rotanın metni taranıp sitede fiilen kullanılan 100 karakter
+çıkarıldı, sonra güvenlik payıyla Latin + Latin-Ext-A + genel noktalama + oklar
+tutuldu. Orijinaller `app/fonts/original/` altında korundu.
+
+> İlk deneme TİPOGRAFİYİ BOZDU. `--layout-features="kern,liga,clig,calt,tnum,onum"`
+> diye elle liste verince Ogg'un kullandığı başka özellikler düştü ve
+> `/the-story` başlığı kaydı: görsel regresyon 4 viewport'ta %0,854–1,574
+> (eşik %0,15). `--layout-features='*'` ile yeniden üretildi; kazanç 67 -> 44 KB'a
+> düştü ama **32 karşılaştırmanın hepsi %0,000**. Doğru takas bu.
+
+**Hero görseli kalite 75 -> 60: 96 -> 49 KB.** Göz kararı değil: hero üç scrim
+katmanının altında ve tonal aralık zaten eziliyor. Sayfa üzerinde pixelmatch
+(390x844, DPR 2, animasyonlar kapalı): **q=68 -> 0 farklı piksel, q=60 -> 0,
+q=52 -> 22 (%0,002).**
+
+**Net: tel üzerinde 812 -> 674 KB (-138 KB, %17).**
+
+### 4. Ve LCP oynamadı — asıl bulgu bu
+
+```
+Slow 4G LCP   9424 -> 9352 ms   (5 kosu medyani)
+TBT           ~2362 ms
+```
+
+138 KB kesilmesine rağmen LCP sabit kaldı. Yani **darboğaz bant genişliği
+değil, ana iş parçacığı.** 4x CPU kısıtı altında TBT ~2,4 saniye; büyük ögenin
+sunumu bayt beklemiyor, hidrasyon bekliyor. Tavan ölçümündeki kazanç da
+baytlardan değil, hidrasyonun tamamen ortadan kalkmasından geliyordu.
+
+### 5. Sıradaki iş ve sınırı
+
+Kazanç bayt kesmekten değil **çalışan istemci JavaScript'ini azaltmaktan**
+gelir. Somut yön: 58 dosya Motion kullanıyor, ana sayfadaki her bölüm bir
+istemci bileşeni. Seçenekler:
+
+* Motion'ı `LazyMotion` + `m` ile bölmek (58 dosya, 188 kullanım; 12 dosya
+  `motion/react-client` ile RSC tarafında — bu kombinasyonun davranışı
+  doğrulanmalı).
+* Ekran altı bölümleri istemci bileşeni olmaktan çıkarmak / ertelemek.
+
+**Ama beklenti gerçekçi tutulmalı:** tavan 3128 ms. Hedef <2500 ms'e ulaşmak
+için hidrasyonun yanında HTML/CSS/font kritik yolunun da kısalması gerekir.
+Bu iş yapılmadan önce yukarıdaki tavan ölçümü tekrarlanmalı.
