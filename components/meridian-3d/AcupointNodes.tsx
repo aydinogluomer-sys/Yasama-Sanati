@@ -287,7 +287,7 @@ function AcupointLabel({
       <div className="text-4xs font-bold tracking-wider text-white uppercase font-sans whitespace-nowrap leading-normal">
         {acupoint.name}
       </div>
-      <div className="text-[8px] font-semibold tracking-widest uppercase font-mono leading-normal" style={{ color }}>
+      <div className="text-[8px] font-medium tracking-widest uppercase font-mono leading-normal" style={{ color }}>
         {acupoint.code === "Yintang" ? "Extra Point" : acupoint.code.replace(/([A-Z]+)(\d+)/, "$1 $2")}
       </div>
       {acupoint.trName && (

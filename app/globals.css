@@ -644,3 +644,126 @@ body:has([data-consultation-route])::after {
     transform: translateY(0);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   HERO AÇILIŞ KOREOGRAFİSİ — saf CSS.
+
+   NEDEN JAVASCRIPT'TEN ALINDI (Faz 4, ölçüm sonucu).
+   `HeroOpeningMotion` Motion ile `initial="hidden"` kullanıyordu. Motion'ın
+   `initial` prop'u SUNUCU HTML'İNE yazılır: paragrafa `opacity:0`, başlık
+   satırlarına `translateY(115%)`. Yani hero metni — ve LCP ögesi — 691 KB'lık
+   JS inip hidrasyon bitene kadar GÖRÜNMÜYORDU.
+
+   Mobil Slow 4G ölçümü (4× CPU, soğuk önbellek), düzeltmeden önce:
+
+     t=  483 ms  HTML  147 KB
+     t= 3402 ms  fontlar bitti (7 dosya, 191 KB)
+     t= 3451 ms  CSS   97 KB
+     t= 5697 ms  JS bitti (691 KB, en büyükleri 170 + 169 + 138 KB)
+     t=12152 ms  LCP  ← P.max-w-[19rem] (hero paragrafı)
+
+   Yani metnin boyanması için gereken her şey 3,5 saniyede hazırdı; sekiz buçuk
+   saniye boyunca beklenen tek şey JavaScript'ti.
+
+   Bu, `app/template.tsx`te çözülen sorunun aynısı. Saf CSS animasyonu stil
+   yüklendiği anda, JS'ten bağımsız çalışır; `both` ile son durumda kalır.
+   Koreografinin kendisi DEĞİŞMEDİ: aynı gecikmeler, aynı süreler, aynı eğriler
+   (utils/motion/tokens.ts — editorial, softOut, textLine 0.72s, hero 1.2s).
+   --------------------------------------------------------------------------- */
+@keyframes heroMaskLine {
+  from {
+    transform: translateY(115%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroOutlineOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Maskeli satır açılımı — `overflow-hidden` bir sarmalayıcının içinde çalışır. */
+.hero-line {
+  animation: heroMaskLine 720ms cubic-bezier(0.24, 0.43, 0.15, 0.97) both;
+}
+.hero-line-1 {
+  animation-delay: 300ms;
+}
+.hero-line-2 {
+  animation-delay: 400ms;
+}
+.hero-line-3 {
+  animation-delay: 520ms;
+}
+
+/* Destek ögeleri — yumuşak yükselerek beliriyor. */
+.hero-fade {
+  animation: heroFadeUp 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-fade-1 {
+  animation-delay: 700ms;
+}
+.hero-fade-2 {
+  animation-delay: 900ms;
+}
+.hero-fade-3 {
+  animation-delay: 1350ms;
+}
+
+/* Yatayda ortalanmış öge için ayrı varyant.
+   `heroFadeUp`in bitişi `transform: translateY(0)` — bu, elemanın üzerindeki
+   `-translate-x-1/2` sınıfını SİLER ve öge ortalamasını kaybeder (animasyon
+   bittikten sonra da, çünkü `both` son kareyi tutar). Merkezleme bu yüzden
+   keyframe'in içine alındı. */
+@keyframes heroFadeUpCentered {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 18px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.hero-fade-center {
+  animation: heroFadeUpCentered 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Arkadaki "ŞİFA" konturu, metin açılırken çekiliyor. */
+.hero-outline-out {
+  animation: heroOutlineOut 1200ms cubic-bezier(0.24, 0.43, 0.15, 0.97) 350ms
+    both;
+}
+
+/* Hareket azaltma: koreografi tamamen kapalı, içerik son durumunda.
+   `animation: none` doğal duruma döndürür (opacity 1, transform yok) çünkü
+   gizli durum yalnız keyframe'in içinde tanımlı. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-line,
+  .hero-fade,
+  .hero-fade-center,
+  .hero-outline-out {
+    animation: none;
+  }
+  .hero-outline-out {
+    opacity: 0;
+  }
+}

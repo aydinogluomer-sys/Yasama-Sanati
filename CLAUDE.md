@@ -147,7 +147,7 @@ npm run test:perf     # LCP / CLS / TBT — LAB ölçümü, p75 değil
 
 | konu | durum |
 |---|---|
-| Mobil Slow 4G LCP | **hedef karşılanmadı** (<2500 ms). Darboğaz kritik yoldaki ~1,3 MB ve React+Motion hidrasyonu — bundle işi. Ayrıntı: `RELEASE-READINESS.md`. |
+| Mobil Slow 4G LCP | **hedef karşılanmadı** (<2500 ms). Faz 4 uygulandı: 9764 → 9424 ms. Hero açılışı JS'ten alındı, çift görsel render'ı kaldırıldı. Kalan darboğaz 690 KB JS — bundle işi, ölçülmemiş adaylar D079'da. |
 | `group/mucizeler-kursu.jpg`, `group/yasam-koclugu.jpg` | renk sıcaklığı düzeltildi, konu hâlâ ılıman iklim penceresi. Prompt hazır. |
 | `/egitmenler` | denetimde "portre yok, kart dili jenerik" — plan maddesi değildi, kapsam dışı bırakıldı. |
 | Footer'ın iki CTA düğmesi | `rounded-full` hap; sitenin geri kalanı kare (`BorderedButton`). 404'te aynı gerekçeyle kaldırılmıştı. Footer bir referans görsele göre ayarlandığı için dokunulmadı — **karar sahibinin.** |

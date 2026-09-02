@@ -904,3 +904,76 @@ gerekçesi yanlıştı), kapı doğru ölçütle yazıldı. Üç motorda da geç
 ölçebildiğini kanıtlayan bir KONTROL koşusu gerekir. Burada kontrol (tanımsız
 token) en sona bırakıldığı için iki tur yanlış iş yapıldı. Kapı:
 `npm run test:selection` (qa/selection.mjs).
+
+## D079 — Faz 4: hero açılışı JavaScript'ten alındı; LCP hedefi yine karşılanmadı
+
+Reason: Planın 16. maddesi "mobil Slow 4G LCP 3244 → <2500 ms" diyordu ve çözüm
+olarak **hero görsellerini** işaret ediyordu (`SideBar/` 3,3 MB, AVIF/WebP
+üretimi, `sizes` daraltması). **Bu teşhis yanlıştı.** Ölçüldü:
+
+```
+mobil 4× CPU + Slow 4G, soğuk önbellek, istek dökümü:
+  t=  414 ms  HTML     147 KB
+  t=  473 ms  hero gorseli  97 KB      ← gorsel ZATEN erken geliyor
+  t=  901 ms  CSS       97 KB
+  t= 5200 ms  fontlar  191 KB (7 dosya)
+  t= 7169 ms  JS       690 KB (170 + 169 + 138 + 53 + 52 + 35 …)
+  tur toplami: js 690 · font 191 · img 180 · css 100 · html 147 KB
+```
+
+Mobilde görsel transferi **180 KB**; `next/image` istek anında zaten AVIF/WebP
+üretiyor. Yani planın önerdiği iş neredeyse hiçbir şey kazandırmayacaktı.
+Ağırlık **JS'te**.
+
+**Bulunan gerçek sorun.** `HeroOpeningMotion` Motion ile `initial="hidden"`
+kullanıyordu; Motion bu prop'u SUNUCU HTML'İNE yazar. Yani hero başlığına
+`translateY(115%)`, paragrafına `opacity:0` gömülüyordu ve **görünür alanın
+tamamı 690 KB JS inip hidrasyon bitene kadar boyanmıyordu.** Ölçüm: LCP
+12152 ms, LCP ögesi hero paragrafı. Metnin boyanması için gereken her şey
+(HTML + CSS + font) 3,5 saniyede hazırdı.
+
+Bu, `app/template.tsx`te çözülen sorunun aynısı (D0xx / A5 notu). Koreografi
+saf CSS'e taşındı: `app/globals.css` içindeki `.hero-line*`, `.hero-fade*`,
+`.hero-fade-center`, `.hero-outline-out`. Gecikmeler, süreler ve eğriler
+`utils/motion/tokens.ts` ile birebir aynı bırakıldı.
+
+**Doğrulama — davranış korundu:**
+
+* `test:visual` güncellemesiz koşuldu: `home` karelerinde değişen piksel
+  **%0.000 / %0.000 / %0.003 / %0.000** (eşik %0.15). Görünen sonuç aynı.
+* Sunucu HTML'inde hero paragrafından ÖNCEKİ bölgede `opacity:0` **0**,
+  `translateY(115%)` **0** (öncesinde vardı). Kalan 27/15 kullanım ekran
+  altındaki bölümlerde, LCP dışı.
+* 14 kapının tamamı geçti.
+
+**Yan düzeltmeler:**
+
+* Hero görseli iki kez render ediliyordu. `HeroClient`, viewport çözülmeden
+  ayrı bir `<Image>`, çözülünce `<HeroMobileClient>` basıyordu; aynı kare,
+  farklı ağaç şekli → React ilk `<img>`i söküp yenisini takıyor → soğuk
+  önbellekte üçüncü bir istek. Her iki durum aynı bileşene bağlandı; dökümde
+  görsel toplamı **457 → 360 KB**.
+* Space Mono ağırlık 700 bırakıldı. Tarandı: `font-mono` taşıyan hiçbir
+  className bold istemiyordu; tek istisna 3D meridyen sahnesindeki 8px'lik bir
+  etiketti (`font-semibold` → `font-medium`). Derlemedeki font varlıkları
+  **217 KB / 11 dosya → 194 KB / 8 dosya**. Not: bu dosyalar ana sayfada
+  zaten yüklenmiyordu, kazanç `/programlar/meridyen-terapi` tarafında.
+
+**HEDEF KARŞILANMADI.** Slow 4G LCP medyanı 9764 → **9424 ms** (5 koşu,
+yayılım 8880–9596). Hedef <2500 ms.
+
+Neden bu kadar az oynadı: hero metni artık erken boyanıyor ama LCP ögesi hero
+GÖRSELİ ve o da 1,6 Mbps'lik hattı 690 KB JS ile paylaşıyor. Kritik yoldaki
+~1,3 MB'ın tamamı inmeden büyük ögenin sunumu tamamlanmıyor.
+
+**Bundan sonrası bundle işidir, cila değil.** Somut adaylar (hiçbiri bu turda
+yapılmadı, ölçülmedi):
+
+1. Motion'ı `LazyMotion` + `m` bileşenine çevirmek. Şu an her sayfa tam
+   `motion` paketini alıyor; `8962-*.js` (138 KB) ve `8148-*.js` (52 KB)
+   yığınlarında motion imzası var.
+2. Ekran altı istemci bileşenlerini `next/dynamic` ile ertelemek.
+3. HTML'in kendisi 147 KB — SSR çıktısının küçültülmesi ayrı bir inceleme.
+
+Bu üçü tahmindir; uygulanmadan önce ölçülmeli. Bu turun dersi tam olarak buydu:
+planın "hero görselleri" teşhisi ölçülmediği için yanlıştı.

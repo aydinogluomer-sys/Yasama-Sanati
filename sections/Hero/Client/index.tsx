@@ -2,32 +2,33 @@
 
 import { useIsMobile } from "@/app/providers";
 import HeroDesktopClient from "./Desktop";
-import Image from "next/image";
 import HeroMobileClient from "@/sections/Hero/Client/Mobile";
-import heroMobile from "@/public/Hero/hero-mobile.jpg";
 
+/**
+ * Hero medyası — viewport çözülene kadar mobil kareyi gösterir.
+ *
+ * Viewport henüz bilinmiyorken (`isMobile === null`) bilerek MOBİL kare
+ * basılıyor: telefon 2560px'lik masaüstü karesini asla indirmesin ve
+ * Desktop→Mobile yanlış-medya sıçraması olmasın.
+ *
+ * YİNELENEN İSTEK DÜZELTİLDİ (Faz 4).
+ * Önce `null` durumunda ayrı bir `<Image>` render ediliyordu, `true` olunca da
+ * `<HeroMobileClient>`. İkisi de AYNI görseli kullanıyordu ama farklı ağaç
+ * şekilleri olduğu için React ilk `<img>`i söküp yenisini takıyordu — yani aynı
+ * kare iki kez isteniyordu. Mobil Slow 4G dökümünde ölçüldü:
+ *
+ *     t= 4210ms  97 KB  hero-mobile w=828
+ *     t=10705ms  97 KB  hero-mobile w=828   ← aynı dosya
+ *     t=11904ms  97 KB  hero-mobile w=828   ← aynı dosya
+ *
+ * Gerçek kullanıcıda tekrar istekleri HTTP önbelleğinden dönebilir, ama DOM'da
+ * gereksiz bir düğüm, ikinci bir kod çözme ve soğuk önbellekte gerçek bir bant
+ * genişliği israfı vardı. Artık her iki durumda da aynı bileşen render ediliyor,
+ * yani React aynı `<img>` düğümünü koruyor.
+ */
 export default function HeroClient() {
   const isMobile = useIsMobile();
-  return (
-    <>
-      {isMobile === null ? (
-        // Viewport not yet resolved: paint the portrait frame only, so a phone never downloads
-        // the 2560px desktop still and there is no Desktop→Mobile wrong-media flash.
-        <Image
-          src={heroMobile}
-          alt=""
-          aria-hidden
-          fill
-          priority
-          sizes="100vw"
-          placeholder="blur"
-          className="absolute inset-0 object-cover"
-        />
-      ) : isMobile ? (
-        <HeroMobileClient />
-      ) : (
-        <HeroDesktopClient />
-      )}
-    </>
-  );
+  // `null` (henüz bilinmiyor) ve `true` aynı dalı paylaşıyor: aynı bileşen,
+  // aynı DOM düğümü, tek istek.
+  return isMobile === false ? <HeroDesktopClient /> : <HeroMobileClient />;
 }

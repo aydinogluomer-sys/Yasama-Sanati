@@ -102,6 +102,22 @@ iyi ölçüldü). Darboğaz bu dosyanın zaten söylediği yerde: kritik yoldaki
 **Hedef <2500 ms KARŞILANMADI.** Gerçek bir ilerleme için gereken şey ölçüm
 değil bundle çalışması; bu ayrı bir iş kalemi.
 
+#### Faz 4 uygulandı (2026-09-02) — LCP 9764 → 9424 ms, hedef yine uzak
+
+Planın teşhisi ("hero görselleri, AVIF/WebP") **yanlıştı**: mobilde görsel
+transferi 180 KB ve `next/image` zaten AVIF/WebP üretiyor. Ağırlık JS'te
+(690 KB). Asıl bulunan sorun: hero'nun Motion `initial="hidden"`i sunucu
+HTML'ine `opacity:0` yazdığı için **görünür alanın tamamı JS'i bekliyordu**
+(LCP 12152 ms). Koreografi saf CSS'e alındı; görsel sonuç birebir aynı kaldı.
+
+Yapılanlar: hero açılışı CSS'e · hero görselinin çift render'ı kaldırıldı
+(görsel transferi 457 → 360 KB) · Space Mono 700 bırakıldı (font varlıkları
+217 → 194 KB). Ayrıntı ve ölçümler: `docs/decisions.md` D079.
+
+Kalan darboğaz ve sıradaki adaylar (**ölçülmedi, tahmin**): Motion'ın
+`LazyMotion` + `m` ayrımı, ekran altı istemci bileşenlerinin ertelenmesi,
+147 KB'lık SSR HTML'inin küçültülmesi.
+
 Journey runtime'ı mobil/masaüstü olarak gerçekten ayrıldı (CSS gizleme JS'i
 bundle'dan çıkarmıyordu). Mobil artık masaüstü journey chunk'ını indirmiyor —
 ama **bayt kazancı yok** (212 KB → 212 KB): modül küçük ve ağır bağımlılıkları

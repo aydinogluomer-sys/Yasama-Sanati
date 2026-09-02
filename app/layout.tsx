@@ -23,7 +23,12 @@ const basisGrotesque = localFont({
 // Micro-label voice (Phase 2): 01/02 indices, dates, coordinates, scroll cues. Micro use only.
 const spaceMono = Space_Mono({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "700"],
+  // 700 KALDIRILDI (Faz 4). Tarandı: `font-mono` taşıyan hiçbir className bold
+  // istemiyordu; tek istisna 3D meridyen sahnesindeki 8px'lik bir etiketti ve o
+  // da `font-medium`a çekildi. 700 ağırlığı iki subset x bir ağırlık = 2 woff2
+  // dosyası demekti ve HER sayfada indiriliyordu — oysa onu talep eden tek öge
+  // yalnız /programlar/meridyen-terapi'de, üstelik dinamik yüklenen bir sahnede.
+  weight: ["400"],
   variable: "--font-space-mono",
 });
 

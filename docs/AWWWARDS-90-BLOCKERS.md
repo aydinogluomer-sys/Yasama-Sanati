@@ -404,9 +404,14 @@ Bu faz **yeni tasarım üretmez**, var olan sistemi devreye alır. En yüksek et
 
 ## FAZ 4 — Performans ve son doğrulama
 
-16. Mobil Slow 4G LCP **3244ms → <2500ms** (RELEASE-READINESS #2, hâlâ açık).
-    İlk hedef hero görselleri: `SideBar/` toplam 3.3MB, en büyüğü `ana-sayfa.jpg`
-    480KB. AVIF/WebP üretimi ve `sizes` daraltması.
+16. ~~Mobil Slow 4G LCP 3244ms → <2500ms. İlk hedef hero görselleri: AVIF/WebP
+    üretimi ve `sizes` daraltması.~~ **TEŞHİS YANLIŞTI — bkz. D079.**
+    Ölçüm: mobilde görsel transferi yalnız **180 KB** ve `next/image` zaten
+    istek anında AVIF/WebP üretiyor. Ağırlık **JS'te: 690 KB**. Asıl sorun
+    başkaydı: hero'nun Motion `initial="hidden"`i sunucu HTML'ine `opacity:0`
+    yazdığı için **görünür alanın tamamı JS'i bekliyordu.** Koreografi saf
+    CSS'e taşındı (görsel sonuç birebir aynı: `test:visual` %0.000–0.003).
+    **Hedef yine de KARŞILANMADI:** 9764 → 9424 ms. Kalan darboğaz bundle.
 17. Faz 1-3 sonrası tam kapı: `npm run verify:all`.
 18. `docs/ART-DIRECTION-GAPS.md`ı güncelle (A12), bu dosyanın durum tablosunu kapat.
 
@@ -570,3 +575,30 @@ Hepsi TEK TEK, sıralı, sunucuya başka hiçbir şey dokunmadan koşuldu.
 `test:visual` notu: tipografi değişikliği KASITLI olduğu için referanslar
 `--update` ile yenilendi (32 kare). Yenileme bir "geçti" değildir; yukarıdaki
 0 değeri, yenilenen referanslara karşı yapılan İKİNCİ koşudan geliyor.
+
+
+## Faz 4 kapanışı (2026-09-02)
+
+| madde | durum |
+|---|---|
+| 16 · Mobil LCP <2500 ms | **karşılanmadı** — 9424 ms. Teşhis düzeltildi ve üç yapısal iyileştirme yapıldı; ayrıntı D079. |
+| 17 · Tam kapı turu | ✅ 14/14 + typecheck + lint + build 27/27 |
+| 18 · Dokümanları kapat | ✅ `ART-DIRECTION-GAPS.md`, `RELEASE-READINESS.md`, bu dosyanın F bölümü |
+
+**Faz 4'te yapılanlar (hepsi ölçüldü):**
+
+1. **Hero açılışı Motion'dan saf CSS'e alındı.** Sunucu HTML'inde hero
+   paragrafından önceki bölgede artık `opacity:0` **0** ve `translateY(115%)`
+   **0**; yani görünür alan 690 KB JS'i beklemiyor. Görsel sonuç değişmedi
+   (`test:visual` güncellemesiz: %0.000 / %0.000 / %0.003 / %0.000).
+2. **Hero görselinin çift render'ı kaldırıldı** — görsel transferi 457 → 360 KB.
+3. **Space Mono 700 bırakıldı** — derleme font varlıkları 217 KB/11 dosya →
+   194 KB/8 dosya.
+
+**Neden hedef karşılanmadı, dürüst hâliyle:** hero metni artık erken boyanıyor
+ama LCP ögesi hero GÖRSELİ ve 1,6 Mbps'lik hat 690 KB JS ile paylaşılıyor.
+Bundan sonrası ölçülmemiş bundle işidir (Motion `LazyMotion`/`m` ayrımı, ekran
+altı bileşenlerin ertelenmesi, 147 KB'lık SSR HTML'i). Bu üçü **tahmindir** —
+uygulanmadan önce ölçülmeli. Bu fazın dersi tam olarak buydu: planın "hero
+görselleri" teşhisi ölçülmediği için yanlıştı ve neredeyse hiçbir şey
+kazandırmayacak bir işe yönlendiriyordu.
