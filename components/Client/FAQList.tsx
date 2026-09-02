@@ -60,7 +60,7 @@ export default function FAQList({ items }: FAQListProps) {
                     transition={{ duration: duration.quick, ease: easing.accordion }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-4 pb-2 text-base md:text-lg font-normal leading-[1.75] text-paper whitespace-pre-line max-w-3xl pr-6">
+                    <div className="mt-4 pb-2 text-base md:text-lg font-normal leading-[1.75] text-paper whitespace-pre-line max-w-editorial pr-6">
                       {item.answer}
                     </div>
                   </motion.div>

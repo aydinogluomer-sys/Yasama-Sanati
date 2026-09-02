@@ -19,7 +19,9 @@
 import { chromium } from "playwright";
 
 const BASE = process.argv[2] || "http://127.0.0.1:3400";
-const SEC = 'div[aria-hidden][class*="rounded-full"][class*="z-[60]"]';
+/* Sınıf adına değil kararlı bir veri kancasına bağlanıyoruz — gerekçe
+   SiteCursor.tsx içindeki yorumda. */
+const SEC = "[data-site-cursor]";
 const ROTALAR = ["/", "/programlar", "/blog", "/the-story"];
 
 const browser = await chromium.launch();
@@ -50,7 +52,29 @@ for (const rota of ROTALAR) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const p = await ctx.newPage();
   await p.goto(BASE + rota, { waitUntil: "networkidle" });
-  await p.waitForTimeout(900);
+
+  /* SABİT SÜRE BEKLEMEK YETMİYOR. Halka bir `useEffect` içinde kuruluyor,
+     yani ancak hidrasyondan sonra var oluyor ve dinleyicisi o an bağlanıyor.
+     Ana sayfa ağır olduğu için sabit 900 ms'de bazen henüz bağlanmamış
+     oluyordu; ilk fare hareketi kaçıyor ve kapı yanlış hata veriyordu
+     (ölçülen: opacity 0, konum 14,14 — yani hiç uyanmamış).
+     Doğru bekleme ölçütü ögenin DOM'da belirmesi: bu, bileşenin gerçekten
+     mount olduğunun kanıtı. Belirmezse zaten hata sayılır. */
+  /* Bekleme süresi ÖLÇÜLÜP yazılıyor, gizlenmiyor. Halka hidrasyondan sonra
+     var oluyor; ana sayfa ağır olduğu için yüklü bir makinede bu 10 saniyeyi
+     aşabiliyor (ölçüldü). Kapının işi imleç davranışını doğrulamak, hidrasyon
+     hızını değil — ama süre satıra basılıyor ki patolojik bir yavaşlama
+     sessizce geçmesin. */
+  const t0 = Date.now();
+  try {
+    await p.waitForSelector(SEC, { state: "attached", timeout: 30000 });
+  } catch {
+    yaz(false, `${rota.padEnd(14)} halka 30 sn icinde DOM'a HIC gelmedi`);
+    await ctx.close();
+    continue;
+  }
+  const bekleme = Date.now() - t0;
+  await p.waitForTimeout(150);
 
   await p.mouse.move(300, 300);
   await p.waitForTimeout(500);
@@ -69,7 +93,7 @@ for (const rota of ROTALAR) {
   const gorunur = b.opacity > 0.5;
   yaz(
     takip && gorunur,
-    `${rota.padEnd(14)} halka fareyi takip ediyor (${a.x},${a.y} -> ${b.x},${b.y}) opacity ${b.opacity}`,
+    `${rota.padEnd(14)} halka fareyi takip ediyor (${a.x},${a.y} -> ${b.x},${b.y}) opacity ${b.opacity} · mount ${bekleme} ms`,
   );
   await ctx.close();
 }
@@ -79,7 +103,8 @@ for (const rota of ROTALAR) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const p = await ctx.newPage();
   await p.goto(BASE + "/", { waitUntil: "networkidle" });
-  await p.waitForTimeout(900);
+  await p.waitForSelector(SEC, { state: "attached", timeout: 30000 });
+  await p.waitForTimeout(150);
   await p.mouse.move(640, 700);
   await p.waitForTimeout(500);
   const notr = await halka(p);

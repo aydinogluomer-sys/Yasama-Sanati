@@ -43,7 +43,7 @@ export default function SubPageLayout({
             {title}
           </h1>
           {description && (
-            <p className="mt-8 text-lg md:text-30 font-light text-cream max-w-3xl [line-height:1.2] animate-hero-desc">
+            <p className="mt-8 text-lg md:text-30 font-light text-cream max-w-editorial [line-height:1.2] animate-hero-desc">
               {description}
             </p>
           )}
@@ -89,7 +89,7 @@ export default function SubPageLayout({
               {title}
             </h1>
             {description && (
-              <p className="animate-hero-desc mt-8 max-w-3xl text-lg font-light [line-height:1.2] text-cream md:text-30">
+              <p className="animate-hero-desc mt-8 max-w-editorial text-lg font-light [line-height:1.2] text-cream md:text-30">
                 {description}
               </p>
             )}

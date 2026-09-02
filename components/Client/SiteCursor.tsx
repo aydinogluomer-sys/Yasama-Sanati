@@ -120,6 +120,12 @@ export default function SiteCursor() {
     <div
       ref={ref}
       aria-hidden
+      /* Kararlı test kancası. Kapı önce sınıf adına göre seçiyordu
+         (`[class*="z-[60]"]`) ama iç içe köşeli parantezler Playwright'ın
+         seçici ayrıştırıcısında `querySelector` ile aynı davranmıyor: aynı öge
+         `evaluate` içinde bulunurken `waitForSelector` ile bulunamıyordu.
+         Sınıf adı zaten bir uygulama detayı; kapı ona bağlanmamalı. */
+      data-site-cursor=""
       className="pointer-events-none fixed top-0 left-0 z-[60] size-7 rounded-full border border-copper-text/70 opacity-0 transition-opacity duration-300 data-[gorunur]:opacity-100 motion-reduce:hidden"
     />
   );
