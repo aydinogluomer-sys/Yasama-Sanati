@@ -42,7 +42,7 @@ Bu dosya, depoda çalışan yapay zekâ ajanları ve geliştiriciler içindir.
 | `docs/decisions.md` | Karar kayıtları (D0xx). Bir şeyin NEDEN öyle olduğunu buradan öğren. |
 | `docs/RELEASE-READINESS.md` | Gönderim engelleri ve güncel performans ölçümü. |
 | `docs/ART-DIRECTION-GAPS.md` | Görsel üretim şartnamesi; hangi karenin değişmesi gerektiği. |
-| `docs/SURFACE-RHYTHM-PLAN.md` | **Açık iş.** Alt sayfaların tek düze koyu yeşilden çıkarılması. Ölçüldü: 9 rota sayfa boyunca `deep %100`, ana sayfa 6 yüzey. Onay bekliyor. |
+| `docs/SURFACE-RHYTHM-PLAN.md` | **Kısmen uygulandı.** Alt sayfaların tek düze koyu yeşilden çıkarılması. Ölçüldü: 9 rota sayfa boyunca `deep %100`, ana sayfa 6 yüzey. **Faz A** (tesisat, `#f0ebe2`) ve **kapanış bandı** (15 rota) yapıldı; bandın üstündeki dikiş sonradan kaldırıldı (D083). **Faz B/C hâlâ onay bekliyor.** Dosyanın sonundaki düzeltme bölümleri bağlayıcı, gövdesi tarihsel. |
 | `design-system/` + `DESIGN.md` | Renk/tip/hareket ölçekleri ve `/on-gorusme` rotasının kendi sistemi ("Meridyen Eşiği"). |
 
 > **Açık karar (proje sahibine ait):** `docs/RELEASE-PLAN.md` hâlâ duruyor ve kapsamı
@@ -95,8 +95,8 @@ Git geçmişinde bir sır bulursan: **döndürülmesi gerektiğini bildir, değe
 ```bash
 npm run verify        # typecheck + lint + build
 npm run build && npx next start -p 3400   # ayrı terminalde, kapılar için
-npm run verify:gates  # 14 kapı, TEK TEK, sonuçları ayrı satırlara
-npm run test:visual   # görsel regresyon (4 viewport × 8 rota)
+npm run verify:gates  # 15 kapı, TEK TEK, sonuçları ayrı satırlara
+npm run test:visual   # görsel regresyon: 4 viewport × 8 rota × 2 kare = 64
 npm run test:perf     # LCP / CLS / TBT — LAB ölçümü, p75 değil
 ```
 
@@ -154,7 +154,21 @@ npm run test:perf     # LCP / CLS / TBT — LAB ölçümü, p75 değil
    1 GB'a inmişken alınan sayılarla çalışıldı: aynı derlemede masaüstü TBT'si
    34 ms ile 489 ms arasında salındı. Makine yüklüyken perf iddiası yazma;
    `Get-CimInstance Win32_OperatingSystem` ile serbest belleği not et (D081).
-9. **`motion/react-client` LazyMotion'ı etkisiz kılar.** O giriş noktası
+9. **Bir kapının YEŞİL olması, ölçmesi gerekeni ölçtüğü anlamına gelmez.**
+   Görsel kapının "sayfa sonu" karesi `scrollTo(scrollHeight)` ile alınıyordu;
+   footer çoğu viewport'ta bir ekrandan uzun olduğu için o kare **yalnız
+   footer**dı ve footer sekiz rotada aynı. Kare hiçbir şey ölçmüyordu, ama
+   64/64 %0,000 diyordu. Kör nokta ancak alt sayfaların dibi baştan aşağı
+   değiştiğinde ve kapı yine %0,000 dediğinde fark edildi (D084).
+   **Kural: yeni bir kapı yazarken önce onun GERÇEK bir değişikliği yakaladığını
+   göster.** Kapının kapsamı da dosyanın içine yazılmalı — görsel kapıda artık
+   footer pikselleri ve nav görünümü YOK.
+10. **Görsel karşılaştırmada ilk yükleme ötekilerden farklı ölçülür.**
+   Aynı kare, altı ayrı tarayıcı açılışı: ilkinde footer'ın belge konumu
+   14851,547, ötekilerde 14851,359. Park noktası yuvarlanınca bu 0,188 px tam
+   bir piksele büyüyor ve kare bir satır kayıyor (%2,003). `qa/visual.mjs`
+   bu yüzden ölçmeye başlamadan bir **ısınma turu** yapıyor (D084).
+11. **`motion/react-client` LazyMotion'ı etkisiz kılar.** O giriş noktası
    bileşenleri TAM özellik paketiyle üretir; 12 dosya onu kullandığı sürece
    `m` + `LazyMotion` göçü hiçbir bayt kazandırmaz (D081).
 

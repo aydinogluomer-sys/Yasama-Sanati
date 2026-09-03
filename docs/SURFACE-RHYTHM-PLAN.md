@@ -270,3 +270,43 @@ images · seo · browsers) + görsel **64/64 %0,000** + typecheck + lint + build
 
 Bant beş rotada ölçüldü: zemin `rgb(240,235,226)`, yükseklik 297px, footer'a
 bitişik (aralık 0).
+
+
+---
+
+# DÜZELTME: BANDIN ÜSTÜNDEKİ DİKİŞ KALDIRILDI (2026-09-03)
+
+Yukarıdaki "Geçişler: … üçüncüsü markanın kendi dili" bölümü **geçersiz.**
+Orada koyu→açık geçiş için `SectionSeam` seçilmişti; proje sahibi o dikişi
+kaldırttı. Bölüm silinmiyor (ne düşünüldüğü kayıt), ama bağlayıcı olan bu
+bölümdür.
+
+**Kullanıcı:** *"Tüm sayfalarda -landing page hariç- beyaz kısımdan önceki
+kısmı, landing page'de bulunan koyu yeşil yap."*
+
+**Ölçüm — şikâyet somuttu.** Dikişin hesaplanmış değeri:
+`168px linear-gradient(rgb(43,53,48) 0%, rgb(93,101,86) 36%, rgb(192,192,175) 64%, rgb(240,235,226) 100%)`
+— ortası zeytin-gri, sonu soluk gri. Beyazdan önceki kısım koyu yeşil değil,
+gri bir sisti.
+
+**Belirsizlik soruldu, tahmin edilmedi.** Sitede iki koyu yeşil var:
+gövdenin `deep` **#2b3530**'u ve ana sayfada beyaz `<Form />`ın hemen
+üstündeki `warm` **#30493d**. İkisi farklı işe çıkıyordu. Seçim: **#2b3530,
+dikiş tamamen silinsin.**
+
+**Yeni sıra:**
+
+```
+gövde  #2b3530  ── KESKİN KENAR ──  bant  #f0ebe2  ── KESKİN KENAR ──  footer #293a32
+```
+
+Bandın üst boşluğu `pt-10 md:pt-14` → `pt-20 md:pt-28` yapıldı; dikişin
+sağladığı 168 px'lik açıklık gidince bakır çizgi kesiğe yapışıyordu.
+
+**Bu keskin kenar sitede yeni bir hamle** — ana sayfa koyu→açık her geçişte
+dikiş kullanır, keskin kesme yalnız açık→koyu yönünde vardır. Marka dilinden
+türetilmedi; proje sahibinin tercihi. Ayrıntı: `docs/decisions.md` D083.
+
+**Faz B'ye devreden:** `SubPageLayout`in `surface="parchment"` dalı hâlâ
+dikişli. Bugün hiçbir rota o dalı kullanmadığı için ekranda görünmüyor ve
+ölçülemiyor; aynı kararın oraya taşınması Faz B'nin işi.

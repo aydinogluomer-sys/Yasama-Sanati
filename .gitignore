@@ -55,3 +55,7 @@ next-env.d.ts
 # gormedik; ilk calistirmada yerelde uretilirler. Bu yuzden kapi YERELDIR,
 # CI'da kosmaz. Bkz. qa/visual.mjs basligi.
 /qa/visual/
+
+# qa/gates.sh'in depo kokune yazdigi kapi gunlugu. Depoda birikmemeli:
+# kokte buyuyen gunluk dosyalari dev sunucusunun izleyicisini bogar.
+/qa-gates.log

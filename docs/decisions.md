@@ -1192,3 +1192,136 @@ birebir eşleştiği için üç yerde token'a çevrildi (görsel 32/32 %0,000).
 ölçüsünü 96px genişletirdi; grep'i memnun etmek için görsel değiştirilmez.
 
 Kapılar: 16/16 + görsel 32/32 + typecheck + lint + build 27/27.
+
+## D083 — Kapanış bandının üstündeki dikiş kaldırıldı; beyazdan önceki kısım düpedüz koyu yeşil
+
+Reason: Kullanıcı: *"Tüm sayfalarda -landing page hariç- beyaz kısımdan önceki
+kısmı, landing page'de bulunan koyu yeşil yap."*
+
+**Önce ölçüldü — şikâyet somut.** Alt sayfada beyaz bandın (`#f0ebe2`) üstünde
+`SectionSeam from={deep} to={parchment}` duruyordu ve hesaplanmış değeri şuydu:
+
+```
+168 px  linear-gradient(
+          rgb(43,53,48)     0%     <- deep
+          rgb(93,101,86)   36%     <- zeytin-gri
+          rgb(192,192,175) 64%     <- soluk gri
+          rgb(240,235,226) 100%)   <- parşömen
+```
+
+Yani "beyazdan önceki kısım" koyu yeşil DEĞİLDİ; 168 px'lik gri bir sisti.
+Kullanıcının tarifi doğruydu.
+
+**İki koyu yeşil var ve seçim sonucu değiştiriyordu.** Ana sayfada beyaz
+(`<Form />`, `#ced1bf`) bölümünün hemen üstündeki yeşil `warm` **#30493d**;
+alt sayfaların gövdesi ise `deep` **#2b3530**. "Landing page'de bulunan koyu
+yeşil" ifadesi ikisine de işaret edebilirdi ve ikisi farklı işe çıkıyordu
+(yeni bir yeşil bant eklemek vs. sadece sisi silmek). **Tahmin edilmedi,
+soruldu.** Karar: **#2b3530 — gövdenin kendi yeşili, dikiş tamamen silinsin.**
+
+**Yapılan.** `ClosingBand`ten `SectionSeam` çıkarıldı. Artık:
+`gövde #2b3530` → KESKİN KENAR → `bant #f0ebe2` → KESKİN KENAR → `footer`.
+
+**Üst boşluk büyütüldü: `pt-10 md:pt-14` → `pt-20 md:pt-28`.** Dikiş varken
+bandın üstünde 168 px'lik açıklık vardı ve bakır saç teli rahat duruyordu;
+kenar sertleşince aynı değer çizgiyi yeşil kesiğin dibine yapıştırdı.
+Ölçüldü: çizgi artık bandın üstünden 112 px aşağıda, bant yüksekliği 353 px.
+
+**Dürüstlük notu — bu keskin kenar sitede YENİ bir hamle.** Bir önceki turda
+(kapanış bandı eklenirken) "koyu→açık geçiş markanın dilinde `SectionSeam`,
+açık→koyu geçiş keskin kenar" diye yazılmıştı ve bu doğru bir tespitti: ana
+sayfa koyu→açık her geçişte dikiş kullanıyor, keskin kesme yalnız AÇIK→KOYU
+yönünde var (`<Form />` kremi doğrudan footer'a bağlanıyor). Şimdi yapılan
+şey o dilin **dışında**. Yani "markanın mevcut dili böyle" diye
+savunulamaz — proje sahibinin bilinçli tercihi olarak seçildi ve öyle
+kaydediliyor.
+
+**Yan etki (yapısal, ölçülmedi).** `ClosingBand` artık hiç Motion içermiyor;
+`SectionSeam` bir istemci bileşeni olduğu için alt sayfa başına bir istemci
+bileşeni azaldı. Bunun bayt veya süre karşılığı **iddia edilmiyor**: bu tur
+boş RAM 0,65 GB'a inmişti (D081'in tehlike bandı) ve o koşullarda perf sayısı
+yazılmaz.
+
+**Dokunulmayan atıl yol.** `SubPageLayout`in `surface="parchment"` dalı hâlâ
+hero→gövde ve gövde→footer geçişlerinde `SectionSeam` kullanıyor. **Bugün
+hiçbir rota bu dalı kullanmıyor** (Faz B onay bekliyor), yani ekranda
+görünmüyor ve doğrulanamaz. Aynı kararı oraya da uygulamak Faz B'nin işidir;
+görünmeyen bir yolu ölçmeden değiştirmemek için elle tutulmadı.
+
+## D084 — Görsel kapı kapanış bandını hiç görmüyormuş; kör noktayı bulmak bir kusur avına dönüştü
+
+Reason: D083'ün değişikliği doğrulanırken görsel kapı **beklenenin tam
+tersini** söyledi: değişen 6 alt sayfanın karelerinde %0,000, hiç
+dokunulmayan ana sayfada %0,517.
+
+### 1. Kapı kördü — ve bu bir önceki turun iddiasını çürütüyor
+
+Bir önceki turda kare sayısı 32'den 64'e çıkarılmış ve **"görsel 64/64,
+kapanış bandı kapsanıyor"** denmişti. **Bu iddia yanlıştı.** İkinci kare
+`scrollTo(document.body.scrollHeight)` ile alınıyordu; footer çoğu viewport'ta
+bir ekrandan uzun olduğu için o noktada ekranda **yalnız footer** kalıyor.
+Footer sekiz rotada birebir aynı, dolayısıyla kare hiçbir şey ölçmüyordu.
+
+Kanıt kendiliğinden çıktı: dikiş silinip banda +80px üst boşluk eklendiği
+hâlde o kareler %0,000 dedi.
+
+**Düzeltme:** kare artık belge yüksekliğine değil **footer ögesine**
+sabitleniyor — footer'ın üstü viewport'un altına park ediliyor, yani kare
+sayfanın son içerik ekranı. Kapsam gözle doğrulandı: yeni referans
+`kvkk__1440x900__kapanis.png` bandı ve keskin kenarı içeriyor.
+
+**Kapsam kaybı açıkça yazılıyor:** footer pikselleri artık görsel kapıda
+değil. Bilerek — sekiz rotada aynı kareyi sekiz kez ölçmenin bilgi değeri
+yoktu. Ama footer'ın GÖRÜNÜMÜNÜ değiştiren biri bu kapıdan geçer.
+
+### 2. Sonra kapı kararsız çıktı; beş hipotez ölçümle elendi
+
+| hipotez | ne yapıldı | sonuç |
+|---|---|---|
+| Animasyon yarışı | `getAnimations()` ile sonlu animasyonlar `finish()`, sonsuzlar duraklatıldı | Hero düzeldi, nav düzelmedi |
+| Nav maskesi | `mask` yerine `header{display:none}` | **Düzeltti** — fark %12,661 / %10,753 / %12,956 idi ve tamamı 116px'lik maske bandıydı |
+| Metin yumuşatma (CSS) | `-webkit-font-smoothing: antialiased` | **Etkisiz** — Windows'ta yok sayılıyor; satır kaldırıldı ki "bu zaten hallediliyor" yanılgısı üretmesin |
+| `--update` ile karşılaştırma turunun CPU profili farkı | çekim karşılaştırmadan ayrıldı; sonra `--update` da simetrik yapıldı | Kısmen; ana kareyi düzeltmedi |
+| Referansın üretim yolu | referanslar `--update` yerine normal koşunun "eksik referans" yolundan üretildi | Düzeltmedi |
+
+### 3. Asıl sebep ölçümle bulundu
+
+Aynı kare, **altı ayrı tarayıcı açılışı**, üründe hiçbir değişiklik yok:
+
+```
+çekim 0 : footer belge konumu 14851,547  ->  park scrollY 14008
+çekim 1 : footer belge konumu 14851,359  ->  park scrollY 14007
+...      (1..5 birbirinin aynısı)
+0 vs 1..5 : %2,003 (beşi de)     1..5 kendi aralarında : fark yok
+```
+
+**İlk yükleme yerleşimi 0,188 px farklı oturtuyor.** Park noktası
+`footerKonumu − viewportYüksekliği` kesirli bir sayı; yuvarlanınca bu 0,188 px
+**tam bir piksele** büyüyor ve kare bir satır kayıyor. Metin yoğun bir ekranda
+1px kayma %2 değişen piksel demek. Kapıda ilk çekilen kare tam da bu: ilk
+viewport'un ilk rotası. Bu yüzden hata her turda AYNI %2,003 ile geliyordu —
+kararsızlık değil, ısınmamış ilk yükleme.
+
+Aynı koşu içinde arka arkaya alınan dört kare %0,005 fark veriyordu; yani
+sayfa park edildikten sonra durgun. Oynayan şey yüklemeden yüklemeye
+yerleşimin kesirli kısmıydı.
+
+### 4. Kalanlar
+
+* **Isınma turu** — kapı, ölçmeye başlamadan önce bir sayfayı yükleyip atıyor.
+* **Nav gizleniyor** (maskelenmiyor).
+* **Çekim karşılaştırmadan ayrıldı** — iki mod aynı zaman çizgisini izlesin.
+* **Tarayıcı bayrakları** `--disable-lcd-text`, `--disable-font-subpixel-positioning`,
+  `--force-color-profile=srgb`.
+* **±1 px dikey kayma toleransı** — emniyet ağı. **Bedeli açıkça yazılıyor:**
+  gerçek bir 1 piksellik dikey kayma regresyonu artık bu kapıdan geçer. Renk,
+  içerik, tipografi, yatay kayma ve 1px'ten büyük her dikey kayma yakalanır.
+  Üç doğrulama koşusunun hiçbirinde devreye girmedi (ısınma turu yetti).
+
+**Doğrulama:** üç ardışık koşu, 64/64, sorun 0. `npm run verify` (typecheck +
+lint + build 27/27) geçti.
+
+**Ders — bu depoda dördüncü kez:** bir kapının yeşil olması, ölçmesi gereken
+şeyi ölçtüğü anlamına gelmez. Yeni bir kapı yazarken önce onun GERÇEK bir
+değişikliği yakaladığı gösterilmeli. Burada bu adım atlandığı için bir tur
+boyunca yanlış güvence verildi.
